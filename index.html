@@ -31,7 +31,6 @@
             padding-top: 60px;
         }
 
-        /* Navigation */
         .navbar {
             position: fixed;
             top: 0;
@@ -68,7 +67,6 @@
             color: white;
         }
 
-        /* Sections */
         .section-blue {
             background: linear-gradient(135deg, #87CEEB 0%, #5DADE2 100%);
             padding: 80px 20px;
@@ -84,7 +82,6 @@
             margin: 0 auto;
         }
 
-        /* Hero */
         .hero {
             text-align: center;
             padding: 40px 20px 80px;
@@ -130,7 +127,6 @@
             60% { transform: translateY(-5px); }
         }
 
-        /* Horizontal Slideshow */
         .slider-nav {
             position: relative;
             margin: 40px 0;
@@ -195,7 +191,6 @@
             }
         }
 
-        /* Section Titles */
         .section-title {
             font-size: 3rem;
             font-weight: 700;
@@ -204,7 +199,6 @@
             color: var(--primary);
         }
 
-        /* Logline & Info */
         .logline {
             font-size: 1.8rem;
             line-height: 1.9;
@@ -351,7 +345,6 @@
             background: var(--gold);
         }
 
-        /* Comparable Films - Horizontal Scroll */
         .comparable-films-wrapper {
             overflow-x: scroll;
             overflow-y: hidden;
@@ -408,7 +401,6 @@
             display: block;
         }
 
-        /* RSVP */
         .screener-info {
             text-align: center;
             margin-bottom: 40px;
@@ -426,7 +418,6 @@
             color: var(--dark);
         }
 
-        /* Countdown Timer */
         .countdown-timer {
             display: flex;
             justify-content: center;
@@ -457,7 +448,6 @@
             letter-spacing: 1px;
         }
 
-        /* Social Share */
         .social-share {
             text-align: center;
             margin-top: 30px;
@@ -503,7 +493,6 @@
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
         }
 
-        /* Mini Golf Game */
         .game-container {
             background: white;
             padding: 40px 20px;
@@ -534,7 +523,7 @@
             height: 45px;
             cursor: pointer;
             font-size: 1.5rem;
-            display: flex;
+            display: inline-flex;
             align-items: center;
             justify-content: center;
             transition: all 0.3s ease;
@@ -738,7 +727,6 @@
             }
         }
 
-        /* Map */
         .map-container {
             margin: 40px 0;
         }
@@ -768,7 +756,6 @@
             color: var(--dark);
         }
 
-        /* Cast Grid */
         .cast-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -815,7 +802,6 @@
             font-style: italic;
         }
 
-        /* Credits */
         .credits-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -846,7 +832,6 @@
             color: var(--primary);
         }
 
-        /* Footer */
         footer {
             background: var(--primary);
             color: white;
@@ -866,7 +851,6 @@
     </style>
 </head>
 <body>
-    <!-- Navigation -->
     <nav class="navbar">
         <div class="nav-container">
             <a href="index.html#home" class="nav-link">Home</a>
@@ -881,14 +865,12 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
     <section id="home" class="section-yellow hero">
         <div class="container">
             <img src="logo-no-bg.png" alt="Mick Skylark: Mini Golf Prodigy">
             
             <div class="scroll-cta">↓ Scroll Down To RSVP ↓</div>
 
-            <!-- Horizontal Slideshow -->
             <div class="slideshow-wrapper" id="bts-slideshow">
                 <div class="slideshow-container">
                     <div class="slide"><img src="bts-photos/bts1.jpg" alt="BTS 1"></div>
@@ -919,7 +901,6 @@
         </div>
     </section>
 
-    <!-- Comparable Films Section -->
     <section id="comparable-films" class="section-blue">
         <div class="container">
             <h2 class="section-title">If You Liked...</h2>
@@ -945,12 +926,10 @@
         </div>
     </section>
 
-    <!-- RSVP Section -->
     <section id="rsvp" class="section-yellow">
         <div class="container">
             <h2 class="section-title">Screener RSVP</h2>
             
-            <!-- Countdown Timer -->
             <div class="countdown-timer">
                 <div class="countdown-box">
                     <span class="countdown-number" id="days">--</span>
@@ -980,75 +959,127 @@
             </div>
         </div>
     </section>
-
-    <!-- Mini Golf Game Section -->
-    <section id="game" class="section-yellow">
-        <div class="container">
-            <h2 class="section-title">⛳ Glory On The Greens</h2>
-            <p style="text-align: center; margin-bottom: 20px; font-size: 1.1rem;">
-                Play our Glory On The Greens mini golf game!
-            </p>
-            
-            <div style="max-width: 700px; margin: 0 auto;">
-                <div style="display: flex; justify-content: center; gap: 15px; margin-bottom: 20px;">
-                    <button class="control-btn active" id="dayBtn" onclick="setTheme('day')" title="Day Mode">☀️</button>
-                    <button class="control-btn" id="nightBtn" onclick="setTheme('night')" title="Night Mode">🌙</button>
-                    <button class="control-btn active" id="soundBtn" onclick="toggleSound()" title="Toggle Sound">🔊</button>
-                </div>
-                
-                <div class="game-container">
-                    <canvas id="golfCanvas" class="game-canvas" width="500" height="400"></canvas>
-                </div>
-
-                <div class="scorecard">
-                    <h3>📋 Scorecard</h3>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Hole</th>
-                                <th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>OUT</th>
-                                <th>10</th><th>11</th><th>12</th><th>13</th><th>14</th><th>15</th><th>16</th><th>17</th><th>18</th><th>IN</th><th>TOT</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr class="par-row">
-                                <td>Par</td>
-                                <td id="par-1">3</td><td id="par-2">3</td><td id="par-3">4</td><td id="par-4">3</td><td id="par-5">3</td><td id="par-6">4</td><td id="par-7">3</td><td id="par-8">4</td><td id="par-9">3</td><td id="par-out">30</td>
-                                <td id="par-10">4</td><td id="par-11">3</td><td id="par-12">4</td><td id="par-13">3</td><td id="par-14">2</td><td id="par-15">4</td><td id="par-16">3</td><td id="par-17">4</td><td id="par-18">3</td><td id="par-in">30</td><td id="par-total">60</td>
-                            </tr>
-                            <tr class="score-row">
-                                <td>Score</td>
-                                <td id="score-1" class="pending">-</td><td id="score-2" class="pending">-</td><td id="score-3" class="pending">-</td><td id="score-4" class="pending">-</td><td id="score-5" class="pending">-</td><td id="score-6" class="pending">-</td><td id="score-7" class="pending">-</td><td id="score-8" class="pending">-</td><td id="score-9" class="pending">-</td><td id="score-out" class="pending">-</td>
-                                <td id="score-10" class="pending">-</td><td id="score-11" class="pending">-</td><td id="score-12" class="pending">-</td><td id="score-13" class="pending">-</td><td id="score-14" class="pending">-</td><td id="score-15" class="pending">-</td><td id="score-16" class="pending">-</td><td id="score-17" class="pending">-</td><td id="score-18" class="pending">-</td><td id="score-in" class="pending">-</td><td id="score-total" class="pending">-</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <div style="text-align: center; margin-top: 15px; padding-top: 15px; border-top: 1px solid #e5e7eb; color: var(--primary); font-size: 0.9rem;">
-                        <span style="margin: 0 15px;">🏆 Best: <strong id="best">--</strong></span>
-                        <span style="margin: 0 15px;">⛳ Holes-in-One: <strong id="holesInOneCount">0</strong></span>
-                    </div>
-                </div>
-
-                <div style="display: flex; gap: 10px; justify-content: center; margin: 20px 0;">
-                    <button class="game-btn" onclick="resetGame()">↻ Restart</button>
-                    <button class="game-btn secondary" onclick="shareChallenge()">👥 Challenge Friends</button>
-                </div>
+    <div class="container">
+        <h1>⛳ Glory On The Greens</h1>
+        <p class="subtitle">Play our Glory On The Greens mini golf game!</p>
+        
+        <div class="controls">
+            <button class="control-btn active" id="dayBtn" onclick="setTheme('day')" title="Day Mode">☀️</button>
+            <button class="control-btn" id="nightBtn" onclick="setTheme('night')" title="Night Mode">🌙</button>
+            <button class="control-btn active" id="soundBtn" onclick="toggleSound()" title="Toggle Sound">🔊</button>
+        </div>
+        
+        <div class="game-container">
+            <div style="position: relative; display: inline-block;">
+                <canvas id="golfCanvas" class="game-canvas" width="500" height="400"></canvas>
             </div>
         </div>
-    </section>
+
+        <div class="scorecard">
+            <h3>📋 Scorecard</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Hole</th>
+                        <th>1</th>
+                        <th>2</th>
+                        <th>3</th>
+                        <th>4</th>
+                        <th>5</th>
+                        <th>6</th>
+                        <th>7</th>
+                        <th>8</th>
+                        <th>9</th>
+                        <th>OUT</th>
+                        <th>10</th>
+                        <th>11</th>
+                        <th>12</th>
+                        <th>13</th>
+                        <th>14</th>
+                        <th>15</th>
+                        <th>16</th>
+                        <th>17</th>
+                        <th>18</th>
+                        <th>IN</th>
+                        <th>TOT</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="par-row">
+                        <td>Par</td>
+                        <td id="par-1">3</td>
+                        <td id="par-2">3</td>
+                        <td id="par-3">4</td>
+                        <td id="par-4">3</td>
+                        <td id="par-5">3</td>
+                        <td id="par-6">4</td>
+                        <td id="par-7">3</td>
+                        <td id="par-8">4</td>
+                        <td id="par-9">3</td>
+                        <td id="par-out">30</td>
+                        <td id="par-10">4</td>
+                        <td id="par-11">3</td>
+                        <td id="par-12">4</td>
+                        <td id="par-13">3</td>
+                        <td id="par-14">2</td>
+                        <td id="par-15">4</td>
+                        <td id="par-16">3</td>
+                        <td id="par-17">4</td>
+                        <td id="par-18">3</td>
+                        <td id="par-in">30</td>
+                        <td id="par-total">60</td>
+                    </tr>
+                    <tr class="score-row">
+                        <td>Score</td>
+                        <td id="score-1" class="pending">-</td>
+                        <td id="score-2" class="pending">-</td>
+                        <td id="score-3" class="pending">-</td>
+                        <td id="score-4" class="pending">-</td>
+                        <td id="score-5" class="pending">-</td>
+                        <td id="score-6" class="pending">-</td>
+                        <td id="score-7" class="pending">-</td>
+                        <td id="score-8" class="pending">-</td>
+                        <td id="score-9" class="pending">-</td>
+                        <td id="score-out" class="pending">-</td>
+                        <td id="score-10" class="pending">-</td>
+                        <td id="score-11" class="pending">-</td>
+                        <td id="score-12" class="pending">-</td>
+                        <td id="score-13" class="pending">-</td>
+                        <td id="score-14" class="pending">-</td>
+                        <td id="score-15" class="pending">-</td>
+                        <td id="score-16" class="pending">-</td>
+                        <td id="score-17" class="pending">-</td>
+                        <td id="score-18" class="pending">-</td>
+                        <td id="score-in" class="pending">-</td>
+                        <td id="score-total" class="pending">-</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div style="text-align: center; margin-top: 15px; padding-top: 15px; border-top: 1px solid #e5e7eb; color: var(--primary); font-size: 0.9rem;">
+                <span style="margin: 0 15px;">🏆 Best: <strong id="best">--</strong></span>
+                <span style="margin: 0 15px;">⛳ Holes-in-One: <strong id="holesInOneCount">0</strong></span>
+            </div>
+        </div>
+
+        <div style="display: flex; gap: 10px; justify-content: center; margin: 20px 0;">
+            <button class="game-btn" onclick="resetGame()">↻ Restart</button>
+            <button class="game-btn secondary" onclick="shareChallenge()">👥 Challenge Friends</button>
+        </div>
+
+        <a href="index.html" class="back-link">← Back to Main Site</a>
+    </div>
 
     <div class="celebration-overlay" id="celebrationOverlay">
-        <div style="background: white; padding: 50px; border-radius: 30px; text-align: center; max-width: 500px; animation: scaleIn 0.5s ease; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);">
-            <div style="font-size: 5rem; animation: bounce 1s ease infinite; margin-bottom: 20px;">🎉</div>
-            <div style="font-size: 2.5rem; color: var(--primary); font-weight: 700; margin-bottom: 15px;">Course Complete!</div>
-            <div style="font-size: 1.5rem; color: var(--gold); font-weight: 600; margin-bottom: 20px;" id="finalScore">Total: 0 strokes</div>
-            <div style="font-size: 1.1rem; color: #666; margin-bottom: 30px;" id="celebrationMessage">Great job!</div>
+        <div class="celebration-content">
+            <div class="celebration-emoji">🎉</div>
+            <div class="celebration-title">Course Complete!</div>
+            <div class="celebration-score" id="finalScore">Total: 0 strokes</div>
+            <div class="celebration-message" id="celebrationMessage">Great job!</div>
             <button class="game-btn" onclick="closeCelebration()">Play Again</button>
             <button class="game-btn secondary" onclick="shareChallenge()">Share Score</button>
         </div>
     </div>
 
-    <!-- Cast Section -->
     <section id="cast" class="section-blue">
         <div class="container">
             <div style="text-align: center; margin-bottom: 50px;">
@@ -1187,7 +1218,6 @@
         </div>
     </section>
 
-    <!-- Instagram Section -->
     <section id="instagram" class="section-yellow">
         <div class="container">
             <h2 class="section-title">Follow Us</h2>
@@ -1195,7 +1225,6 @@
         </div>
     </section>
 
-    <!-- Social Share Section -->
     <section id="share" class="section-yellow">
         <div class="container">
             <div class="social-share">
@@ -1208,7 +1237,7 @@
                     <a href="https://twitter.com/intent/tweet?text=Check%20out%20Mick%20Skylark%3A%20Mini%20Golf%20Prodigy!&url=https://mickskylark.com" target="_blank" class="share-btn twitter">
                         🐦 Share on Twitter
                     </a>
-                    <a href="/cdn-cgi/l/email-protection#5a65292f38303f392e6719323f39317f686a352f2e7f686a173339317f686a093123363b28317c38353e2367137f686a2e32352f3d322e7f686a23352f7d3e7f686a3f343035237f686a2e3233297f686a3c333637607f686a322e2e2a2960757537333931293123363b283174393537" class="share-btn email">
+                    <a href="mailto:?subject=Check%20out%20Mick%20Skylark&body=I%20thought%20you'd%20enjoy%20this%20film:%20https://mickskylark.com" class="share-btn email">
                         📧 Share via Email
                     </a>
                 </div>
@@ -1216,7 +1245,6 @@
         </div>
     </section>
 
-    <!-- Credits Section -->
     <section id="credits" class="section-blue">
         <div class="container">
             <h2 class="section-title">The Team</h2>
@@ -1245,7 +1273,6 @@
         </div>
     </section>
 
-    <!-- Screening Locations -->
     <section id="locations" class="section-yellow">
         <div class="container">
             <h2 class="section-title">Screening Locations</h2>
@@ -1267,7 +1294,6 @@
         </div>
     </section>
 
-   <!-- Footer -->
     <footer>
         <p>&copy; 2025 Mick Skylark: Mini Golf Prodigy. All rights reserved.</p>
         <p style="margin-top: 10px; opacity: 0.8;">A Potato Eater Productions Film</p>
@@ -1276,17 +1302,14 @@
         </p>
     </footer>
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-        // Behold Instagram widget
+    <script>
         (function(){
             const d=document,s=d.createElement("script");s.type="module";
             s.src="https://w.behold.so/widget.js";d.head.append(s);
         })();
 
-        // Tally embed script
         var d=document,w="https://tally.so/widgets/embed.js",v=function(){"undefined"!=typeof Tally?Tally.loadEmbeds():d.querySelectorAll("iframe[data-tally-src]:not([src])").forEach((function(e){e.src=e.dataset.tallySrc}))};if("undefined"!=typeof Tally)v();else if(d.querySelector('script[src="'+w+'"]')==null){var s=d.createElement("script");s.src=w,s.onload=v,s.onerror=v,d.body.appendChild(s);}
 
-        // Smooth scroll for nav
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -1311,7 +1334,6 @@
             });
         });
 
-        // Countdown Timer to February 22, 2026 at 3:00 PM
         function updateCountdown() {
             const screeningDate = new Date('February 22, 2026 15:00:00').getTime();
             const now = new Date().getTime();
@@ -1338,7 +1360,6 @@
         setInterval(updateCountdown, 1000);
         updateCountdown();
 
-        // Auto-scroll for comparable films only
         const filmsWrapper = document.querySelector('.comparable-films-wrapper');
         if (filmsWrapper) {
             let filmsScrollAmount = 0;
@@ -1977,4 +1998,14 @@
         }
 
         window.resetGame = function() {
-            currentHole 
+            currentHole = 1;
+            totalStrokes = 0;
+            holeScores = Array(18).fill(null);
+            loadHole(currentHole);
+            updateScorecard();
+            drawGame();
+        }
+    </script>
+    </script>
+</body>
+</html>
