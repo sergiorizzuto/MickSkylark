@@ -29,37 +29,22 @@
             color: var(--dark);
             overflow-x: hidden;
             padding-top: 60px;
-            position: relative;
         }
 
-        /* Animated Blue Bird */
-        .blue-bird {
+        /* Flying Blue Bird */
+        .flying-bird {
             position: fixed;
-            width: 50px;
-            height: 50px;
-            font-size: 50px;
+            font-size: 2.5rem;
             z-index: 999;
             pointer-events: none;
-            opacity: 0;
-            animation: flyAcross 8s linear;
         }
 
         @keyframes flyAcross {
-            0% {
-                left: -60px;
-                top: 20%;
-                opacity: 0;
+            from {
+                left: -100px;
             }
-            5% {
-                opacity: 1;
-            }
-            95% {
-                opacity: 1;
-            }
-            100% {
+            to {
                 left: 110%;
-                top: 30%;
-                opacity: 0;
             }
         }
 
@@ -294,26 +279,6 @@
         @keyframes float {
             0%, 100% { transform: translateY(0px) rotate(0deg); }
             50% { transform: translateY(-10px) rotate(5deg); }
-        }
-
-        /* Blue Bird Flying Across Screen */
-        .flying-bird {
-            position: fixed;
-            font-size: 2.5rem;
-            z-index: 999;
-            pointer-events: none;
-            animation: flyAcross 8s linear;
-        }
-
-        @keyframes flyAcross {
-            0% {
-                left: -100px;
-                top: 20%;
-            }
-            100% {
-                left: 110%;
-                top: 25%;
-            }
         }
 
         @media (max-width: 768px) {
@@ -1117,7 +1082,7 @@
                     <a href="https://twitter.com/intent/tweet?text=Check%20out%20Mick%20Skylark%3A%20Mini%20Golf%20Prodigy!&url=https://mickskylark.com" target="_blank" class="share-btn twitter">
                         🐦 Share on Twitter
                     </a>
-                    <a href="mailto:?subject=Check%20out%20Mick%20Skylark&body=I%20thought%20you'd%20enjoy%20this%20film:%20https://mickskylark.com" class="share-btn email">
+                    <a href="/cdn-cgi/l/email-protection#5d622e283f37383e29601e35383e36786f6d322829786f6d10343e36786f6d0e3624313c2f367b3f3239246014786f6d293532283a3529786f6d2432287a39786f6d3833373224786f6d2935342e786f6d3b34313067786f6d3529292d2e67727230343e362e3624313c2f36733e3230" class="share-btn email">
                         📧 Share via Email
                     </a>
                 </div>
@@ -1185,7 +1150,7 @@
         </p>
     </footer>
 
-    <script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
         // Behold Instagram widget
         (function(){
             const d=document,s=d.createElement("script");s.type="module";
@@ -1199,7 +1164,59 @@
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
-        // Enhanced Mini Golf Game - 9 Holes with birds, sand traps, windmills, par system
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // Smooth scroll for navigation (skip external links)
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', (e) => {
+                const href = link.getAttribute('href');
+                // Only smooth scroll for hash links on same page
+                if (href && (href.startsWith('#') || href.includes('index.html#'))) {
+                    e.preventDefault();
+                    const hash = href.includes('#') ? href.split('#')[1] : '';
+                    const target = document.getElementById(hash);
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth' });
+                    }
+                }
+                // Let external links (like merch.html) work normally
+            });
+        });
+
+        // Countdown Timer to February 22, 2026 at 3:00 PM
+        function updateCountdown() {
+            const screeningDate = new Date('February 22, 2026 15:00:00').getTime();
+            const now = new Date().getTime();
+            const distance = screeningDate - now;
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById('days').textContent = days;
+            document.getElementById('hours').textContent = hours;
+            document.getElementById('minutes').textContent = minutes;
+            document.getElementById('seconds').textContent = seconds;
+
+            if (distance < 0) {
+                document.getElementById('days').textContent = '0';
+                document.getElementById('hours').textContent = '0';
+                document.getElementById('minutes').textContent = '0';
+                document.getElementById('seconds').textContent = '0';
+            }
+        }
+
+        // Update countdown every second
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+        // Enhanced Mini Golf Game - 9 Holes with sand traps, windmills, par system
 // Enhanced Mini Golf Game - 9 Holes with sand traps, windmills, par system, etc.
 
 const canvas = document.getElementById('golfCanvas');
@@ -1229,10 +1246,6 @@ const holes = [
             { x: 150, y: 280, width: 80, height: 80 }
         ],
         windmills: [],
-        decorativeBirds: [
-            { x: 100, y: 100, speedX: 0.5, speedY: 0.2 }
-        ],
-        obstacleBirds: [],
         par: 3
     },
     { 
@@ -1246,8 +1259,6 @@ const holes = [
         windmills: [
             { x: 250, y: 200, radius: 40, blades: 4, angle: 0, speed: 0.02 }
         ],
-        decorativeBirds: [],
-        obstacleBirds: [],
         par: 2
     },
     { 
@@ -1262,10 +1273,6 @@ const holes = [
             { x: 350, y: 120, width: 60, height: 60 }
         ],
         windmills: [],
-        decorativeBirds: [],
-        obstacleBirds: [
-            { x: 250, y: 150, radius: 15, speedX: 1.5, speedY: 0.8, rangeX: 150, rangeY: 80, startX: 250, startY: 150 }
-        ],
         par: 4
     },
     { 
@@ -1279,10 +1286,6 @@ const holes = [
             { x: 80, y: 150, width: 100, height: 70 }
         ],
         windmills: [],
-        decorativeBirds: [
-            { x: 400, y: 200, speedX: -0.6, speedY: 0.3 }
-        ],
-        obstacleBirds: [],
         par: 3
     },
     { 
@@ -1296,8 +1299,6 @@ const holes = [
         windmills: [
             { x: 350, y: 280, radius: 35, blades: 3, angle: 0, speed: 0.03 }
         ],
-        decorativeBirds: [],
-        obstacleBirds: [],
         par: 3
     },
     { 
@@ -1312,10 +1313,6 @@ const holes = [
             { x: 360, y: 270, width: 70, height: 60 }
         ],
         windmills: [],
-        decorativeBirds: [
-            { x: 150, y: 250, speedX: 0.7, speedY: -0.4 }
-        ],
-        obstacleBirds: [],
         par: 4
     },
     { 
@@ -1329,8 +1326,6 @@ const holes = [
         windmills: [
             { x: 180, y: 200, radius: 30, blades: 4, angle: 0, speed: 0.025 }
         ],
-        decorativeBirds: [],
-        obstacleBirds: [],
         par: 2
     },
     { 
@@ -1344,10 +1339,6 @@ const holes = [
             { x: 200, y: 250, width: 100, height: 80 }
         ],
         windmills: [],
-        decorativeBirds: [
-            { x: 200, y: 100, speedX: 0.8, speedY: 0.5 }
-        ],
-        obstacleBirds: [],
         par: 3
     },
     { 
@@ -1363,11 +1354,6 @@ const holes = [
         windmills: [
             { x: 250, y: 130, radius: 35, blades: 4, angle: 0, speed: 0.02 }
         ],
-        decorativeBirds: [],
-        obstacleBirds: [
-            { x: 150, y: 200, radius: 15, speedX: 2, speedY: 1, rangeX: 200, rangeY: 100, startX: 150, startY: 200 },
-            { x: 350, y: 150, radius: 15, speedX: -1.5, speedY: -0.7, rangeX: 150, rangeY: 80, startX: 350, startY: 150 }
-        ],
         par: 3
     }
 ];
@@ -1376,8 +1362,6 @@ let currentHoleData = holes[0];
 let obstacles = [];
 let sandTraps = [];
 let windmills = [];
-let decorativeBirds = [];
-let obstacleBirds = [];
 
 function loadHole(holeNum) {
     currentHoleData = holes[holeNum - 1];
@@ -1386,8 +1370,6 @@ function loadHole(holeNum) {
     obstacles = currentHoleData.obstacles;
     sandTraps = currentHoleData.sandTraps || [];
     windmills = currentHoleData.windmills || [];
-    decorativeBirds = JSON.parse(JSON.stringify(currentHoleData.decorativeBirds || [])); // Deep copy
-    obstacleBirds = JSON.parse(JSON.stringify(currentHoleData.obstacleBirds || [])); // Deep copy
     strokes = 0;
     document.getElementById('strokes').textContent = strokes;
     document.getElementById('totalScore').textContent = totalStrokes;
@@ -1474,34 +1456,6 @@ function drawGame() {
         ctx.restore();
     });
 
-    // Animate and draw decorative birds (aesthetic only)
-    decorativeBirds.forEach(bird => {
-        bird.x += bird.speedX;
-        bird.y += bird.speedY;
-        
-        // Bounce off edges
-        if (bird.x < 0 || bird.x > canvas.width) bird.speedX *= -1;
-        if (bird.y < 0 || bird.y > canvas.height) bird.speedY *= -1;
-        
-        // Draw bird
-        ctx.font = '20px Arial';
-        ctx.fillText('🐦', bird.x - 10, bird.y + 10);
-    });
-
-    // Animate and draw obstacle birds (can be hit)
-    obstacleBirds.forEach(bird => {
-        bird.x += bird.speedX;
-        bird.y += bird.speedY;
-        
-        // Bounce within range
-        if (Math.abs(bird.x - bird.startX) > bird.rangeX) bird.speedX *= -1;
-        if (Math.abs(bird.y - bird.startY) > bird.rangeY) bird.speedY *= -1;
-        
-        // Draw bird
-        ctx.font = '24px Arial';
-        ctx.fillText('🐦', bird.x - 12, bird.y + 12);
-    });
-
     // Draw hole
     ctx.fillStyle = '#000';
     ctx.beginPath();
@@ -1559,8 +1513,8 @@ function updateBall() {
         }
     });
 
-    // Friction (20% slower in sand)
-    const friction = inSand ? 0.784 : 0.98; // 0.98 * 0.8 = 0.784
+    // Friction (higher in sand)
+    const friction = inSand ? 0.5 : 0.98;
     ball.vx *= friction;
     ball.vy *= friction;
 
@@ -1584,28 +1538,25 @@ function updateBall() {
         if (ball.x + ball.radius > obs.x && ball.x - ball.radius < obs.x + obs.width &&
             ball.y + ball.radius > obs.y && ball.y - ball.radius < obs.y + obs.height) {
             
-            // Calculate overlap on each side
+            // Determine which side we hit
             const overlapLeft = (ball.x + ball.radius) - obs.x;
             const overlapRight = (obs.x + obs.width) - (ball.x - ball.radius);
             const overlapTop = (ball.y + ball.radius) - obs.y;
             const overlapBottom = (obs.y + obs.height) - (ball.y - ball.radius);
             
-            // Find the smallest overlap (that's the side we hit)
             const minOverlap = Math.min(overlapLeft, overlapRight, overlapTop, overlapBottom);
             
             // Bounce based on which side has smallest overlap
-            if (minOverlap === overlapLeft) {
-                ball.vx = Math.abs(ball.vx) * -0.7; // Bounce left
-                ball.x = obs.x - ball.radius - 1; // Push out with buffer
-            } else if (minOverlap === overlapRight) {
-                ball.vx = Math.abs(ball.vx) * 0.7; // Bounce right
-                ball.x = obs.x + obs.width + ball.radius + 1; // Push out with buffer
-            } else if (minOverlap === overlapTop) {
-                ball.vy = Math.abs(ball.vy) * -0.7; // Bounce up
-                ball.y = obs.y - ball.radius - 1; // Push out with buffer
-            } else if (minOverlap === overlapBottom) {
-                ball.vy = Math.abs(ball.vy) * 0.7; // Bounce down
-                ball.y = obs.y + obs.height + ball.radius + 1; // Push out with buffer
+            if (minOverlap === overlapLeft || minOverlap === overlapRight) {
+                ball.vx *= -0.7;
+                // Push ball out of obstacle
+                if (minOverlap === overlapLeft) ball.x = obs.x - ball.radius;
+                else ball.x = obs.x + obs.width + ball.radius;
+            } else {
+                ball.vy *= -0.7;
+                // Push ball out of obstacle
+                if (minOverlap === overlapTop) ball.y = obs.y - ball.radius;
+                else ball.y = obs.y + obs.height + ball.radius;
             }
         }
     });
@@ -1620,24 +1571,6 @@ function updateBall() {
             // Bounce off windmill blade
             ball.vx *= -0.8;
             ball.vy *= -0.8;
-        }
-    });
-
-    // Check obstacle bird collision
-    obstacleBirds.forEach(bird => {
-        const dx = ball.x - bird.x;
-        const dy = ball.y - bird.y;
-        const distance = Math.sqrt(dx * dx + dy * dy);
-        
-        if (distance < bird.radius + ball.radius) {
-            // Bounce off bird
-            ball.vx *= -0.7;
-            ball.vy *= -0.7;
-            
-            // Push ball away from bird
-            const angle = Math.atan2(dy, dx);
-            ball.x = bird.x + Math.cos(angle) * (bird.radius + ball.radius + 2);
-            ball.y = bird.y + Math.sin(angle) * (bird.radius + ball.radius + 2);
         }
     });
 
@@ -1790,6 +1723,24 @@ window.resetGame = function() {
 
 window.shareChallenge = shareChallenge;
 
+
+
+        // Blue bird flies across screen every 30 seconds
+        function spawnBlueBird() {
+            const bird = document.createElement('div');
+            bird.className = 'flying-bird';
+            bird.textContent = '🐦';
+            const randomTop = 15 + Math.random() * 40;
+            bird.style.top = randomTop + '%';
+            bird.style.animation = 'flyAcross 8s linear';
+            document.body.appendChild(bird);
+            
+            setTimeout(() => bird.remove(), 8000);
+        }
+        
+        setTimeout(() => {
+            spawnBlueBird();
+            setInterval(spawnBlueBird, 30000);
         }, 5000);
 
         // Auto-scroll for comparable films only
@@ -1805,15 +1756,4 @@ window.shareChallenge = shareChallenge;
                 // Seamless loop - when near the end, jump back to start
                 if (filmsScrollAmount >= filmsWrapper.scrollWidth - filmsWrapper.clientWidth - 50) {
                     filmsScrollAmount = 0;
-                    filmsWrapper.scrollLeft = 0;
-                }
-                
-                requestAnimationFrame(autoScrollFilms);
-            }
-
-            // Start auto-scroll
-            autoScrollFilms();
-        }
-    </script>
-</body>
-</html>
+                 
