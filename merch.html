@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Merchandise - Mick Skylark: Mini Golf Prodigy</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #1E3A8A;
+            --primary-dark: #1E40AF;
+            --secondary: #FCD34D;
+            --gold: #FBBF24;
+            --light: #FFFFFF;
+            --dark: #1F2937;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--dark);
+            overflow-x: hidden;
+            background: linear-gradient(135deg, #87CEEB 0%, #5DADE2 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .merch-container {
+            text-align: center;
+            max-width: 800px;
+            background: white;
+            padding: 60px 40px;
+            border-radius: 30px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .merch-container::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(252, 211, 77, 0.1), transparent);
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+
+        .logo {
+            max-width: 400px;
+            width: 100%;
+            margin-bottom: 40px;
+            border-radius: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .coming-soon {
+            font-size: 5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--gold) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin: 30px 0;
+            position: relative;
+            z-index: 1;
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            color: var(--dark);
+            margin-bottom: 40px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .preview-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .preview-item {
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--gold) 100%);
+            padding: 30px 20px;
+            border-radius: 15px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: var(--primary);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .preview-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .preview-item::before {
+            content: '🎁';
+            display: block;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .notify-form {
+            margin-top: 40px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .notify-form h3 {
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .notify-form p {
+            font-size: 1.1rem;
+            margin-bottom: 25px;
+            color: var(--dark);
+        }
+
+        .email-input {
+            display: flex;
+            gap: 10px;
+            max-width: 500px;
+            margin: 0 auto;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .email-input input {
+            flex: 1;
+            min-width: 250px;
+            padding: 15px 20px;
+            border: 2px solid var(--primary);
+            border-radius: 30px;
+            font-size: 1rem;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .email-input button {
+            padding: 15px 35px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .email-input button:hover {
+            background: var(--primary-dark);
+            transform: scale(1.05);
+        }
+
+        .back-link {
+            margin-top: 40px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .back-link a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: color 0.3s ease;
+        }
+
+        .back-link a:hover {
+            color: var(--primary-dark);
+        }
+
+        @media (max-width: 768px) {
+            .merch-container {
+                padding: 40px 20px;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .coming-soon {
+                font-size: 3rem;
+            }
+
+            .subtitle {
+                font-size: 1.2rem;
+            }
+
+            .preview-items {
+                grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            }
+
+            .email-input {
+                flex-direction: column;
+            }
+
+            .email-input input,
+            .email-input button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="merch-container">
+        <img src="logo-no-bg.png" alt="Mick Skylark Logo" class="logo">
+        
+        <h1>Official Merchandise</h1>
+        
+        <div class="coming-soon">COMING SOON!</div>
+        
+        <p class="subtitle">Get ready for exclusive Mick Skylark gear!</p>
+        
+        <div class="preview-items">
+            <div class="preview-item">T-Shirts</div>
+            <div class="preview-item">Hoodies</div>
+            <div class="preview-item">Posters</div>
+            <div class="preview-item">Hats</div>
+            <div class="preview-item">Mugs</div>
+            <div class="preview-item">& More!</div>
+        </div>
+        
+        <div class="notify-form">
+            <h3>Be the First to Know!</h3>
+            <p>Get notified when our merch store launches</p>
+            <div class="email-input">
+                <input type="email" id="emailInput" placeholder="Enter your email" required>
+                <button onclick="notifyMe()">Notify Me</button>
+            </div>
+            <p id="confirmMessage" style="margin-top: 20px; color: var(--primary); font-weight: 600; display: none;">✓ Thanks! We'll notify you when merch is available!</p>
+        </div>
+        
+        <div class="back-link">
+            <a href="index.html">← Back to Main Site</a>
+        </div>
+    </div>
+
+    <script>
+        function notifyMe() {
+            const email = document.getElementById('emailInput').value;
+            if (email && email.includes('@')) {
+                // Store email in localStorage for now (in production, send to backend)
+                const emails = JSON.parse(localStorage.getItem('merchNotifications') || '[]');
+                if (!emails.includes(email)) {
+                    emails.push(email);
+                    localStorage.setItem('merchNotifications', JSON.stringify(emails));
+                }
+                
+                document.getElementById('confirmMessage').style.display = 'block';
+                document.getElementById('emailInput').value = '';
+                
+                setTimeout(() => {
+                    document.getElementById('confirmMessage').style.display = 'none';
+                }, 5000);
+            } else {
+                alert('Please enter a valid email address');
+            }
+        }
+
+        // Allow Enter key to submit
+        document.getElementById('emailInput').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                notifyMe();
+            }
+        });
+    </script>
+</body>
+</html>
