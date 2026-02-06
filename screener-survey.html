@@ -1,1 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Screener Survey - Mick Skylark: Mini Golf Prodigy</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
+
+    <style>
+        :root {
+            --primary: #1E3A8A;
+            --primary-dark: #1E40AF;
+            --secondary: #FCD34D;
+            --gold: #FBBF24;
+            --light: #FFFFFF;
+            --dark: #1F2937;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--dark);
+            overflow-x: hidden;
+            padding-top: 60px;
+            background: #fff;
+        }
+
+        .navbar {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+            padding: 12px 0;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            padding: 0 20px;
+        }
+
+        .nav-link {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            padding: 8px 18px;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .nav-link:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .section-yellow {
+            background: linear-gradient(135deg, #FDE68A 0%, #FCD34D 100%);
+            padding: 80px 20px;
+            min-height: calc(100vh - 60px);
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+
+        .subtitle {
+            text-align: center;
+            font-size: 1.1rem;
+            color: var(--dark);
+            margin: 0 auto 35px;
+            max-width: 780px;
+        }
+
+        .card {
+            background: white;
+            padding: 28px;
+            border-radius: 20px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+            overflow: hidden;
+        }
+
+        .back-row {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .link-btn {
+            display: inline-block;
+            padding: 12px 26px;
+            background: var(--primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(30, 58, 138, 0.3);
+        }
+
+        .link-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(30, 58, 138, 0.4);
+        }
+
+        footer {
+            background: var(--primary);
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        footer a {
+            color: var(--secondary);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        footer a:hover { text-decoration: underline; }
+
+        @media (max-width: 768px) {
+            .section-title { font-size: 2.2rem; }
+            .card { padding: 18px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html#home" class="nav-link">Home</a>
+            <a href="index.html#comparable-films" class="nav-link">Similar Films</a>
+            <a href="index.html#rsvp" class="nav-link">RSVP</a>
+            <a href="screener-survey.html" class="nav-link">Screener Survey</a>
+            <a href="index.html#game" class="nav-link">Mini Golf Game</a>
+            <a href="index.html#cast" class="nav-link">Cast</a>
+            <a href="index.html#instagram" class="nav-link">Instagram</a>
+            <a href="merch.html" class="nav-link">Merch</a>
+            <a href="index.html#credits" class="nav-link">Credits</a>
+            <a href="index.html#locations" class="nav-link">Locations</a>
+        </div>
+    </nav>
+
+    <!-- Screener Survey -->
+    <section class="section-yellow">
+        <div class="container">
+            <h1 class="section-title">Screener Survey</h1>
+            <p class="subtitle">
+                Please take 2 minutes to answer the questions below. This helps us understand the audience and improve the film.
+            </p>
+
+            <div class="back-row">
+                <a class="link-btn" href="index.html#rsvp">← Back to RSVP</a>
+            </div>
+
+            <div class="card">
+                <!-- Replace this iframe with your survey embed link -->
+                <!-- Option A: Tally (recommended since you already use it) -->
+                <iframe
+                    data-tally-src="PASTE_YOUR_TALLY_EMBED_LINK_HERE"
+                    loading="lazy"
+                    width="100%"
+                    height="900"
+                    frameborder="0"
+                    marginheight="0"
+                    marginwidth="0"
+                    title="Mick Skylark Screener Survey">
+                </iframe>
+
+                <!-- Option B (fallback): If you don’t have an embed yet, use a normal link instead:
+                <p style="text-align:center; font-size:1.1rem;">
+                    <a class="link-btn" href="PASTE_SURVEY_LINK_HERE" target="_blank" rel="noopener">Open Survey</a>
+                </p>
+                -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Mick Skylark: Mini Golf Prodigy. All rights reserved.</p>
+        <p style="margin-top: 10px; opacity: 0.8;">A Potato Eater Productions Film</p>
+        <p style="margin-top: 15px;">
+            <a href="https://www.instagram.com/mickskylark" target="_blank" rel="noopener">Follow us on Instagram!</a>
+        </p>
+    </footer>
+
+    <script>
+        // Tally embed script (same approach as your main page)
+        (function () {
+            var d = document,
+                w = "https://tally.so/widgets/embed.js",
+                v = function () {
+                    if (typeof Tally != "undefined") Tally.loadEmbeds();
+                    else
+                        d.querySelectorAll("iframe[data-tally-src]:not([src])").forEach(function (e) {
+                            e.src = e.dataset.tallySrc;
+                        });
+                };
+
+            if (typeof Tally != "undefined") v();
+            else if (d.querySelector('script[src="' + w + '"]') == null) {
+                var s = d.createElement("script");
+                s.src = w;
+                s.onload = v;
+                s.onerror = v;
+                d.body.appendChild(s);
+            }
+        })();
+    </script>
+</body>
+</html>
 
