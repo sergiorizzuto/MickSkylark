@@ -4,10 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Merchandise - Mick Skylark: Mini Golf Prodigy</title>
+
+    <!-- Basic SEO -->
+    <meta name="description" content="Official Mick Skylark: Mini Golf Prodigy merchandise. Coming soon: shirts, hoodies, posters, hats, mugs, and more.">
+    <meta name="robots" content="index,follow">
+    <link rel="canonical" href="https://mickskylark.com/merch.html">
+
+    <!-- Open Graph (Facebook / LinkedIn / iMessage previews) -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Mick Skylark: Mini Golf Prodigy">
+    <meta property="og:title" content="Official Merchandise - Mick Skylark">
+    <meta property="og:description" content="Official Mick Skylark merchandise. Coming soon: shirts, hoodies, posters, hats, mugs, and more.">
+    <meta property="og:url" content="https://mickskylark.com/merch.html">
+    <meta property="og:image" content="https://mickskylark.com/logo-no-bg.png">
+
+    <!-- Twitter / X preview -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Official Merchandise - Mick Skylark">
+    <meta name="twitter:description" content="Official Mick Skylark merchandise. Coming soon: shirts, hoodies, posters, hats, mugs, and more.">
+    <meta name="twitter:image" content="https://mickskylark.com/logo-no-bg.png">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
-    
+
     <style>
         :root {
             --primary: #1E3A8A;
@@ -18,20 +38,56 @@
             --dark: #1F2937;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             font-family: 'Poppins', sans-serif;
             color: var(--dark);
             overflow-x: hidden;
             background: linear-gradient(135deg, #87CEEB 0%, #5DADE2 100%);
+            padding-top: 70px; /* space for fixed navbar */
             min-height: 100vh;
+        }
+
+        /* Navbar (matches your main site style) */
+        .navbar {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+            padding: 12px 0;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
             display: flex;
-            flex-direction: column;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            padding: 0 20px;
+        }
+
+        .nav-link {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            padding: 8px 18px;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .nav-link:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* Page centering wrapper */
+        .page-wrap {
+            min-height: calc(100vh - 70px);
+            display: flex;
             justify-content: center;
             align-items: center;
             padding: 20px;
@@ -40,6 +96,7 @@
         .merch-container {
             text-align: center;
             max-width: 800px;
+            width: 100%;
             background: white;
             padding: 60px 40px;
             border-radius: 30px;
@@ -135,9 +192,7 @@
             transition: transform 0.3s ease;
         }
 
-        .preview-item:hover {
-            transform: translateY(-5px);
-        }
+        .preview-item:hover { transform: translateY(-5px); }
 
         .preview-item::before {
             content: '🎁';
@@ -182,137 +237,3 @@
             font-size: 1rem;
             font-family: 'Poppins', sans-serif;
         }
-
-        .email-input button {
-            padding: 15px 35px;
-            background: var(--primary);
-            color: white;
-            border: none;
-            border-radius: 30px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-family: 'Poppins', sans-serif;
-        }
-
-        .email-input button:hover {
-            background: var(--primary-dark);
-            transform: scale(1.05);
-        }
-
-        .back-link {
-            margin-top: 40px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .back-link a {
-            color: var(--primary);
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 1.1rem;
-            transition: color 0.3s ease;
-        }
-
-        .back-link a:hover {
-            color: var(--primary-dark);
-        }
-
-        @media (max-width: 768px) {
-            .merch-container {
-                padding: 40px 20px;
-            }
-
-            h1 {
-                font-size: 2rem;
-            }
-
-            .coming-soon {
-                font-size: 3rem;
-            }
-
-            .subtitle {
-                font-size: 1.2rem;
-            }
-
-            .preview-items {
-                grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-            }
-
-            .email-input {
-                flex-direction: column;
-            }
-
-            .email-input input,
-            .email-input button {
-                width: 100%;
-            }
-        }
-    </style>
-</head>
-<body>
-    <div class="merch-container">
-        <img src="logo-no-bg.png" alt="Mick Skylark Logo" class="logo">
-        
-        <h1>Official Merchandise</h1>
-        
-        <div class="coming-soon">COMING SOON!</div>
-        
-        <p class="subtitle">Get ready for exclusive Mick Skylark gear!</p>
-        
-        <div class="preview-items">
-            <div class="preview-item">T-Shirts</div>
-            <div class="preview-item">Hoodies</div>
-            <div class="preview-item">Posters</div>
-            <div class="preview-item">Hats</div>
-            <div class="preview-item">Mugs</div>
-            <div class="preview-item">& More!</div>
-        </div>
-        
-        <div class="notify-form">
-            <h3>Be the First to Know!</h3>
-            <p>Get notified when our merch store launches</p>
-            <div class="email-input">
-                <input type="email" id="emailInput" placeholder="Enter your email" required>
-                <button onclick="notifyMe()">Notify Me</button>
-            </div>
-            <p id="confirmMessage" style="margin-top: 20px; color: var(--primary); font-weight: 600; display: none;">✓ Thanks! We'll notify you when merch is available!</p>
-        </div>
-        
-        <div class="back-link">
-            <a href="index.html">← Back to Main Site</a>
-        </div>
-    </div>
-
-    <script>
-        function notifyMe() {
-            const email = document.getElementById('emailInput').value;
-            if (email && email.includes('@')) {
-                // Store email in localStorage for now (in production, send to backend)
-                const emails = JSON.parse(localStorage.getItem('merchNotifications') || '[]');
-                if (!emails.includes(email)) {
-                    emails.push(email);
-                    localStorage.setItem('merchNotifications', JSON.stringify(emails));
-                }
-                
-                document.getElementById('confirmMessage').style.display = 'block';
-                document.getElementById('emailInput').value = '';
-                
-                setTimeout(() => {
-                    document.getElementById('confirmMessage').style.display = 'none';
-                }, 5000);
-            } else {
-                alert('Please enter a valid email address');
-            }
-        }
-
-        // Allow Enter key to submit
-        document.getElementById('emailInput').addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') {
-                notifyMe();
-            }
-        });
-    </script>
-</body>
-</html>
