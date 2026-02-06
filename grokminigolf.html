@@ -1,207 +1,916 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mini Golf Game</title>
+    <title>Glory On The Greens - Mick Skylark</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    
     <style>
-        body {
+        :root {
+            --primary: #1E3A8A;
+            --primary-dark: #1E40AF;
+            --secondary: #FCD34D;
+            --gold: #FBBF24;
+        }
+
+        * {
             margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #FDE68A 0%, #FCD34D 100%);
+            padding: 40px 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: var(--primary);
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: var(--primary);
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+        }
+
+        .controls {
             display: flex;
             justify-content: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .control-btn {
+            background: white;
+            border: 2px solid var(--primary);
+            border-radius: 50%;
+            width: 45px;
+            height: 45px;
+            cursor: pointer;
+            font-size: 1.5rem;
+            display: flex;
             align-items: center;
-            height: 100vh;
-            background-color: #f0f0f0;
-            font-family: Arial, sans-serif;
+            justify-content: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         }
-        #game-container {
-            position: relative;
+
+        .control-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
         }
-        #canvas {
-            background-color: #228B22; /* Green grass color */
-            border: 2px solid #000;
-        }
-        #score {
-            position: absolute;
-            top: 10px;
-            left: 10px;
+
+        .control-btn.active {
+            background: var(--primary);
             color: white;
-            font-size: 20px;
         }
-        #message {
-            position: absolute;
+
+        .game-container {
+            background: white;
+            padding: 40px 20px;
+            border-radius: 20px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+            text-align: center;
+        }
+
+        .game-canvas {
+            border: 3px solid var(--primary);
+            border-radius: 15px;
+            cursor: crosshair;
+            margin: 20px auto;
+            display: block;
+            max-width: 100%;
+            height: auto;
+        }
+
+        .game-stats {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin: 15px 0;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 12px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+            min-width: 100px;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            opacity: 0.9;
+            font-weight: 600;
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .game-btn {
+            padding: 12px 30px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            font-family: 'Poppins', sans-serif;
+            margin: 5px;
+        }
+
+        .game-btn:hover {
+            background: var(--primary-dark);
+            transform: scale(1.05);
+        }
+
+        .game-btn.secondary {
+            background: var(--secondary);
+            color: var(--primary);
+        }
+
+        .game-btn.secondary:hover {
+            background: var(--gold);
+        }
+
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 30px;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        .water-splash {
+            position: fixed;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            color: red;
-            font-size: 30px;
+            font-size: 4rem;
+            font-weight: 700;
+            color: #1E90FF;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+            animation: splashAnimation 1s ease-out forwards;
+            pointer-events: none;
+            z-index: 10000;
+        }
+
+        @keyframes splashAnimation {
+            0% {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(0.5);
+            }
+            50% {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1.2);
+            }
+            100% {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(1) translateY(-50px);
+            }
+        }
+
+        .celebration-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
             display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .celebration-overlay.active {
+            display: flex;
+        }
+
+        .celebration-content {
+            background: white;
+            padding: 50px;
+            border-radius: 30px;
+            text-align: center;
+            max-width: 500px;
+            animation: scaleIn 0.5s ease;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .celebration-emoji {
+            font-size: 5rem;
+            animation: bounce 1s ease infinite;
+            margin-bottom: 20px;
+        }
+
+        .celebration-title {
+            font-size: 2.5rem;
+            color: var(--primary);
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .celebration-score {
+            font-size: 1.5rem;
+            color: var(--gold);
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .celebration-message {
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes scaleIn {
+            from { transform: scale(0.5); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background: var(--gold);
+            position: absolute;
+            animation: confettiFall 3s linear forwards;
+        }
+
+        @keyframes confettiFall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .game-container {
+                padding: 20px 10px;
+            }
+
+            .game-canvas {
+                width: 100% !important;
+                height: auto !important;
+            }
+
+            .celebration-content {
+                padding: 30px 20px;
+                margin: 20px;
+            }
+
+            .celebration-title {
+                font-size: 2rem;
+            }
         }
     </style>
 </head>
 <body>
-    <div id="game-container">
-        <canvas id="canvas" width="800" height="600"></canvas>
-        <div id="score">Strokes: 0</div>
-        <div id="message">Hole in One!</div>
+    <div class="container">
+        <h1>⛳ Glory On The Greens</h1>
+        <p class="subtitle">Click to hit the ball into the hole! Can you beat par?</p>
+        
+        <div class="controls">
+            <button class="control-btn active" id="dayBtn" onclick="setTheme('day')" title="Day Mode">☀️</button>
+            <button class="control-btn" id="nightBtn" onclick="setTheme('night')" title="Night Mode">🌙</button>
+            <button class="control-btn active" id="soundBtn" onclick="toggleSound()" title="Toggle Sound">🔊</button>
+        </div>
+        
+        <div class="game-container">
+            <canvas id="golfCanvas" class="game-canvas" width="500" height="400"></canvas>
+            
+            <div class="game-stats">
+                <div class="stat-card">
+                    <span class="stat-label">This Hole:</span>
+                    <span class="stat-value" id="strokes">0</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-label" id="parInfo">Par 3</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-label">Total:</span>
+                    <span class="stat-value" id="totalScore">0</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-label" id="overUnder">Even</span>
+                </div>
+            </div>
+            
+            <div class="game-stats" style="margin-top: 15px;">
+                <div class="stat-card">
+                    <span class="stat-label">🏆 Best:</span>
+                    <span class="stat-value" id="best">--</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-label">⛳ Holes-in-One:</span>
+                    <span class="stat-value" id="holesInOneCount">0</span>
+                </div>
+            </div>
+            
+            <div style="display: flex; gap: 10px; justify-content: center; margin-top: 20px; flex-wrap: wrap;">
+                <button class="game-btn" onclick="resetGame()">↻ Restart Course</button>
+                <button class="game-btn secondary" onclick="shareChallenge()">👥 Challenge Friends</button>
+            </div>
+        </div>
+
+        <a href="index.html" class="back-link">← Back to Main Site</a>
     </div>
 
+    <div class="celebration-overlay" id="celebrationOverlay">
+        <div class="celebration-content">
+            <div class="celebration-emoji">🎉</div>
+            <div class="celebration-title">Course Complete!</div>
+            <div class="celebration-score" id="finalScore">Total: 0 strokes</div>
+            <div class="celebration-message" id="celebrationMessage">Great job!</div>
+            <button class="game-btn" onclick="closeCelebration()">Play Again</button>
+            <button class="game-btn secondary" onclick="shareChallenge()">Share Score</button>
+        </div>
+    </div>
     <script>
-        const canvas = document.getElementById('canvas');
-        const ctx = canvas.getContext('2d');
-        const scoreDisplay = document.getElementById('score');
-        const messageDisplay = document.getElementById('message');
+        const canvas = document.getElementById('golfCanvas');
+        const ctx = canvas ? canvas.getContext('2d') : null;
 
-        // Game variables
-        let ball = { x: 100, y: 300, radius: 10, vx: 0, vy: 0 };
-        let hole = { x: 700, y: 300, radius: 15 };
+        let ball = { x: 50, y: 350, radius: 10, vx: 0, vy: 0 };
+        let hole = { x: 450, y: 50, radius: 20 };
         let strokes = 0;
-        let isAiming = false;
-        let aimStartX, aimStartY;
-        let obstacles = [
-            { x: 300, y: 200, width: 50, height: 200 }, // Vertical wall
-            { x: 500, y: 100, width: 50, height: 300 }  // Another vertical wall
-        ];
+        let currentHole = 1;
+        let totalStrokes = 0;
+        let holesInOne = parseInt(localStorage.getItem('holesInOne') || '0');
+        let best = localStorage.getItem('bestScore') || '--';
+        let currentTheme = 'day';
+        let soundEnabled = true;
+        let ballTrail = [];
+        let particles = [];
 
-        // Physics constants
-        const friction = 0.98;
-        const gravity = 0; // No gravity for mini golf
+        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
 
-        function draw() {
-            // Clear canvas
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-            // Draw grass (already background)
+        function playSound(type) {
+            if (!soundEnabled) return;
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
             
-            // Draw obstacles
-            ctx.fillStyle = '#8B4513'; // Brown for walls
-            obstacles.forEach(obs => {
-                ctx.fillRect(obs.x, obs.y, obs.width, obs.height);
-            });
-
-            // Draw hole
-            ctx.beginPath();
-            ctx.arc(hole.x, hole.y, hole.radius, 0, Math.PI * 2);
-            ctx.fillStyle = '#000';
-            ctx.fill();
-
-            // Draw ball
-            ctx.beginPath();
-            ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2);
-            ctx.fillStyle = '#FFF';
-            ctx.fill();
-
-            // Draw aiming line if aiming
-            if (isAiming) {
-                ctx.beginPath();
-                ctx.moveTo(ball.x, ball.y);
-                ctx.lineTo(aimStartX, aimStartY);
-                ctx.strokeStyle = '#FF0000';
-                ctx.lineWidth = 2;
-                ctx.stroke();
+            switch(type) {
+                case 'hit':
+                    oscillator.frequency.value = 300;
+                    oscillator.type = 'sine';
+                    gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+                    gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.1);
+                    oscillator.start(audioContext.currentTime);
+                    oscillator.stop(audioContext.currentTime + 0.1);
+                    break;
+                case 'wall':
+                    oscillator.frequency.value = 200;
+                    oscillator.type = 'square';
+                    gainNode.gain.setValueAtTime(0.2, audioContext.currentTime);
+                    gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.15);
+                    oscillator.start(audioContext.currentTime);
+                    oscillator.stop(audioContext.currentTime + 0.15);
+                    break;
+                case 'hole':
+                    oscillator.frequency.value = 523;
+                    oscillator.type = 'sine';
+                    gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+                    gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.5);
+                    oscillator.start(audioContext.currentTime);
+                    oscillator.stop(audioContext.currentTime + 0.5);
+                    break;
+                case 'water':
+                    oscillator.frequency.value = 150;
+                    oscillator.type = 'sine';
+                    gainNode.gain.setValueAtTime(0.25, audioContext.currentTime);
+                    gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.3);
+                    oscillator.start(audioContext.currentTime);
+                    oscillator.stop(audioContext.currentTime + 0.3);
+                    break;
             }
         }
 
-        function update() {
-            ball.x += ball.vx;
-            ball.y += ball.vy;
+        function toggleSound() {
+            soundEnabled = !soundEnabled;
+            const btn = document.getElementById('soundBtn');
+            btn.textContent = soundEnabled ? '🔊' : '🔇';
+            btn.classList.toggle('active', soundEnabled);
+        }
 
-            // Apply friction
-            ball.vx *= friction;
-            ball.vy *= friction;
+        function setTheme(theme) {
+            currentTheme = theme;
+            document.getElementById('dayBtn').classList.toggle('active', theme === 'day');
+            document.getElementById('nightBtn').classList.toggle('active', theme === 'night');
+            drawGame();
+        }
 
-            // Stop if velocity is very low
-            if (Math.abs(ball.vx) < 0.1 && Math.abs(ball.vy) < 0.1) {
-                ball.vx = 0;
-                ball.vy = 0;
+        const parValues = [3, 3, 4, 3, 3, 4, 2, 4, 3];
+
+        const holes = [
+            { ball: {x: 50, y: 350}, hole: {x: 450, y: 50}, obstacles: [{x: 200, y: 200, width: 20, height: 150},{x: 350, y: 50, width: 20, height: 200}], sandTraps: [{x: 150, y: 280, width: 80, height: 80}], waterHazards: [], bumpers: [], windmills: [], movingObstacles: [], par: 3 },
+            { ball: {x: 50, y: 350}, hole: {x: 450, y: 100}, obstacles: [{x: 200, y: 150, width: 20, height: 150},{x: 350, y: 200, width: 20, height: 200}], sandTraps: [{x: 250, y: 280, width: 70, height: 70}], waterHazards: [], bumpers: [{x: 280, y: 180, radius: 25},{x: 380, y: 280, radius: 25}], windmills: [], movingObstacles: [], par: 3 },
+            { ball: {x: 50, y: 200}, hole: {x: 450, y: 200}, obstacles: [{x: 200, y: 100, width: 20, height: 100},{x: 300, y: 200, width: 20, height: 100}], sandTraps: [{x: 120, y: 250, width: 60, height: 60}], waterHazards: [{x: 350, y: 120, width: 70, height: 70}], bumpers: [], windmills: [], movingObstacles: [], par: 4 },
+            { ball: {x: 450, y: 350}, hole: {x: 50, y: 50}, obstacles: [{x: 240, y: 0, width: 20, height: 250},{x: 240, y: 300, width: 20, height: 100}], sandTraps: [{x: 80, y: 150, width: 100, height: 70}], waterHazards: [], bumpers: [{x: 350, y: 200, radius: 30}], windmills: [], movingObstacles: [], par: 3 },
+            { ball: {x: 250, y: 350}, hole: {x: 450, y: 150}, obstacles: [{x: 100, y: 100, width: 100, height: 20},{x: 300, y: 200, width: 100, height: 20}], sandTraps: [], waterHazards: [{x: 180, y: 250, width: 80, height: 80}], bumpers: [], windmills: [{x: 350, y: 280, radius: 35, blades: 3, angle: 0, speed: 0.03}], movingObstacles: [], par: 3 },
+            { ball: {x: 50, y: 350}, hole: {x: 450, y: 50}, obstacles: [{x: 150, y: 0, width: 20, height: 180},{x: 330, y: 220, width: 20, height: 180}], movingObstacles: [{x: 240, y: 180, width: 20, height: 100, direction: 1, speed: 1.5, minY: 100, maxY: 280, axis: 'vertical'}], sandTraps: [{x: 180, y: 280, width: 70, height: 70}], waterHazards: [], bumpers: [], windmills: [], par: 4 },
+            { ball: {x: 250, y: 200}, hole: {x: 50, y: 200}, obstacles: [{x: 100, y: 50, width: 20, height: 100},{x: 100, y: 250, width: 20, height: 100}], sandTraps: [], waterHazards: [], bumpers: [{x: 150, y: 200, radius: 20}], windmills: [{x: 180, y: 200, radius: 30, blades: 4, angle: 0, speed: 0.025}], movingObstacles: [], par: 2 },
+            { ball: {x: 50, y: 350}, hole: {x: 450, y: 50}, obstacles: [{x: 150, y: 0, width: 20, height: 200},{x: 250, y: 150, width: 20, height: 250},{x: 350, y: 0, width: 20, height: 200}], sandTraps: [{x: 180, y: 250, width: 60, height: 60}], waterHazards: [], bumpers: [{x: 380, y: 280, radius: 25}], windmills: [], movingObstacles: [], par: 4 },
+            { ball: {x: 250, y: 350}, hole: {x: 250, y: 50}, obstacles: [{x: 100, y: 180, width: 80, height: 20},{x: 320, y: 200, width: 80, height: 20}], sandTraps: [{x: 200, y: 250, width: 100, height: 60}], waterHazards: [], bumpers: [], windmills: [{x: 250, y: 130, radius: 35, blades: 4, angle: 0, speed: 0.02}], movingObstacles: [], par: 3 }
+        ];
+
+        let currentHoleData = holes[0];
+        let obstacles = [], sandTraps = [], windmills = [], movingObstacles = [], waterHazards = [], bumpers = [];
+
+        function loadHole(holeNum) {
+            currentHoleData = holes[holeNum - 1];
+            ball = { ...currentHoleData.ball, radius: 10, vx: 0, vy: 0 };
+            hole = { ...currentHoleData.hole, radius: 20 };
+            obstacles = currentHoleData.obstacles;
+            sandTraps = currentHoleData.sandTraps || [];
+            windmills = currentHoleData.windmills || [];
+            movingObstacles = currentHoleData.movingObstacles || [];
+            waterHazards = currentHoleData.waterHazards || [];
+            bumpers = currentHoleData.bumpers || [];
+            ballTrail = [];
+            particles = [];
+            strokes = 0;
+            document.getElementById('strokes').textContent = strokes;
+            document.getElementById('totalScore').textContent = totalStrokes;
+            document.getElementById('holesInOneCount').textContent = holesInOne;
+            updateParDisplay();
+        }
+
+        function updateParDisplay() {
+            const currentPar = parValues[currentHole - 1];
+            const totalPar = parValues.slice(0, currentHole).reduce((a, b) => a + b, 0);
+            const overUnder = totalStrokes - totalPar;
+            const overUnderText = overUnder === 0 ? 'Even' : overUnder > 0 ? `+${overUnder}` : overUnder;
+            document.getElementById('parInfo').textContent = `Par ${currentPar}`;
+            document.getElementById('overUnder').textContent = `Score: ${overUnderText}`;
+        }
+
+        function createParticles(x, y, color, count = 8) {
+            for (let i = 0; i < count; i++) {
+                particles.push({ x: x, y: y, vx: (Math.random() - 0.5) * 4, vy: (Math.random() - 0.5) * 4, life: 30, color: color, size: Math.random() * 3 + 2 });
             }
+        }
 
-            // Wall collisions (canvas boundaries)
-            if (ball.x - ball.radius < 0 || ball.x + ball.radius > canvas.width) {
-                ball.vx = -ball.vx;
-            }
-            if (ball.y - ball.radius < 0 || ball.y + ball.radius > canvas.height) {
-                ball.vy = -ball.vy;
-            }
+        function showWaterSplash() {
+            const splash = document.createElement('div');
+            splash.className = 'water-splash';
+            splash.textContent = 'Oops! 💦';
+            document.body.appendChild(splash);
+            playSound('water');
+            setTimeout(() => splash.remove(), 1000);
+        }
 
-            // Obstacle collisions
-            obstacles.forEach(obs => {
-                if (ball.x + ball.radius > obs.x && ball.x - ball.radius < obs.x + obs.width &&
-                    ball.y + ball.radius > obs.y && ball.y - ball.radius < obs.y + obs.height) {
-                    // Simple bounce: reverse velocity component based on collision side
-                    // This is basic; for better physics, determine side of collision
-                    ball.vx = -ball.vx;
-                    ball.vy = -ball.vy;
+        function drawGame() {
+            if (!ctx) return;
+            const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
+            if (currentTheme === 'night') {
+                gradient.addColorStop(0, '#1a2332');
+                gradient.addColorStop(1, '#0f1419');
+            } else {
+                gradient.addColorStop(0, '#90EE90');
+                gradient.addColorStop(1, '#7FD87F');
+            }
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            ctx.fillStyle = currentTheme === 'night' ? '#1E3A8A' : '#fff';
+            ctx.fillRect(5, 5, 150, 50);
+            ctx.fillStyle = currentTheme === 'night' ? '#FCD34D' : '#1E3A8A';
+            ctx.font = 'bold 16px Poppins';
+            ctx.fillText(`Hole ${currentHole} of 9`, 15, 25);
+            ctx.font = '14px Poppins';
+            ctx.fillText(`Par ${parValues[currentHole - 1]}`, 15, 45);
+
+            waterHazards.forEach(water => {
+                const waterGradient = ctx.createRadialGradient(water.x + water.width/2, water.y + water.height/2, 0, water.x + water.width/2, water.y + water.height/2, water.width/2);
+                waterGradient.addColorStop(0, '#4DA6FF');
+                waterGradient.addColorStop(1, '#1E90FF');
+                ctx.fillStyle = waterGradient;
+                ctx.fillRect(water.x, water.y, water.width, water.height);
+                ctx.strokeStyle = 'rgba(255, 255, 255, 0.3)';
+                ctx.lineWidth = 2;
+                ctx.beginPath();
+                ctx.arc(water.x + water.width/2, water.y + water.height/2, water.width/3, 0, Math.PI * 2);
+                ctx.stroke();
+            });
+
+            sandTraps.forEach(trap => {
+                ctx.fillStyle = '#F4C430';
+                ctx.fillRect(trap.x, trap.y, trap.width, trap.height);
+                ctx.fillStyle = 'rgba(218, 165, 32, 0.3)';
+                for (let i = 0; i < 20; i++) {
+                    ctx.fillRect(trap.x + Math.random() * trap.width, trap.y + Math.random() * trap.height, 2, 2);
                 }
             });
 
-            // Check if ball in hole
-            const dx = ball.x - hole.x;
-            const dy = ball.y - hole.y;
-            if (Math.sqrt(dx * dx + dy * dy) < hole.radius + ball.radius / 2) {
-                messageDisplay.textContent = `Hole in ${strokes}!`;
-                messageDisplay.style.display = 'block';
-                setTimeout(resetGame, 2000);
+            ctx.fillStyle = '#8B4513';
+            obstacles.forEach(obs => ctx.fillRect(obs.x, obs.y, obs.width, obs.height));
+
+            movingObstacles.forEach(obs => {
+                if (obs.axis === 'vertical') {
+                    obs.y += obs.speed * obs.direction;
+                    if (obs.y <= obs.minY || obs.y >= obs.maxY) obs.direction *= -1;
+                } else {
+                    obs.x += obs.speed * obs.direction;
+                    if (obs.x <= obs.minX || obs.x >= obs.maxX) obs.direction *= -1;
+                }
+                const gradient = ctx.createLinearGradient(obs.x, obs.y, obs.x + obs.width, obs.y + obs.height);
+                gradient.addColorStop(0, '#D2691E');
+                gradient.addColorStop(1, '#8B4513');
+                ctx.fillStyle = gradient;
+                ctx.fillRect(obs.x, obs.y, obs.width, obs.height);
+                ctx.fillStyle = '#FFD700';
+                ctx.font = 'bold 20px Arial';
+                ctx.textAlign = 'center';
+                const arrow = obs.axis === 'vertical' ? (obs.direction > 0 ? '↓' : '↑') : (obs.direction > 0 ? '→' : '←');
+                ctx.fillText(arrow, obs.x + obs.width/2, obs.y + obs.height/2 + 7);
+            });
+
+            bumpers.forEach(bumper => {
+                const bumperGradient = ctx.createRadialGradient(bumper.x, bumper.y, bumper.radius * 0.3, bumper.x, bumper.y, bumper.radius);
+                bumperGradient.addColorStop(0, '#FF6B6B');
+                bumperGradient.addColorStop(1, '#C92A2A');
+                ctx.fillStyle = bumperGradient;
+                ctx.beginPath();
+                ctx.arc(bumper.x, bumper.y, bumper.radius, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.fillStyle = 'rgba(255, 255, 255, 0.4)';
+                ctx.beginPath();
+                ctx.arc(bumper.x - 5, bumper.y - 5, bumper.radius * 0.4, 0, Math.PI * 2);
+                ctx.fill();
+            });
+
+            windmills.forEach(mill => {
+                mill.angle += mill.speed;
+                ctx.fillStyle = '#654321';
+                ctx.beginPath();
+                ctx.arc(mill.x, mill.y, 8, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.save();
+                ctx.translate(mill.x, mill.y);
+                ctx.rotate(mill.angle);
+                for (let i = 0; i < mill.blades; i++) {
+                    ctx.rotate((Math.PI * 2) / mill.blades);
+                    ctx.fillStyle = '#8B4513';
+                    ctx.fillRect(-5, 0, 10, mill.radius);
+                    ctx.beginPath();
+                    ctx.arc(0, mill.radius, 8, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+                ctx.restore();
+            });
+
+            ctx.fillStyle = '#000';
+            ctx.beginPath();
+            ctx.arc(hole.x, hole.y, hole.radius, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.fillStyle = '#333';
+            ctx.beginPath();
+            ctx.arc(hole.x, hole.y, hole.radius - 5, 0, Math.PI * 2);
+            ctx.fill();
+
+            ctx.strokeStyle = currentTheme === 'night' ? '#FCD34D' : '#000';
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.moveTo(hole.x, hole.y);
+            ctx.lineTo(hole.x, hole.y - 40);
+            ctx.stroke();
+            ctx.fillStyle = '#FF0000';
+            ctx.beginPath();
+            ctx.moveTo(hole.x, hole.y - 40);
+            ctx.lineTo(hole.x + 15, hole.y - 30);
+            ctx.lineTo(hole.x, hole.y - 20);
+            ctx.fill();
+
+            ctx.globalAlpha = 0.3;
+            ballTrail.forEach((pos, index) => {
+                const alpha = index / ballTrail.length * 0.5;
+                ctx.globalAlpha = alpha;
+                ctx.fillStyle = '#FFF';
+                ctx.beginPath();
+                ctx.arc(pos.x, pos.y, ball.radius * 0.7, 0, Math.PI * 2);
+                ctx.fill();
+            });
+            ctx.globalAlpha = 1.0;
+
+            particles = particles.filter(p => {
+                p.x += p.vx; p.y += p.vy; p.life--;
+                if (p.life > 0) {
+                    ctx.globalAlpha = p.life / 30;
+                    ctx.fillStyle = p.color;
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.globalAlpha = 1.0;
+                    return true;
+                }
+                return false;
+            });
+
+            ctx.fillStyle = '#FFF';
+            ctx.strokeStyle = currentTheme === 'night' ? '#FCD34D' : '#000';
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.stroke();
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.5)';
+            ctx.beginPath();
+            ctx.arc(ball.x - 3, ball.y - 3, 3, 0, Math.PI * 2);
+            ctx.fill();
+        }
+
+        function updateBall() {
+            if (!ctx) return;
+            ball.x += ball.vx;
+            ball.y += ball.vy;
+
+            if (ball.vx !== 0 || ball.vy !== 0) {
+                ballTrail.push({ x: ball.x, y: ball.y });
+                if (ballTrail.length > 15) ballTrail.shift();
+            }
+
+            waterHazards.forEach(water => {
+                if (ball.x > water.x && ball.x < water.x + water.width && ball.y > water.y && ball.y < water.y + water.height) {
+                    createParticles(ball.x, ball.y, '#1E90FF', 12);
+                    showWaterSplash();
+                    ball.x = currentHoleData.ball.x;
+                    ball.y = currentHoleData.ball.y;
+                    ball.vx = 0; ball.vy = 0;
+                    strokes++;
+                    document.getElementById('strokes').textContent = strokes;
+                    ballTrail = [];
+                }
+            });
+
+            let inSand = false;
+            sandTraps.forEach(trap => {
+                if (ball.x > trap.x && ball.x < trap.x + trap.width && ball.y > trap.y && ball.y < trap.y + trap.height) {
+                    inSand = true;
+                    if (Math.random() > 0.95) createParticles(ball.x, ball.y, '#F4C430', 2);
+                }
+            });
+
+            const friction = inSand ? 0.931 : 0.98;
+            ball.vx *= friction;
+            ball.vy *= friction;
+            if (Math.abs(ball.vx) < 0.1) ball.vx = 0;
+            if (Math.abs(ball.vy) < 0.1) ball.vy = 0;
+
+            if (ball.x - ball.radius < 0 || ball.x + ball.radius > canvas.width) {
+                ball.vx *= -0.7;
+                ball.x = Math.max(ball.radius, Math.min(canvas.width - ball.radius, ball.x));
+                createParticles(ball.x, ball.y, '#FFD700', 5);
+                playSound('wall');
+            }
+            if (ball.y - ball.radius < 0 || ball.y + ball.radius > canvas.height) {
+                ball.vy *= -0.7;
+                ball.y = Math.max(ball.radius, Math.min(canvas.height - ball.radius, ball.y));
+                createParticles(ball.x, ball.y, '#FFD700', 5);
+                playSound('wall');
+            }
+
+            bumpers.forEach(bumper => {
+                const dx = ball.x - bumper.x;
+                const dy = ball.y - bumper.y;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+                if (distance < bumper.radius + ball.radius) {
+                    const nx = dx / distance;
+                    const ny = dy / distance;
+                    const dotProduct = ball.vx * nx + ball.vy * ny;
+                    ball.vx = (ball.vx - 2 * dotProduct * nx) * 1.2;
+                    ball.vy = (ball.vy - 2 * dotProduct * ny) * 1.2;
+                    ball.x = bumper.x + nx * (bumper.radius + ball.radius + 1);
+                    ball.y = bumper.y + ny * (bumper.radius + ball.radius + 1);
+                    createParticles(ball.x, ball.y, '#FF6B6B', 8);
+                    playSound('wall');
+                }
+            });
+
+            obstacles.forEach(obs => {
+                if (ball.x + ball.radius > obs.x && ball.x - ball.radius < obs.x + obs.width && ball.y + ball.radius > obs.y && ball.y - ball.radius < obs.y + obs.height) {
+                    const overlapLeft = (ball.x + ball.radius) - obs.x;
+                    const overlapRight = (obs.x + obs.width) - (ball.x - ball.radius);
+                    const overlapTop = (ball.y + ball.radius) - obs.y;
+                    const overlapBottom = (obs.y + obs.height) - (ball.y - ball.radius);
+                    const minOverlap = Math.min(overlapLeft, overlapRight, overlapTop, overlapBottom);
+                    if (minOverlap === overlapLeft) { ball.vx = Math.abs(ball.vx) * -0.7; ball.x = obs.x - ball.radius - 1; }
+                    else if (minOverlap === overlapRight) { ball.vx = Math.abs(ball.vx) * 0.7; ball.x = obs.x + obs.width + ball.radius + 1; }
+                    else if (minOverlap === overlapTop) { ball.vy = Math.abs(ball.vy) * -0.7; ball.y = obs.y - ball.radius - 1; }
+                    else if (minOverlap === overlapBottom) { ball.vy = Math.abs(ball.vy) * 0.7; ball.y = obs.y + obs.height + ball.radius + 1; }
+                    createParticles(ball.x, ball.y, '#8B4513', 5);
+                    playSound('wall');
+                }
+            });
+
+            movingObstacles.forEach(obs => {
+                if (ball.x + ball.radius > obs.x && ball.x - ball.radius < obs.x + obs.width && ball.y + ball.radius > obs.y && ball.y - ball.radius < obs.y + obs.height) {
+                    const overlapLeft = (ball.x + ball.radius) - obs.x;
+                    const overlapRight = (obs.x + obs.width) - (ball.x - ball.radius);
+                    const overlapTop = (ball.y + ball.radius) - obs.y;
+                    const overlapBottom = (obs.y + obs.height) - (ball.y - ball.radius);
+                    const minOverlap = Math.min(overlapLeft, overlapRight, overlapTop, overlapBottom);
+                    if (minOverlap === overlapLeft) { ball.vx = Math.abs(ball.vx) * -0.7; ball.x = obs.x - ball.radius - 1; }
+                    else if (minOverlap === overlapRight) { ball.vx = Math.abs(ball.vx) * 0.7; ball.x = obs.x + obs.width + ball.radius + 1; }
+                    else if (minOverlap === overlapTop) { ball.vy = Math.abs(ball.vy) * -0.7; ball.y = obs.y - ball.radius - 1; }
+                    else if (minOverlap === overlapBottom) { ball.vy = Math.abs(ball.vy) * 0.7; ball.y = obs.y + obs.height + ball.radius + 1; }
+                    createParticles(ball.x, ball.y, '#D2691E', 5);
+                    playSound('wall');
+                }
+            });
+
+            windmills.forEach(mill => {
+                const dx = ball.x - mill.x;
+                const dy = ball.y - mill.y;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+                if (distance < mill.radius + ball.radius && distance > 10) {
+                    ball.vx *= -0.8;
+                    ball.vy *= -0.8;
+                    createParticles(ball.x, ball.y, '#8B4513', 6);
+                    playSound('wall');
+                }
+            });
+
+            const dist = Math.sqrt((ball.x - hole.x) ** 2 + (ball.y - hole.y) ** 2);
+            if (dist < hole.radius - 5 && Math.abs(ball.vx) < 2 && Math.abs(ball.vy) < 2) {
+                ball.vx = 0; ball.vy = 0;
+                totalStrokes += strokes;
+                document.getElementById('totalScore').textContent = totalStrokes;
+                playSound('hole');
+                createParticles(hole.x, hole.y, '#FFD700', 15);
+                if (strokes === 1) {
+                    holesInOne++;
+                    localStorage.setItem('holesInOne', holesInOne);
+                    document.getElementById('holesInOneCount').textContent = holesInOne;
+                }
+                setTimeout(() => {
+                    if (currentHole === 9) {
+                        showCelebration();
+                    } else {
+                        const currentPar = parValues[currentHole - 1];
+                        let msg = `Hole in ${strokes}!`;
+                        if (strokes === 1) msg = '🎉 HOLE IN ONE! 🎉';
+                        else if (strokes < currentPar) msg += ' ⭐ Under par!';
+                        else if (strokes === currentPar) msg += ' ✓ Par';
+                        else msg += ' Over par';
+                        alert(msg);
+                        currentHole++;
+                        loadHole(currentHole);
+                        drawGame();
+                    }
+                }, 100);
+            }
+
+            drawGame();
+            if (ball.vx !== 0 || ball.vy !== 0) requestAnimationFrame(updateBall);
+        }
+
+        function showCelebration() {
+            const totalPar = parValues.reduce((a, b) => a + b, 0);
+            const overUnder = totalStrokes - totalPar;
+            const overUnderText = overUnder === 0 ? 'Even Par!' : overUnder > 0 ? `${overUnder} Over Par` : `${Math.abs(overUnder)} Under Par!`;
+            document.getElementById('finalScore').textContent = `Total: ${totalStrokes} strokes`;
+            document.getElementById('celebrationMessage').textContent = overUnderText;
+            document.getElementById('celebrationOverlay').classList.add('active');
+            if (best === '--' || totalStrokes < parseInt(best)) {
+                best = totalStrokes;
+                localStorage.setItem('bestScore', best);
+                document.getElementById('best').textContent = best;
+            }
+            for (let i = 0; i < 50; i++) createConfetti();
+        }
+
+        function closeCelebration() {
+            document.getElementById('celebrationOverlay').classList.remove('active');
+            currentHole = 1;
+            totalStrokes = 0;
+            loadHole(currentHole);
+            drawGame();
+        }
+
+        function createConfetti() {
+            const confetti = document.createElement('div');
+            confetti.className = 'confetti';
+            confetti.style.left = Math.random() * 100 + '%';
+            confetti.style.background = ['#FCD34D', '#FBBF24', '#1E3A8A', '#3B82F6'][Math.floor(Math.random() * 4)];
+            confetti.style.animationDelay = Math.random() * 2 + 's';
+            document.getElementById('celebrationOverlay').appendChild(confetti);
+            setTimeout(() => confetti.remove(), 3000);
+        }
+
+        function shareChallenge() {
+            const totalPar = parValues.slice(0, currentHole - 1).reduce((a, b) => a + b, 0);
+            const overUnder = totalStrokes - totalPar;
+            const scoreText = overUnder === 0 ? 'Even Par' : overUnder > 0 ? `+${overUnder}` : `${overUnder}`;
+            const challengeText = `🏌️ Can you beat my Glory On The Greens score?\n${totalStrokes} strokes (${scoreText}) through ${currentHole - 1} holes!\n\nPlay at: mickskylark.com`;
+            if (navigator.share) {
+                navigator.share({ title: 'Glory On The Greens Challenge', text: challengeText });
+            } else {
+                navigator.clipboard.writeText(challengeText).then(() => {
+                    alert('Challenge copied to clipboard! Share it with friends!');
+                });
             }
         }
 
-        function gameLoop() {
-            draw();
-            update();
-            requestAnimationFrame(gameLoop);
+        if (canvas) {
+            function resizeCanvas() {
+                const container = canvas.parentElement;
+                const containerWidth = container.offsetWidth - 40;
+                if (window.innerWidth <= 768 && containerWidth < 500) {
+                    const scale = containerWidth / 500;
+                    canvas.style.width = containerWidth + 'px';
+                    canvas.style.height = (400 * scale) + 'px';
+                }
+            }
+            resizeCanvas();
+            window.addEventListener('resize', resizeCanvas);
+
+            function handleHit(e) {
+                if (ball.vx === 0 && ball.vy === 0) {
+                    const rect = canvas.getBoundingClientRect();
+                    const scaleX = canvas.width / rect.width;
+                    const scaleY = canvas.height / rect.height;
+                    let clickX, clickY;
+                    if (e.type === 'touchstart') {
+                        clickX = (e.touches[0].clientX - rect.left) * scaleX;
+                        clickY = (e.touches[0].clientY - rect.top) * scaleY;
+                    } else {
+                        clickX = (e.clientX - rect.left) * scaleX;
+                        clickY = (e.clientY - rect.top) * scaleY;
+                    }
+                    const dx = clickX - ball.x;
+                    const dy = clickY - ball.y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+                    ball.vx = (dx / distance) * Math.min(distance / 20, 8);
+                    ball.vy = (dy / distance) * Math.min(distance / 20, 8);
+                    strokes++;
+                    document.getElementById('strokes').textContent = strokes;
+                    playSound('hit');
+                    updateBall();
+                }
+            }
+
+            canvas.addEventListener('click', handleHit);
+            canvas.addEventListener('touchstart', (e) => { e.preventDefault(); handleHit(e); });
+
+            document.getElementById('best').textContent = best;
+            document.getElementById('holesInOneCount').textContent = holesInOne;
+            loadHole(1);
+            drawGame();
         }
 
-        function resetGame() {
-            ball.x = 100;
-            ball.y = 300;
-            ball.vx = 0;
-            ball.vy = 0;
-            strokes = 0;
-            updateScore();
-            messageDisplay.style.display = 'none';
+        window.resetGame = function() {
+            currentHole = 1;
+            totalStrokes = 0;
+            loadHole(currentHole);
+            drawGame();
         }
-
-        function updateScore() {
-            scoreDisplay.textContent = `Strokes: ${strokes}`;
-        }
-
-        // Mouse events for aiming and putting
-        canvas.addEventListener('mousedown', (e) => {
-            if (ball.vx === 0 && ball.vy === 0) { // Only aim if ball is stopped
-                isAiming = true;
-                aimStartX = e.clientX - canvas.getBoundingClientRect().left;
-                aimStartY = e.clientY - canvas.getBoundingClientRect().top;
-            }
-        });
-
-        canvas.addEventListener('mousemove', (e) => {
-            if (isAiming) {
-                aimStartX = e.clientX - canvas.getBoundingClientRect().left;
-                aimStartY = e.clientY - canvas.getBoundingClientRect().top;
-            }
-        });
-
-        canvas.addEventListener('mouseup', (e) => {
-            if (isAiming) {
-                isAiming = false;
-                const endX = e.clientX - canvas.getBoundingClientRect().left;
-                const endY = e.clientY - canvas.getBoundingClientRect().top;
-                
-                // Calculate velocity based on drag distance
-                const power = 0.05; // Adjust for putt strength
-                ball.vx = (ball.x - endX) * power;
-                ball.vy = (ball.y - endY) * power;
-                
-                strokes++;
-                updateScore();
-            }
-        });
-
-        // Start the game
-        resetGame();
-        gameLoop();
     </script>
 </body>
 </html>
-
