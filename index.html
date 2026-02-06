@@ -206,12 +206,42 @@
 
         /* Logline & Info */
         .logline {
-            font-size: 1.3rem;
+            font-size: 1.5rem;
             line-height: 1.8;
             max-width: 800px;
-            margin: 30px auto;
+            margin: 40px auto;
             text-align: center;
             color: var(--dark);
+            font-weight: 500;
+            font-style: italic;
+            padding: 35px 45px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            border-left: 5px solid var(--primary);
+            position: relative;
+        }
+
+        .logline::before {
+            content: '"';
+            font-size: 4rem;
+            color: var(--primary);
+            opacity: 0.2;
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            font-family: Georgia, serif;
+        }
+
+        .logline::after {
+            content: '"';
+            font-size: 4rem;
+            color: var(--primary);
+            opacity: 0.2;
+            position: absolute;
+            bottom: -30px;
+            right: 20px;
+            font-family: Georgia, serif;
         }
 
         .rating {
@@ -642,15 +672,15 @@
     <!-- Navigation -->
     <nav class="navbar">
         <div class="nav-container">
-            <a href="#home" class="nav-link">Home</a>
-            <a href="#comparable-films" class="nav-link">Similar Films</a>
-            <a href="#rsvp" class="nav-link">RSVP</a>
-            <a href="#game" class="nav-link">Mini Golf Game</a>
-            <a href="#cast" class="nav-link">Cast</a>
-            <a href="#instagram" class="nav-link">Instagram</a>
-            <a href="merch.html" class="nav-link">Merch</a>
-            <a href="#credits" class="nav-link">Credits</a>
-            <a href="#locations" class="nav-link">Locations</a>
+            <a href="index.html#home" class="nav-link">Home</a>
+            <a href="index.html#comparable-films" class="nav-link">Similar Films</a>
+            <a href="index.html#rsvp" class="nav-link">RSVP</a>
+            <a href="index.html#game" class="nav-link">Mini Golf Game</a>
+            <a href="index.html#cast" class="nav-link">Cast</a>
+            <a href="index.html#instagram" class="nav-link">Instagram</a>
+            <a href="merch.html" class="nav-link nav-link-external">Merch</a>
+            <a href="index.html#credits" class="nav-link">Credits</a>
+            <a href="index.html#locations" class="nav-link">Locations</a>
         </div>
     </nav>
 
@@ -1023,10 +1053,11 @@
         document.querySelectorAll('.nav-link').forEach(link => {
             link.addEventListener('click', (e) => {
                 const href = link.getAttribute('href');
-                // Only prevent default for internal links (starting with #)
-                if (href && href.startsWith('#')) {
+                // Only smooth scroll for hash links on same page
+                if (href && (href.startsWith('#') || href.includes('index.html#'))) {
                     e.preventDefault();
-                    const target = document.querySelector(href);
+                    const hash = href.includes('#') ? href.split('#')[1] : '';
+                    const target = document.getElementById(hash);
                     if (target) {
                         target.scrollIntoView({ behavior: 'smooth' });
                     }
@@ -1328,5 +1359,6 @@
     </script>
 </body>
 </html>
+
 
 
