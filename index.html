@@ -93,7 +93,7 @@
         .hero img {
             width: 100%;
             max-width: 600px;
-            margin: 0 auto 20px;
+            margin: 0 auto 10px;
             display: block;
             border-radius: 20px;
             opacity: 0;
@@ -270,6 +270,30 @@
                 padding: 35px 30px;
                 transform: none;
             }
+        }
+
+        .genre-tags {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 25px 0;
+            flex-wrap: wrap;
+        }
+
+        .genre-tag {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--primary);
+            background: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .genre-tag:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
         }
 
         .rating {
@@ -740,6 +764,11 @@
                 Mick Skylark, coached by his mentor Jonsey, quickly rises to the top as a child mini golf prodigy. 
                 When a tragedy strikes that he feels responsible for, he quits the sport for good.
             </p>
+
+            <div class="genre-tags">
+                <span class="genre-tag">• Comedic</span>
+                <span class="genre-tag">• Family Friendly</span>
+            </div>
 
             <div class="rating-badge">
                 <span class="rating-label">Rating:</span>
