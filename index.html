@@ -137,14 +137,18 @@
         }
 
         .slideshow-wrapper {
-            overflow-x: auto;
+            overflow-x: scroll;
             overflow-y: hidden;
             white-space: nowrap;
             padding: 20px 0;
             -webkit-overflow-scrolling: touch;
             scrollbar-width: thin;
             scrollbar-color: var(--primary) transparent;
-            scroll-behavior: smooth;
+            cursor: grab;
+        }
+
+        .slideshow-wrapper:active {
+            cursor: grabbing;
         }
 
         .slideshow-wrapper::-webkit-scrollbar {
@@ -184,68 +188,10 @@
             display: block;
         }
 
-        /* Navigation Arrows */
-        .nav-arrow {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(255, 255, 255, 0.95);
-            border: 2px solid var(--primary);
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 28px;
-            font-weight: bold;
-            color: var(--primary);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            z-index: 100;
-            transition: all 0.3s ease;
-            user-select: none;
-            pointer-events: auto;
-        }
-
-        .nav-arrow:hover {
-            background: var(--primary);
-            color: white;
-            transform: translateY(-50%) scale(1.15);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
-        }
-
-        .nav-arrow:active {
-            transform: translateY(-50%) scale(1.05);
-        }
-
-        .nav-arrow.left {
-            left: -25px;
-        }
-
-        .nav-arrow.right {
-            right: -25px;
-        }
-
         @media (max-width: 768px) {
             .slide {
                 width: 300px;
                 height: 225px;
-            }
-            
-            .nav-arrow {
-                width: 45px;
-                height: 45px;
-                font-size: 24px;
-                background: rgba(255, 255, 255, 1);
-            }
-
-            .nav-arrow.left {
-                left: 5px;
-            }
-
-            .nav-arrow.right {
-                right: 5px;
             }
         }
 
@@ -274,6 +220,43 @@
             text-align: center;
             margin: 20px 0;
             color: var(--primary);
+        }
+
+        .rating-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 15px 35px;
+            border-radius: 50px;
+            box-shadow: 0 6px 25px rgba(30, 58, 138, 0.4);
+            margin: 30px auto;
+            text-align: center;
+            font-size: 1.3rem;
+            font-weight: 700;
+            animation: ratingPulse 2s ease-in-out infinite;
+        }
+
+        .rating-label {
+            display: inline-block;
+            margin-right: 10px;
+            opacity: 0.9;
+        }
+
+        .rating-value {
+            display: inline-block;
+            font-size: 1.4rem;
+            letter-spacing: 1px;
+        }
+
+        @keyframes ratingPulse {
+            0%, 100% { 
+                transform: scale(1);
+                box-shadow: 0 6px 25px rgba(30, 58, 138, 0.4);
+            }
+            50% { 
+                transform: scale(1.05);
+                box-shadow: 0 8px 30px rgba(30, 58, 138, 0.6);
+            }
         }
 
         .links-section {
@@ -312,14 +295,18 @@
 
         /* Comparable Films - Horizontal Scroll */
         .comparable-films-wrapper {
-            overflow-x: auto;
+            overflow-x: scroll;
             overflow-y: hidden;
             white-space: nowrap;
             padding: 20px 0;
             -webkit-overflow-scrolling: touch;
             scrollbar-width: thin;
             scrollbar-color: var(--primary) transparent;
-            scroll-behavior: smooth;
+            cursor: grab;
+        }
+
+        .comparable-films-wrapper:active {
+            cursor: grabbing;
         }
 
         .comparable-films-wrapper::-webkit-scrollbar {
@@ -662,7 +649,6 @@
             <a href="#cast" class="nav-link">Cast</a>
             <a href="#instagram" class="nav-link">Instagram</a>
             <a href="#credits" class="nav-link">Credits</a>
-            <a href="#map" class="nav-link">Locations</a>
         </div>
     </nav>
 
@@ -674,10 +660,7 @@
             <div class="scroll-cta">↓ Scroll Down To RSVP ↓</div>
 
             <!-- Horizontal Slideshow -->
-            <div class="slider-nav">
-                <button class="nav-arrow left" onclick="scrollSlideshow(-420)">‹</button>
-                <button class="nav-arrow right" onclick="scrollSlideshow(420)">›</button>
-                <div class="slideshow-wrapper" id="bts-slideshow">
+            <div class="slideshow-wrapper" id="bts-slideshow">
                 <div class="slideshow-container">
                     <div class="slide"><img src="bts-photos/bts1.jpg" alt="BTS 1"></div>
                     <div class="slide"><img src="bts-photos/bts2.jpg" alt="BTS 2"></div>
@@ -698,7 +681,10 @@
                 When a tragedy strikes that he feels responsible for, he quits the sport for good.
             </p>
 
-            <div class="rating">Rating: TBD / PG to PG-13</div>
+            <div class="rating-badge">
+                <span class="rating-label">Rating:</span>
+                <span class="rating-value">TBD / PG to PG-13</span>
+            </div>
 
             <div class="links-section">
                 <a href="https://pro.imdb.com/title/tt12115818/" target="_blank" class="link-btn">View on IMDb</a>
@@ -714,10 +700,7 @@
             <p style="text-align: center; margin-bottom: 50px; font-size: 1.1rem; color: var(--dark);">
                 Fans of these comedy classics will love Mick Skylark!
             </p>
-            <div class="slider-nav">
-                <button class="nav-arrow left" onclick="scrollFilms(-280)">‹</button>
-                <button class="nav-arrow right" onclick="scrollFilms(280)">›</button>
-                <div class="comparable-films-wrapper" id="films-slideshow">
+            <div class="comparable-films-wrapper" id="films-slideshow">
                 <div class="comparable-films">
                     <div class="film-poster">
                         <img src="comparable-films/happy-gilmore.webp" alt="Happy Gilmore">
@@ -732,7 +715,6 @@
                         <img src="comparable-films/young-frankenstein.webp" alt="Young Frankenstein">
                     </div>
                 </div>
-            </div>
             </div>
         </div>
     </section>
@@ -946,7 +928,7 @@
                     <a href="https://twitter.com/intent/tweet?text=Check%20out%20Mick%20Skylark%3A%20Mini%20Golf%20Prodigy!&url=https://mickskylark.com" target="_blank" class="share-btn twitter">
                         🐦 Share on Twitter
                     </a>
-                    <a href="/cdn-cgi/l/email-protection#28175b5d4a424d4b5c156b404d4b430d1a18475d5c0d1a1865414b430d1a187b435144495a430e4a474c5115610d1a185c40475d4f405c0d1a1851475d0f4c0d1a184d464247510d1a185c40415b0d1a184e414445120d1a18405c5c585b12070745414b435b435144495a43064b4745" class="share-btn email">
+                    <a href="mailto:?subject=Check%20out%20Mick%20Skylark&body=I%20thought%20you'd%20enjoy%20this%20film:%20https://mickskylark.com" class="share-btn email">
                         📧 Share via Email
                     </a>
                 </div>
@@ -983,36 +965,6 @@
         </div>
     </section>
 
-    <!-- Screening Locations Map -->
-    <section id="map" class="section-yellow">
-        <div class="container">
-            <h2 class="section-title">Screening Locations</h2>
-            <div class="map-container">
-                <div class="map-grid">
-                    <div class="location-card">
-                        <h3>🌴 Boca Raton, Florida</h3>
-                        <p><strong>Address:</strong><br>313 E Palmetto Park Rd<br>Boca Raton, FL 33432</p>
-                        <p><strong>Date:</strong> Sunday, February 22, 2026</p>
-                        <p><strong>Time:</strong> 3:00 PM</p>
-                    </div>
-                    <div class="location-card">
-                        <h3>🎬 Los Angeles, California</h3>
-                        <p><strong>Venue:</strong> Cinemark Playa Vista & XD</p>
-                        <p><strong>Address:</strong><br>12746 W Jefferson Blvd, Suite 3190<br>Playa Vista, CA 90094</p>
-                        <p><strong>Date:</strong> Sunday, February 22, 2026</p>
-                        <p><strong>Time:</strong> 3:00 PM</p>
-                    </div>
-                </div>
-                <iframe 
-                    class="map-embed"
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3571.5661893045844!2d-80.08395!3d26.3587!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88d8e3e3c3e3e3e3%3A0x3e3e3e3e3e3e3e3e!2s313%20E%20Palmetto%20Park%20Rd%2C%20Boca%20Raton%2C%20FL%2033432!5e0!3m2!1sen!2sus!4v1234567890"
-                    allowfullscreen
-                    loading="lazy">
-                </iframe>
-            </div>
-        </div>
-    </section>
-
     <!-- Footer -->
     <footer>
         <p>&copy; 2025 Mick Skylark: Mini Golf Prodigy. All rights reserved.</p>
@@ -1022,7 +974,7 @@
         </p>
     </footer>
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    <script>
         // Behold Instagram widget
         (function(){
             const d=document,s=d.createElement("script");s.type="module";
@@ -1043,20 +995,16 @@
             });
         });
 
-        // Arrow navigation functions
-        window.scrollSlideshow = function(amount) {
-            const slideshow = document.getElementById('bts-slideshow');
-            if (slideshow) {
-                slideshow.scrollBy({ left: amount, behavior: 'smooth' });
-            }
-        }
-
-        window.scrollFilms = function(amount) {
-            const films = document.getElementById('films-slideshow');
-            if (films) {
-                films.scrollBy({ left: amount, behavior: 'smooth' });
-            }
-        }
+        // Smooth scroll for navigation
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const target = document.querySelector(link.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
 
         // Countdown Timer to February 22, 2026 at 3:00 PM
         function updateCountdown() {
@@ -1362,4 +1310,16 @@
                 // Seamless loop - when near the end, jump back to start
                 if (filmsScrollAmount >= filmsWrapper.scrollWidth - filmsWrapper.clientWidth - 50) {
                     filmsScrollAmount = 0;
-                 
+                    filmsWrapper.scrollLeft = 0;
+                }
+                
+                requestAnimationFrame(autoScrollFilms);
+            }
+
+            // Start auto-scroll
+            autoScrollFilms();
+        }
+    </script>
+</body>
+</html>
+
