@@ -591,6 +591,240 @@
             background: var(--gold);
         }
 
+        /* Add these styles after the .game-btn styles */
+
+.controls {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.control-btn {
+    background: white;
+    border: 2px solid var(--primary);
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    cursor: pointer;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.control-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.control-btn.active {
+    background: var(--primary);
+    color: white;
+}
+
+.scorecard {
+    background: white;
+    border-radius: 15px;
+    padding: 20px;
+    margin: 30px auto;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    overflow-x: auto;
+}
+
+.scorecard h3 {
+    color: var(--primary);
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.scorecard table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+}
+
+.scorecard th, .scorecard td {
+    padding: 8px;
+    text-align: center;
+    border: 1px solid #e5e7eb;
+}
+
+.scorecard th {
+    background: var(--primary);
+    color: white;
+    font-weight: 600;
+}
+
+.scorecard .par-row {
+    background: #f9fafb;
+    font-weight: 600;
+}
+
+.scorecard .score-row td {
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+
+.scorecard .score-row td.birdie {
+    background: #10B981;
+    color: white;
+}
+
+.scorecard .score-row td.par {
+    background: #FCD34D;
+}
+
+.scorecard .score-row td.bogey {
+    background: #F59E0B;
+    color: white;
+}
+
+.scorecard .score-row td.double-bogey {
+    background: #EF4444;
+    color: white;
+}
+
+.scorecard .score-row td.pending {
+    background: #f3f4f6;
+    color: #9ca3af;
+}
+
+.water-splash {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 4rem;
+    font-weight: 700;
+    color: #1E90FF;
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+    animation: splashAnimation 1s ease-out forwards;
+    pointer-events: none;
+    z-index: 10000;
+}
+
+@keyframes splashAnimation {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.5);
+    }
+    50% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1.2);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(1) translateY(-50px);
+    }
+}
+
+.celebration-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    animation: fadeIn 0.3s ease;
+}
+
+.celebration-overlay.active {
+    display: flex;
+}
+
+.celebration-content {
+    background: white;
+    padding: 50px;
+    border-radius: 30px;
+    text-align: center;
+    max-width: 500px;
+    animation: scaleIn 0.5s ease;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.celebration-emoji {
+    font-size: 5rem;
+    animation: bounce2 1s ease infinite;
+    margin-bottom: 20px;
+}
+
+.celebration-title {
+    font-size: 2.5rem;
+    color: var(--primary);
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+.celebration-score {
+    font-size: 1.5rem;
+    color: var(--gold);
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.celebration-message {
+    font-size: 1.1rem;
+    color: #666;
+    margin-bottom: 30px;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes scaleIn {
+    from { transform: scale(0.5); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+@keyframes bounce2 {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+}
+
+.confetti {
+    position: fixed;
+    width: 10px;
+    height: 10px;
+    background: var(--gold);
+    position: absolute;
+    animation: confettiFall 3s linear forwards;
+}
+
+@keyframes confettiFall {
+    to {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .celebration-content {
+        padding: 30px 20px;
+        margin: 20px;
+    }
+
+    .celebration-title {
+        font-size: 2rem;
+    }
+
+    .scorecard {
+        font-size: 0.8rem;
+    }
+
+    .scorecard th, .scorecard td {
+        padding: 6px 4px;
+    }
+}
+
         @media (max-width: 768px) {
             .game-container {
                 padding: 20px 10px;
