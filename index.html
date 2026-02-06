@@ -205,6 +205,7 @@
             z-index: 100;
             transition: all 0.3s ease;
             user-select: none;
+            pointer-events: auto;
         }
 
         .nav-arrow:hover {
@@ -233,9 +234,10 @@
             }
             
             .nav-arrow {
-                width: 40px;
-                height: 40px;
+                width: 45px;
+                height: 45px;
                 font-size: 24px;
+                background: rgba(255, 255, 255, 1);
             }
 
             .nav-arrow.left {
@@ -459,7 +461,7 @@
         /* Mini Golf Game */
         .game-container {
             background: white;
-            padding: 40px;
+            padding: 40px 20px;
             border-radius: 20px;
             box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
             max-width: 600px;
@@ -475,6 +477,19 @@
             display: block;
             margin-left: auto;
             margin-right: auto;
+            max-width: 100%;
+            height: auto;
+        }
+
+        @media (max-width: 768px) {
+            .game-container {
+                padding: 20px 10px;
+            }
+            
+            .game-canvas {
+                width: 100% !important;
+                height: auto !important;
+            }
         }
 
         .game-score {
@@ -768,7 +783,7 @@
             <div class="game-container">
                 <canvas id="golfCanvas" class="game-canvas" width="500" height="400"></canvas>
                 <div class="game-score">
-                    This Hole: <span id="strokes">0</span> | Total Score: <span id="totalScore">0</span> | Best: <span id="best">--</span>
+                    This Hole: <span id="strokes">0</span> | Total: <span id="totalScore">0</span> | Best: <span id="best">--</span>
                 </div>
                 <button class="game-btn" onclick="resetGame()">Restart Course</button>
             </div>
@@ -931,7 +946,7 @@
                     <a href="https://twitter.com/intent/tweet?text=Check%20out%20Mick%20Skylark%3A%20Mini%20Golf%20Prodigy!&url=https://mickskylark.com" target="_blank" class="share-btn twitter">
                         🐦 Share on Twitter
                     </a>
-                    <a href="mailto:?subject=Check%20out%20Mick%20Skylark&body=I%20thought%20you'd%20enjoy%20this%20film:%20https://mickskylark.com" class="share-btn email">
+                    <a href="/cdn-cgi/l/email-protection#28175b5d4a424d4b5c156b404d4b430d1a18475d5c0d1a1865414b430d1a187b435144495a430e4a474c5115610d1a185c40475d4f405c0d1a1851475d0f4c0d1a184d464247510d1a185c40415b0d1a184e414445120d1a18405c5c585b12070745414b435b435144495a43064b4745" class="share-btn email">
                         📧 Share via Email
                     </a>
                 </div>
@@ -990,8 +1005,9 @@
                 </div>
                 <iframe 
                     class="map-embed"
-                    src="https://www.google.com/maps/d/embed?mid=1n8vXqX_3cQZPzXjzJyKQGLxBzJE&ehbc=2E312F"
-                    allowfullscreen>
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3571.5661893045844!2d-80.08395!3d26.3587!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88d8e3e3c3e3e3e3%3A0x3e3e3e3e3e3e3e3e!2s313%20E%20Palmetto%20Park%20Rd%2C%20Boca%20Raton%2C%20FL%2033432!5e0!3m2!1sen!2sus!4v1234567890"
+                    allowfullscreen
+                    loading="lazy">
                 </iframe>
             </div>
         </div>
@@ -1006,7 +1022,7 @@
         </p>
     </footer>
 
-    <script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
         // Behold Instagram widget
         (function(){
             const d=document,s=d.createElement("script");s.type="module";
@@ -1250,11 +1266,34 @@
         }
 
         if (canvas) {
-            canvas.addEventListener('click', (e) => {
+            // Make canvas responsive
+            function resizeCanvas() {
+                const container = canvas.parentElement;
+                const containerWidth = container.offsetWidth - 40; // Account for padding
+                if (window.innerWidth <= 768 && containerWidth < 500) {
+                    const scale = containerWidth / 500;
+                    canvas.style.width = containerWidth + 'px';
+                    canvas.style.height = (400 * scale) + 'px';
+                }
+            }
+            resizeCanvas();
+            window.addEventListener('resize', resizeCanvas);
+
+            // Handle both click and touch
+            function handleHit(e) {
                 if (ball.vx === 0 && ball.vy === 0) {
                     const rect = canvas.getBoundingClientRect();
-                    const clickX = e.clientX - rect.left;
-                    const clickY = e.clientY - rect.top;
+                    const scaleX = canvas.width / rect.width;
+                    const scaleY = canvas.height / rect.height;
+                    
+                    let clickX, clickY;
+                    if (e.type === 'touchstart') {
+                        clickX = (e.touches[0].clientX - rect.left) * scaleX;
+                        clickY = (e.touches[0].clientY - rect.top) * scaleY;
+                    } else {
+                        clickX = (e.clientX - rect.left) * scaleX;
+                        clickY = (e.clientY - rect.top) * scaleY;
+                    }
 
                     const dx = clickX - ball.x;
                     const dy = clickY - ball.y;
@@ -1267,6 +1306,12 @@
                     document.getElementById('strokes').textContent = strokes;
                     updateBall();
                 }
+            }
+
+            canvas.addEventListener('click', handleHit);
+            canvas.addEventListener('touchstart', (e) => {
+                e.preventDefault();
+                handleHit(e);
             });
 
             document.getElementById('best').textContent = best;
@@ -1317,15 +1362,4 @@
                 // Seamless loop - when near the end, jump back to start
                 if (filmsScrollAmount >= filmsWrapper.scrollWidth - filmsWrapper.clientWidth - 50) {
                     filmsScrollAmount = 0;
-                    filmsWrapper.scrollLeft = 0;
-                }
-                
-                requestAnimationFrame(autoScrollFilms);
-            }
-
-            // Start auto-scroll
-            autoScrollFilms();
-        }
-    </script>
-</body>
-</html>
+                 
