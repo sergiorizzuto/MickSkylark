@@ -526,15 +526,35 @@
             height: auto;
         }
 
-        @media (max-width: 768px) {
-            .game-container {
-                padding: 20px 10px;
-            }
-            
-            .game-canvas {
-                width: 100% !important;
-                height: auto !important;
-            }
+        .game-stats {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin: 15px 0;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 12px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+            min-width: 100px;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            opacity: 0.9;
+            font-weight: 600;
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: 700;
         }
 
         .game-score {
@@ -554,11 +574,41 @@
             cursor: pointer;
             transition: all 0.3s ease;
             font-size: 1rem;
+            font-family: 'Poppins', sans-serif;
         }
 
         .game-btn:hover {
             background: var(--primary-dark);
             transform: scale(1.05);
+        }
+
+        .game-btn.secondary {
+            background: var(--secondary);
+            color: var(--primary);
+        }
+
+        .game-btn.secondary:hover {
+            background: var(--gold);
+        }
+
+        @media (max-width: 768px) {
+            .game-container {
+                padding: 20px 10px;
+            }
+            
+            .game-canvas {
+                width: 100% !important;
+                height: auto !important;
+            }
+
+            .stat-card {
+                min-width: 80px;
+                padding: 10px 15px;
+            }
+
+            .stat-value {
+                font-size: 1.2rem;
+            }
         }
 
         /* Map */
@@ -747,11 +797,6 @@
                 <span class="rating-label">Rating:</span>
                 <span class="rating-value">TBD / PG to PG-13</span>
             </div>
-
-            <div class="links-section">
-                <a href="https://pro.imdb.com/title/tt12115818/" target="_blank" class="link-btn">View on IMDb</a>
-                <a href="https://deadline.com/2025/11/david-koechner-robert-knepper-thomas-lennon-mick-skylark-1236625639/" target="_blank" class="link-btn secondary">Read Deadline News</a>
-            </div>
         </div>
     </section>
 
@@ -826,10 +871,36 @@
             </p>
             <div class="game-container">
                 <canvas id="golfCanvas" class="game-canvas" width="500" height="400"></canvas>
-                <div class="game-score">
-                    This Hole: <span id="strokes">0</span> | Total: <span id="totalScore">0</span> | Best: <span id="best">--</span>
+                <div class="game-stats">
+                    <div class="stat-card">
+                        <span class="stat-label">This Hole:</span>
+                        <span class="stat-value" id="strokes">0</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-label" id="parInfo">Par 3</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-label">Total:</span>
+                        <span class="stat-value" id="totalScore">0</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-label" id="overUnder">Even</span>
+                    </div>
                 </div>
-                <button class="game-btn" onclick="resetGame()">Restart Course</button>
+                <div class="game-stats" style="margin-top: 15px;">
+                    <div class="stat-card">
+                        <span class="stat-label">🏆 Best:</span>
+                        <span class="stat-value" id="best">--</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-label">⛳ Holes-in-One:</span>
+                        <span class="stat-value" id="holesInOneCount">0</span>
+                    </div>
+                </div>
+                <div style="display: flex; gap: 10px; justify-content: center; margin-top: 20px; flex-wrap: wrap;">
+                    <button class="game-btn" onclick="resetGame()">↻ Restart Course</button>
+                    <button class="game-btn secondary" onclick="shareChallenge()">👥 Challenge Friends</button>
+                </div>
             </div>
         </div>
     </section>
@@ -837,6 +908,10 @@
     <!-- Cast Section -->
     <section id="cast" class="section-blue">
         <div class="container">
+            <div style="text-align: center; margin-bottom: 50px;">
+                <a href="https://pro.imdb.com/title/tt12115818/" target="_blank" class="link-btn" style="font-size: 1.2rem; padding: 15px 40px;">📽️ View on IMDb</a>
+            </div>
+            
             <h2 class="section-title">Starring</h2>
             <div class="cast-grid">
                 <div class="cast-member">
@@ -1124,245 +1199,493 @@
         setInterval(updateCountdown, 1000);
         updateCountdown();
 
-        // Mini Golf Game - 9 Holes
-        const canvas = document.getElementById('golfCanvas');
-        const ctx = canvas ? canvas.getContext('2d') : null;
-        
-        let ball = { x: 50, y: 350, radius: 10, vx: 0, vy: 0 };
-        let hole = { x: 450, y: 50, radius: 20 };
-        let strokes = 0;
-        let currentHole = 1;
-        let totalStrokes = 0;
-        let best = localStorage.getItem('bestScore') || '--';
-        
-        // 9 different hole configurations
-        const holes = [
-            { ball: {x: 50, y: 350}, hole: {x: 450, y: 50}, obstacles: [
-                { x: 200, y: 200, width: 20, height: 150 },
-                { x: 350, y: 50, width: 20, height: 200 }
-            ]},
-            { ball: {x: 250, y: 350}, hole: {x: 250, y: 50}, obstacles: [
-                { x: 150, y: 150, width: 200, height: 20 },
-                { x: 150, y: 250, width: 200, height: 20 }
-            ]},
-            { ball: {x: 50, y: 200}, hole: {x: 450, y: 200}, obstacles: [
-                { x: 200, y: 100, width: 20, height: 100 },
-                { x: 300, y: 200, width: 20, height: 100 }
-            ]},
-            { ball: {x: 450, y: 350}, hole: {x: 50, y: 50}, obstacles: [
-                { x: 240, y: 0, width: 20, height: 250 },
-                { x: 240, y: 300, width: 20, height: 100 }
-            ]},
-            { ball: {x: 250, y: 350}, hole: {x: 450, y: 150}, obstacles: [
-                { x: 100, y: 100, width: 100, height: 20 },
-                { x: 300, y: 200, width: 100, height: 20 }
-            ]},
-            { ball: {x: 50, y: 50}, hole: {x: 450, y: 350}, obstacles: [
-                { x: 200, y: 0, width: 20, height: 200 },
-                { x: 300, y: 200, width: 20, height: 200 }
-            ]},
-            { ball: {x: 250, y: 200}, hole: {x: 50, y: 200}, obstacles: [
-                { x: 100, y: 50, width: 20, height: 100 },
-                { x: 100, y: 250, width: 20, height: 100 }
-            ]},
-            { ball: {x: 450, y: 200}, hole: {x: 250, y: 200}, obstacles: [
-                { x: 150, y: 0, width: 20, height: 150 },
-                { x: 330, y: 250, width: 20, height: 150 }
-            ]},
-            { ball: {x: 250, y: 350}, hole: {x: 250, y: 50}, obstacles: [
-                { x: 100, y: 180, width: 80, height: 20 },
-                { x: 320, y: 200, width: 80, height: 20 }
-            ]}
-        ];
+        // Enhanced Mini Golf Game - 9 Holes with sand traps, windmills, par system
+// Enhanced Mini Golf Game - 9 Holes with sand traps, windmills, par system, etc.
 
-        function loadHole(holeNum) {
-            const holeData = holes[holeNum - 1];
-            ball = { ...holeData.ball, radius: 10, vx: 0, vy: 0 };
-            hole = { ...holeData.hole, radius: 20 };
-            obstacles = holeData.obstacles;
-            strokes = 0;
-            document.getElementById('strokes').textContent = strokes;
-            document.getElementById('totalScore').textContent = totalStrokes;
+const canvas = document.getElementById('golfCanvas');
+const ctx = canvas ? canvas.getContext('2d') : null;
+
+let ball = { x: 50, y: 350, radius: 10, vx: 0, vy: 0 };
+let hole = { x: 450, y: 50, radius: 20 };
+let strokes = 0;
+let currentHole = 1;
+let totalStrokes = 0;
+let holesInOne = parseInt(localStorage.getItem('holesInOne') || '0');
+let best = localStorage.getItem('bestScore') || '--';
+
+// Par for each hole
+const parValues = [3, 2, 4, 3, 3, 4, 2, 3, 3]; // Total par: 27
+
+// 9 different hole configurations with hazards
+const holes = [
+    { 
+        ball: {x: 50, y: 350}, 
+        hole: {x: 450, y: 50}, 
+        obstacles: [
+            { x: 200, y: 200, width: 20, height: 150, type: 'wall' },
+            { x: 350, y: 50, width: 20, height: 200, type: 'wall' }
+        ],
+        sandTraps: [
+            { x: 150, y: 280, width: 80, height: 80 }
+        ],
+        windmills: [],
+        par: 3
+    },
+    { 
+        ball: {x: 250, y: 350}, 
+        hole: {x: 250, y: 50}, 
+        obstacles: [
+            { x: 150, y: 150, width: 200, height: 20, type: 'wall' },
+            { x: 150, y: 250, width: 200, height: 20, type: 'wall' }
+        ],
+        sandTraps: [],
+        windmills: [
+            { x: 250, y: 200, radius: 40, blades: 4, angle: 0, speed: 0.02 }
+        ],
+        par: 2
+    },
+    { 
+        ball: {x: 50, y: 200}, 
+        hole: {x: 450, y: 200}, 
+        obstacles: [
+            { x: 200, y: 100, width: 20, height: 100, type: 'wall' },
+            { x: 300, y: 200, width: 20, height: 100, type: 'wall' }
+        ],
+        sandTraps: [
+            { x: 120, y: 250, width: 60, height: 60 },
+            { x: 350, y: 120, width: 60, height: 60 }
+        ],
+        windmills: [],
+        par: 4
+    },
+    { 
+        ball: {x: 450, y: 350}, 
+        hole: {x: 50, y: 50}, 
+        obstacles: [
+            { x: 240, y: 0, width: 20, height: 250, type: 'wall' },
+            { x: 240, y: 300, width: 20, height: 100, type: 'wall' }
+        ],
+        sandTraps: [
+            { x: 80, y: 150, width: 100, height: 70 }
+        ],
+        windmills: [],
+        par: 3
+    },
+    { 
+        ball: {x: 250, y: 350}, 
+        hole: {x: 450, y: 150}, 
+        obstacles: [
+            { x: 100, y: 100, width: 100, height: 20, type: 'wall' },
+            { x: 300, y: 200, width: 100, height: 20, type: 'wall' }
+        ],
+        sandTraps: [],
+        windmills: [
+            { x: 350, y: 280, radius: 35, blades: 3, angle: 0, speed: 0.03 }
+        ],
+        par: 3
+    },
+    { 
+        ball: {x: 50, y: 50}, 
+        hole: {x: 450, y: 350}, 
+        obstacles: [
+            { x: 200, y: 0, width: 20, height: 200, type: 'wall' },
+            { x: 300, y: 200, width: 20, height: 200, type: 'wall' }
+        ],
+        sandTraps: [
+            { x: 250, y: 100, width: 90, height: 90 },
+            { x: 360, y: 270, width: 70, height: 60 }
+        ],
+        windmills: [],
+        par: 4
+    },
+    { 
+        ball: {x: 250, y: 200}, 
+        hole: {x: 50, y: 200}, 
+        obstacles: [
+            { x: 100, y: 50, width: 20, height: 100, type: 'wall' },
+            { x: 100, y: 250, width: 20, height: 100, type: 'wall' }
+        ],
+        sandTraps: [],
+        windmills: [
+            { x: 180, y: 200, radius: 30, blades: 4, angle: 0, speed: 0.025 }
+        ],
+        par: 2
+    },
+    { 
+        ball: {x: 450, y: 200}, 
+        hole: {x: 250, y: 200}, 
+        obstacles: [
+            { x: 150, y: 0, width: 20, height: 150, type: 'wall' },
+            { x: 330, y: 250, width: 20, height: 150, type: 'wall' }
+        ],
+        sandTraps: [
+            { x: 200, y: 250, width: 100, height: 80 }
+        ],
+        windmills: [],
+        par: 3
+    },
+    { 
+        ball: {x: 250, y: 350}, 
+        hole: {x: 250, y: 50}, 
+        obstacles: [
+            { x: 100, y: 180, width: 80, height: 20, type: 'wall' },
+            { x: 320, y: 200, width: 80, height: 20, type: 'wall' }
+        ],
+        sandTraps: [
+            { x: 200, y: 250, width: 100, height: 60 }
+        ],
+        windmills: [
+            { x: 250, y: 130, radius: 35, blades: 4, angle: 0, speed: 0.02 }
+        ],
+        par: 3
+    }
+];
+
+let currentHoleData = holes[0];
+let obstacles = [];
+let sandTraps = [];
+let windmills = [];
+
+function loadHole(holeNum) {
+    currentHoleData = holes[holeNum - 1];
+    ball = { ...currentHoleData.ball, radius: 10, vx: 0, vy: 0 };
+    hole = { ...currentHoleData.hole, radius: 20 };
+    obstacles = currentHoleData.obstacles;
+    sandTraps = currentHoleData.sandTraps || [];
+    windmills = currentHoleData.windmills || [];
+    strokes = 0;
+    document.getElementById('strokes').textContent = strokes;
+    document.getElementById('totalScore').textContent = totalStrokes;
+    document.getElementById('holesInOneCount').textContent = holesInOne;
+    updateParDisplay();
+}
+
+function updateParDisplay() {
+    const currentPar = parValues[currentHole - 1];
+    const totalPar = parValues.slice(0, currentHole).reduce((a, b) => a + b, 0);
+    const overUnder = totalStrokes - totalPar;
+    const overUnderText = overUnder === 0 ? 'Even' : overUnder > 0 ? `+${overUnder}` : overUnder;
+    
+    document.getElementById('parInfo').textContent = `Par ${currentPar}`;
+    document.getElementById('overUnder').textContent = `Score: ${overUnderText}`;
+}
+
+function drawGame() {
+    if (!ctx) return;
+    
+    // Clear canvas with gradient
+    const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
+    gradient.addColorStop(0, '#90EE90');
+    gradient.addColorStop(1, '#7FD87F');
+    ctx.fillStyle = gradient;
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    // Draw hole info
+    ctx.fillStyle = '#fff';
+    ctx.fillRect(5, 5, 150, 50);
+    ctx.fillStyle = '#1E3A8A';
+    ctx.font = 'bold 16px Poppins';
+    ctx.fillText(`Hole ${currentHole} of 9`, 15, 25);
+    ctx.font = '14px Poppins';
+    ctx.fillText(`Par ${parValues[currentHole - 1]}`, 15, 45);
+
+    // Draw sand traps
+    sandTraps.forEach(trap => {
+        ctx.fillStyle = '#F4C430';
+        ctx.fillRect(trap.x, trap.y, trap.width, trap.height);
+        // Sand texture
+        ctx.fillStyle = 'rgba(218, 165, 32, 0.3)';
+        for (let i = 0; i < 20; i++) {
+            ctx.fillRect(
+                trap.x + Math.random() * trap.width,
+                trap.y + Math.random() * trap.height,
+                2, 2
+            );
         }
+    });
 
-        let obstacles = [];
+    // Draw obstacles
+    ctx.fillStyle = '#8B4513';
+    obstacles.forEach(obs => {
+        ctx.fillRect(obs.x, obs.y, obs.width, obs.height);
+    });
 
-        function drawGame() {
-            if (!ctx) return;
-            
-            // Clear canvas
-            ctx.fillStyle = '#90EE90';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-            // Draw hole number
-            ctx.fillStyle = '#000';
-            ctx.font = 'bold 20px Poppins';
-            ctx.fillText(`Hole ${currentHole} of 9`, 10, 30);
-
-            // Draw obstacles
+    // Draw and animate windmills
+    windmills.forEach(mill => {
+        // Update rotation
+        mill.angle += mill.speed;
+        
+        // Draw center post
+        ctx.fillStyle = '#654321';
+        ctx.beginPath();
+        ctx.arc(mill.x, mill.y, 8, 0, Math.PI * 2);
+        ctx.fill();
+        
+        // Draw rotating blades
+        ctx.save();
+        ctx.translate(mill.x, mill.y);
+        ctx.rotate(mill.angle);
+        
+        for (let i = 0; i < mill.blades; i++) {
+            ctx.rotate((Math.PI * 2) / mill.blades);
             ctx.fillStyle = '#8B4513';
-            obstacles.forEach(obs => {
-                ctx.fillRect(obs.x, obs.y, obs.width, obs.height);
-            });
-
-            // Draw hole
-            ctx.fillStyle = '#000';
-            ctx.beginPath();
-            ctx.arc(hole.x, hole.y, hole.radius, 0, Math.PI * 2);
-            ctx.fill();
-
-            // Draw flag
-            ctx.strokeStyle = '#000';
-            ctx.lineWidth = 2;
-            ctx.beginPath();
-            ctx.moveTo(hole.x, hole.y);
-            ctx.lineTo(hole.x, hole.y - 40);
-            ctx.stroke();
-            ctx.fillStyle = '#FF0000';
-            ctx.beginPath();
-            ctx.moveTo(hole.x, hole.y - 40);
-            ctx.lineTo(hole.x + 15, hole.y - 30);
-            ctx.lineTo(hole.x, hole.y - 20);
-            ctx.fill();
-
-            // Draw ball
-            ctx.fillStyle = '#FFF';
-            ctx.strokeStyle = '#000';
-            ctx.lineWidth = 1;
-            ctx.beginPath();
-            ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2);
-            ctx.fill();
-            ctx.stroke();
-        }
-
-        function updateBall() {
-            if (!ctx) return;
+            ctx.fillRect(-5, 0, 10, mill.radius);
             
-            ball.x += ball.vx;
-            ball.y += ball.vy;
+            // Blade tip
+            ctx.beginPath();
+            ctx.arc(0, mill.radius, 8, 0, Math.PI * 2);
+            ctx.fill();
+        }
+        ctx.restore();
+    });
 
-            // Friction
-            ball.vx *= 0.98;
-            ball.vy *= 0.98;
+    // Draw hole
+    ctx.fillStyle = '#000';
+    ctx.beginPath();
+    ctx.arc(hole.x, hole.y, hole.radius, 0, Math.PI * 2);
+    ctx.fill();
+    
+    // Inner circle for depth
+    ctx.fillStyle = '#333';
+    ctx.beginPath();
+    ctx.arc(hole.x, hole.y, hole.radius - 5, 0, Math.PI * 2);
+    ctx.fill();
 
-            // Stop if moving very slowly
-            if (Math.abs(ball.vx) < 0.1) ball.vx = 0;
-            if (Math.abs(ball.vy) < 0.1) ball.vy = 0;
+    // Draw flag
+    ctx.strokeStyle = '#000';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(hole.x, hole.y);
+    ctx.lineTo(hole.x, hole.y - 40);
+    ctx.stroke();
+    ctx.fillStyle = '#FF0000';
+    ctx.beginPath();
+    ctx.moveTo(hole.x, hole.y - 40);
+    ctx.lineTo(hole.x + 15, hole.y - 30);
+    ctx.lineTo(hole.x, hole.y - 20);
+    ctx.fill();
 
-            // Bounce off walls
-            if (ball.x - ball.radius < 0 || ball.x + ball.radius > canvas.width) {
-                ball.vx *= -0.7;
-                ball.x = Math.max(ball.radius, Math.min(canvas.width - ball.radius, ball.x));
-            }
-            if (ball.y - ball.radius < 0 || ball.y + ball.radius > canvas.height) {
-                ball.vy *= -0.7;
-                ball.y = Math.max(ball.radius, Math.min(canvas.height - ball.radius, ball.y));
-            }
+    // Draw ball
+    ctx.fillStyle = '#FFF';
+    ctx.strokeStyle = '#000';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.stroke();
+    
+    // Ball highlight
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.5)';
+    ctx.beginPath();
+    ctx.arc(ball.x - 3, ball.y - 3, 3, 0, Math.PI * 2);
+    ctx.fill();
+}
 
-            // Check obstacles
-            obstacles.forEach(obs => {
-                if (ball.x + ball.radius > obs.x && ball.x - ball.radius < obs.x + obs.width &&
-                    ball.y + ball.radius > obs.y && ball.y - ball.radius < obs.y + obs.height) {
-                    ball.vx *= -0.7;
-                    ball.vy *= -0.7;
-                }
-            });
+function updateBall() {
+    if (!ctx) return;
+    
+    ball.x += ball.vx;
+    ball.y += ball.vy;
 
-            // Check if in hole
-            const dist = Math.sqrt((ball.x - hole.x) ** 2 + (ball.y - hole.y) ** 2);
-            if (dist < hole.radius && Math.abs(ball.vx) < 2 && Math.abs(ball.vy) < 2) {
-                ball.vx = 0;
-                ball.vy = 0;
-                totalStrokes += strokes;
-                document.getElementById('totalScore').textContent = totalStrokes;
+    // Check if in sand trap (slower friction)
+    let inSand = false;
+    sandTraps.forEach(trap => {
+        if (ball.x > trap.x && ball.x < trap.x + trap.width &&
+            ball.y > trap.y && ball.y < trap.y + trap.height) {
+            inSand = true;
+        }
+    });
+
+    // Friction (higher in sand)
+    const friction = inSand ? 0.5 : 0.98;
+    ball.vx *= friction;
+    ball.vy *= friction;
+
+    // Stop if moving very slowly
+    if (Math.abs(ball.vx) < 0.1) ball.vx = 0;
+    if (Math.abs(ball.vy) < 0.1) ball.vy = 0;
+
+    // Bounce off walls
+    if (ball.x - ball.radius < 0 || ball.x + ball.radius > canvas.width) {
+        ball.vx *= -0.7;
+        ball.x = Math.max(ball.radius, Math.min(canvas.width - ball.radius, ball.x));
+    }
+    if (ball.y - ball.radius < 0 || ball.y + ball.radius > canvas.height) {
+        ball.vy *= -0.7;
+        ball.y = Math.max(ball.radius, Math.min(canvas.height - ball.radius, ball.y));
+    }
+
+    // Check wall obstacles
+    obstacles.forEach(obs => {
+        if (ball.x + ball.radius > obs.x && ball.x - ball.radius < obs.x + obs.width &&
+            ball.y + ball.radius > obs.y && ball.y - ball.radius < obs.y + obs.height) {
+            ball.vx *= -0.7;
+            ball.vy *= -0.7;
+        }
+    });
+
+    // Check windmill collision
+    windmills.forEach(mill => {
+        const dx = ball.x - mill.x;
+        const dy = ball.y - mill.y;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+        
+        if (distance < mill.radius + ball.radius && distance > 10) {
+            // Bounce off windmill blade
+            ball.vx *= -0.8;
+            ball.vy *= -0.8;
+        }
+    });
+
+    // Check if in hole
+    const dist = Math.sqrt((ball.x - hole.x) ** 2 + (ball.y - hole.y) ** 2);
+    if (dist < hole.radius - 5 && Math.abs(ball.vx) < 2 && Math.abs(ball.vy) < 2) {
+        ball.vx = 0;
+        ball.vy = 0;
+        totalStrokes += strokes;
+        document.getElementById('totalScore').textContent = totalStrokes;
+        
+        // Check for hole-in-one
+        if (strokes === 1) {
+            holesInOne++;
+            localStorage.setItem('holesInOne', holesInOne);
+            document.getElementById('holesInOneCount').textContent = holesInOne;
+        }
+        
+        setTimeout(() => {
+            if (currentHole === 9) {
+                const totalPar = parValues.reduce((a, b) => a + b, 0);
+                const overUnder = totalStrokes - totalPar;
+                const overUnderText = overUnder === 0 ? 'Even Par!' : overUnder > 0 ? `${overUnder} Over Par` : `${Math.abs(overUnder)} Under Par!`;
+                alert(`Course Complete!\nTotal: ${totalStrokes} strokes\n${overUnderText}`);
                 
-                setTimeout(() => {
-                    if (currentHole === 9) {
-                        alert(`Course Complete! Total: ${totalStrokes} strokes`);
-                        if (best === '--' || totalStrokes < parseInt(best)) {
-                            best = totalStrokes;
-                            localStorage.setItem('bestScore', best);
-                            document.getElementById('best').textContent = best;
-                        }
-                        currentHole = 1;
-                        totalStrokes = 0;
-                        loadHole(currentHole);
-                        drawGame();
-                    } else {
-                        alert(`Hole in ${strokes}`);
-                        currentHole++;
-                        loadHole(currentHole);
-                        drawGame();
-                    }
-                }, 100);
-            }
-
-            drawGame();
-            if (ball.vx !== 0 || ball.vy !== 0) {
-                requestAnimationFrame(updateBall);
-            }
-        }
-
-        if (canvas) {
-            // Make canvas responsive
-            function resizeCanvas() {
-                const container = canvas.parentElement;
-                const containerWidth = container.offsetWidth - 40; // Account for padding
-                if (window.innerWidth <= 768 && containerWidth < 500) {
-                    const scale = containerWidth / 500;
-                    canvas.style.width = containerWidth + 'px';
-                    canvas.style.height = (400 * scale) + 'px';
+                if (best === '--' || totalStrokes < parseInt(best)) {
+                    best = totalStrokes;
+                    localStorage.setItem('bestScore', best);
+                    document.getElementById('best').textContent = best;
                 }
+                currentHole = 1;
+                totalStrokes = 0;
+                loadHole(currentHole);
+                drawGame();
+            } else {
+                const currentPar = parValues[currentHole - 1];
+                let msg = `Hole in ${strokes}!`;
+                if (strokes === 1) msg = '🎉 HOLE IN ONE! 🎉';
+                else if (strokes < currentPar) msg += ' ⭐ Under par!';
+                else if (strokes === currentPar) msg += ' ✓ Par';
+                else msg += ' Over par';
+                
+                alert(msg);
+                currentHole++;
+                loadHole(currentHole);
+                drawGame();
             }
-            resizeCanvas();
-            window.addEventListener('resize', resizeCanvas);
+        }, 100);
+    }
 
-            // Handle both click and touch
-            function handleHit(e) {
-                if (ball.vx === 0 && ball.vy === 0) {
-                    const rect = canvas.getBoundingClientRect();
-                    const scaleX = canvas.width / rect.width;
-                    const scaleY = canvas.height / rect.height;
-                    
-                    let clickX, clickY;
-                    if (e.type === 'touchstart') {
-                        clickX = (e.touches[0].clientX - rect.left) * scaleX;
-                        clickY = (e.touches[0].clientY - rect.top) * scaleY;
-                    } else {
-                        clickX = (e.clientX - rect.left) * scaleX;
-                        clickY = (e.clientY - rect.top) * scaleY;
-                    }
+    drawGame();
+    if (ball.vx !== 0 || ball.vy !== 0) {
+        requestAnimationFrame(updateBall);
+    }
+}
 
-                    const dx = clickX - ball.x;
-                    const dy = clickY - ball.y;
-                    const distance = Math.sqrt(dx * dx + dy * dy);
+// Challenge friends feature
+function generateChallengeCode() {
+    const code = `GOLF-${totalStrokes}-${Date.now().toString(36).toUpperCase()}`;
+    return code;
+}
 
-                    ball.vx = (dx / distance) * Math.min(distance / 20, 8);
-                    ball.vy = (dy / distance) * Math.min(distance / 20, 8);
+function shareChallenge() {
+    if (totalStrokes === 0) {
+        alert('Complete at least one hole first!');
+        return;
+    }
+    
+    const totalPar = parValues.slice(0, currentHole - 1).reduce((a, b) => a + b, 0);
+    const overUnder = totalStrokes - totalPar;
+    const scoreText = overUnder === 0 ? 'Even Par' : overUnder > 0 ? `+${overUnder}` : `${overUnder}`;
+    
+    const challengeText = `🏌️ Can you beat my Mick Skylark mini golf score?\n${totalStrokes} strokes (${scoreText}) through ${currentHole - 1} holes!\n\nPlay at: mickskylark.com`;
+    
+    if (navigator.share) {
+        navigator.share({
+            title: 'Mick Skylark Mini Golf Challenge',
+            text: challengeText
+        });
+    } else {
+        // Fallback: copy to clipboard
+        navigator.clipboard.writeText(challengeText).then(() => {
+            alert('Challenge copied to clipboard! Share it with friends!');
+        });
+    }
+}
 
-                    strokes++;
-                    document.getElementById('strokes').textContent = strokes;
-                    updateBall();
-                }
+// Initialize game
+if (canvas) {
+    // Make canvas responsive
+    function resizeCanvas() {
+        const container = canvas.parentElement;
+        const containerWidth = container.offsetWidth - 40;
+        if (window.innerWidth <= 768 && containerWidth < 500) {
+            const scale = containerWidth / 500;
+            canvas.style.width = containerWidth + 'px';
+            canvas.style.height = (400 * scale) + 'px';
+        }
+    }
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    // Handle clicks
+    function handleHit(e) {
+        if (ball.vx === 0 && ball.vy === 0) {
+            const rect = canvas.getBoundingClientRect();
+            const scaleX = canvas.width / rect.width;
+            const scaleY = canvas.height / rect.height;
+            
+            let clickX, clickY;
+            if (e.type === 'touchstart') {
+                clickX = (e.touches[0].clientX - rect.left) * scaleX;
+                clickY = (e.touches[0].clientY - rect.top) * scaleY;
+            } else {
+                clickX = (e.clientX - rect.left) * scaleX;
+                clickY = (e.clientY - rect.top) * scaleY;
             }
 
-            canvas.addEventListener('click', handleHit);
-            canvas.addEventListener('touchstart', (e) => {
-                e.preventDefault();
-                handleHit(e);
-            });
+            const dx = clickX - ball.x;
+            const dy = clickY - ball.y;
+            const distance = Math.sqrt(dx * dx + dy * dy);
 
-            document.getElementById('best').textContent = best;
-            loadHole(1);
-            drawGame();
-        }
+            ball.vx = (dx / distance) * Math.min(distance / 20, 8);
+            ball.vy = (dy / distance) * Math.min(distance / 20, 8);
 
-        window.resetGame = function() {
-            currentHole = 1;
-            totalStrokes = 0;
-            loadHole(currentHole);
-            drawGame();
+            strokes++;
+            document.getElementById('strokes').textContent = strokes;
+            updateBall();
         }
+    }
+
+    canvas.addEventListener('click', handleHit);
+    canvas.addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        handleHit(e);
+    });
+
+    document.getElementById('best').textContent = best;
+    document.getElementById('holesInOneCount').textContent = holesInOne;
+    loadHole(1);
+    drawGame();
+}
+
+window.resetGame = function() {
+    currentHole = 1;
+    totalStrokes = 0;
+    loadHole(currentHole);
+    drawGame();
+}
+
+window.shareChallenge = shareChallenge;
+
 
         // Auto-scroll for comparable films only
         const filmsWrapper = document.querySelector('.comparable-films-wrapper');
