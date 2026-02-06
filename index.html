@@ -31,23 +31,6 @@
             padding-top: 60px;
         }
 
-        /* Flying Blue Bird */
-        .flying-bird {
-            position: fixed;
-            font-size: 2.5rem;
-            z-index: 999;
-            pointer-events: none;
-        }
-
-        @keyframes flyAcross {
-            from {
-                left: -100px;
-            }
-            to {
-                left: 110%;
-            }
-        }
-
         /* Navigation */
         .navbar {
             position: fixed;
@@ -1082,7 +1065,7 @@
                     <a href="https://twitter.com/intent/tweet?text=Check%20out%20Mick%20Skylark%3A%20Mini%20Golf%20Prodigy!&url=https://mickskylark.com" target="_blank" class="share-btn twitter">
                         🐦 Share on Twitter
                     </a>
-                    <a href="/cdn-cgi/l/email-protection#5d622e283f37383e29601e35383e36786f6d322829786f6d10343e36786f6d0e3624313c2f367b3f3239246014786f6d293532283a3529786f6d2432287a39786f6d3833373224786f6d2935342e786f6d3b34313067786f6d3529292d2e67727230343e362e3624313c2f36733e3230" class="share-btn email">
+                    <a href="/cdn-cgi/l/email-protection#b58ac6c0d7dfd0d6c188f6ddd0d6de908785dac0c1908785f8dcd6de908785e6deccd9d4c7de93d7dad1cc88fc908785c1dddac0d2ddc1908785ccdac092d1908785d0dbdfdacc908785c1dddcc6908785d3dcd9d88f908785ddc1c1c5c68f9a9ad8dcd6dec6deccd9d4c7de9bd6dad8" class="share-btn email">
                         📧 Share via Email
                     </a>
                 </div>
@@ -1532,32 +1515,12 @@ function updateBall() {
         ball.y = Math.max(ball.radius, Math.min(canvas.height - ball.radius, ball.y));
     }
 
-    // Check wall obstacles - bounce off properly
+    // Check wall obstacles
     obstacles.forEach(obs => {
-        // Check if ball overlaps obstacle
         if (ball.x + ball.radius > obs.x && ball.x - ball.radius < obs.x + obs.width &&
             ball.y + ball.radius > obs.y && ball.y - ball.radius < obs.y + obs.height) {
-            
-            // Determine which side we hit
-            const overlapLeft = (ball.x + ball.radius) - obs.x;
-            const overlapRight = (obs.x + obs.width) - (ball.x - ball.radius);
-            const overlapTop = (ball.y + ball.radius) - obs.y;
-            const overlapBottom = (obs.y + obs.height) - (ball.y - ball.radius);
-            
-            const minOverlap = Math.min(overlapLeft, overlapRight, overlapTop, overlapBottom);
-            
-            // Bounce based on which side has smallest overlap
-            if (minOverlap === overlapLeft || minOverlap === overlapRight) {
-                ball.vx *= -0.7;
-                // Push ball out of obstacle
-                if (minOverlap === overlapLeft) ball.x = obs.x - ball.radius;
-                else ball.x = obs.x + obs.width + ball.radius;
-            } else {
-                ball.vy *= -0.7;
-                // Push ball out of obstacle
-                if (minOverlap === overlapTop) ball.y = obs.y - ball.radius;
-                else ball.y = obs.y + obs.height + ball.radius;
-            }
+            ball.vx *= -0.7;
+            ball.vy *= -0.7;
         }
     });
 
@@ -1708,40 +1671,12 @@ if (canvas) {
         handleHit(e);
     });
 
-    document.getElementById('best').textContent = best;
-    document.getElementById('holesInOneCount').textContent = holesInOne;
-    loadHole(1);
-    drawGame();
-}
-
-window.resetGame = function() {
-    currentHole = 1;
-    totalStrokes = 0;
-    loadHole(currentHole);
+    document.getEtHole);
     drawGame();
 }
 
 window.shareChallenge = shareChallenge;
 
-
-
-        // Blue bird flies across screen every 30 seconds
-        function spawnBlueBird() {
-            const bird = document.createElement('div');
-            bird.className = 'flying-bird';
-            bird.textContent = '🐦';
-            const randomTop = 15 + Math.random() * 40;
-            bird.style.top = randomTop + '%';
-            bird.style.animation = 'flyAcross 8s linear';
-            document.body.appendChild(bird);
-            
-            setTimeout(() => bird.remove(), 8000);
-        }
-        
-        setTimeout(() => {
-            spawnBlueBird();
-            setInterval(spawnBlueBird, 30000);
-        }, 5000);
 
         // Auto-scroll for comparable films only
         const filmsWrapper = document.querySelector('.comparable-films-wrapper');
@@ -1756,4 +1691,15 @@ window.shareChallenge = shareChallenge;
                 // Seamless loop - when near the end, jump back to start
                 if (filmsScrollAmount >= filmsWrapper.scrollWidth - filmsWrapper.clientWidth - 50) {
                     filmsScrollAmount = 0;
-                 
+                    filmsWrapper.scrollLeft = 0;
+                }
+                
+                requestAnimationFrame(autoScrollFilms);
+            }
+
+            // Start auto-scroll
+            autoScrollFilms();
+        }
+    </script>
+</body>
+</html>
