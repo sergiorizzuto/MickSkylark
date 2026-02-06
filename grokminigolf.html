@@ -96,7 +96,10 @@
             display: block;
             max-width: 100%;
             height: auto;
+            position: relative;
         }
+
+
 
         .game-stats {
             display: flex;
@@ -127,6 +130,73 @@
         .stat-value {
             font-size: 1.5rem;
             font-weight: 700;
+        }
+
+        .scorecard {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 30px auto;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            overflow-x: auto;
+        }
+
+        .scorecard h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .scorecard table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+
+        .scorecard th, .scorecard td {
+            padding: 8px;
+            text-align: center;
+            border: 1px solid #e5e7eb;
+        }
+
+        .scorecard th {
+            background: var(--primary);
+            color: white;
+            font-weight: 600;
+        }
+
+        .scorecard .par-row {
+            background: #f9fafb;
+            font-weight: 600;
+        }
+
+        .scorecard .score-row td {
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .scorecard .score-row td.birdie {
+            background: #10B981;
+            color: white;
+        }
+
+        .scorecard .score-row td.par {
+            background: #FCD34D;
+        }
+
+        .scorecard .score-row td.bogey {
+            background: #F59E0B;
+            color: white;
+        }
+
+        .scorecard .score-row td.double-bogey {
+            background: #EF4444;
+            color: white;
+        }
+
+        .scorecard .score-row td.pending {
+            background: #f3f4f6;
+            color: #9ca3af;
         }
 
         .game-btn {
@@ -307,13 +377,21 @@
             .celebration-title {
                 font-size: 2rem;
             }
+
+            .scorecard {
+                font-size: 0.8rem;
+            }
+
+            .scorecard th, .scorecard td {
+                padding: 6px 4px;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>⛳ Glory On The Greens</h1>
-        <p class="subtitle">Click to hit the ball into the hole! Can you beat par?</p>
+        <p class="subtitle">Play our Glory On The Greens mini golf game!</p>
         
         <div class="controls">
             <button class="control-btn active" id="dayBtn" onclick="setTheme('day')" title="Day Mode">☀️</button>
@@ -322,40 +400,100 @@
         </div>
         
         <div class="game-container">
-            <canvas id="golfCanvas" class="game-canvas" width="500" height="400"></canvas>
-            
-            <div class="game-stats">
-                <div class="stat-card">
-                    <span class="stat-label">This Hole:</span>
-                    <span class="stat-value" id="strokes">0</span>
-                </div>
-                <div class="stat-card">
-                    <span class="stat-label" id="parInfo">Par 3</span>
-                </div>
-                <div class="stat-card">
-                    <span class="stat-label">Total:</span>
-                    <span class="stat-value" id="totalScore">0</span>
-                </div>
-                <div class="stat-card">
-                    <span class="stat-label" id="overUnder">Even</span>
-                </div>
+            <div style="position: relative; display: inline-block;">
+                <canvas id="golfCanvas" class="game-canvas" width="500" height="400"></canvas>
             </div>
-            
-            <div class="game-stats" style="margin-top: 15px;">
-                <div class="stat-card">
-                    <span class="stat-label">🏆 Best:</span>
-                    <span class="stat-value" id="best">--</span>
-                </div>
-                <div class="stat-card">
-                    <span class="stat-label">⛳ Holes-in-One:</span>
-                    <span class="stat-value" id="holesInOneCount">0</span>
-                </div>
+        </div>
+
+        <div class="scorecard">
+            <h3>📋 Scorecard</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Hole</th>
+                        <th>1</th>
+                        <th>2</th>
+                        <th>3</th>
+                        <th>4</th>
+                        <th>5</th>
+                        <th>6</th>
+                        <th>7</th>
+                        <th>8</th>
+                        <th>9</th>
+                        <th>OUT</th>
+                        <th>10</th>
+                        <th>11</th>
+                        <th>12</th>
+                        <th>13</th>
+                        <th>14</th>
+                        <th>15</th>
+                        <th>16</th>
+                        <th>17</th>
+                        <th>18</th>
+                        <th>IN</th>
+                        <th>TOT</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="par-row">
+                        <td>Par</td>
+                        <td id="par-1">3</td>
+                        <td id="par-2">3</td>
+                        <td id="par-3">4</td>
+                        <td id="par-4">3</td>
+                        <td id="par-5">3</td>
+                        <td id="par-6">4</td>
+                        <td id="par-7">3</td>
+                        <td id="par-8">4</td>
+                        <td id="par-9">3</td>
+                        <td id="par-out">30</td>
+                        <td id="par-10">4</td>
+                        <td id="par-11">3</td>
+                        <td id="par-12">4</td>
+                        <td id="par-13">3</td>
+                        <td id="par-14">2</td>
+                        <td id="par-15">4</td>
+                        <td id="par-16">3</td>
+                        <td id="par-17">4</td>
+                        <td id="par-18">3</td>
+                        <td id="par-in">30</td>
+                        <td id="par-total">60</td>
+                    </tr>
+                    <tr class="score-row">
+                        <td>Score</td>
+                        <td id="score-1" class="pending">-</td>
+                        <td id="score-2" class="pending">-</td>
+                        <td id="score-3" class="pending">-</td>
+                        <td id="score-4" class="pending">-</td>
+                        <td id="score-5" class="pending">-</td>
+                        <td id="score-6" class="pending">-</td>
+                        <td id="score-7" class="pending">-</td>
+                        <td id="score-8" class="pending">-</td>
+                        <td id="score-9" class="pending">-</td>
+                        <td id="score-out" class="pending">-</td>
+                        <td id="score-10" class="pending">-</td>
+                        <td id="score-11" class="pending">-</td>
+                        <td id="score-12" class="pending">-</td>
+                        <td id="score-13" class="pending">-</td>
+                        <td id="score-14" class="pending">-</td>
+                        <td id="score-15" class="pending">-</td>
+                        <td id="score-16" class="pending">-</td>
+                        <td id="score-17" class="pending">-</td>
+                        <td id="score-18" class="pending">-</td>
+                        <td id="score-in" class="pending">-</td>
+                        <td id="score-total" class="pending">-</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div style="text-align: center; margin-top: 15px; padding-top: 15px; border-top: 1px solid #e5e7eb; color: var(--primary); font-size: 0.9rem;">
+                <span style="margin: 0 15px;">🏆 Best: <strong id="best">--</strong></span>
+                <span style="margin: 0 15px;">⛳ Holes-in-One: <strong id="holesInOneCount">0</strong></span>
             </div>
-            
-            <div style="display: flex; gap: 10px; justify-content: center; margin-top: 20px; flex-wrap: wrap;">
-                <button class="game-btn" onclick="resetGame()">↻ Restart Course</button>
-                <button class="game-btn secondary" onclick="shareChallenge()">👥 Challenge Friends</button>
-            </div>
+        </div>
+
+        <div style="display: flex; gap: 10px; justify-content: center; margin: 20px 0;">
+            <button class="game-btn" onclick="resetGame()">↻ Restart</button>
+            <button class="game-btn secondary" onclick="shareChallenge()">👥 Challenge Friends</button>
         </div>
 
         <a href="index.html" class="back-link">← Back to Main Site</a>
@@ -371,6 +509,7 @@
             <button class="game-btn secondary" onclick="shareChallenge()">Share Score</button>
         </div>
     </div>
+
     <script>
         const canvas = document.getElementById('golfCanvas');
         const ctx = canvas ? canvas.getContext('2d') : null;
@@ -386,6 +525,7 @@
         let soundEnabled = true;
         let ballTrail = [];
         let particles = [];
+        let holeScores = Array(18).fill(null);
 
         const audioContext = new (window.AudioContext || window.webkitAudioContext)();
 
@@ -446,7 +586,7 @@
             drawGame();
         }
 
-        const parValues = [3, 3, 4, 3, 3, 4, 2, 4, 3];
+        const parValues = [3, 3, 4, 3, 3, 4, 3, 4, 3, 4, 3, 4, 3, 2, 4, 3, 4, 3];
 
         const holes = [
             { ball: {x: 50, y: 350}, hole: {x: 450, y: 50}, obstacles: [{x: 200, y: 200, width: 20, height: 150},{x: 350, y: 50, width: 20, height: 200}], sandTraps: [{x: 150, y: 280, width: 80, height: 80}], waterHazards: [], bumpers: [], windmills: [], movingObstacles: [], par: 3 },
@@ -455,13 +595,59 @@
             { ball: {x: 450, y: 350}, hole: {x: 50, y: 50}, obstacles: [{x: 240, y: 0, width: 20, height: 250},{x: 240, y: 300, width: 20, height: 100}], sandTraps: [{x: 80, y: 150, width: 100, height: 70}], waterHazards: [], bumpers: [{x: 350, y: 200, radius: 30}], windmills: [], movingObstacles: [], par: 3 },
             { ball: {x: 250, y: 350}, hole: {x: 450, y: 150}, obstacles: [{x: 100, y: 100, width: 100, height: 20},{x: 300, y: 200, width: 100, height: 20}], sandTraps: [], waterHazards: [{x: 180, y: 250, width: 80, height: 80}], bumpers: [], windmills: [{x: 350, y: 280, radius: 35, blades: 3, angle: 0, speed: 0.03}], movingObstacles: [], par: 3 },
             { ball: {x: 50, y: 350}, hole: {x: 450, y: 50}, obstacles: [{x: 150, y: 0, width: 20, height: 180},{x: 330, y: 220, width: 20, height: 180}], movingObstacles: [{x: 240, y: 180, width: 20, height: 100, direction: 1, speed: 1.5, minY: 100, maxY: 280, axis: 'vertical'}], sandTraps: [{x: 180, y: 280, width: 70, height: 70}], waterHazards: [], bumpers: [], windmills: [], par: 4 },
-            { ball: {x: 250, y: 200}, hole: {x: 50, y: 200}, obstacles: [{x: 100, y: 50, width: 20, height: 100},{x: 100, y: 250, width: 20, height: 100}], sandTraps: [], waterHazards: [], bumpers: [{x: 150, y: 200, radius: 20}], windmills: [{x: 180, y: 200, radius: 30, blades: 4, angle: 0, speed: 0.025}], movingObstacles: [], par: 2 },
+            { ball: {x: 50, y: 350}, hole: {x: 450, y: 50}, obstacles: [{x: 120, y: 100, width: 20, height: 150},{x: 240, y: 200, width: 20, height: 150},{x: 360, y: 100, width: 20, height: 150}], sandTraps: [{x: 80, y: 280, width: 60, height: 60}], waterHazards: [], bumpers: [{x: 180, y: 150, radius: 25},{x: 300, y: 250, radius: 25}], windmills: [], movingObstacles: [], par: 3 },
             { ball: {x: 50, y: 350}, hole: {x: 450, y: 50}, obstacles: [{x: 150, y: 0, width: 20, height: 200},{x: 250, y: 150, width: 20, height: 250},{x: 350, y: 0, width: 20, height: 200}], sandTraps: [{x: 180, y: 250, width: 60, height: 60}], waterHazards: [], bumpers: [{x: 380, y: 280, radius: 25}], windmills: [], movingObstacles: [], par: 4 },
-            { ball: {x: 250, y: 350}, hole: {x: 250, y: 50}, obstacles: [{x: 100, y: 180, width: 80, height: 20},{x: 320, y: 200, width: 80, height: 20}], sandTraps: [{x: 200, y: 250, width: 100, height: 60}], waterHazards: [], bumpers: [], windmills: [{x: 250, y: 130, radius: 35, blades: 4, angle: 0, speed: 0.02}], movingObstacles: [], par: 3 }
+            { ball: {x: 250, y: 350}, hole: {x: 250, y: 50}, obstacles: [{x: 100, y: 180, width: 80, height: 20},{x: 320, y: 200, width: 80, height: 20}], sandTraps: [{x: 200, y: 250, width: 100, height: 60}], waterHazards: [], bumpers: [], windmills: [{x: 250, y: 130, radius: 35, blades: 4, angle: 0, speed: 0.02}], movingObstacles: [], par: 3 },
+            { ball: {x: 50, y: 50}, hole: {x: 450, y: 350}, obstacles: [{x: 200, y: 100, width: 20, height: 150},{x: 300, y: 150, width: 20, height: 150}], sandTraps: [{x: 120, y: 80, width: 70, height: 70},{x: 350, y: 280, width: 70, height: 70}], waterHazards: [], bumpers: [{x: 380, y: 120, radius: 25}], windmills: [], movingObstacles: [], par: 4 },
+            { ball: {x: 250, y: 350}, hole: {x: 50, y: 50}, obstacles: [{x: 100, y: 150, width: 150, height: 20},{x: 100, y: 280, width: 150, height: 20}], sandTraps: [{x: 300, y: 100, width: 80, height: 80}], waterHazards: [], bumpers: [{x: 170, y: 220, radius: 25}], windmills: [], movingObstacles: [], par: 3 },
+            { ball: {x: 50, y: 200}, hole: {x: 450, y: 200}, obstacles: [{x: 180, y: 80, width: 20, height: 120},{x: 300, y: 200, width: 20, height: 120}], sandTraps: [{x: 350, y: 250, width: 70, height: 70}], waterHazards: [{x: 120, y: 120, width: 60, height: 60}], bumpers: [], windmills: [{x: 240, y: 200, radius: 30, blades: 3, angle: 0, speed: 0.03}], movingObstacles: [], par: 4 },
+            { ball: {x: 450, y: 350}, hole: {x: 450, y: 50}, obstacles: [{x: 350, y: 150, width: 20, height: 150}], sandTraps: [{x: 380, y: 280, width: 60, height: 60}], waterHazards: [], bumpers: [{x: 400, y: 200, radius: 20}], windmills: [], movingObstacles: [], par: 3 },
+            { ball: {x: 250, y: 350}, hole: {x: 250, y: 50}, obstacles: [{x: 150, y: 150, width: 20, height: 100},{x: 330, y: 150, width: 20, height: 100}], sandTraps: [], waterHazards: [], bumpers: [], windmills: [{x: 250, y: 200, radius: 25, blades: 4, angle: 0, speed: 0.04}], movingObstacles: [], par: 2 },
+            { ball: {x: 50, y: 350}, hole: {x: 450, y: 350}, obstacles: [{x: 200, y: 0, width: 20, height: 250},{x: 280, y: 150, width: 20, height: 250}], sandTraps: [{x: 350, y: 280, width: 80, height: 80}], waterHazards: [{x: 120, y: 280, width: 70, height: 70}], bumpers: [], windmills: [], movingObstacles: [], par: 4 },
+            { ball: {x: 250, y: 200}, hole: {x: 450, y: 50}, obstacles: [{x: 150, y: 100, width: 20, height: 200},{x: 320, y: 0, width: 20, height: 180}], sandTraps: [{x: 200, y: 250, width: 90, height: 70}], waterHazards: [], bumpers: [{x: 380, y: 200, radius: 30}], windmills: [], movingObstacles: [], par: 3 },
+            { ball: {x: 50, y: 50}, hole: {x: 450, y: 350}, obstacles: [{x: 200, y: 0, width: 20, height: 180},{x: 300, y: 220, width: 20, height: 180}], movingObstacles: [{x: 250, y: 180, width: 20, height: 40, direction: 1, speed: 2, minY: 180, maxY: 220, axis: 'vertical'}], sandTraps: [{x: 350, y: 280, width: 80, height: 80}], waterHazards: [], bumpers: [], windmills: [], par: 4 },
+            { ball: {x: 250, y: 350}, hole: {x: 250, y: 50}, obstacles: [{x: 180, y: 150, width: 20, height: 100},{x: 300, y: 150, width: 20, height: 100},{x: 100, y: 250, width: 60, height: 20},{x: 340, y: 250, width: 60, height: 20}], sandTraps: [{x: 210, y: 260, width: 80, height: 80}], waterHazards: [{x: 220, y: 100, width: 60, height: 40}], bumpers: [], windmills: [{x: 250, y: 200, radius: 30, blades: 3, angle: 0, speed: 0.025}], movingObstacles: [], par: 3 }
         ];
 
         let currentHoleData = holes[0];
         let obstacles = [], sandTraps = [], windmills = [], movingObstacles = [], waterHazards = [], bumpers = [];
+
+        function updateScorecard() {
+            for (let i = 0; i < 18; i++) {
+                const scoreCell = document.getElementById(`score-${i + 1}`);
+                if (holeScores[i] !== null) {
+                    scoreCell.textContent = holeScores[i];
+                    scoreCell.classList.remove('pending', 'birdie', 'par', 'bogey', 'double-bogey');
+                    const par = parValues[i];
+                    const diff = holeScores[i] - par;
+                    if (diff < 0) scoreCell.classList.add('birdie');
+                    else if (diff === 0) scoreCell.classList.add('par');
+                    else if (diff === 1) scoreCell.classList.add('bogey');
+                    else if (diff >= 2) scoreCell.classList.add('double-bogey');
+                }
+            }
+
+            let outScore = 0, inScore = 0;
+            for (let i = 0; i < 9; i++) {
+                if (holeScores[i] !== null) outScore += holeScores[i];
+            }
+            for (let i = 9; i < 18; i++) {
+                if (holeScores[i] !== null) inScore += holeScores[i];
+            }
+
+            if (holeScores.slice(0, 9).some(s => s !== null)) {
+                document.getElementById('score-out').textContent = outScore || '-';
+                document.getElementById('score-out').classList.remove('pending');
+            }
+            if (holeScores.slice(9, 18).some(s => s !== null)) {
+                document.getElementById('score-in').textContent = inScore || '-';
+                document.getElementById('score-in').classList.remove('pending');
+            }
+            if (holeScores.some(s => s !== null)) {
+                document.getElementById('score-total').textContent = outScore + inScore;
+                document.getElementById('score-total').classList.remove('pending');
+            }
+        }
 
         function loadHole(holeNum) {
             currentHoleData = holes[holeNum - 1];
@@ -476,9 +662,7 @@
             ballTrail = [];
             particles = [];
             strokes = 0;
-            document.getElementById('strokes').textContent = strokes;
-            document.getElementById('totalScore').textContent = totalStrokes;
-            document.getElementById('holesInOneCount').textContent = holesInOne;
+            drawGame();
             updateParDisplay();
         }
 
@@ -496,6 +680,8 @@
                 particles.push({ x: x, y: y, vx: (Math.random() - 0.5) * 4, vy: (Math.random() - 0.5) * 4, life: 30, color: color, size: Math.random() * 3 + 2 });
             }
         }
+
+        let currentPower = 0;
 
         function showWaterSplash() {
             const splash = document.createElement('div');
@@ -523,9 +709,37 @@
             ctx.fillRect(5, 5, 150, 50);
             ctx.fillStyle = currentTheme === 'night' ? '#FCD34D' : '#1E3A8A';
             ctx.font = 'bold 16px Poppins';
-            ctx.fillText(`Hole ${currentHole} of 9`, 15, 25);
+            ctx.fillText(`Hole ${currentHole} of 18`, 15, 25);
             ctx.font = '14px Poppins';
             ctx.fillText(`Par ${parValues[currentHole - 1]}`, 15, 45);
+
+            // Top right - Power %
+            if (currentPower > 0) {
+                const powerPercent = Math.round((currentPower / 8) * 100);
+                ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
+                ctx.fillRect(canvas.width - 75, 5, 70, 30);
+                ctx.font = 'bold 18px Poppins';
+                ctx.fillStyle = powerPercent > 75 ? '#EF4444' : powerPercent > 50 ? '#FCD34D' : '#10B981';
+                ctx.fillText(`${powerPercent}%`, canvas.width - 60, 28);
+            }
+
+            // Bottom left - This Hole strokes
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
+            ctx.fillRect(5, canvas.height - 35, 100, 30);
+            ctx.fillStyle = currentTheme === 'night' ? '#FCD34D' : '#1E3A8A';
+            ctx.font = '14px Poppins';
+            ctx.fillText('This Hole:', 10, canvas.height - 18);
+            ctx.font = 'bold 20px Poppins';
+            ctx.fillText(strokes, 85, canvas.height - 15);
+
+            // Bottom right - Total
+            const totalText = `Total: ${totalStrokes}`;
+            const totalWidth = ctx.measureText(totalText).width;
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
+            ctx.fillRect(canvas.width - totalWidth - 20, canvas.height - 35, totalWidth + 15, 30);
+            ctx.fillStyle = currentTheme === 'night' ? '#FCD34D' : '#1E3A8A';
+            ctx.font = '14px Poppins';
+            ctx.fillText(totalText, canvas.width - totalWidth - 12, canvas.height - 15);
 
             waterHazards.forEach(water => {
                 const waterGradient = ctx.createRadialGradient(water.x + water.width/2, water.y + water.height/2, 0, water.x + water.width/2, water.y + water.height/2, water.width/2);
@@ -684,8 +898,8 @@
                     ball.y = currentHoleData.ball.y;
                     ball.vx = 0; ball.vy = 0;
                     strokes++;
-                    document.getElementById('strokes').textContent = strokes;
                     ballTrail = [];
+                    drawGame();
                 }
             });
 
@@ -778,19 +992,23 @@
             });
 
             const dist = Math.sqrt((ball.x - hole.x) ** 2 + (ball.y - hole.y) ** 2);
-            if (dist < hole.radius - 5 && Math.abs(ball.vx) < 2 && Math.abs(ball.vy) < 2) {
+            if (dist < hole.radius - 7 && Math.abs(ball.vx) < 2 && Math.abs(ball.vy) < 2) {
                 ball.vx = 0; ball.vy = 0;
                 totalStrokes += strokes;
-                document.getElementById('totalScore').textContent = totalStrokes;
+                holeScores[currentHole - 1] = strokes;
                 playSound('hole');
                 createParticles(hole.x, hole.y, '#FFD700', 15);
+                updateScorecard();
+                drawGame();
+                
                 if (strokes === 1) {
                     holesInOne++;
                     localStorage.setItem('holesInOne', holesInOne);
                     document.getElementById('holesInOneCount').textContent = holesInOne;
                 }
+                
                 setTimeout(() => {
-                    if (currentHole === 9) {
+                    if (currentHole === 18) {
                         showCelebration();
                     } else {
                         const currentPar = parValues[currentHole - 1];
@@ -830,7 +1048,9 @@
             document.getElementById('celebrationOverlay').classList.remove('active');
             currentHole = 1;
             totalStrokes = 0;
+            holeScores = Array(18).fill(null);
             loadHole(currentHole);
+            updateScorecard();
             drawGame();
         }
 
@@ -887,11 +1107,14 @@
                     const dx = clickX - ball.x;
                     const dy = clickY - ball.y;
                     const distance = Math.sqrt(dx * dx + dy * dy);
-                    ball.vx = (dx / distance) * Math.min(distance / 20, 8);
-                    ball.vy = (dy / distance) * Math.min(distance / 20, 8);
+                    const power = Math.min(distance / 20, 8);
+                    ball.vx = (dx / distance) * power;
+                    ball.vy = (dy / distance) * power;
                     strokes++;
-                    document.getElementById('strokes').textContent = strokes;
+                    currentPower = power;
                     playSound('hit');
+                    drawGame();
+                    setTimeout(() => { currentPower = 0; }, 800);
                     updateBall();
                 }
             }
@@ -908,7 +1131,9 @@
         window.resetGame = function() {
             currentHole = 1;
             totalStrokes = 0;
+            holeScores = Array(18).fill(null);
             loadHole(currentHole);
+            updateScorecard();
             drawGame();
         }
     </script>
