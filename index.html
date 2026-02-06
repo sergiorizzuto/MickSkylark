@@ -1019,14 +1019,19 @@
             });
         });
 
-        // Smooth scroll for navigation
+        // Smooth scroll for navigation (skip external links)
         document.querySelectorAll('.nav-link').forEach(link => {
             link.addEventListener('click', (e) => {
-                e.preventDefault();
-                const target = document.querySelector(link.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth' });
+                const href = link.getAttribute('href');
+                // Only prevent default for internal links (starting with #)
+                if (href && href.startsWith('#')) {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth' });
+                    }
                 }
+                // Let external links (like merch.html) work normally
             });
         });
 
@@ -1323,4 +1328,5 @@
     </script>
 </body>
 </html>
+
 
