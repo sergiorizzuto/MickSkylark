@@ -206,42 +206,70 @@
 
         /* Logline & Info */
         .logline {
-            font-size: 1.5rem;
-            line-height: 1.8;
-            max-width: 800px;
-            margin: 40px auto;
+            font-size: 1.8rem;
+            line-height: 1.9;
+            max-width: 900px;
+            margin: 50px auto;
             text-align: center;
-            color: var(--dark);
-            font-weight: 500;
-            font-style: italic;
-            padding: 35px 45px;
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 20px;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-            border-left: 5px solid var(--primary);
+            color: white;
+            font-weight: 600;
+            padding: 50px 60px;
+            background: linear-gradient(135deg, #1E3A8A 0%, #3B82F6 50%, #1E3A8A 100%);
+            background-size: 200% 200%;
+            animation: gradientShift 8s ease infinite;
+            border-radius: 25px;
+            box-shadow: 0 15px 50px rgba(30, 58, 138, 0.4), 
+                        0 0 0 1px rgba(255, 255, 255, 0.1) inset;
             position: relative;
+            overflow: hidden;
+            transform: perspective(1000px) rotateX(2deg);
         }
 
         .logline::before {
-            content: '"';
-            font-size: 4rem;
-            color: var(--primary);
-            opacity: 0.2;
+            content: '';
             position: absolute;
-            top: -10px;
-            left: 20px;
-            font-family: Georgia, serif;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #FCD34D, #FBBF24, #FCD34D);
+            border-radius: 25px;
+            z-index: -1;
+            opacity: 0.3;
+            animation: borderPulse 3s ease-in-out infinite;
         }
 
         .logline::after {
-            content: '"';
-            font-size: 4rem;
-            color: var(--primary);
-            opacity: 0.2;
+            content: '🎬';
             position: absolute;
-            bottom: -30px;
+            font-size: 3rem;
+            top: 15px;
             right: 20px;
-            font-family: Georgia, serif;
+            opacity: 0.2;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        @keyframes borderPulse {
+            0%, 100% { transform: scale(1); opacity: 0.3; }
+            50% { transform: scale(1.02); opacity: 0.5; }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(5deg); }
+        }
+
+        @media (max-width: 768px) {
+            .logline {
+                font-size: 1.3rem;
+                padding: 35px 30px;
+                transform: none;
+            }
         }
 
         .rating {
@@ -1359,6 +1387,3 @@
     </script>
 </body>
 </html>
-
-
-
