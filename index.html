@@ -1496,8 +1496,8 @@ function updateBall() {
         }
     });
 
-    // Friction (higher in sand)
-    const friction = inSand ? 0.5 : 0.98;
+    // Friction (20% slower in sand)
+    const friction = inSand ? 0.784 : 0.98; // 0.98 * 0.8 = 0.784
     ball.vx *= friction;
     ball.vy *= friction;
 
@@ -1515,12 +1515,35 @@ function updateBall() {
         ball.y = Math.max(ball.radius, Math.min(canvas.height - ball.radius, ball.y));
     }
 
-    // Check wall obstacles
+    // Check wall obstacles - bounce off properly
     obstacles.forEach(obs => {
+        // Check if ball overlaps obstacle
         if (ball.x + ball.radius > obs.x && ball.x - ball.radius < obs.x + obs.width &&
             ball.y + ball.radius > obs.y && ball.y - ball.radius < obs.y + obs.height) {
-            ball.vx *= -0.7;
-            ball.vy *= -0.7;
+            
+            // Calculate overlap on each side
+            const overlapLeft = (ball.x + ball.radius) - obs.x;
+            const overlapRight = (obs.x + obs.width) - (ball.x - ball.radius);
+            const overlapTop = (ball.y + ball.radius) - obs.y;
+            const overlapBottom = (obs.y + obs.height) - (ball.y - ball.radius);
+            
+            // Find the smallest overlap (that's the side we hit)
+            const minOverlap = Math.min(overlapLeft, overlapRight, overlapTop, overlapBottom);
+            
+            // Bounce based on which side has smallest overlap
+            if (minOverlap === overlapLeft) {
+                ball.vx = Math.abs(ball.vx) * -0.7; // Bounce left
+                ball.x = obs.x - ball.radius - 1; // Push out with buffer
+            } else if (minOverlap === overlapRight) {
+                ball.vx = Math.abs(ball.vx) * 0.7; // Bounce right
+                ball.x = obs.x + obs.width + ball.radius + 1; // Push out with buffer
+            } else if (minOverlap === overlapTop) {
+                ball.vy = Math.abs(ball.vy) * -0.7; // Bounce up
+                ball.y = obs.y - ball.radius - 1; // Push out with buffer
+            } else if (minOverlap === overlapBottom) {
+                ball.vy = Math.abs(ball.vy) * 0.7; // Bounce down
+                ball.y = obs.y + obs.height + ball.radius + 1; // Push out with buffer
+            }
         }
     });
 
@@ -1685,6 +1708,7 @@ window.resetGame = function() {
 }
 
 window.shareChallenge = shareChallenge;
+
 
 
         // Auto-scroll for comparable films only
