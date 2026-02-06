@@ -649,6 +649,7 @@
             <a href="#cast" class="nav-link">Cast</a>
             <a href="#instagram" class="nav-link">Instagram</a>
             <a href="#credits" class="nav-link">Credits</a>
+            <a href="#locations" class="nav-link">Locations</a>
         </div>
     </nav>
 
@@ -965,6 +966,28 @@
         </div>
     </section>
 
+    <!-- Screening Locations -->
+    <section id="locations" class="section-yellow">
+        <div class="container">
+            <h2 class="section-title">Screening Locations</h2>
+            <div class="map-grid">
+                <div class="location-card">
+                    <h3>🌴 Boca Raton, Florida</h3>
+                    <p><strong>Address:</strong><br>313 E Palmetto Park Rd<br>Boca Raton, FL 33432</p>
+                    <p><strong>Date:</strong> Sunday, February 22, 2026</p>
+                    <p><strong>Time:</strong> 3:00 PM</p>
+                </div>
+                <div class="location-card">
+                    <h3>🎬 Los Angeles, California</h3>
+                    <p><strong>Venue:</strong> Cinemark Playa Vista & XD</p>
+                    <p><strong>Address:</strong><br>12746 W Jefferson Blvd, Suite 3190<br>Playa Vista, CA 90094</p>
+                    <p><strong>Date:</strong> Sunday, February 22, 2026</p>
+                    <p><strong>Time:</strong> 3:00 PM</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Footer -->
     <footer>
         <p>&copy; 2025 Mick Skylark: Mini Golf Prodigy. All rights reserved.</p>
@@ -1274,34 +1297,11 @@
             drawGame();
         }
 
-        // Auto-scroll with seamless loop for slideshow
-        const slideshowWrapper = document.querySelector('.slideshow-wrapper');
-        if (slideshowWrapper) {
-            let scrollAmount = 0;
-            const scrollSpeed = 0.5; // Slower for smoother effect
-
-            function autoScroll() {
-                scrollAmount += scrollSpeed;
-                slideshowWrapper.scrollLeft = scrollAmount;
-                
-                // Seamless loop - when near the end, jump back to start
-                if (scrollAmount >= slideshowWrapper.scrollWidth - slideshowWrapper.clientWidth - 50) {
-                    scrollAmount = 0;
-                    slideshowWrapper.scrollLeft = 0;
-                }
-                
-                requestAnimationFrame(autoScroll);
-            }
-
-            // Start auto-scroll
-            autoScroll();
-        }
-
-        // Auto-scroll with seamless loop for comparable films
+        // Auto-scroll for comparable films only
         const filmsWrapper = document.querySelector('.comparable-films-wrapper');
         if (filmsWrapper) {
             let filmsScrollAmount = 0;
-            const filmsScrollSpeed = 0.4; // Even slower
+            const filmsScrollSpeed = 0.5;
 
             function autoScrollFilms() {
                 filmsScrollAmount += filmsScrollSpeed;
@@ -1322,4 +1322,5 @@
     </script>
 </body>
 </html>
+
 
