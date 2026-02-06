@@ -31,7 +31,6 @@
             padding-top: 60px;
         }
 
-        /* Navigation */
         .navbar {
             position: fixed;
             top: 0;
@@ -68,7 +67,6 @@
             color: white;
         }
 
-        /* Sections */
         .section-blue {
             background: linear-gradient(135deg, #87CEEB 0%, #5DADE2 100%);
             padding: 80px 20px;
@@ -84,7 +82,6 @@
             margin: 0 auto;
         }
 
-        /* Hero */
         .hero {
             text-align: center;
             padding: 40px 20px 80px;
@@ -130,7 +127,6 @@
             60% { transform: translateY(-5px); }
         }
 
-        /* Horizontal Slideshow */
         .slider-nav {
             position: relative;
             margin: 40px 0;
@@ -195,7 +191,6 @@
             }
         }
 
-        /* Section Titles */
         .section-title {
             font-size: 3rem;
             font-weight: 700;
@@ -204,7 +199,6 @@
             color: var(--primary);
         }
 
-        /* Logline & Info */
         .logline {
             font-size: 1.8rem;
             line-height: 1.9;
@@ -351,7 +345,6 @@
             background: var(--gold);
         }
 
-        /* Comparable Films - Horizontal Scroll */
         .comparable-films-wrapper {
             overflow-x: scroll;
             overflow-y: hidden;
@@ -408,7 +401,6 @@
             display: block;
         }
 
-        /* RSVP */
         .screener-info {
             text-align: center;
             margin-bottom: 40px;
@@ -426,7 +418,6 @@
             color: var(--dark);
         }
 
-        /* Countdown Timer */
         .countdown-timer {
             display: flex;
             justify-content: center;
@@ -457,7 +448,6 @@
             letter-spacing: 1px;
         }
 
-        /* Social Share */
         .social-share {
             text-align: center;
             margin-top: 30px;
@@ -503,14 +493,11 @@
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
         }
 
-        /* Mini Golf Game */
         .game-container {
             background: white;
             padding: 40px 20px;
             border-radius: 20px;
             box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
-            max-width: 600px;
-            margin: 0 auto;
             text-align: center;
         }
 
@@ -518,50 +505,110 @@
             border: 3px solid var(--primary);
             border-radius: 15px;
             cursor: crosshair;
-            margin: 20px 0;
+            margin: 20px auto;
             display: block;
-            margin-left: auto;
-            margin-right: auto;
             max-width: 100%;
             height: auto;
+            position: relative;
         }
 
-        .game-stats {
+        .controls {
             display: flex;
             justify-content: center;
             gap: 15px;
-            flex-wrap: wrap;
-            margin: 15px 0;
+            margin-bottom: 20px;
         }
 
-        .stat-card {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-            color: white;
-            padding: 12px 20px;
-            border-radius: 12px;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
-            min-width: 100px;
+        .control-btn {
+            background: white;
+            border: 2px solid var(--primary);
+            border-radius: 50%;
+            width: 45px;
+            height: 45px;
+            cursor: pointer;
+            font-size: 1.5rem;
             display: flex;
-            flex-direction: column;
-            gap: 5px;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         }
 
-        .stat-label {
-            font-size: 0.85rem;
-            opacity: 0.9;
+        .control-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .control-btn.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        .scorecard {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 30px auto;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            overflow-x: auto;
+        }
+
+        .scorecard h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .scorecard table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+
+        .scorecard th, .scorecard td {
+            padding: 8px;
+            text-align: center;
+            border: 1px solid #e5e7eb;
+        }
+
+        .scorecard th {
+            background: var(--primary);
+            color: white;
             font-weight: 600;
         }
 
-        .stat-value {
-            font-size: 1.5rem;
-            font-weight: 700;
+        .scorecard .par-row {
+            background: #f9fafb;
+            font-weight: 600;
         }
 
-        .game-score {
-            font-size: 1.5rem;
+        .scorecard .score-row td {
             font-weight: 700;
-            color: var(--primary);
-            margin: 15px 0;
+            font-size: 1.1rem;
+        }
+
+        .scorecard .score-row td.birdie {
+            background: #10B981;
+            color: white;
+        }
+
+        .scorecard .score-row td.par {
+            background: #FCD34D;
+        }
+
+        .scorecard .score-row td.bogey {
+            background: #F59E0B;
+            color: white;
+        }
+
+        .scorecard .score-row td.double-bogey {
+            background: #EF4444;
+            color: white;
+        }
+
+        .scorecard .score-row td.pending {
+            background: #f3f4f6;
+            color: #9ca3af;
         }
 
         .game-btn {
@@ -575,6 +622,7 @@
             transition: all 0.3s ease;
             font-size: 1rem;
             font-family: 'Poppins', sans-serif;
+            margin: 5px;
         }
 
         .game-btn:hover {
@@ -591,239 +639,119 @@
             background: var(--gold);
         }
 
-        /* Add these styles after the .game-btn styles */
+        .water-splash {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 4rem;
+            font-weight: 700;
+            color: #1E90FF;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+            animation: splashAnimation 1s ease-out forwards;
+            pointer-events: none;
+            z-index: 10000;
+        }
 
-.controls {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    margin-bottom: 20px;
-}
+        @keyframes splashAnimation {
+            0% {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(0.5);
+            }
+            50% {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1.2);
+            }
+            100% {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(1) translateY(-50px);
+            }
+        }
 
-.control-btn {
-    background: white;
-    border: 2px solid var(--primary);
-    border-radius: 50%;
-    width: 45px;
-    height: 45px;
-    cursor: pointer;
-    font-size: 1.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s ease;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
+        .celebration-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            animation: fadeIn 0.3s ease;
+        }
 
-.control-btn:hover {
-    transform: scale(1.1);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-}
+        .celebration-overlay.active {
+            display: flex;
+        }
 
-.control-btn.active {
-    background: var(--primary);
-    color: white;
-}
+        .celebration-content {
+            background: white;
+            padding: 50px;
+            border-radius: 30px;
+            text-align: center;
+            max-width: 500px;
+            animation: scaleIn 0.5s ease;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
 
-.scorecard {
-    background: white;
-    border-radius: 15px;
-    padding: 20px;
-    margin: 30px auto;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    overflow-x: auto;
-}
+        .celebration-emoji {
+            font-size: 5rem;
+            animation: bounce2 1s ease infinite;
+            margin-bottom: 20px;
+        }
 
-.scorecard h3 {
-    color: var(--primary);
-    margin-bottom: 15px;
-    text-align: center;
-}
+        .celebration-title {
+            font-size: 2.5rem;
+            color: var(--primary);
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
 
-.scorecard table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 0.9rem;
-}
+        .celebration-score {
+            font-size: 1.5rem;
+            color: var(--gold);
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
 
-.scorecard th, .scorecard td {
-    padding: 8px;
-    text-align: center;
-    border: 1px solid #e5e7eb;
-}
+        .celebration-message {
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 30px;
+        }
 
-.scorecard th {
-    background: var(--primary);
-    color: white;
-    font-weight: 600;
-}
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
 
-.scorecard .par-row {
-    background: #f9fafb;
-    font-weight: 600;
-}
+        @keyframes scaleIn {
+            from { transform: scale(0.5); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
 
-.scorecard .score-row td {
-    font-weight: 700;
-    font-size: 1.1rem;
-}
+        @keyframes bounce2 {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
 
-.scorecard .score-row td.birdie {
-    background: #10B981;
-    color: white;
-}
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background: var(--gold);
+            position: absolute;
+            animation: confettiFall 3s linear forwards;
+        }
 
-.scorecard .score-row td.par {
-    background: #FCD34D;
-}
-
-.scorecard .score-row td.bogey {
-    background: #F59E0B;
-    color: white;
-}
-
-.scorecard .score-row td.double-bogey {
-    background: #EF4444;
-    color: white;
-}
-
-.scorecard .score-row td.pending {
-    background: #f3f4f6;
-    color: #9ca3af;
-}
-
-.water-splash {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 4rem;
-    font-weight: 700;
-    color: #1E90FF;
-    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
-    animation: splashAnimation 1s ease-out forwards;
-    pointer-events: none;
-    z-index: 10000;
-}
-
-@keyframes splashAnimation {
-    0% {
-        opacity: 0;
-        transform: translate(-50%, -50%) scale(0.5);
-    }
-    50% {
-        opacity: 1;
-        transform: translate(-50%, -50%) scale(1.2);
-    }
-    100% {
-        opacity: 0;
-        transform: translate(-50%, -50%) scale(1) translateY(-50px);
-    }
-}
-
-.celebration-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.8);
-    display: none;
-    justify-content: center;
-    align-items: center;
-    z-index: 9999;
-    animation: fadeIn 0.3s ease;
-}
-
-.celebration-overlay.active {
-    display: flex;
-}
-
-.celebration-content {
-    background: white;
-    padding: 50px;
-    border-radius: 30px;
-    text-align: center;
-    max-width: 500px;
-    animation: scaleIn 0.5s ease;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-}
-
-.celebration-emoji {
-    font-size: 5rem;
-    animation: bounce2 1s ease infinite;
-    margin-bottom: 20px;
-}
-
-.celebration-title {
-    font-size: 2.5rem;
-    color: var(--primary);
-    font-weight: 700;
-    margin-bottom: 15px;
-}
-
-.celebration-score {
-    font-size: 1.5rem;
-    color: var(--gold);
-    font-weight: 600;
-    margin-bottom: 20px;
-}
-
-.celebration-message {
-    font-size: 1.1rem;
-    color: #666;
-    margin-bottom: 30px;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-
-@keyframes scaleIn {
-    from { transform: scale(0.5); opacity: 0; }
-    to { transform: scale(1); opacity: 1; }
-}
-
-@keyframes bounce2 {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-20px); }
-}
-
-.confetti {
-    position: fixed;
-    width: 10px;
-    height: 10px;
-    background: var(--gold);
-    position: absolute;
-    animation: confettiFall 3s linear forwards;
-}
-
-@keyframes confettiFall {
-    to {
-        transform: translateY(100vh) rotate(360deg);
-        opacity: 0;
-    }
-}
-
-@media (max-width: 768px) {
-    .celebration-content {
-        padding: 30px 20px;
-        margin: 20px;
-    }
-
-    .celebration-title {
-        font-size: 2rem;
-    }
-
-    .scorecard {
-        font-size: 0.8rem;
-    }
-
-    .scorecard th, .scorecard td {
-        padding: 6px 4px;
-    }
-}
+        @keyframes confettiFall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
 
         @media (max-width: 768px) {
             .game-container {
@@ -835,17 +763,24 @@
                 height: auto !important;
             }
 
-            .stat-card {
-                min-width: 80px;
-                padding: 10px 15px;
+            .celebration-content {
+                padding: 30px 20px;
+                margin: 20px;
             }
 
-            .stat-value {
-                font-size: 1.2rem;
+            .celebration-title {
+                font-size: 2rem;
+            }
+
+            .scorecard {
+                font-size: 0.8rem;
+            }
+
+            .scorecard th, .scorecard td {
+                padding: 6px 4px;
             }
         }
 
-        /* Map */
         .map-container {
             margin: 40px 0;
         }
@@ -883,7 +818,6 @@
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
         }
 
-        /* Cast Grid */
         .cast-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -930,7 +864,6 @@
             font-style: italic;
         }
 
-        /* Credits */
         .credits-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -961,7 +894,6 @@
             color: var(--primary);
         }
 
-        /* Footer */
         footer {
             background: var(--primary);
             color: white;
@@ -1095,16 +1027,14 @@
             </div>
         </div>
     </section>
-
     <!-- Mini Golf Game Section -->
     <section id="game" class="section-yellow">
-    <div class="container">
-        <h2 class="section-title">⛳ Glory On The Greens</h2>
-        <p style="text-align: center; margin-bottom: 20px; font-size: 1.1rem;">
-            Play our Glory On The Greens mini golf game!
-        </p>
-        
-        <div style="max-width: 700px; margin: 0 auto;">
+        <div class="container">
+            <h2 class="section-title">Play Glory On The Greens!</h2>
+            <p style="text-align: center; margin-bottom: 30px; font-size: 1.1rem;">
+                Click to hit the ball into the hole! Can you beat par on all 18 holes?
+            </p>
+            
             <div class="controls">
                 <button class="control-btn active" id="dayBtn" onclick="setTheme('day')" title="Day Mode">☀️</button>
                 <button class="control-btn" id="nightBtn" onclick="setTheme('night')" title="Night Mode">🌙</button>
@@ -1112,116 +1042,213 @@
             </div>
             
             <div class="game-container">
-                <div style="position: relative; display: inline-block;">
-                    <canvas id="golfCanvas" class="game-canvas" width="500" height="400"></canvas>
+                <canvas id="golfCanvas" class="game-canvas" width="500" height="400"></canvas>
+                
+                <div class="scorecard">
+                    <h3>📋 Scorecard</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Hole</th>
+                                <th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>OUT</th>
+                                <th>10</th><th>11</th><th>12</th><th>13</th><th>14</th><th>15</th><th>16</th><th>17</th><th>18</th><th>IN</th><th>TOT</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="par-row">
+                                <td>Par</td>
+                                <td>3</td><td>3</td><td>4</td><td>3</td><td>3</td><td>4</td><td>3</td><td>4</td><td>3</td><td>30</td>
+                                <td>4</td><td>3</td><td>4</td><td>3</td><td>2</td><td>4</td><td>3</td><td>4</td><td>3</td><td>30</td><td>60</td>
+                            </tr>
+                            <tr class="score-row">
+                                <td>Score</td>
+                                <td id="score-1" class="pending">-</td>
+                                <td id="score-2" class="pending">-</td>
+                                <td id="score-3" class="pending">-</td>
+                                <td id="score-4" class="pending">-</td>
+                                <td id="score-5" class="pending">-</td>
+                                <td id="score-6" class="pending">-</td>
+                                <td id="score-7" class="pending">-</td>
+                                <td id="score-8" class="pending">-</td>
+                                <td id="score-9" class="pending">-</td>
+                                <td id="score-out" class="pending">-</td>
+                                <td id="score-10" class="pending">-</td>
+                                <td id="score-11" class="pending">-</td>
+                                <td id="score-12" class="pending">-</td>
+                                <td id="score-13" class="pending">-</td>
+                                <td id="score-14" class="pending">-</td>
+                                <td id="score-15" class="pending">-</td>
+                                <td id="score-16" class="pending">-</td>
+                                <td id="score-17" class="pending">-</td>
+                                <td id="score-18" class="pending">-</td>
+                                <td id="score-in" class="pending">-</td>
+                                <td id="score-total" class="pending">-</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div style="text-align: center; margin-top: 15px; padding-top: 15px; border-top: 1px solid #e5e7eb; color: var(--primary); font-size: 0.9rem;">
+                        <span style="margin: 0 15px;">🏆 Best: <strong id="best">--</strong></span>
+                        <span style="margin: 0 15px;">⛳ Holes-in-One: <strong id="holesInOneCount">0</strong></span>
+                    </div>
                 </div>
-            </div>
-
-            <div class="scorecard">
-                <h3>📋 Scorecard</h3>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Hole</th>
-                            <th>1</th>
-                            <th>2</th>
-                            <th>3</th>
-                            <th>4</th>
-                            <th>5</th>
-                            <th>6</th>
-                            <th>7</th>
-                            <th>8</th>
-                            <th>9</th>
-                            <th>OUT</th>
-                            <th>10</th>
-                            <th>11</th>
-                            <th>12</th>
-                            <th>13</th>
-                            <th>14</th>
-                            <th>15</th>
-                            <th>16</th>
-                            <th>17</th>
-                            <th>18</th>
-                            <th>IN</th>
-                            <th>TOT</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr class="par-row">
-                            <td>Par</td>
-                            <td id="par-1">3</td>
-                            <td id="par-2">3</td>
-                            <td id="par-3">4</td>
-                            <td id="par-4">3</td>
-                            <td id="par-5">3</td>
-                            <td id="par-6">4</td>
-                            <td id="par-7">3</td>
-                            <td id="par-8">4</td>
-                            <td id="par-9">3</td>
-                            <td id="par-out">30</td>
-                            <td id="par-10">4</td>
-                            <td id="par-11">3</td>
-                            <td id="par-12">4</td>
-                            <td id="par-13">3</td>
-                            <td id="par-14">2</td>
-                            <td id="par-15">4</td>
-                            <td id="par-16">3</td>
-                            <td id="par-17">4</td>
-                            <td id="par-18">3</td>
-                            <td id="par-in">30</td>
-                            <td id="par-total">60</td>
-                        </tr>
-                        <tr class="score-row">
-                            <td>Score</td>
-                            <td id="score-1" class="pending">-</td>
-                            <td id="score-2" class="pending">-</td>
-                            <td id="score-3" class="pending">-</td>
-                            <td id="score-4" class="pending">-</td>
-                            <td id="score-5" class="pending">-</td>
-                            <td id="score-6" class="pending">-</td>
-                            <td id="score-7" class="pending">-</td>
-                            <td id="score-8" class="pending">-</td>
-                            <td id="score-9" class="pending">-</td>
-                            <td id="score-out" class="pending">-</td>
-                            <td id="score-10" class="pending">-</td>
-                            <td id="score-11" class="pending">-</td>
-                            <td id="score-12" class="pending">-</td>
-                            <td id="score-13" class="pending">-</td>
-                            <td id="score-14" class="pending">-</td>
-                            <td id="score-15" class="pending">-</td>
-                            <td id="score-16" class="pending">-</td>
-                            <td id="score-17" class="pending">-</td>
-                            <td id="score-18" class="pending">-</td>
-                            <td id="score-in" class="pending">-</td>
-                            <td id="score-total" class="pending">-</td>
-                        </tr>
-                    </tbody>
-                </table>
-                <div style="text-align: center; margin-top: 15px; padding-top: 15px; border-top: 1px solid #e5e7eb; color: var(--primary); font-size: 0.9rem;">
-                    <span style="margin: 0 15px;">🏆 Best: <strong id="best">--</strong></span>
-                    <span style="margin: 0 15px;">⛳ Holes-in-One: <strong id="holesInOneCount">0</strong></span>
+                
+                <div style="display: flex; gap: 10px; justify-content: center; margin-top: 20px; flex-wrap: wrap;">
+                    <button class="game-btn" onclick="resetGame()">↻ Restart Course</button>
+                    <button class="game-btn secondary" onclick="shareChallenge()">👥 Challenge Friends</button>
                 </div>
-            </div>
-
-            <div style="display: flex; gap: 10px; justify-content: center; margin: 20px 0;">
-                <button class="game-btn" onclick="resetGame()">↻ Restart</button>
-                <button class="game-btn secondary" onclick="shareChallenge()">👥 Challenge Friends</button>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<div class="celebration-overlay" id="celebrationOverlay">
-    <div class="celebration-content">
-        <div class="celebration-emoji">🎉</div>
-        <div class="celebration-title">Course Complete!</div>
-        <div class="celebration-score" id="finalScore">Total: 0 strokes</div>
-        <div class="celebration-message" id="celebrationMessage">Great job!</div>
-        <button class="game-btn" onclick="closeCelebration()">Play Again</button>
-        <button class="game-btn secondary" onclick="shareChallenge()">Share Score</button>
+    <div class="celebration-overlay" id="celebrationOverlay">
+        <div class="celebration-content">
+            <div class="celebration-emoji">🎉</div>
+            <div class="celebration-title">Course Complete!</div>
+            <div class="celebration-score" id="finalScore">Total: 0 strokes</div>
+            <div class="celebration-message" id="celebrationMessage">Great job!</div>
+            <button class="game-btn" onclick="closeCelebration()">Play Again</button>
+            <button class="game-btn secondary" onclick="shareChallenge()">Share Score</button>
+        </div>
     </div>
-</div>
 
+    <!-- Cast Section -->
+    <section id="cast" class="section-blue">
+        <div class="container">
+            <div style="text-align: center; margin-bottom: 50px;">
+                <a href="https://pro.imdb.com/title/tt12115818/" target="_blank" class="link-btn" style="font-size: 1.2rem; padding: 15px 40px;">📽️ View on IMDb</a>
+            </div>
+            
+            <h2 class="section-title">Starring</h2>
+            <div class="cast-grid">
+                <div class="cast-member">
+                    <img src="cast-photos/brandon-engman.jpg" alt="Brandon Engman" class="cast-photo">
+                    <div class="cast-info">
+                        <div class="actor-name">Brandon Engman</div>
+                        <div class="character-name">as Mick Skylark</div>
+                    </div>
+                </div>
+                <div class="cast-member">
+                    <img src="cast-photos/david-koechner.jpg" alt="David Koechner" class="cast-photo">
+                    <div class="cast-info">
+                        <div class="actor-name">David Koechner</div>
+                        <div class="character-name">as Jonsey</div>
+                    </div>
+                </div>
+                <div class="cast-member">
+                    <img src="cast-photos/patrick-warburton.jpg" alt="Patrick Warburton" class="cast-photo">
+                    <div class="cast-info">
+                        <div class="actor-name">Patrick Warburton</div>
+                        <div class="character-name">as Dr. Phil</div>
+                    </div>
+                </div>
+                <div class="cast-member">
+                    <img src="cast-photos/robert-knepper.jpg" alt="Robert Knepper" class="cast-photo">
+                    <div class="cast-info">
+                        <div class="actor-name">Robert Knepper</div>
+                        <div class="character-name">as Vladimir</div>
+                    </div>
+                </div>
+                <div class="cast-member">
+                    <img src="cast-photos/cs-lee.jpg" alt="CS Lee" class="cast-photo">
+                    <div class="cast-info">
+                        <div class="actor-name">CS Lee</div>
+                        <div class="character-name">as Leonard</div>
+                    </div>
+                </div>
+                <div class="cast-member">
+                    <img src="cast-photos/elizabeth-mitchell.jpg" alt="Elizabeth Mitchell" class="cast-photo">
+                    <div class="cast-info">
+                        <div class="actor-name">Elizabeth Mitchell</div>
+                        <div class="character-name">as Clara</div>
+                    </div>
+                </div>
+                <div class="cast-member">
+                    <img src="cast-photos/thomas-lennon.jpg" alt="Thomas Lennon" class="cast-photo">
+                    <div class="cast-info">
+                        <div class="actor-name">Thomas Lennon</div>
+                        <div class="character-name">as Tom McDonald</div>
+                    </div>
+                </div>
+                <div class="cast-member">
+                    <img src="cast-photos/matt-iseman.jpg" alt="Matt Iseman" class="cast-photo">
+                    <div class="cast-info">
+                        <div class="actor-name">Matt Iseman</div>
+                        <div class="character-name">as Artie Finegold</div>
+                    </div>
+                </div>
+                <div class="cast-member">
+                    <img src="cast-photos/jorge-garcia.jpg" alt="Jorge Garcia" class="cast-photo">
+                    <div class="cast-info">
+                        <div class="actor-name">Jorge Garcia</div>
+                        <div class="character-name">as Roger</div>
+                    </div>
+                </div>
+                <div class="cast-member">
+                    <img src="cast-photos/james-murray.jpg" alt="James Murray" class="cast-photo">
+                    <div class="cast-info">
+                        <div class="actor-name">James Murray (Murr)</div>
+                        <div class="character-name">as Harry Johnson</div>
+                    </div>
+                </div>
+                <div class="cast-member">
+                    <img src="cast-photos/russell-hodgkinson.jpg" alt="Russell Hodgkinson" class="cast-photo">
+                    <div class="cast-info">
+                        <div class="actor-name">Russell Hodgkinson</div>
+                        <div class="character-name">as Dave</div>
+                    </div>
+                </div>
+                <div class="cast-member">
+                    <img src="cast-photos/ali-stoner.jpg" alt="Ali Stoner" class="cast-photo">
+                    <div class="cast-info">
+                        <div class="actor-name">Ali Stoner</div>
+                        <div class="character-name">as Vanessa</div>
+                    </div>
+                </div>
+                <div class="cast-member">
+                    <img src="cast-photos/colin-egglesfield.jpg" alt="Colin Egglesfield" class="cast-photo">
+                    <div class="cast-info">
+                        <div class="actor-name">Colin Egglesfield</div>
+                        <div class="character-name">as Eagle</div>
+                    </div>
+                </div>
+                <div class="cast-member">
+                    <img src="cast-photos/violet-bennett.jpg" alt="Violet Bennett" class="cast-photo">
+                    <div class="cast-info">
+                        <div class="actor-name">Violet Bennett</div>
+                        <div class="character-name">as Lily</div>
+                    </div>
+                </div>
+                <div class="cast-member">
+                    <img src="cast-photos/urijah-faber.jpg" alt="Urijah Faber" class="cast-photo">
+                    <div class="cast-info">
+                        <div class="actor-name">Urijah Faber</div>
+                        <div class="character-name">as Foley Dowed</div>
+                    </div>
+                </div>
+                <div class="cast-member">
+                    <img src="cast-photos/sergio-rizzuto.jpg" alt="Sergio Rizzuto" class="cast-photo">
+                    <div class="cast-info">
+                        <div class="actor-name">Sergio Rizzuto</div>
+                        <div class="character-name">as Lunch Box</div>
+                    </div>
+                </div>
+                <div class="cast-member">
+                    <img src="cast-photos/ettore-baccari.jpg" alt="Ettore James Baccari" class="cast-photo">
+                    <div class="cast-info">
+                        <div class="actor-name">Ettore James Baccari</div>
+                        <div class="character-name">as Young Mick</div>
+                    </div>
+                </div>
+                <div class="cast-member">
+                    <img src="cast-photos/jett-miller.jpg" alt="Jett Miller" class="cast-photo">
+                    <div class="cast-info">
+                        <div class="actor-name">Jett Miller</div>
+                        <div class="character-name">as Humphrey</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- Instagram Section -->
     <section id="instagram" class="section-yellow">
@@ -1316,7 +1343,6 @@
             </a>
         </p>
     </footer>
-
     <script>
         // Behold Instagram widget
         (function(){
@@ -1342,7 +1368,6 @@
         document.querySelectorAll('.nav-link').forEach(link => {
             link.addEventListener('click', (e) => {
                 const href = link.getAttribute('href');
-                // Only smooth scroll for hash links on same page
                 if (href && (href.startsWith('#') || href.includes('index.html#'))) {
                     e.preventDefault();
                     const hash = href.includes('#') ? href.split('#')[1] : '';
@@ -1351,7 +1376,6 @@
                         target.scrollIntoView({ behavior: 'smooth' });
                     }
                 }
-                // Let external links (like merch.html) work normally
             });
         });
 
@@ -1379,10 +1403,10 @@
             }
         }
 
-        // Update countdown every second
         setInterval(updateCountdown, 1000);
         updateCountdown();
 
+        // 18-Hole Mini Golf Game
         const canvas = document.getElementById('golfCanvas');
         const ctx = canvas ? canvas.getContext('2d') : null;
 
@@ -1924,6 +1948,10 @@
         }
 
         function shareChallenge() {
+            if (totalStrokes === 0) {
+                alert('Complete at least one hole first!');
+                return;
+            }
             const totalPar = parValues.slice(0, currentHole - 1).reduce((a, b) => a + b, 0);
             const overUnder = totalStrokes - totalPar;
             const scoreText = overUnder === 0 ? 'Even Par' : overUnder > 0 ? `+${overUnder}` : `${overUnder}`;
@@ -1996,7 +2024,10 @@
             drawGame();
         }
 
-
+        window.setTheme = setTheme;
+        window.toggleSound = toggleSound;
+        window.shareChallenge = shareChallenge;
+        window.closeCelebration = closeCelebration;
 
         // Auto-scroll for comparable films only
         const filmsWrapper = document.querySelector('.comparable-films-wrapper');
@@ -2008,7 +2039,6 @@
                 filmsScrollAmount += filmsScrollSpeed;
                 filmsWrapper.scrollLeft = filmsScrollAmount;
                 
-                // Seamless loop - when near the end, jump back to start
                 if (filmsScrollAmount >= filmsWrapper.scrollWidth - filmsWrapper.clientWidth - 50) {
                     filmsScrollAmount = 0;
                     filmsWrapper.scrollLeft = 0;
@@ -2017,7 +2047,6 @@
                 requestAnimationFrame(autoScrollFilms);
             }
 
-            // Start auto-scroll
             autoScrollFilms();
         }
     </script>
