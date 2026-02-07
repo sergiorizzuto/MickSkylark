@@ -67,6 +67,44 @@
             color: white;
         }
 
+        /* Active nav link (scrollspy) */
+        .nav-link.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* Back to top button */
+        .back-to-top {
+            position: fixed;
+            right: 18px;
+            bottom: 18px;
+            z-index: 2000;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 999px;
+            padding: 12px 16px;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 8px 25px rgba(30, 58, 138, 0.35);
+            transform: translateY(20px);
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.25s ease;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .back-to-top.show {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+
+        .back-to-top:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
         .section-blue {
             background: linear-gradient(135deg, #87CEEB 0%, #5DADE2 100%);
             padding: 80px 20px;
@@ -1028,6 +1066,7 @@
             </div>
         </div>
     </section>
+
     <!-- Mini Golf Game Section -->
     <section id="game" class="section-yellow">
         <div class="container">
@@ -1340,10 +1379,14 @@
         </p>
         <p style="margin-top: 15px;">
             <a href="grokminigolf.html" style="color: #FCD34D; font-weight: 600; text-decoration: none; border: 2px solid #FCD34D; padding: 8px 20px; border-radius: 25px; display: inline-block; transition: all 0.3s ease;">
-                ⛳ 
+                ⛳
             </a>
         </p>
     </footer>
+
+    <!-- Back to top button -->
+    <button class="back-to-top" id="backToTopBtn" aria-label="Back to top">↑ Top</button>
+
     <script>
         // Behold Instagram widget
         (function(){
@@ -1354,31 +1397,70 @@
         // Tally embed script
         var d=document,w="https://tally.so/widgets/embed.js",v=function(){"undefined"!=typeof Tally?Tally.loadEmbeds():d.querySelectorAll("iframe[data-tally-src]:not([src])").forEach((function(e){e.src=e.dataset.tallySrc}))};if("undefined"!=typeof Tally)v();else if(d.querySelector('script[src="'+w+'"]')==null){var s=d.createElement("script");s.src=w,s.onload=v,s.onerror=v,d.body.appendChild(s);}
 
-        // Smooth scroll for nav
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
+        // One smooth-scroll handler (ONLY for same-page hash links)
+        document.addEventListener('click', (e) => {
+            const link = e.target.closest('a');
+            if (!link) return;
+
+            const href = link.getAttribute('href');
+            if (!href) return;
+
+            const isHashOnly = href.startsWith('#');
+            const isIndexHash = href.startsWith('index.html#');
+
+            if (isHashOnly || isIndexHash) {
                 e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth' });
-                }
-            });
+                const hash = isHashOnly ? href.slice(1) : href.split('#')[1];
+                const target = document.getElementById(hash);
+                if (target) target.scrollIntoView({ behavior: 'smooth' });
+            }
+            // else: normal navigation (merch.html, screener-survey.html, etc.)
         });
 
-        // Smooth scroll for navigation (skip external links)
-        document.querySelectorAll('.nav-link').forEach(link => {
-            link.addEventListener('click', (e) => {
-                const href = link.getAttribute('href');
-                if (href && (href.startsWith('#') || href.includes('index.html#'))) {
-                    e.preventDefault();
-                    const hash = href.includes('#') ? href.split('#')[1] : '';
-                    const target = document.getElementById(hash);
-                    if (target) {
-                        target.scrollIntoView({ behavior: 'smooth' });
-                    }
-                }
+        // Back to top behavior
+        const backToTopBtn = document.getElementById('backToTopBtn');
+        if (backToTopBtn) {
+            const toggleBackToTop = () => {
+                if (window.scrollY > 600) backToTopBtn.classList.add('show');
+                else backToTopBtn.classList.remove('show');
+            };
+
+            window.addEventListener('scroll', toggleBackToTop, { passive: true });
+            toggleBackToTop();
+
+            backToTopBtn.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
             });
-        });
+        }
+
+        // Scrollspy: highlight nav link based on section in view
+        const sectionIds = ['home','comparable-films','rsvp','game','cast','instagram','credits','locations'];
+        const sections = sectionIds.map(id => document.getElementById(id)).filter(Boolean);
+        const navLinks = Array.from(document.querySelectorAll('.nav-link'));
+
+        function setActiveNav(id) {
+            navLinks.forEach(a => a.classList.remove('active'));
+            const active = navLinks.find(a => {
+                const h = a.getAttribute('href') || '';
+                return h === `#${id}` || h === `index.html#${id}`;
+            });
+            if (active) active.classList.add('active');
+        }
+
+        if (sections.length) {
+            const observer = new IntersectionObserver((entries) => {
+                const visible = entries
+                    .filter(e => e.isIntersecting)
+                    .sort((a,b) => b.intersectionRatio - a.intersectionRatio)[0];
+
+                if (visible && visible.target && visible.target.id) {
+                    setActiveNav(visible.target.id);
+                }
+            }, { root: null, threshold: [0.2, 0.35, 0.5, 0.65] });
+
+            sections.forEach(sec => observer.observe(sec));
+            setActiveNav('home');
+        }
 
         // Countdown Timer to February 22, 2026 at 3:00 PM
         function updateCountdown() {
