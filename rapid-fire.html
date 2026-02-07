@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>Rapid Fire Golf</title>
+  <title>Rapid Fire Golf - Mick Skylark</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
 
   <style>
     :root{
@@ -25,32 +25,38 @@
       background: linear-gradient(135deg, #FDE68A 0%, #FCD34D 100%);
       color:var(--dark);
       min-height:100vh;
-      padding:26px 14px 40px;
+      padding:20px 14px 40px;
+      overflow-x:hidden;
     }
 
-    .wrap{max-width:980px;margin:0 auto;}
+    .wrap{max-width:1000px;margin:0 auto;}
+    
     h1{
       text-align:center;
       color:var(--primary);
       font-weight:900;
-      font-size:2.6rem;
-      letter-spacing:0.2px;
+      font-size:2.8rem;
+      letter-spacing:0.5px;
+      margin-bottom:8px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
     }
+    
     .sub{
       margin-top:10px;
       text-align:center;
-      font-size:1.05rem;
-      line-height:1.55;
-      opacity:0.92;
+      font-size:1.1rem;
+      line-height:1.6;
+      opacity:0.95;
+      font-weight:600;
     }
     .sub b{color:var(--primary);}
 
     .card{
-      margin:18px auto 0;
+      margin:20px auto 0;
       background:#fff;
-      border-radius:22px;
-      box-shadow:0 14px 55px rgba(0,0,0,0.16);
-      padding:16px 14px 18px;
+      border-radius:24px;
+      box-shadow:0 16px 60px rgba(0,0,0,0.18);
+      padding:18px 16px 20px;
       position:relative;
       overflow:hidden;
     }
@@ -59,10 +65,11 @@
       display:flex;
       align-items:center;
       justify-content:space-between;
-      gap:10px;
+      gap:12px;
       flex-wrap:wrap;
-      padding:6px 4px 10px;
+      padding:8px 4px 12px;
     }
+    
     .stats{
       display:flex;
       gap:10px;
@@ -70,22 +77,50 @@
       align-items:center;
       justify-content:center;
     }
+    
     .pill{
       display:inline-flex;
       align-items:center;
       gap:10px;
-      padding:10px 14px;
+      padding:12px 16px;
       border-radius:999px;
       background:rgba(30,58,138,0.06);
-      border:1px solid rgba(30,58,138,0.12);
+      border:2px solid rgba(30,58,138,0.14);
       font-weight:900;
       color:var(--primary);
-      min-height:42px;
+      min-height:46px;
+      transition: all 0.2s ease;
     }
-    .pill b{color:var(--dark);font-weight:1000;}
-    .pill.time{background:rgba(252,211,77,0.35);border-color:rgba(252,211,77,0.7);}
-    .pill.score{background:rgba(16,185,129,0.10);border-color:rgba(16,185,129,0.22);}
-    .pill.best{background:rgba(37,99,235,0.08);border-color:rgba(37,99,235,0.18);color:#2563EB;}
+    .pill b{color:var(--dark);font-weight:1000;font-size:1.1rem;}
+    .pill.time{
+      background:rgba(252,211,77,0.4);
+      border-color:rgba(252,211,77,0.8);
+      animation: timePulse 1s ease-in-out infinite;
+    }
+    .pill.time.warning{
+      background:rgba(239,68,68,0.3);
+      border-color:rgba(239,68,68,0.7);
+      animation: warningPulse 0.5s ease-in-out infinite;
+    }
+    .pill.score{
+      background:rgba(16,185,129,0.12);
+      border-color:rgba(16,185,129,0.25);
+    }
+    .pill.best{
+      background:rgba(37,99,235,0.1);
+      border-color:rgba(37,99,235,0.2);
+      color:#2563EB;
+    }
+    
+    @keyframes timePulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.03); }
+    }
+    
+    @keyframes warningPulse {
+      0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(239,68,68,0.7); }
+      50% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(239,68,68,0); }
+    }
 
     .controls{
       display:flex;
@@ -94,73 +129,108 @@
       justify-content:center;
       align-items:center;
     }
+    
     .btn{
       border:none;
       border-radius:999px;
-      padding:12px 18px;
-      font-weight:1000;
+      padding:13px 22px;
+      font-weight:900;
       cursor:pointer;
       font-family:'Poppins',sans-serif;
-      transition:transform 0.12s ease, box-shadow 0.12s ease, background 0.12s ease;
-      box-shadow:0 8px 18px rgba(0,0,0,0.12);
+      transition:transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+      box-shadow:0 8px 20px rgba(0,0,0,0.14);
+      font-size:0.95rem;
     }
-    .btn:active{transform:translateY(1px) scale(0.99);}
+    .btn:active{transform:translateY(2px) scale(0.98);}
     .btn.primary{background:var(--primary);color:#fff;}
-    .btn.primary:hover{background:var(--primary-dark);}
+    .btn.primary:hover{background:var(--primary-dark);box-shadow:0 10px 25px rgba(0,0,0,0.2);}
     .btn.secondary{background:var(--yellow);color:var(--dark);}
-    .btn.secondary:hover{background:var(--gold);}
+    .btn.secondary:hover{background:var(--gold);box-shadow:0 10px 25px rgba(0,0,0,0.2);}
     .btn.ghost{
       background:#fff;
       color:var(--primary);
-      border:2px solid rgba(30,58,138,0.25);
+      border:2px solid rgba(30,58,138,0.3);
       box-shadow:none;
     }
-    .btn.ghost:hover{background:rgba(30,58,138,0.06);}
+    .btn.ghost:hover{background:rgba(30,58,138,0.08);}
 
     .note{
       text-align:center;
-      margin:10px 0 12px;
+      margin:12px 0 14px;
       font-size:0.95rem;
       opacity:0.85;
+      font-weight:600;
     }
 
     .stage{
       display:flex;
       justify-content:center;
       align-items:center;
+      position:relative;
     }
 
     canvas{
-      width:min(760px, 100%);
+      width:min(780px, 100%);
       height:auto;
-      border-radius:18px;
-      border:3px solid var(--primary);
+      border-radius:20px;
+      border:4px solid var(--primary);
       background:#eaf7ea;
-      box-shadow:0 10px 28px rgba(0,0,0,0.14);
+      box-shadow:0 12px 32px rgba(0,0,0,0.16);
       touch-action:none;
       display:block;
+      cursor:crosshair;
+    }
+
+    /* Power meter */
+    .power-meter{
+      position:absolute;
+      bottom:20px;
+      left:50%;
+      transform:translateX(-50%);
+      width:200px;
+      height:20px;
+      background:rgba(0,0,0,0.3);
+      border-radius:10px;
+      overflow:hidden;
+      border:2px solid #fff;
+      display:none;
+    }
+    .power-meter.active{display:block;}
+    .power-fill{
+      height:100%;
+      background:linear-gradient(90deg, #10B981 0%, #FCD34D 50%, #EF4444 100%);
+      width:0%;
+      transition:width 0.05s linear;
+      border-radius:8px;
     }
 
     /* Popups */
     .popup{
       position:absolute;
       left:50%;
-      top:55%;
+      top:50%;
       transform:translate(-50%,-50%);
       font-weight:1000;
-      font-size:2.6rem;
+      font-size:3rem;
       pointer-events:none;
-      text-shadow:0 10px 24px rgba(0,0,0,0.22);
+      text-shadow:0 12px 28px rgba(0,0,0,0.3);
       opacity:0;
-      animation: pop 0.55s ease forwards;
+      animation: pop 0.6s ease forwards;
       white-space:nowrap;
+      z-index:100;
     }
-    .popup.plus{color:var(--ok);}
-    .popup.minus{color:var(--bad);}
+    .popup.plus{color:var(--ok);text-shadow:0 12px 28px rgba(16,185,129,0.5);}
+    .popup.minus{color:var(--bad);text-shadow:0 12px 28px rgba(239,68,68,0.5);}
+    .popup.streak{
+      color:#FF6B35;
+      font-size:2.5rem;
+      text-shadow:0 12px 28px rgba(255,107,53,0.5);
+    }
+    
     @keyframes pop{
-      0%{opacity:0; transform:translate(-50%,-50%) scale(0.75);}
-      30%{opacity:1; transform:translate(-50%,-56%) scale(1.08);}
-      100%{opacity:0; transform:translate(-50%,-80%) scale(1.0);}
+      0%{opacity:0; transform:translate(-50%,-50%) scale(0.5) rotate(-5deg);}
+      30%{opacity:1; transform:translate(-50%,-58%) scale(1.15) rotate(2deg);}
+      100%{opacity:0; transform:translate(-50%,-90%) scale(1.0) rotate(0deg);}
     }
 
     /* Overlay end screen */
@@ -169,25 +239,56 @@
       display:flex;
       align-items:center;
       justify-content:center;
-      background:rgba(0,0,0,0.75);
+      background:rgba(0,0,0,0.8);
       opacity:0;
       pointer-events:none;
-      transition:opacity 0.2s ease;
-      padding:18px;
+      transition:opacity 0.25s ease;
+      padding:20px;
+      backdrop-filter:blur(5px);
     }
     .overlay.show{opacity:1; pointer-events:auto;}
     .modal{
-      width:min(560px, 100%);
+      width:min(580px, 100%);
       background:#fff;
-      border-radius:22px;
-      padding:22px 18px;
+      border-radius:24px;
+      padding:30px 20px;
       text-align:center;
-      box-shadow:0 18px 60px rgba(0,0,0,0.35);
+      box-shadow:0 20px 70px rgba(0,0,0,0.4);
+      animation: modalIn 0.4s ease;
     }
-    .modal h2{color:var(--primary);font-size:2.1rem;font-weight:1000;}
-    .big-score{margin-top:12px;font-size:3.2rem;font-weight:1000;}
-    .modal p{margin-top:10px;line-height:1.6;opacity:0.9;}
-    .tiny{margin-top:8px;font-size:0.95rem;opacity:0.75;}
+    
+    @keyframes modalIn{
+      from{transform:scale(0.8) translateY(-30px);opacity:0;}
+      to{transform:scale(1) translateY(0);opacity:1;}
+    }
+    
+    .modal h2{color:var(--primary);font-size:2.4rem;font-weight:1000;margin-bottom:10px;}
+    .big-score{
+      margin-top:15px;
+      font-size:3.8rem;
+      font-weight:1000;
+      background:linear-gradient(135deg, var(--primary), var(--gold));
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+      background-clip:text;
+    }
+    .modal p{margin-top:12px;line-height:1.7;opacity:0.9;font-size:1.05rem;}
+    .tiny{margin-top:10px;font-size:0.9rem;opacity:0.7;}
+    
+    .modal-stats{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+      margin:20px 0;
+    }
+    .modal-stat{
+      background:rgba(30,58,138,0.06);
+      padding:12px;
+      border-radius:12px;
+      border:2px solid rgba(30,58,138,0.12);
+    }
+    .modal-stat-label{font-size:0.85rem;opacity:0.7;font-weight:600;}
+    .modal-stat-value{font-size:1.8rem;font-weight:900;color:var(--primary);margin-top:4px;}
 
     .btn:focus-visible{
       outline:3px solid rgba(252,211,77,0.95);
@@ -195,63 +296,113 @@
     }
 
     @media (max-width:768px){
-      h1{font-size:2.1rem;}
+      h1{font-size:2.2rem;}
+      .sub{font-size:1rem;}
+      .big-score{font-size:3rem;}
+      .popup{font-size:2.5rem;}
+    }
+    
+    /* Combo multiplier */
+    .combo-display{
+      position:absolute;
+      top:20px;
+      right:20px;
+      background:rgba(255,107,53,0.9);
+      color:#fff;
+      padding:10px 18px;
+      border-radius:999px;
+      font-weight:900;
+      font-size:1.1rem;
+      box-shadow:0 8px 20px rgba(255,107,53,0.4);
+      transform:scale(0);
+      transition:transform 0.3s ease;
+      z-index:50;
+    }
+    .combo-display.active{
+      transform:scale(1);
+      animation:comboBounce 0.5s ease;
+    }
+    
+    @keyframes comboBounce{
+      0%, 100%{transform:scale(1);}
+      50%{transform:scale(1.15);}
     }
   </style>
 </head>
 
 <body>
   <div class="wrap">
-    <h1>Rapid Fire Golf</h1>
+    <h1>⚡ Rapid Fire Golf ⚡</h1>
     <div class="sub">
-      Score as many putts as you can in <b>30 seconds</b>.<br>
-      <b>Miss</b> = lose 1 second. <b>3 makes in a row</b> = gain 1 second.
+      Score as many putts as you can in <b>30 seconds</b>!<br>
+      <b>Miss</b> = -1 second • <b>3 in a row</b> = +1 second
     </div>
 
     <div class="card" id="card">
       <div class="top">
         <div class="stats">
-          <div class="pill time">⏱ Time: <b id="timeLeft">30.0</b></div>
+          <div class="pill time" id="timePill">⏱ Time: <b id="timeLeft">30.0</b>s</div>
           <div class="pill score">🏌️ Score: <b id="score">0</b></div>
           <div class="pill">🔥 Streak: <b id="streak">0</b></div>
           <div class="pill best">🏆 Best: <b id="best">0</b></div>
         </div>
 
         <div class="controls">
-          <button class="btn primary" id="startBtn">Start</button>
+          <button class="btn primary" id="startBtn">Start Game</button>
           <button class="btn secondary" id="restartBtn">Restart</button>
           <button class="btn ghost" id="soundBtn">🔊 Sound</button>
         </div>
       </div>
 
-      <div class="note">Click/tap to aim and shoot. Power is based on distance from the ball.</div>
+      <div class="note">🎯 Click/tap and drag to aim and shoot • Distance = Power</div>
 
       <div class="stage">
-        <canvas id="c" width="760" height="430"></canvas>
+        <canvas id="c" width="780" height="440"></canvas>
+        
+        <div class="power-meter" id="powerMeter">
+          <div class="power-fill" id="powerFill"></div>
+        </div>
+        
+        <div class="combo-display" id="comboDisplay">🔥 STREAK x<span id="comboNum">3</span>!</div>
       </div>
 
       <div class="overlay" id="overlay" role="dialog" aria-modal="true">
         <div class="modal">
-          <h2>Time!</h2>
-          <div class="big-score">Score: <span id="finalScore">0</span></div>
-          <p>Best: <b id="finalBest">0</b></p>
-          <div style="margin-top:14px; display:flex; gap:10px; justify-content:center; flex-wrap:wrap;">
-            <button class="btn primary" id="playAgainBtn">Play Again</button>
+          <h2>⏰ Time's Up!</h2>
+          <div class="big-score"><span id="finalScore">0</span></div>
+          
+          <div class="modal-stats">
+            <div class="modal-stat">
+              <div class="modal-stat-label">Best Score</div>
+              <div class="modal-stat-value" id="finalBest">0</div>
+            </div>
+            <div class="modal-stat">
+              <div class="modal-stat-label">Max Streak</div>
+              <div class="modal-stat-value" id="finalMaxStreak">0</div>
+            </div>
           </div>
-          <div class="tiny">Sound works best after you press Start (mobile restrictions).</div>
+          
+          <p id="performanceMsg">Great job!</p>
+          
+          <div style="margin-top:18px; display:flex; gap:10px; justify-content:center; flex-wrap:wrap;">
+            <button class="btn primary" id="playAgainBtn">🎮 Play Again</button>
+            <button class="btn secondary" id="shareBtn">📤 Share Score</button>
+          </div>
+          
+          <div class="tiny">Tip: Aim carefully and build up your streak for bonus time!</div>
         </div>
       </div>
     </div>
   </div>
 
   <script>
-    // ====== BASIC WORKING RAPID FIRE GAME (NO TRICKY STUFF) ======
     (function(){
       const card = document.getElementById('card');
       const canvas = document.getElementById('c');
       const ctx = canvas.getContext('2d');
 
       const timeEl = document.getElementById('timeLeft');
+      const timePill = document.getElementById('timePill');
       const scoreEl = document.getElementById('score');
       const streakEl = document.getElementById('streak');
       const bestEl = document.getElementById('best');
@@ -259,11 +410,19 @@
       const startBtn = document.getElementById('startBtn');
       const restartBtn = document.getElementById('restartBtn');
       const soundBtn = document.getElementById('soundBtn');
+      const shareBtn = document.getElementById('shareBtn');
 
       const overlay = document.getElementById('overlay');
       const finalScoreEl = document.getElementById('finalScore');
       const finalBestEl = document.getElementById('finalBest');
+      const finalMaxStreakEl = document.getElementById('finalMaxStreak');
+      const performanceMsg = document.getElementById('performanceMsg');
       const playAgainBtn = document.getElementById('playAgainBtn');
+      
+      const powerMeter = document.getElementById('powerMeter');
+      const powerFill = document.getElementById('powerFill');
+      const comboDisplay = document.getElementById('comboDisplay');
+      const comboNum = document.getElementById('comboNum');
 
       const ROUND_SECONDS = 30.0;
 
@@ -273,21 +432,23 @@
 
       let score = 0;
       let streak = 0;
+      let maxStreak = 0;
 
       let best = parseInt(localStorage.getItem('rapidFireBest') || '0', 10) || 0;
       bestEl.textContent = best;
 
       // Ball + hole
-      const startBallPos = { x: canvas.width * 0.18, y: canvas.height * 0.74 };
-      let ball = { x: startBallPos.x, y: startBallPos.y, r: 10, vx: 0, vy: 0 };
+      const startBallPos = { x: canvas.width * 0.15, y: canvas.height * 0.72 };
+      let ball = { x: startBallPos.x, y: startBallPos.y, r: 11, vx: 0, vy: 0 };
       let hole = randomHole();
 
       // Aim
-      let aim = { active: false, x: 0, y: 0 };
+      let aim = { active: false, x: 0, y: 0, startX: 0, startY: 0 };
       let pointerDown = false;
 
-      // Miss tracking: if a shot stops and you didn't score -> miss penalty
+      // Miss tracking
       let shotInProgress = false;
+      let shotStartTime = 0;
 
       // particles
       let particles = [];
@@ -299,6 +460,7 @@
         if(!ac) ac = new (window.AudioContext || window.webkitAudioContext)();
         return ac;
       }
+      
       function beep(freq, dur, type='sine', gain=0.18){
         if(!soundEnabled) return;
         const A = getAC();
@@ -313,25 +475,27 @@
         o.start(A.currentTime);
         o.stop(A.currentTime + dur);
       }
+      
       const sfx = {
-        start(){ beep(660, 0.10, 'sine', 0.22); beep(880, 0.10, 'sine', 0.18); },
-        hit(){ beep(320, 0.08, 'sine', 0.22); },
-        wall(){ beep(220, 0.07, 'square', 0.12); },
-        make(){ beep(740, 0.10, 'sine', 0.22); beep(990, 0.14, 'sine', 0.18); },
-        miss(){ beep(180, 0.12, 'sawtooth', 0.14); },
-        bonus(){ beep(880, 0.09, 'triangle', 0.18); beep(1170, 0.11, 'triangle', 0.14); },
-        end(){ beep(220, 0.10, 'sine', 0.16); beep(165, 0.16, 'sine', 0.12); }
+        start(){ beep(660, 0.10, 'sine', 0.24); beep(880, 0.10, 'sine', 0.20); },
+        hit(){ beep(340, 0.09, 'sine', 0.24); },
+        wall(){ beep(220, 0.08, 'square', 0.14); },
+        make(){ beep(780, 0.11, 'sine', 0.26); beep(1040, 0.15, 'sine', 0.20); },
+        miss(){ beep(160, 0.14, 'sawtooth', 0.16); beep(120, 0.14, 'sawtooth', 0.12); },
+        bonus(){ beep(920, 0.10, 'triangle', 0.20); beep(1230, 0.12, 'triangle', 0.16); },
+        streak(){ beep(660, 0.08, 'sine', 0.18); beep(880, 0.08, 'sine', 0.18); beep(1100, 0.10, 'sine', 0.18); },
+        end(){ beep(220, 0.12, 'sine', 0.18); beep(165, 0.18, 'sine', 0.14); }
       };
 
       function clamp(v, lo, hi){ return Math.max(lo, Math.min(hi, v)); }
       function rand(lo, hi){ return lo + Math.random()*(hi-lo); }
 
       function randomHole(){
-        const pad = 60;
-        const x = rand(canvas.width*0.48, canvas.width - pad);
+        const pad = 70;
+        const x = rand(canvas.width*0.5, canvas.width - pad);
         const y = rand(pad, canvas.height - pad);
-        // shrink slightly as score rises (optional, small)
-        const r = clamp(22 - Math.floor(score/8), 14, 22);
+        // Hole gets slightly smaller as score increases
+        const r = clamp(24 - Math.floor(score/10), 16, 24);
         return { x, y, r };
       }
 
@@ -341,9 +505,12 @@
         lastTs = 0;
         score = 0;
         streak = 0;
+        maxStreak = 0;
         shotInProgress = false;
+        shotStartTime = 0;
         particles = [];
         aim.active = false;
+        pointerDown = false;
 
         ball.x = startBallPos.x; ball.y = startBallPos.y;
         ball.vx = 0; ball.vy = 0;
@@ -352,6 +519,10 @@
         timeEl.textContent = time.toFixed(1);
         scoreEl.textContent = score;
         streakEl.textContent = streak;
+        
+        timePill.classList.remove('warning');
+        comboDisplay.classList.remove('active');
+        powerMeter.classList.remove('active');
 
         hideOverlay();
         draw();
@@ -359,7 +530,6 @@
 
       function startRound(){
         if(running) return;
-        // unlock audio on mobile
         try { getAC(); } catch(e) {}
         running = true;
         lastTs = 0;
@@ -380,6 +550,14 @@
 
         finalScoreEl.textContent = score;
         finalBestEl.textContent = best;
+        finalMaxStreakEl.textContent = maxStreak;
+        
+        // Performance message
+        if(score >= 30) performanceMsg.textContent = "🌟 INCREDIBLE! You're a rapid fire master!";
+        else if(score >= 20) performanceMsg.textContent = "🎯 Excellent work! Keep it up!";
+        else if(score >= 10) performanceMsg.textContent = "👍 Good job! Practice makes perfect!";
+        else performanceMsg.textContent = "Keep trying! You'll get better!";
+
         showOverlay();
       }
 
@@ -388,41 +566,41 @@
 
       function spawnPop(text, kind){
         const el = document.createElement('div');
-        el.className = 'popup ' + (kind === 'plus' ? 'plus' : 'minus');
+        el.className = 'popup ' + kind;
         el.textContent = text;
         card.appendChild(el);
-        setTimeout(()=> el.remove(), 600);
+        setTimeout(()=> el.remove(), 650);
       }
 
-      function addParticles(x, y, color, count=14){
+      function addParticles(x, y, color, count=16){
         for(let i=0;i<count;i++){
           particles.push({
             x, y,
-            vx: (Math.random()-0.5)*5.0,
-            vy: (Math.random()-0.5)*5.0,
-            life: rand(18, 34),
+            vx: (Math.random()-0.5)*6.0,
+            vy: (Math.random()-0.5)*6.0,
+            life: rand(20, 38),
             color,
-            r: rand(2, 4)
+            r: rand(2.5, 5)
           });
         }
       }
 
       function shootAt(px, py){
         if(!running) return;
-        if(Math.abs(ball.vx) > 0.02 || Math.abs(ball.vy) > 0.02) return;
 
         const dx = px - ball.x;
         const dy = py - ball.y;
         const dist = Math.sqrt(dx*dx + dy*dy) || 1;
 
-        // rapid-fire tuning: short shots still have enough movement
-        const power = clamp(dist / 18, 3.0, 11.0);
+        const power = clamp(dist / 16, 3.5, 12.0);
 
         ball.vx = (dx/dist) * power;
         ball.vy = (dy/dist) * power;
 
         shotInProgress = true;
+        shotStartTime = performance.now();
         aim.active = false;
+        powerMeter.classList.remove('active');
         sfx.hit();
       }
 
@@ -431,13 +609,14 @@
         timeEl.textContent = time.toFixed(1);
 
         spawnPop('-1 !', 'minus');
-        addParticles(ball.x, ball.y, '#EF4444', 18);
+        addParticles(ball.x, ball.y, '#EF4444', 22);
         sfx.miss();
 
         streak = 0;
         streakEl.textContent = streak;
+        comboDisplay.classList.remove('active');
 
-        // reset fast
+        // Reset
         ball.x = startBallPos.x; ball.y = startBallPos.y;
         ball.vx = 0; ball.vy = 0;
         hole = randomHole();
@@ -449,11 +628,12 @@
       function scorePoint(){
         score += 1;
         streak += 1;
+        maxStreak = Math.max(maxStreak, streak);
 
         scoreEl.textContent = score;
         streakEl.textContent = streak;
 
-        addParticles(hole.x, hole.y, '#FBBF24', 24);
+        addParticles(hole.x, hole.y, '#FBBF24', 28);
         sfx.make();
 
         // 3 in a row => +1 second
@@ -461,11 +641,17 @@
           time += 1.0;
           timeEl.textContent = time.toFixed(1);
           spawnPop('+1 !', 'plus');
-          addParticles(hole.x, hole.y, '#10B981', 16);
+          addParticles(hole.x, hole.y, '#10B981', 20);
           sfx.bonus();
+          
+          // Show streak combo
+          comboNum.textContent = streak;
+          comboDisplay.classList.add('active');
+          sfx.streak();
+          setTimeout(()=> comboDisplay.classList.remove('active'), 2000);
         }
 
-        // reset for next shot
+        // Reset for next shot
         ball.x = startBallPos.x; ball.y = startBallPos.y;
         ball.vx = 0; ball.vy = 0;
         hole = randomHole();
@@ -475,7 +661,7 @@
       function update(dt){
         if(!running) return;
 
-        // timer
+        // Timer
         time -= dt;
         if(time <= 0){
           time = 0;
@@ -484,113 +670,141 @@
           return;
         }
         timeEl.textContent = time.toFixed(1);
+        
+        // Warning at 5 seconds
+        if(time <= 5.0){
+          timePill.classList.add('warning');
+        } else {
+          timePill.classList.remove('warning');
+        }
 
-        // ball physics
+        // Ball physics
         ball.x += ball.vx;
         ball.y += ball.vy;
 
-        // friction
-        ball.vx *= 0.985;
-        ball.vy *= 0.985;
+        // Friction
+        ball.vx *= 0.986;
+        ball.vy *= 0.986;
 
-        // wall bounce
-        if(ball.x - ball.r < 0){ ball.x = ball.r; ball.vx *= -0.65; sfx.wall(); }
-        if(ball.x + ball.r > canvas.width){ ball.x = canvas.width - ball.r; ball.vx *= -0.65; sfx.wall(); }
-        if(ball.y - ball.r < 0){ ball.y = ball.r; ball.vy *= -0.65; sfx.wall(); }
-        if(ball.y + ball.r > canvas.height){ ball.y = canvas.height - ball.r; ball.vy *= -0.65; sfx.wall(); }
+        // Wall bounce
+        if(ball.x - ball.r < 0){ ball.x = ball.r; ball.vx *= -0.68; sfx.wall(); }
+        if(ball.x + ball.r > canvas.width){ ball.x = canvas.width - ball.r; ball.vx *= -0.68; sfx.wall(); }
+        if(ball.y - ball.r < 0){ ball.y = ball.r; ball.vy *= -0.68; sfx.wall(); }
+        if(ball.y + ball.r > canvas.height){ ball.y = canvas.height - ball.r; ball.vy *= -0.68; sfx.wall(); }
 
         const speed = Math.hypot(ball.vx, ball.vy);
-        if(speed < 0.05){ ball.vx = 0; ball.vy = 0; }
+        if(speed < 0.06){ ball.vx = 0; ball.vy = 0; }
 
-        // score detection (must be slow-ish)
+        // Score detection
         const d = Math.hypot(ball.x - hole.x, ball.y - hole.y);
-        if(d < (hole.r - 6) && speed < 2.0){
+        if(d < (hole.r - 7) && speed < 2.5){
           scorePoint();
         }
 
-        // miss detection: shot ended without scoring
-        if(shotInProgress && ball.vx === 0 && ball.vy === 0){
-          const dd = Math.hypot(ball.x - hole.x, ball.y - hole.y);
-          if(dd >= (hole.r - 6)){
-            missPenalty();
+        // Miss detection - 2.5 second timeout
+        if(shotInProgress){
+          const shotElapsed = (performance.now() - shotStartTime) / 1000;
+          if(shotElapsed >= 2.5){
+            const dd = Math.hypot(ball.x - hole.x, ball.y - hole.y);
+            if(dd >= (hole.r - 7)){
+              missPenalty();
+            }
           }
         }
 
-        // particles
+        // Particles
         particles = particles.filter(p => {
           p.x += p.vx; p.y += p.vy;
-          p.vx *= 0.96; p.vy *= 0.96;
+          p.vx *= 0.97; p.vy *= 0.97;
           p.life -= 1;
           return p.life > 0;
         });
       }
 
       function draw(){
-        // background green
+        // Background gradient
         const g = ctx.createLinearGradient(0,0,0,canvas.height);
-        g.addColorStop(0,'#9BE7A3');
-        g.addColorStop(1,'#6FD48B');
+        g.addColorStop(0,'#A8E6A1');
+        g.addColorStop(1,'#7FD87F');
         ctx.fillStyle = g;
         ctx.fillRect(0,0,canvas.width,canvas.height);
 
-        // stripes
-        ctx.globalAlpha = 0.11;
+        // Stripes
+        ctx.globalAlpha = 0.12;
         ctx.fillStyle = '#fff';
-        for(let i=0;i<16;i++){
-          ctx.fillRect(i*90 - 60, 0, 38, canvas.height);
+        for(let i=0;i<18;i++){
+          ctx.fillRect(i*100 - 70, 0, 42, canvas.height);
         }
         ctx.globalAlpha = 1;
 
-        // tee area
-        ctx.fillStyle = 'rgba(255,255,255,0.18)';
-        ctx.fillRect(0, canvas.height*0.62, canvas.width*0.36, canvas.height*0.38);
+        // Tee area
+        ctx.fillStyle = 'rgba(255,255,255,0.2)';
+        ctx.fillRect(0, canvas.height*0.6, canvas.width*0.32, canvas.height*0.4);
 
-        // hole shadow + hole
-        ctx.fillStyle = 'rgba(0,0,0,0.25)';
+        // Hole shadow
+        ctx.fillStyle = 'rgba(0,0,0,0.3)';
         ctx.beginPath();
-        ctx.arc(hole.x+2, hole.y+3, hole.r, 0, Math.PI*2);
+        ctx.arc(hole.x+2.5, hole.y+3.5, hole.r, 0, Math.PI*2);
         ctx.fill();
 
-        ctx.fillStyle = '#0b0b0b';
+        // Hole
+        ctx.fillStyle = '#0a0a0a';
         ctx.beginPath();
         ctx.arc(hole.x, hole.y, hole.r, 0, Math.PI*2);
         ctx.fill();
 
-        ctx.fillStyle = '#2a2a2a';
+        ctx.fillStyle = '#2d2d2d';
         ctx.beginPath();
-        ctx.arc(hole.x, hole.y, hole.r - 6, 0, Math.PI*2);
+        ctx.arc(hole.x, hole.y, hole.r - 7, 0, Math.PI*2);
         ctx.fill();
 
-        // flag
-        ctx.strokeStyle = '#111';
-        ctx.lineWidth = 2;
+        // Flag
+        ctx.strokeStyle = '#1a1a1a';
+        ctx.lineWidth = 2.5;
         ctx.beginPath();
         ctx.moveTo(hole.x, hole.y);
-        ctx.lineTo(hole.x, hole.y - 42);
+        ctx.lineTo(hole.x, hole.y - 46);
         ctx.stroke();
 
         ctx.fillStyle = '#EF4444';
         ctx.beginPath();
-        ctx.moveTo(hole.x, hole.y - 42);
-        ctx.lineTo(hole.x + 18, hole.y - 33);
-        ctx.lineTo(hole.x, hole.y - 24);
+        ctx.moveTo(hole.x, hole.y - 46);
+        ctx.lineTo(hole.x + 20, hole.y - 36);
+        ctx.lineTo(hole.x, hole.y - 26);
         ctx.fill();
 
-        // aim line
-        if(aim.active && running && ball.vx===0 && ball.vy===0){
-          ctx.strokeStyle = 'rgba(30,58,138,0.75)';
-          ctx.lineWidth = 3;
-          ctx.setLineDash([8,6]);
+        // Aim line with gradient
+        if(aim.active && running){
+          const gradient = ctx.createLinearGradient(ball.x, ball.y, aim.x, aim.y);
+          gradient.addColorStop(0, 'rgba(30,58,138,0.85)');
+          gradient.addColorStop(1, 'rgba(30,58,138,0.3)');
+          
+          ctx.strokeStyle = gradient;
+          ctx.lineWidth = 4;
+          ctx.setLineDash([10,8]);
           ctx.beginPath();
           ctx.moveTo(ball.x, ball.y);
           ctx.lineTo(aim.x, aim.y);
           ctx.stroke();
           ctx.setLineDash([]);
+          
+          // Aim arrow
+          const dx = aim.x - ball.x;
+          const dy = aim.y - ball.y;
+          const angle = Math.atan2(dy, dx);
+          const arrowLen = 15;
+          
+          ctx.fillStyle = 'rgba(30,58,138,0.7)';
+          ctx.beginPath();
+          ctx.moveTo(aim.x, aim.y);
+          ctx.lineTo(aim.x - arrowLen * Math.cos(angle - Math.PI/6), aim.y - arrowLen * Math.sin(angle - Math.PI/6));
+          ctx.lineTo(aim.x - arrowLen * Math.cos(angle + Math.PI/6), aim.y - arrowLen * Math.sin(angle + Math.PI/6));
+          ctx.fill();
         }
 
-        // particles
+        // Particles
         for(const p of particles){
-          ctx.globalAlpha = clamp(p.life/28, 0, 1);
+          ctx.globalAlpha = clamp(p.life/30, 0, 1);
           ctx.fillStyle = p.color;
           ctx.beginPath();
           ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
@@ -598,30 +812,36 @@
         }
         ctx.globalAlpha = 1;
 
-        // ball shadow + ball
-        ctx.fillStyle = 'rgba(0,0,0,0.18)';
+        // Ball shadow
+        ctx.fillStyle = 'rgba(0,0,0,0.22)';
         ctx.beginPath();
-        ctx.arc(ball.x+2, ball.y+3, ball.r, 0, Math.PI*2);
+        ctx.arc(ball.x+2.5, ball.y+3.5, ball.r, 0, Math.PI*2);
         ctx.fill();
 
-        ctx.fillStyle = '#fff';
-        ctx.strokeStyle = '#111';
-        ctx.lineWidth = 2;
+        // Ball
+        const ballGradient = ctx.createRadialGradient(ball.x-3, ball.y-3, 0, ball.x, ball.y, ball.r);
+        ballGradient.addColorStop(0, '#fff');
+        ballGradient.addColorStop(1, '#e8e8e8');
+        ctx.fillStyle = ballGradient;
+        ctx.strokeStyle = '#1a1a1a';
+        ctx.lineWidth = 2.5;
         ctx.beginPath();
         ctx.arc(ball.x, ball.y, ball.r, 0, Math.PI*2);
         ctx.fill();
         ctx.stroke();
 
-        ctx.fillStyle = 'rgba(255,255,255,0.55)';
+        // Ball highlight
+        ctx.fillStyle = 'rgba(255,255,255,0.6)';
         ctx.beginPath();
-        ctx.arc(ball.x-3, ball.y-3, 3, 0, Math.PI*2);
+        ctx.arc(ball.x-4, ball.y-4, 3.5, 0, Math.PI*2);
         ctx.fill();
 
-        // border warning for last 5 seconds
+        // Time warning flash
         if(running && time <= 5.0){
           const t = (5.0 - time)/5.0;
-          ctx.strokeStyle = `rgba(239,68,68,${0.15 + t*0.45})`;
-          ctx.lineWidth = 10;
+          const flash = Math.sin(Date.now() * 0.01) * 0.5 + 0.5;
+          ctx.strokeStyle = `rgba(239,68,68,${0.2 + flash*0.5})`;
+          ctx.lineWidth = 12;
           ctx.strokeRect(0,0,canvas.width,canvas.height);
         }
       }
@@ -656,46 +876,59 @@
         };
       }
 
-      // Mouse input
-      canvas.addEventListener('mousedown', (e)=>{
+      // Mouse/Touch input
+      function handlePointerStart(e){
+        if(!running) return;
         pointerDown = true;
         const p = getPointerPos(e);
-        aim.active = true; aim.x = p.x; aim.y = p.y;
+        aim.active = true;
+        aim.startX = p.x;
+        aim.startY = p.y;
+        aim.x = p.x;
+        aim.y = p.y;
+        powerMeter.classList.add('active');
         draw();
-      });
-      window.addEventListener('mousemove', (e)=>{
+      }
+
+      function handlePointerMove(e){
         if(!pointerDown) return;
         const p = getPointerPos(e);
-        aim.active = true; aim.x = p.x; aim.y = p.y;
-      });
-      window.addEventListener('mouseup', (e)=>{
+        aim.x = p.x;
+        aim.y = p.y;
+        
+        // Update power meter
+        const dx = aim.x - ball.x;
+        const dy = aim.y - ball.y;
+        const dist = Math.sqrt(dx*dx + dy*dy);
+        const power = clamp((dist / 16) / 12.0 * 100, 0, 100);
+        powerFill.style.width = power + '%';
+      }
+
+      function handlePointerEnd(e){
         if(!pointerDown) return;
         pointerDown = false;
         const p = getPointerPos(e);
         shootAt(p.x, p.y);
-      });
+        powerMeter.classList.remove('active');
+      }
 
-      // Touch input
+      canvas.addEventListener('mousedown', handlePointerStart);
+      window.addEventListener('mousemove', handlePointerMove);
+      window.addEventListener('mouseup', handlePointerEnd);
+
       canvas.addEventListener('touchstart', (e)=>{
         e.preventDefault();
-        pointerDown = true;
-        const p = getPointerPos(e);
-        aim.active = true; aim.x = p.x; aim.y = p.y;
-        draw();
+        handlePointerStart(e);
       }, {passive:false});
 
       canvas.addEventListener('touchmove', (e)=>{
         e.preventDefault();
-        if(!pointerDown) return;
-        const p = getPointerPos(e);
-        aim.active = true; aim.x = p.x; aim.y = p.y;
+        handlePointerMove(e);
       }, {passive:false});
 
       canvas.addEventListener('touchend', (e)=>{
         e.preventDefault();
-        if(!pointerDown) return;
-        pointerDown = false;
-        shootAt(aim.x, aim.y);
+        handlePointerEnd(e);
       }, {passive:false});
 
       // Buttons
@@ -714,6 +947,19 @@
         soundBtn.textContent = soundEnabled ? '🔊 Sound' : '🔇 Sound';
         if(soundEnabled){
           try { getAC(); sfx.start(); } catch(e) {}
+        }
+      });
+      
+      shareBtn.addEventListener('click', ()=>{
+        const text = `🏌️ I scored ${score} points in Rapid Fire Golf! Can you beat it?\n\nPlay at: mickskylark.com/rapid-fire.html`;
+        if(navigator.share){
+          navigator.share({title: 'Rapid Fire Golf', text}).catch(()=>{});
+        } else if(navigator.clipboard){
+          navigator.clipboard.writeText(text).then(()=>{
+            alert('Score copied to clipboard!');
+          });
+        } else {
+          alert(text);
         }
       });
 
