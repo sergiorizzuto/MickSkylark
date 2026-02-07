@@ -1,1 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Rapid Fire Golf — Mick Skylark</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="icon" href="favicon.ico" />
+
+  <style>
+    :root{
+      --primary:#1E3A8A;
+      --primary-dark:#1E40AF;
+      --secondary:#FCD34D;
+      --gold:#FBBF24;
+      --dark:#1F2937;
+      --accent:#2563EB;
+      --danger:#EF4444;
+      --ok:#10B981;
+      --bg1:#FDE68A;
+      --bg2:#FCD34D;
+    }
+    *{margin:0;padding:0;box-sizing:border-box;}
+    html{scroll-behavior:smooth;}
+    body{
+      font-family:'Poppins',sans-serif;
+      color:var(--dark);
+      background: linear-gradient(135deg, var(--bg1) 0%, var(--bg2) 100%);
+      min-height:100vh;
+      overflow-x:hidden;
+      padding-top:72px;
+    }
+
+    /* Navbar (matches your site style) */
+    .navbar{
+      position:fixed; top:0; left:0; right:0;
+      background:rgba(255,255,255,0.92);
+      backdrop-filter:blur(10px);
+      -webkit-backdrop-filter:blur(10px);
+      box-shadow:0 2px 10px rgba(0,0,0,0.08);
+      z-index:1000;
+      padding:10px 0;
+    }
+    .nav-container{
+      max-width:1200px;
+      margin:0 auto;
+      display:flex;
+      justify-content:center;
+      gap:10px;
+      flex-wrap:wrap;
+      padding:0 14px;
+    }
+    .nav-link{
+      color:var(--primary);
+      text-decoration:none;
+      font-weight:700;
+      padding:8px 14px;
+      border-radius:999px;
+      transition:all 0.2s ease;
+      font-size:0.9rem;
+      line-height:1;
+      border:1px solid transparent;
+      outline:none;
+    }
+    .nav-link:hover{background:var(--primary);color:#fff;}
+    .nav-link.nav-standout{
+      color:var(--accent);
+      border-color:rgba(37,99,235,0.25);
+      background:rgba(37,99,235,0.06);
+    }
+    .nav-link.nav-standout:hover{background:var(--accent);color:#fff;border-color:transparent;}
+    @media (max-width:768px){
+      body{padding-top:90px;}
+      .nav-container{gap:8px;justify-content:flex-start;}
+      .nav-link{padding:10px 14px;font-size:0.95rem;}
+    }
+
+    .wrap{
+      max-width:1100px;
+      margin:0 auto;
+      padding:28px 16px 50px;
+    }
+
+    .hero{
+      text-align:center;
+      margin-bottom:18px;
+    }
+    h1{
+      font-size:2.6rem;
+      color:var(--primary);
+      font-weight:800;
+      letter-spacing:0.2px;
+    }
+    .sub{
+      margin-top:8px;
+      font-size:1.08rem;
+      opacity:0.9;
+      line-height:1.55;
+    }
+
+    .card{
+      margin:20px auto 0;
+      background:#fff;
+      border-radius:22px;
+      box-shadow:0 14px 50px rgba(0,0,0,0.16);
+      padding:18px 16px 16px;
+      overflow:hidden;
+      position:relative;
+    }
+
+    .topbar{
+      display:flex;
+      gap:12px;
+      align-items:center;
+      justify-content:space-between;
+      flex-wrap:wrap;
+      padding:6px 6px 12px;
+    }
+
+    .stats{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+      justify-content:center;
+    }
+
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:10px 14px;
+      border-radius:999px;
+      border:1px solid rgba(30,58,138,0.12);
+      background:rgba(30,58,138,0.06);
+      font-weight:800;
+      color:var(--primary);
+      min-height:42px;
+    }
+    .pill b{
+      color:var(--dark);
+      font-weight:900;
+    }
+    .time-pill{
+      background:rgba(252,211,77,0.35);
+      border-color:rgba(252,211,77,0.7);
+    }
+    .time-pill b{color:var(--primary);}
+    .score-pill{
+      background:rgba(16,185,129,0.10);
+      border-color:rgba(16,185,129,0.25);
+    }
+    .best-pill{
+      background:rgba(37,99,235,0.08);
+      border-color:rgba(37,99,235,0.18);
+      color:var(--accent);
+    }
+
+    .controls{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      justify-content:center;
+      align-items:center;
+    }
+    .btn{
+      appearance:none;
+      border:none;
+      border-radius:999px;
+      padding:12px 18px;
+      font-weight:900;
+      cursor:pointer;
+      transition:transform 0.12s ease, box-shadow 0.12s ease, background 0.12s ease;
+      box-shadow:0 8px 18px rgba(0,0,0,0.12);
+      font-family:'Poppins',sans-serif;
+    }
+    .btn:active{transform:translateY(1px) scale(0.99); box-shadow:0 6px 14px rgba(0,0,0,0.12);}
+    .btn.primary{background:var(--primary); color:#fff;}
+    .btn.primary:hover{background:var(--primary-dark);}
+    .btn.secondary{background:var(--secondary); color:var(--dark);}
+    .btn.secondary:hover{background:var(--gold);}
+    .btn.ghost{
+      background:#fff;
+      color:var(--primary);
+      border:2px solid rgba(30,58,138,0.25);
+      box-shadow:none;
+    }
+    .btn.ghost:hover{background:rgba(30,58,138,0.06);}
+
+    .hud-note{
+      text-align:center;
+      margin-top:10px;
+      font-size:0.95rem;
+      opacity:0.86;
+    }
+    .hud-note .hot{
+      font-weight:900;
+      color:var(--primary);
+    }
+
+    .stage{
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      padding:10px 6px 6px;
+    }
+
+    canvas{
+      width: min(720px, 100%);
+      height:auto;
+      border-radius:18px;
+      border:3px solid var(--primary);
+      box-shadow:0 10px 28px rgba(0,0,0,0.14);
+      background:#eaf7ea;
+      touch-action:none;
+      display:block;
+    }
+
+    .overlay{
+      position:absolute;
+      inset:0;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:rgba(0,0,0,0.75);
+      opacity:0;
+      pointer-events:none;
+      transition:opacity 0.2s ease;
+      padding:18px;
+    }
+    .overlay.show{
+      opacity:1;
+      pointer-events:auto;
+    }
+    .modal{
+      width:min(560px, 100%);
+      background:#fff;
+      border-radius:22px;
+      padding:22px 18px;
+      text-align:center;
+      box-shadow:0 18px 60px rgba(0,0,0,0.35);
+    }
+    .modal h2{
+      color:var(--primary);
+      font-size:2.1rem;
+      font-weight:900;
+    }
+    .modal p{
+      margin-top:8px;
+      line-height:1.6;
+      opacity:0.9;
+    }
+    .big-score{
+      margin-top:14px;
+      font-size:3.2rem;
+      font-weight:1000;
+      color:var(--dark);
+    }
+    .small{
+      margin-top:6px;
+      font-size:0.95rem;
+      opacity:0.75;
+    }
+
+    /* Popups */
+    .popup{
+      position:absolute;
+      left:50%;
+      top:50%;
+      transform:translate(-50%,-50%);
+      font-weight:1000;
+      font-size:2.4rem;
+      pointer-events:none;
+      text-shadow:0 10px 24px rgba(0,0,0,0.22);
+      opacity:0;
+      animation: pop 0.55s ease forwards;
+      white-space:nowrap;
+    }
+    .popup.plus{color:var(--ok);}
+    .popup.minus{color:var(--danger);}
+    @keyframes pop{
+      0%{opacity:0; transform:translate(-50%,-50%) scale(0.75);}
+      30%{opacity:1; transform:translate(-50%,-56%) scale(1.08);}
+      100%{opacity:0; transform:translate(-50%,-80%) scale(1.0);}
+    }
+
+    /* Accessibility focus */
+    .nav-link:focus-visible, .btn:focus-visible{
+      outline:3px solid rgba(252,211,77,0.95);
+      outline-offset:2px;
+    }
+
+    @media (max-width:768px){
+      h1{font-size:2.1rem;}
+      .sub{font-size:1.02rem;}
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="navbar" aria-label="Primary navigation">
+    <div class="nav-container">
+      <a href="index.html#home" class="nav-link">Home</a>
+      <a href="index.html#game" class="nav-link">Mini Golf Game</a>
+      <a href="rapid-fire.html" class="nav-link nav-standout">Rapid Fire</a>
+      <a href="index.html#rsvp" class="nav-link nav-standout">RSVP</a>
+      <a href="contact.html" class="nav-link">Contact</a>
+    </div>
+  </nav>
+
+  <div class="wrap">
+    <div class="hero">
+      <h1>Rapid Fire Golf</h1>
+      <div class="sub">
+        Score as many putts as you can in <span class="hot">30 seconds</span>.<br />
+        <span class="hot">Miss</span> = lose 1 second. <span class="hot">3 makes in a row</span> = gain 1 second.
+      </div>
+    </div>
+
+    <div class="card" id="card">
+      <div class="topbar">
+        <div class="stats" aria-label="Game stats">
+          <div class="pill time-pill">⏱ Time: <b id="timeLeft">30.0</b></div>
+          <div class="pill score-pill">🏌️ Score: <b id="score">0</b></div>
+          <div class="pill">🔥 Streak: <b id="streak">0</b></div>
+          <div class="pill best-pill">🏆 Best: <b id="best">0</b></div>
+        </div>
+
+        <div class="controls" aria-label="Game controls">
+          <button class="btn primary" id="startBtn">Start</button>
+          <button class="btn secondary" id="restartBtn">Restart</button>
+          <button class="btn ghost" id="soundBtn" title="Toggle sound">🔊 Sound</button>
+        </div>
+      </div>
+
+      <div class="hud-note">
+        Click / tap to aim and shoot. Power is based on distance from the ball.
+      </div>
+
+      <div class="stage">
+        <canvas id="c" width="720" height="420" aria-label="Rapid Fire Golf canvas">
+          Your browser doesn’t support canvas.
+        </canvas>
+      </div>
+
+      <div class="overlay" id="overlay" aria-label="Game over overlay" role="dialog" aria-modal="true">
+        <div class="modal">
+          <h2>Time!</h2>
+          <div class="big-score"><span id="finalScore">0</span></div>
+          <p>
+            Best: <b id="finalBest">0</b><br />
+            Tip: tighter shots = faster scoring.
+          </p>
+          <div style="margin-top:14px; display:flex; gap:10px; justify-content:center; flex-wrap:wrap;">
+            <button class="btn primary" id="playAgainBtn">Play Again</button>
+            <a class="btn secondary" href="index.html#game" style="text-decoration:none; display:inline-flex; align-items:center; justify-content:center;">
+              Back to site
+            </a>
+          </div>
+          <div class="small">Sound works best after you press Start (mobile restrictions).</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      const canvas = document.getElementById('c');
+      const ctx = canvas.getContext('2d');
+
+      const ui = {
+        timeLeft: document.getElementById('timeLeft'),
+        score: document.getElementById('score'),
+        streak: document.getElementById('streak'),
+        best: document.getElementById('best'),
+        startBtn: document.getElementById('startBtn'),
+        restartBtn: document.getElementById('restartBtn'),
+        soundBtn: document.getElementById('soundBtn'),
+        overlay: document.getElementById('overlay'),
+        finalScore: document.getElementById('finalScore'),
+        finalBest: document.getElementById('finalBest'),
+        playAgainBtn: document.getElementById('playAgainBtn'),
+        card: document.getElementById('card')
+      };
+
+      // --- Game state ---
+      const ROUND_SECONDS = 30.0;
+      let running = false;
+      let time = ROUND_SECONDS;
+      let lastTs = 0;
+
+      let score = 0;
+      let streak = 0;
+
+      let best = parseInt(localStorage.getItem('rapidFireBest') || '0', 10) || 0;
+      ui.best.textContent = best;
+
+      // Ball + hole
+      let ball = { x: canvas.width * 0.18, y: canvas.height * 0.74, r: 10, vx: 0, vy: 0 };
+      let hole = { x: canvas.width * 0.78, y: canvas.height * 0.28, r: 20 };
+
+      // “take liberties”: moving hole after some points
+      let holeDrift = { vx: 0.45, vy: 0.35 };
+      let difficulty = 1; // grows with score
+
+      // visual goodies
+      let particles = [];
+      let aim = { active: false, x: 0, y: 0 };
+
+      // sound (Web Audio)
+      let soundEnabled = true;
+      let ac = null;
+      function getAC() {
+        if (!ac) ac = new (window.AudioContext || window.webkitAudioContext)();
+        return ac;
+      }
+      function beep(freq, dur, type='sine', gain=0.18) {
+        if (!soundEnabled) return;
+        const A = getAC();
+        if (A.state === 'suspended') A.resume().catch(()=>{});
+        const o = A.createOscillator();
+        const g = A.createGain();
+        o.type = type;
+        o.frequency.value = freq;
+        g.gain.setValueAtTime(gain, A.currentTime);
+        g.gain.exponentialRampToValueAtTime(0.001, A.currentTime + dur);
+        o.connect(g);
+        g.connect(A.destination);
+        o.start(A.currentTime);
+        o.stop(A.currentTime + dur);
+      }
+      const sfx = {
+        start(){ beep(660, 0.10, 'sine', 0.22); beep(880, 0.10, 'sine', 0.18); },
+        hit(){ beep(320, 0.08, 'sine', 0.22); },
+        wall(){ beep(220, 0.07, 'square', 0.12); },
+        make(){ beep(740, 0.10, 'sine', 0.22); beep(990, 0.14, 'sine', 0.18); },
+        miss(){ beep(180, 0.12, 'sawtooth', 0.14); },
+        bonus(){ beep(880, 0.09, 'triangle', 0.18); beep(1170, 0.11, 'triangle', 0.14); },
+        end(){ beep(220, 0.10, 'sine', 0.16); beep(165, 0.16, 'sine', 0.12); },
+        tick(){ beep(900, 0.03, 'square', 0.05); }
+      };
+
+      function clamp(v, lo, hi){ return Math.max(lo, Math.min(hi, v)); }
+      function rand(lo, hi){ return lo + Math.random()*(hi-lo); }
+
+      function resetRound() {
+        running = false;
+        time = ROUND_SECONDS;
+        lastTs = 0;
+        score = 0;
+        streak = 0;
+        difficulty = 1;
+        particles = [];
+        aim.active = false;
+
+        ball = { x: canvas.width * 0.18, y: canvas.height * 0.74, r: 10, vx: 0, vy: 0 };
+        hole = randomHole();
+        holeDrift = { vx: 0.45, vy: 0.35 };
+
+        ui.score.textContent = score;
+        ui.streak.textContent = streak;
+        ui.timeLeft.textContent = time.toFixed(1);
+        hideOverlay();
+        draw();
+      }
+
+      function randomHole() {
+        const margin = 64;
+        const x = rand(canvas.width*0.45, canvas.width - margin);
+        const y = rand(margin, canvas.height - margin);
+        const baseR = 22;
+        // shrink slightly as score grows, but never too tiny
+        const r = clamp(baseR - Math.floor(score/6), 14, 22);
+        return { x, y, r };
+      }
+
+      function spawnPop(text, kind) {
+        const el = document.createElement('div');
+        el.className = 'popup ' + (
 
