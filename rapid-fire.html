@@ -446,6 +446,7 @@
         <div class="controls">
           <button class="btn primary" id="startBtn">Start Game</button>
           <button class="btn secondary" id="restartBtn">Restart</button>
+          <button class="btn secondary" id="challengeBtn">👥 Challenge Friends</button>
           <button class="btn ghost" id="soundBtn">🔊 Sound</button>
         </div>
       </div>
@@ -507,6 +508,7 @@
       const restartBtn = document.getElementById('restartBtn');
       const soundBtn = document.getElementById('soundBtn');
       const shareBtn = document.getElementById('shareBtn');
+      const challengeBtn = document.getElementById('challengeBtn');
 
       const overlay = document.getElementById('overlay');
       const finalScoreEl = document.getElementById('finalScore');
@@ -781,36 +783,36 @@
         // Ball physics
         ball.x += ball.vx;
         ball.y += ball.vy;
-        
-        // Safety: Keep ball within canvas bounds
-        ball.x = clamp(ball.x, ball.r, canvas.width - ball.r);
-        ball.y = clamp(ball.y, ball.r, canvas.height - ball.r);
 
-        // Friction
+        // Wall bounce BEFORE friction - check for collisions first
+        let bounced = false;
+        if(ball.x - ball.r <= 0){
+          ball.x = ball.r;
+          ball.vx = -ball.vx * 0.8; // Reverse and reduce
+          bounced = true;
+        }
+        else if(ball.x + ball.r >= canvas.width){
+          ball.x = canvas.width - ball.r;
+          ball.vx = -ball.vx * 0.8;
+          bounced = true;
+        }
+        
+        if(ball.y - ball.r <= 0){
+          ball.y = ball.r;
+          ball.vy = -ball.vy * 0.8;
+          bounced = true;
+        }
+        else if(ball.y + ball.r >= canvas.height){
+          ball.y = canvas.height - ball.r;
+          ball.vy = -ball.vy * 0.8;
+          bounced = true;
+        }
+        
+        if(bounced) sfx.wall();
+
+        // Friction AFTER bounce
         ball.vx *= 0.986;
         ball.vy *= 0.986;
-
-        // Wall bounce - improved physics
-        if(ball.x - ball.r < 0){
-          ball.x = ball.r + 1; // Push away from wall
-          if(ball.vx < 0) ball.vx *= -0.75; // Only reverse if moving towards wall
-          sfx.wall();
-        }
-        if(ball.x + ball.r > canvas.width){
-          ball.x = canvas.width - ball.r - 1;
-          if(ball.vx > 0) ball.vx *= -0.75;
-          sfx.wall();
-        }
-        if(ball.y - ball.r < 0){
-          ball.y = ball.r + 1;
-          if(ball.vy < 0) ball.vy *= -0.75;
-          sfx.wall();
-        }
-        if(ball.y + ball.r > canvas.height){
-          ball.y = canvas.height - ball.r - 1;
-          if(ball.vy > 0) ball.vy *= -0.75;
-          sfx.wall();
-        }
 
         const speed = Math.hypot(ball.vx, ball.vy);
         if(speed < 0.06){ ball.vx = 0; ball.vy = 0; }
@@ -1097,18 +1099,29 @@
         }
       });
       
-      shareBtn.addEventListener('click', ()=>{
-        const text = `🏌️ I scored ${score} points in Rapid Fire Golf! Can you beat it?\n\nPlay at: mickskylark.com/rapid-fire.html`;
+      function shareScore(){
+        const shareText = score > 0 
+          ? `🏌️⚡ I scored ${score} points in Rapid Fire Golf! Can you beat it?\n\nPlay now: ${window.location.href}`
+          : `🏌️⚡ Try Rapid Fire Golf - Score as many putts as you can in 30 seconds!\n\nPlay now: ${window.location.href}`;
+        
         if(navigator.share){
-          navigator.share({title: 'Rapid Fire Golf', text}).catch(()=>{});
+          navigator.share({
+            title: 'Rapid Fire Golf Challenge',
+            text: shareText
+          }).catch(()=>{});
         } else if(navigator.clipboard){
-          navigator.clipboard.writeText(text).then(()=>{
-            alert('Score copied to clipboard!');
+          navigator.clipboard.writeText(shareText).then(()=>{
+            alert('Challenge copied to clipboard! Share it with friends!');
+          }).catch(()=>{
+            alert(shareText);
           });
         } else {
-          alert(text);
+          alert(shareText);
         }
-      });
+      }
+      
+      shareBtn.addEventListener('click', shareScore);
+      challengeBtn.addEventListener('click', shareScore);
 
       // Initialize
       resetRound();
