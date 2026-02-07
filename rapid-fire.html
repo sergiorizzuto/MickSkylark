@@ -3,123 +3,66 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>Rapid Fire Golf — Mick Skylark</title>
+  <title>Rapid Fire Golf</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="icon" href="favicon.ico" />
 
   <style>
     :root{
       --primary:#1E3A8A;
       --primary-dark:#1E40AF;
-      --secondary:#FCD34D;
       --gold:#FBBF24;
+      --yellow:#FCD34D;
       --dark:#1F2937;
-      --accent:#2563EB;
-      --danger:#EF4444;
       --ok:#10B981;
-      --bg1:#FDE68A;
-      --bg2:#FCD34D;
+      --bad:#EF4444;
     }
     *{margin:0;padding:0;box-sizing:border-box;}
-    html{scroll-behavior:smooth;}
     body{
       font-family:'Poppins',sans-serif;
+      background: linear-gradient(135deg, #FDE68A 0%, #FCD34D 100%);
       color:var(--dark);
-      background: linear-gradient(135deg, var(--bg1) 0%, var(--bg2) 100%);
       min-height:100vh;
-      overflow-x:hidden;
-      padding-top:72px;
+      padding:26px 14px 40px;
     }
 
-    /* Navbar (matches your site style) */
-    .navbar{
-      position:fixed; top:0; left:0; right:0;
-      background:rgba(255,255,255,0.92);
-      backdrop-filter:blur(10px);
-      -webkit-backdrop-filter:blur(10px);
-      box-shadow:0 2px 10px rgba(0,0,0,0.08);
-      z-index:1000;
-      padding:10px 0;
-    }
-    .nav-container{
-      max-width:1200px;
-      margin:0 auto;
-      display:flex;
-      justify-content:center;
-      gap:10px;
-      flex-wrap:wrap;
-      padding:0 14px;
-    }
-    .nav-link{
-      color:var(--primary);
-      text-decoration:none;
-      font-weight:700;
-      padding:8px 14px;
-      border-radius:999px;
-      transition:all 0.2s ease;
-      font-size:0.9rem;
-      line-height:1;
-      border:1px solid transparent;
-      outline:none;
-    }
-    .nav-link:hover{background:var(--primary);color:#fff;}
-    .nav-link.nav-standout{
-      color:var(--accent);
-      border-color:rgba(37,99,235,0.25);
-      background:rgba(37,99,235,0.06);
-    }
-    .nav-link.nav-standout:hover{background:var(--accent);color:#fff;border-color:transparent;}
-    @media (max-width:768px){
-      body{padding-top:90px;}
-      .nav-container{gap:8px;justify-content:flex-start;}
-      .nav-link{padding:10px 14px;font-size:0.95rem;}
-    }
-
-    .wrap{
-      max-width:1100px;
-      margin:0 auto;
-      padding:28px 16px 50px;
-    }
-
-    .hero{
-      text-align:center;
-      margin-bottom:18px;
-    }
+    .wrap{max-width:980px;margin:0 auto;}
     h1{
-      font-size:2.6rem;
+      text-align:center;
       color:var(--primary);
-      font-weight:800;
+      font-weight:900;
+      font-size:2.6rem;
       letter-spacing:0.2px;
     }
     .sub{
-      margin-top:8px;
-      font-size:1.08rem;
-      opacity:0.9;
+      margin-top:10px;
+      text-align:center;
+      font-size:1.05rem;
       line-height:1.55;
+      opacity:0.92;
     }
+    .sub b{color:var(--primary);}
 
     .card{
-      margin:20px auto 0;
+      margin:18px auto 0;
       background:#fff;
       border-radius:22px;
-      box-shadow:0 14px 50px rgba(0,0,0,0.16);
-      padding:18px 16px 16px;
-      overflow:hidden;
+      box-shadow:0 14px 55px rgba(0,0,0,0.16);
+      padding:16px 14px 18px;
       position:relative;
+      overflow:hidden;
     }
 
-    .topbar{
+    .top{
       display:flex;
-      gap:12px;
       align-items:center;
       justify-content:space-between;
+      gap:10px;
       flex-wrap:wrap;
-      padding:6px 6px 12px;
+      padding:6px 4px 10px;
     }
-
     .stats{
       display:flex;
       gap:10px;
@@ -127,37 +70,22 @@
       align-items:center;
       justify-content:center;
     }
-
     .pill{
       display:inline-flex;
       align-items:center;
       gap:10px;
       padding:10px 14px;
       border-radius:999px;
-      border:1px solid rgba(30,58,138,0.12);
       background:rgba(30,58,138,0.06);
-      font-weight:800;
+      border:1px solid rgba(30,58,138,0.12);
+      font-weight:900;
       color:var(--primary);
       min-height:42px;
     }
-    .pill b{
-      color:var(--dark);
-      font-weight:900;
-    }
-    .time-pill{
-      background:rgba(252,211,77,0.35);
-      border-color:rgba(252,211,77,0.7);
-    }
-    .time-pill b{color:var(--primary);}
-    .score-pill{
-      background:rgba(16,185,129,0.10);
-      border-color:rgba(16,185,129,0.25);
-    }
-    .best-pill{
-      background:rgba(37,99,235,0.08);
-      border-color:rgba(37,99,235,0.18);
-      color:var(--accent);
-    }
+    .pill b{color:var(--dark);font-weight:1000;}
+    .pill.time{background:rgba(252,211,77,0.35);border-color:rgba(252,211,77,0.7);}
+    .pill.score{background:rgba(16,185,129,0.10);border-color:rgba(16,185,129,0.22);}
+    .pill.best{background:rgba(37,99,235,0.08);border-color:rgba(37,99,235,0.18);color:#2563EB;}
 
     .controls{
       display:flex;
@@ -167,20 +95,19 @@
       align-items:center;
     }
     .btn{
-      appearance:none;
       border:none;
       border-radius:999px;
       padding:12px 18px;
-      font-weight:900;
+      font-weight:1000;
       cursor:pointer;
+      font-family:'Poppins',sans-serif;
       transition:transform 0.12s ease, box-shadow 0.12s ease, background 0.12s ease;
       box-shadow:0 8px 18px rgba(0,0,0,0.12);
-      font-family:'Poppins',sans-serif;
     }
-    .btn:active{transform:translateY(1px) scale(0.99); box-shadow:0 6px 14px rgba(0,0,0,0.12);}
-    .btn.primary{background:var(--primary); color:#fff;}
+    .btn:active{transform:translateY(1px) scale(0.99);}
+    .btn.primary{background:var(--primary);color:#fff;}
     .btn.primary:hover{background:var(--primary-dark);}
-    .btn.secondary{background:var(--secondary); color:var(--dark);}
+    .btn.secondary{background:var(--yellow);color:var(--dark);}
     .btn.secondary:hover{background:var(--gold);}
     .btn.ghost{
       background:#fff;
@@ -190,38 +117,55 @@
     }
     .btn.ghost:hover{background:rgba(30,58,138,0.06);}
 
-    .hud-note{
+    .note{
       text-align:center;
-      margin-top:10px;
+      margin:10px 0 12px;
       font-size:0.95rem;
-      opacity:0.86;
-    }
-    .hud-note .hot{
-      font-weight:900;
-      color:var(--primary);
+      opacity:0.85;
     }
 
     .stage{
       display:flex;
       justify-content:center;
       align-items:center;
-      padding:10px 6px 6px;
     }
 
     canvas{
-      width: min(720px, 100%);
+      width:min(760px, 100%);
       height:auto;
       border-radius:18px;
       border:3px solid var(--primary);
-      box-shadow:0 10px 28px rgba(0,0,0,0.14);
       background:#eaf7ea;
+      box-shadow:0 10px 28px rgba(0,0,0,0.14);
       touch-action:none;
       display:block;
     }
 
-    .overlay{
+    /* Popups */
+    .popup{
       position:absolute;
-      inset:0;
+      left:50%;
+      top:55%;
+      transform:translate(-50%,-50%);
+      font-weight:1000;
+      font-size:2.6rem;
+      pointer-events:none;
+      text-shadow:0 10px 24px rgba(0,0,0,0.22);
+      opacity:0;
+      animation: pop 0.55s ease forwards;
+      white-space:nowrap;
+    }
+    .popup.plus{color:var(--ok);}
+    .popup.minus{color:var(--bad);}
+    @keyframes pop{
+      0%{opacity:0; transform:translate(-50%,-50%) scale(0.75);}
+      30%{opacity:1; transform:translate(-50%,-56%) scale(1.08);}
+      100%{opacity:0; transform:translate(-50%,-80%) scale(1.0);}
+    }
+
+    /* Overlay end screen */
+    .overlay{
+      position:absolute; inset:0;
       display:flex;
       align-items:center;
       justify-content:center;
@@ -231,10 +175,7 @@
       transition:opacity 0.2s ease;
       padding:18px;
     }
-    .overlay.show{
-      opacity:1;
-      pointer-events:auto;
-    }
+    .overlay.show{opacity:1; pointer-events:auto;}
     .modal{
       width:min(560px, 100%);
       background:#fff;
@@ -243,151 +184,89 @@
       text-align:center;
       box-shadow:0 18px 60px rgba(0,0,0,0.35);
     }
-    .modal h2{
-      color:var(--primary);
-      font-size:2.1rem;
-      font-weight:900;
-    }
-    .modal p{
-      margin-top:8px;
-      line-height:1.6;
-      opacity:0.9;
-    }
-    .big-score{
-      margin-top:14px;
-      font-size:3.2rem;
-      font-weight:1000;
-      color:var(--dark);
-    }
-    .small{
-      margin-top:6px;
-      font-size:0.95rem;
-      opacity:0.75;
-    }
+    .modal h2{color:var(--primary);font-size:2.1rem;font-weight:1000;}
+    .big-score{margin-top:12px;font-size:3.2rem;font-weight:1000;}
+    .modal p{margin-top:10px;line-height:1.6;opacity:0.9;}
+    .tiny{margin-top:8px;font-size:0.95rem;opacity:0.75;}
 
-    /* Popups */
-    .popup{
-      position:absolute;
-      left:50%;
-      top:50%;
-      transform:translate(-50%,-50%);
-      font-weight:1000;
-      font-size:2.4rem;
-      pointer-events:none;
-      text-shadow:0 10px 24px rgba(0,0,0,0.22);
-      opacity:0;
-      animation: pop 0.55s ease forwards;
-      white-space:nowrap;
-    }
-    .popup.plus{color:var(--ok);}
-    .popup.minus{color:var(--danger);}
-    @keyframes pop{
-      0%{opacity:0; transform:translate(-50%,-50%) scale(0.75);}
-      30%{opacity:1; transform:translate(-50%,-56%) scale(1.08);}
-      100%{opacity:0; transform:translate(-50%,-80%) scale(1.0);}
-    }
-
-    /* Accessibility focus */
-    .nav-link:focus-visible, .btn:focus-visible{
+    .btn:focus-visible{
       outline:3px solid rgba(252,211,77,0.95);
       outline-offset:2px;
     }
 
     @media (max-width:768px){
       h1{font-size:2.1rem;}
-      .sub{font-size:1.02rem;}
     }
   </style>
 </head>
 
 <body>
-  <nav class="navbar" aria-label="Primary navigation">
-    <div class="nav-container">
-      <a href="index.html#home" class="nav-link">Home</a>
-      <a href="index.html#game" class="nav-link">Mini Golf Game</a>
-      <a href="rapid-fire.html" class="nav-link nav-standout">Rapid Fire</a>
-      <a href="index.html#rsvp" class="nav-link nav-standout">RSVP</a>
-      <a href="contact.html" class="nav-link">Contact</a>
-    </div>
-  </nav>
-
   <div class="wrap">
-    <div class="hero">
-      <h1>Rapid Fire Golf</h1>
-      <div class="sub">
-        Score as many putts as you can in <span class="hot">30 seconds</span>.<br />
-        <span class="hot">Miss</span> = lose 1 second. <span class="hot">3 makes in a row</span> = gain 1 second.
-      </div>
+    <h1>Rapid Fire Golf</h1>
+    <div class="sub">
+      Score as many putts as you can in <b>30 seconds</b>.<br>
+      <b>Miss</b> = lose 1 second. <b>3 makes in a row</b> = gain 1 second.
     </div>
 
     <div class="card" id="card">
-      <div class="topbar">
-        <div class="stats" aria-label="Game stats">
-          <div class="pill time-pill">⏱ Time: <b id="timeLeft">30.0</b></div>
-          <div class="pill score-pill">🏌️ Score: <b id="score">0</b></div>
+      <div class="top">
+        <div class="stats">
+          <div class="pill time">⏱ Time: <b id="timeLeft">30.0</b></div>
+          <div class="pill score">🏌️ Score: <b id="score">0</b></div>
           <div class="pill">🔥 Streak: <b id="streak">0</b></div>
-          <div class="pill best-pill">🏆 Best: <b id="best">0</b></div>
+          <div class="pill best">🏆 Best: <b id="best">0</b></div>
         </div>
 
-        <div class="controls" aria-label="Game controls">
+        <div class="controls">
           <button class="btn primary" id="startBtn">Start</button>
           <button class="btn secondary" id="restartBtn">Restart</button>
-          <button class="btn ghost" id="soundBtn" title="Toggle sound">🔊 Sound</button>
+          <button class="btn ghost" id="soundBtn">🔊 Sound</button>
         </div>
       </div>
 
-      <div class="hud-note">
-        Click / tap to aim and shoot. Power is based on distance from the ball.
-      </div>
+      <div class="note">Click/tap to aim and shoot. Power is based on distance from the ball.</div>
 
       <div class="stage">
-        <canvas id="c" width="720" height="420" aria-label="Rapid Fire Golf canvas">
-          Your browser doesn’t support canvas.
-        </canvas>
+        <canvas id="c" width="760" height="430"></canvas>
       </div>
 
-      <div class="overlay" id="overlay" aria-label="Game over overlay" role="dialog" aria-modal="true">
+      <div class="overlay" id="overlay" role="dialog" aria-modal="true">
         <div class="modal">
           <h2>Time!</h2>
-          <div class="big-score"><span id="finalScore">0</span></div>
-          <p>
-            Best: <b id="finalBest">0</b><br />
-            Tip: tighter shots = faster scoring.
-          </p>
+          <div class="big-score">Score: <span id="finalScore">0</span></div>
+          <p>Best: <b id="finalBest">0</b></p>
           <div style="margin-top:14px; display:flex; gap:10px; justify-content:center; flex-wrap:wrap;">
             <button class="btn primary" id="playAgainBtn">Play Again</button>
-            <a class="btn secondary" href="index.html#game" style="text-decoration:none; display:inline-flex; align-items:center; justify-content:center;">
-              Back to site
-            </a>
           </div>
-          <div class="small">Sound works best after you press Start (mobile restrictions).</div>
+          <div class="tiny">Sound works best after you press Start (mobile restrictions).</div>
         </div>
       </div>
     </div>
   </div>
 
   <script>
-    (function () {
+    // ====== BASIC WORKING RAPID FIRE GAME (NO TRICKY STUFF) ======
+    (function(){
+      const card = document.getElementById('card');
       const canvas = document.getElementById('c');
       const ctx = canvas.getContext('2d');
 
-      const ui = {
-        timeLeft: document.getElementById('timeLeft'),
-        score: document.getElementById('score'),
-        streak: document.getElementById('streak'),
-        best: document.getElementById('best'),
-        startBtn: document.getElementById('startBtn'),
-        restartBtn: document.getElementById('restartBtn'),
-        soundBtn: document.getElementById('soundBtn'),
-        overlay: document.getElementById('overlay'),
-        finalScore: document.getElementById('finalScore'),
-        finalBest: document.getElementById('finalBest'),
-        playAgainBtn: document.getElementById('playAgainBtn'),
-        card: document.getElementById('card')
-      };
+      const timeEl = document.getElementById('timeLeft');
+      const scoreEl = document.getElementById('score');
+      const streakEl = document.getElementById('streak');
+      const bestEl = document.getElementById('best');
 
-      // --- Game state ---
+      const startBtn = document.getElementById('startBtn');
+      const restartBtn = document.getElementById('restartBtn');
+      const soundBtn = document.getElementById('soundBtn');
+
+      const overlay = document.getElementById('overlay');
+      const finalScoreEl = document.getElementById('finalScore');
+      const finalBestEl = document.getElementById('finalBest');
+      const playAgainBtn = document.getElementById('playAgainBtn');
+
       const ROUND_SECONDS = 30.0;
+
       let running = false;
       let time = ROUND_SECONDS;
       let lastTs = 0;
@@ -396,39 +275,41 @@
       let streak = 0;
 
       let best = parseInt(localStorage.getItem('rapidFireBest') || '0', 10) || 0;
-      ui.best.textContent = best;
+      bestEl.textContent = best;
 
       // Ball + hole
-      let ball = { x: canvas.width * 0.18, y: canvas.height * 0.74, r: 10, vx: 0, vy: 0 };
-      let hole = { x: canvas.width * 0.78, y: canvas.height * 0.28, r: 20 };
+      const startBallPos = { x: canvas.width * 0.18, y: canvas.height * 0.74 };
+      let ball = { x: startBallPos.x, y: startBallPos.y, r: 10, vx: 0, vy: 0 };
+      let hole = randomHole();
 
-      // “take liberties”: moving hole after some points
-      let holeDrift = { vx: 0.45, vy: 0.35 };
-      let difficulty = 1; // grows with score
-
-      // visual goodies
-      let particles = [];
+      // Aim
       let aim = { active: false, x: 0, y: 0 };
+      let pointerDown = false;
 
-      // sound (Web Audio)
+      // Miss tracking: if a shot stops and you didn't score -> miss penalty
+      let shotInProgress = false;
+
+      // particles
+      let particles = [];
+
+      // Sound (WebAudio)
       let soundEnabled = true;
       let ac = null;
-      function getAC() {
-        if (!ac) ac = new (window.AudioContext || window.webkitAudioContext)();
+      function getAC(){
+        if(!ac) ac = new (window.AudioContext || window.webkitAudioContext)();
         return ac;
       }
-      function beep(freq, dur, type='sine', gain=0.18) {
-        if (!soundEnabled) return;
+      function beep(freq, dur, type='sine', gain=0.18){
+        if(!soundEnabled) return;
         const A = getAC();
-        if (A.state === 'suspended') A.resume().catch(()=>{});
+        if(A.state === 'suspended') A.resume().catch(()=>{});
         const o = A.createOscillator();
         const g = A.createGain();
         o.type = type;
         o.frequency.value = freq;
         g.gain.setValueAtTime(gain, A.currentTime);
         g.gain.exponentialRampToValueAtTime(0.001, A.currentTime + dur);
-        o.connect(g);
-        g.connect(A.destination);
+        o.connect(g); g.connect(A.destination);
         o.start(A.currentTime);
         o.stop(A.currentTime + dur);
       }
@@ -439,45 +320,406 @@
         make(){ beep(740, 0.10, 'sine', 0.22); beep(990, 0.14, 'sine', 0.18); },
         miss(){ beep(180, 0.12, 'sawtooth', 0.14); },
         bonus(){ beep(880, 0.09, 'triangle', 0.18); beep(1170, 0.11, 'triangle', 0.14); },
-        end(){ beep(220, 0.10, 'sine', 0.16); beep(165, 0.16, 'sine', 0.12); },
-        tick(){ beep(900, 0.03, 'square', 0.05); }
+        end(){ beep(220, 0.10, 'sine', 0.16); beep(165, 0.16, 'sine', 0.12); }
       };
 
       function clamp(v, lo, hi){ return Math.max(lo, Math.min(hi, v)); }
       function rand(lo, hi){ return lo + Math.random()*(hi-lo); }
 
-      function resetRound() {
+      function randomHole(){
+        const pad = 60;
+        const x = rand(canvas.width*0.48, canvas.width - pad);
+        const y = rand(pad, canvas.height - pad);
+        // shrink slightly as score rises (optional, small)
+        const r = clamp(22 - Math.floor(score/8), 14, 22);
+        return { x, y, r };
+      }
+
+      function resetRound(){
         running = false;
         time = ROUND_SECONDS;
         lastTs = 0;
         score = 0;
         streak = 0;
-        difficulty = 1;
+        shotInProgress = false;
         particles = [];
         aim.active = false;
 
-        ball = { x: canvas.width * 0.18, y: canvas.height * 0.74, r: 10, vx: 0, vy: 0 };
+        ball.x = startBallPos.x; ball.y = startBallPos.y;
+        ball.vx = 0; ball.vy = 0;
         hole = randomHole();
-        holeDrift = { vx: 0.45, vy: 0.35 };
 
-        ui.score.textContent = score;
-        ui.streak.textContent = streak;
-        ui.timeLeft.textContent = time.toFixed(1);
+        timeEl.textContent = time.toFixed(1);
+        scoreEl.textContent = score;
+        streakEl.textContent = streak;
+
         hideOverlay();
         draw();
       }
 
-      function randomHole() {
-        const margin = 64;
-        const x = rand(canvas.width*0.45, canvas.width - margin);
-        const y = rand(margin, canvas.height - margin);
-        const baseR = 22;
-        // shrink slightly as score grows, but never too tiny
-        const r = clamp(baseR - Math.floor(score/6), 14, 22);
-        return { x, y, r };
+      function startRound(){
+        if(running) return;
+        // unlock audio on mobile
+        try { getAC(); } catch(e) {}
+        running = true;
+        lastTs = 0;
+        hideOverlay();
+        sfx.start();
+        requestAnimationFrame(loop);
       }
 
-      function spawnPop(text, kind) {
-        const el = document.createElement('div');
-        el.className = 'popup ' + (
+      function endRound(){
+        running = false;
+        sfx.end();
 
+        if(score > best){
+          best = score;
+          localStorage.setItem('rapidFireBest', String(best));
+          bestEl.textContent = best;
+        }
+
+        finalScoreEl.textContent = score;
+        finalBestEl.textContent = best;
+        showOverlay();
+      }
+
+      function showOverlay(){ overlay.classList.add('show'); }
+      function hideOverlay(){ overlay.classList.remove('show'); }
+
+      function spawnPop(text, kind){
+        const el = document.createElement('div');
+        el.className = 'popup ' + (kind === 'plus' ? 'plus' : 'minus');
+        el.textContent = text;
+        card.appendChild(el);
+        setTimeout(()=> el.remove(), 600);
+      }
+
+      function addParticles(x, y, color, count=14){
+        for(let i=0;i<count;i++){
+          particles.push({
+            x, y,
+            vx: (Math.random()-0.5)*5.0,
+            vy: (Math.random()-0.5)*5.0,
+            life: rand(18, 34),
+            color,
+            r: rand(2, 4)
+          });
+        }
+      }
+
+      function shootAt(px, py){
+        if(!running) return;
+        if(Math.abs(ball.vx) > 0.02 || Math.abs(ball.vy) > 0.02) return;
+
+        const dx = px - ball.x;
+        const dy = py - ball.y;
+        const dist = Math.sqrt(dx*dx + dy*dy) || 1;
+
+        // rapid-fire tuning: short shots still have enough movement
+        const power = clamp(dist / 18, 3.0, 11.0);
+
+        ball.vx = (dx/dist) * power;
+        ball.vy = (dy/dist) * power;
+
+        shotInProgress = true;
+        aim.active = false;
+        sfx.hit();
+      }
+
+      function missPenalty(){
+        time = Math.max(0, time - 1.0);
+        timeEl.textContent = time.toFixed(1);
+
+        spawnPop('-1 !', 'minus');
+        addParticles(ball.x, ball.y, '#EF4444', 18);
+        sfx.miss();
+
+        streak = 0;
+        streakEl.textContent = streak;
+
+        // reset fast
+        ball.x = startBallPos.x; ball.y = startBallPos.y;
+        ball.vx = 0; ball.vy = 0;
+        hole = randomHole();
+        shotInProgress = false;
+
+        if(time <= 0) endRound();
+      }
+
+      function scorePoint(){
+        score += 1;
+        streak += 1;
+
+        scoreEl.textContent = score;
+        streakEl.textContent = streak;
+
+        addParticles(hole.x, hole.y, '#FBBF24', 24);
+        sfx.make();
+
+        // 3 in a row => +1 second
+        if(streak % 3 === 0){
+          time += 1.0;
+          timeEl.textContent = time.toFixed(1);
+          spawnPop('+1 !', 'plus');
+          addParticles(hole.x, hole.y, '#10B981', 16);
+          sfx.bonus();
+        }
+
+        // reset for next shot
+        ball.x = startBallPos.x; ball.y = startBallPos.y;
+        ball.vx = 0; ball.vy = 0;
+        hole = randomHole();
+        shotInProgress = false;
+      }
+
+      function update(dt){
+        if(!running) return;
+
+        // timer
+        time -= dt;
+        if(time <= 0){
+          time = 0;
+          timeEl.textContent = time.toFixed(1);
+          endRound();
+          return;
+        }
+        timeEl.textContent = time.toFixed(1);
+
+        // ball physics
+        ball.x += ball.vx;
+        ball.y += ball.vy;
+
+        // friction
+        ball.vx *= 0.985;
+        ball.vy *= 0.985;
+
+        // wall bounce
+        if(ball.x - ball.r < 0){ ball.x = ball.r; ball.vx *= -0.65; sfx.wall(); }
+        if(ball.x + ball.r > canvas.width){ ball.x = canvas.width - ball.r; ball.vx *= -0.65; sfx.wall(); }
+        if(ball.y - ball.r < 0){ ball.y = ball.r; ball.vy *= -0.65; sfx.wall(); }
+        if(ball.y + ball.r > canvas.height){ ball.y = canvas.height - ball.r; ball.vy *= -0.65; sfx.wall(); }
+
+        const speed = Math.hypot(ball.vx, ball.vy);
+        if(speed < 0.05){ ball.vx = 0; ball.vy = 0; }
+
+        // score detection (must be slow-ish)
+        const d = Math.hypot(ball.x - hole.x, ball.y - hole.y);
+        if(d < (hole.r - 6) && speed < 2.0){
+          scorePoint();
+        }
+
+        // miss detection: shot ended without scoring
+        if(shotInProgress && ball.vx === 0 && ball.vy === 0){
+          const dd = Math.hypot(ball.x - hole.x, ball.y - hole.y);
+          if(dd >= (hole.r - 6)){
+            missPenalty();
+          }
+        }
+
+        // particles
+        particles = particles.filter(p => {
+          p.x += p.vx; p.y += p.vy;
+          p.vx *= 0.96; p.vy *= 0.96;
+          p.life -= 1;
+          return p.life > 0;
+        });
+      }
+
+      function draw(){
+        // background green
+        const g = ctx.createLinearGradient(0,0,0,canvas.height);
+        g.addColorStop(0,'#9BE7A3');
+        g.addColorStop(1,'#6FD48B');
+        ctx.fillStyle = g;
+        ctx.fillRect(0,0,canvas.width,canvas.height);
+
+        // stripes
+        ctx.globalAlpha = 0.11;
+        ctx.fillStyle = '#fff';
+        for(let i=0;i<16;i++){
+          ctx.fillRect(i*90 - 60, 0, 38, canvas.height);
+        }
+        ctx.globalAlpha = 1;
+
+        // tee area
+        ctx.fillStyle = 'rgba(255,255,255,0.18)';
+        ctx.fillRect(0, canvas.height*0.62, canvas.width*0.36, canvas.height*0.38);
+
+        // hole shadow + hole
+        ctx.fillStyle = 'rgba(0,0,0,0.25)';
+        ctx.beginPath();
+        ctx.arc(hole.x+2, hole.y+3, hole.r, 0, Math.PI*2);
+        ctx.fill();
+
+        ctx.fillStyle = '#0b0b0b';
+        ctx.beginPath();
+        ctx.arc(hole.x, hole.y, hole.r, 0, Math.PI*2);
+        ctx.fill();
+
+        ctx.fillStyle = '#2a2a2a';
+        ctx.beginPath();
+        ctx.arc(hole.x, hole.y, hole.r - 6, 0, Math.PI*2);
+        ctx.fill();
+
+        // flag
+        ctx.strokeStyle = '#111';
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.moveTo(hole.x, hole.y);
+        ctx.lineTo(hole.x, hole.y - 42);
+        ctx.stroke();
+
+        ctx.fillStyle = '#EF4444';
+        ctx.beginPath();
+        ctx.moveTo(hole.x, hole.y - 42);
+        ctx.lineTo(hole.x + 18, hole.y - 33);
+        ctx.lineTo(hole.x, hole.y - 24);
+        ctx.fill();
+
+        // aim line
+        if(aim.active && running && ball.vx===0 && ball.vy===0){
+          ctx.strokeStyle = 'rgba(30,58,138,0.75)';
+          ctx.lineWidth = 3;
+          ctx.setLineDash([8,6]);
+          ctx.beginPath();
+          ctx.moveTo(ball.x, ball.y);
+          ctx.lineTo(aim.x, aim.y);
+          ctx.stroke();
+          ctx.setLineDash([]);
+        }
+
+        // particles
+        for(const p of particles){
+          ctx.globalAlpha = clamp(p.life/28, 0, 1);
+          ctx.fillStyle = p.color;
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
+          ctx.fill();
+        }
+        ctx.globalAlpha = 1;
+
+        // ball shadow + ball
+        ctx.fillStyle = 'rgba(0,0,0,0.18)';
+        ctx.beginPath();
+        ctx.arc(ball.x+2, ball.y+3, ball.r, 0, Math.PI*2);
+        ctx.fill();
+
+        ctx.fillStyle = '#fff';
+        ctx.strokeStyle = '#111';
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.arc(ball.x, ball.y, ball.r, 0, Math.PI*2);
+        ctx.fill();
+        ctx.stroke();
+
+        ctx.fillStyle = 'rgba(255,255,255,0.55)';
+        ctx.beginPath();
+        ctx.arc(ball.x-3, ball.y-3, 3, 0, Math.PI*2);
+        ctx.fill();
+
+        // border warning for last 5 seconds
+        if(running && time <= 5.0){
+          const t = (5.0 - time)/5.0;
+          ctx.strokeStyle = `rgba(239,68,68,${0.15 + t*0.45})`;
+          ctx.lineWidth = 10;
+          ctx.strokeRect(0,0,canvas.width,canvas.height);
+        }
+      }
+
+      function loop(ts){
+        if(!running) return;
+        if(!lastTs) lastTs = ts;
+        const dt = Math.min(0.05, (ts - lastTs)/1000);
+        lastTs = ts;
+
+        update(dt);
+        draw();
+        requestAnimationFrame(loop);
+      }
+
+      function getPointerPos(evt){
+        const rect = canvas.getBoundingClientRect();
+        const scaleX = canvas.width / rect.width;
+        const scaleY = canvas.height / rect.height;
+
+        let clientX, clientY;
+        if(evt.touches && evt.touches[0]){
+          clientX = evt.touches[0].clientX;
+          clientY = evt.touches[0].clientY;
+        } else {
+          clientX = evt.clientX;
+          clientY = evt.clientY;
+        }
+        return {
+          x: (clientX - rect.left)*scaleX,
+          y: (clientY - rect.top)*scaleY
+        };
+      }
+
+      // Mouse input
+      canvas.addEventListener('mousedown', (e)=>{
+        pointerDown = true;
+        const p = getPointerPos(e);
+        aim.active = true; aim.x = p.x; aim.y = p.y;
+        draw();
+      });
+      window.addEventListener('mousemove', (e)=>{
+        if(!pointerDown) return;
+        const p = getPointerPos(e);
+        aim.active = true; aim.x = p.x; aim.y = p.y;
+      });
+      window.addEventListener('mouseup', (e)=>{
+        if(!pointerDown) return;
+        pointerDown = false;
+        const p = getPointerPos(e);
+        shootAt(p.x, p.y);
+      });
+
+      // Touch input
+      canvas.addEventListener('touchstart', (e)=>{
+        e.preventDefault();
+        pointerDown = true;
+        const p = getPointerPos(e);
+        aim.active = true; aim.x = p.x; aim.y = p.y;
+        draw();
+      }, {passive:false});
+
+      canvas.addEventListener('touchmove', (e)=>{
+        e.preventDefault();
+        if(!pointerDown) return;
+        const p = getPointerPos(e);
+        aim.active = true; aim.x = p.x; aim.y = p.y;
+      }, {passive:false});
+
+      canvas.addEventListener('touchend', (e)=>{
+        e.preventDefault();
+        if(!pointerDown) return;
+        pointerDown = false;
+        shootAt(aim.x, aim.y);
+      }, {passive:false});
+
+      // Buttons
+      startBtn.addEventListener('click', startRound);
+      restartBtn.addEventListener('click', ()=>{
+        resetRound();
+        startRound();
+      });
+      playAgainBtn.addEventListener('click', ()=>{
+        resetRound();
+        startRound();
+      });
+
+      soundBtn.addEventListener('click', ()=>{
+        soundEnabled = !soundEnabled;
+        soundBtn.textContent = soundEnabled ? '🔊 Sound' : '🔇 Sound';
+        if(soundEnabled){
+          try { getAC(); sfx.start(); } catch(e) {}
+        }
+      });
+
+      // Initialize
+      resetRound();
+    })();
+  </script>
+</body>
+</html>
