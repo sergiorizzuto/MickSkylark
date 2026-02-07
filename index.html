@@ -1273,22 +1273,51 @@
             if (link) link.classList.add('active');
         }
 
-        // Use IntersectionObserver for reliable mobile behavior
-        const observer = new IntersectionObserver((entries) => {
-            // pick the most visible intersecting entry
-            const visible = entries
-              .filter(e => e.isIntersecting)
-              .sort((a,b) => (b.intersectionRatio - a.intersectionRatio))[0];
-            if (visible && visible.target && visible.target.id) {
-                setActiveNav(visible.target.id);
-            }
-        }, {
-            root: null,
-            threshold: [0.2, 0.35, 0.5, 0.65],
-            rootMargin: "-20% 0px -65% 0px"
-        });
+        // Use IntersectionObserver for reliable active-nav behavior
+const navEl = document.querySelector('.navbar');
+const navOffset = navEl ? Math.ceil(navEl.getBoundingClientRect().height) : 72;
 
-        sections.forEach(sec => observer.observe(sec));
+// Keep latest intersection ratios for ALL sections
+const ratioById = new Map(sectionIds.map(id => [id, 0]));
+
+const observer = new IntersectionObserver((entries) => {
+  // Update ratios for sections that changed
+  for (const e of entries) {
+    ratioById.set(e.target.id, e.isIntersecting ? e.intersectionRatio : 0);
+  }
+
+  // Pick best section overall (not just the entries that changed)
+  let bestId = null;
+  let bestRatio = 0;
+
+  for (const [id, r] of ratioById.entries()) {
+    if (r > bestRatio) { bestRatio = r; bestId = id; }
+  }
+
+  // If nothing intersecting (can happen with aggressive margins), pick nearest to navbar line
+  if (!bestId) {
+    let closestId = null;
+    let closestDist = Infinity;
+    for (const sec of sections) {
+      const d = Math.abs(sec.getBoundingClientRect().top - navOffset);
+      if (d < closestDist) { closestDist = d; closestId = sec.id; }
+    }
+    bestId = closestId;
+  }
+
+  if (bestId) setActiveNav(bestId);
+}, {
+  root: null,
+  // Detection window: starts under navbar and extends to about mid-screen
+  rootMargin: `-${navOffset}px 0px -55% 0px`,
+  threshold: [0, 0.05, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6]
+});
+
+sections.forEach(sec => observer.observe(sec));
+
+// Set initial active immediately
+setActiveNav(sections[0]?.id || 'home');
+
 
         // Countdown Timer to February 22, 2026 at 3:00 PM (local time)
         function updateCountdown() {
