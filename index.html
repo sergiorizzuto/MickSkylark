@@ -1244,39 +1244,76 @@
             updateBackToTopVisibility();
         }
 
-        // Scroll-spy: highlight nav items when their section is in view
-        const sectionIds = ['home','comparable-films','rsvp','game','cast','instagram','credits','locations'];
-        const navLinksBySection = new Map();
-        document.querySelectorAll('.nav-link[data-section]').forEach(a => {
-            navLinksBySection.set(a.getAttribute('data-section'), a);
+        <script>
+  // Scroll-spy: highlight nav items when their section is in view
+  (function () {
+    const sectionIds = ['home','comparable-films','rsvp','game','cast','instagram','credits','locations'];
+
+    const navLinksBySection = new Map();
+    document.querySelectorAll('.nav-link[data-section]').forEach(a => {
+      navLinksBySection.set(a.getAttribute('data-section'), a);
+    });
+
+    const sections = sectionIds
+      .map(id => document.getElementById(id))
+      .filter(Boolean);
+
+    function setActiveNav(sectionId) {
+      navLinksBySection.forEach((link) => link.classList.remove('active'));
+      const link = navLinksBySection.get(sectionId);
+      if (link) link.classList.add('active');
+    }
+
+    // Calculate navbar height so we can offset detection
+    function getNavOffset() {
+      const nav = document.querySelector('.navbar');
+      return nav ? nav.getBoundingClientRect().height : 72;
+    }
+
+    // IntersectionObserver: treat the area just under the navbar as the "top"
+    let observer = null;
+
+    function setupObserver() {
+      if (observer) observer.disconnect();
+
+      const navOffset = getNavOffset();
+
+      observer = new IntersectionObserver((entries) => {
+        // pick the entry closest to the top (below navbar) among intersecting ones
+        const inView = entries.filter(e => e.isIntersecting);
+        if (!inView.length) return;
+
+        inView.sort((a, b) => {
+          const aTop = Math.abs(a.boundingClientRect.top - navOffset);
+          const bTop = Math.abs(b.boundingClientRect.top - navOffset);
+          return aTop - bTop;
         });
 
-        const sections = sectionIds
-          .map(id => document.getElementById(id))
-          .filter(Boolean);
+        const id = inView[0].target.id;
+        if (id) setActiveNav(id);
+      }, {
+        root: null,
+        // big reliable window: from just below navbar down to ~40% of viewport
+        rootMargin: `-${Math.ceil(navOffset)}px 0px -60% 0px`,
+        threshold: [0, 0.05, 0.1, 0.2]
+      });
 
-        function setActiveNav(sectionId) {
-            navLinksBySection.forEach((link) => link.classList.remove('active'));
-            const link = navLinksBySection.get(sectionId);
-            if (link) link.classList.add('active');
-        }
+      sections.forEach(sec => observer.observe(sec));
 
-        // Use IntersectionObserver for reliable mobile behavior
-        const observer = new IntersectionObserver((entries) => {
-            // pick the most visible intersecting entry
-            const visible = entries
-              .filter(e => e.isIntersecting)
-              .sort((a,b) => (b.intersectionRatio - a.intersectionRatio))[0];
-            if (visible && visible.target && visible.target.id) {
-                setActiveNav(visible.target.id);
-            }
-        }, {
-            root: null,
-            threshold: [0.2, 0.35, 0.5, 0.65],
-            rootMargin: "-20% 0px -65% 0px"
-        });
+      // Set an initial active section immediately
+      const initial = sections
+        .map(sec => ({ id: sec.id, top: sec.getBoundingClientRect().top }))
+        .filter(x => x.top - navOffset <= 5)
+        .sort((a, b) => b.top - a.top)[0];
 
-        sections.forEach(sec => observer.observe(sec));
+      if (initial?.id) setActiveNav(initial.id);
+      else if (sections[0]?.id) setActiveNav(sections[0].id);
+    }
+
+    setupObserver();
+    window.addEventListener('resize', () => setupObserver(), { passive: true });
+  })();
+</script>
 
         // Countdown Timer to February 22, 2026 at 3:00 PM (local time)
         function updateCountdown() {
