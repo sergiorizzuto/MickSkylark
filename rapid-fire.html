@@ -817,9 +817,9 @@
         const speed = Math.hypot(ball.vx, ball.vy);
         if(speed < 0.06){ ball.vx = 0; ball.vy = 0; }
 
-        // Score detection - 25% more forgiving
+        // Score detection - 40% more forgiving on speed, bigger detection zone
         const d = Math.hypot(ball.x - hole.x, ball.y - hole.y);
-        if(d < (hole.r - 4) && speed < 3.5){
+        if(d < (hole.r - 3) && speed < 4.9){
           scorePoint();
         }
 
@@ -828,7 +828,7 @@
           const shotElapsed = (performance.now() - shotStartTime) / 1000;
           if(shotElapsed >= 2.5){
             const dd = Math.hypot(ball.x - hole.x, ball.y - hole.y);
-            if(dd >= (hole.r - 4)){
+            if(dd >= (hole.r - 3)){
               missPenalty();
             }
           }
