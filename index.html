@@ -1,13 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <title>Mick Skylark: Mini Golf Prodigy - Official Website</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-    
+    <meta name="description" content="Mick Skylark: Mini Golf Prodigy — a family-friendly comedy. RSVP for the screener, explore cast, and play the mini golf game." />
+    <meta name="robots" content="index,follow" />
+    <link rel="canonical" href="https://mickskylark.com/" />
+    <meta name="theme-color" content="#1E3A8A" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Mick Skylark: Mini Golf Prodigy" />
+    <meta property="og:description" content="Family-friendly comedy. RSVP for the screener, explore cast, and play the mini golf game." />
+    <meta property="og:url" content="https://mickskylark.com/" />
+    <meta property="og:image" content="https://mickskylark.com/logo-no-bg.png" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Mick Skylark: Mini Golf Prodigy" />
+    <meta name="twitter:description" content="Family-friendly comedy. RSVP for the screener, explore cast, and play the mini golf game." />
+    <meta name="twitter:image" content="https://mickskylark.com/logo-no-bg.png" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
+
+    <!-- Structured data: Movie + Event -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Movie",
+          "name": "Mick Skylark: Mini Golf Prodigy",
+          "url": "https://mickskylark.com/",
+          "image": "https://mickskylark.com/logo-no-bg.png",
+          "genre": ["Comedy", "Family"],
+          "contentRating": "TBD / PG to PG-13",
+          "director": { "@type": "Person", "name": "Sergio Rizzuto" },
+          "productionCompany": { "@type": "Organization", "name": "Potato Eater Productions" }
+        },
+        {
+          "@type": "Event",
+          "name": "Mick Skylark: Mini Golf Prodigy - Screener",
+          "startDate": "2026-02-22T15:00:00-05:00",
+          "eventStatus": "https://schema.org/EventScheduled",
+          "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+          "url": "https://mickskylark.com/#rsvp",
+          "location": [
+            {
+              "@type": "Place",
+              "name": "Boca Raton Screening",
+              "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "313 E Palmetto Park Rd",
+                "addressLocality": "Boca Raton",
+                "addressRegion": "FL",
+                "postalCode": "33432",
+                "addressCountry": "US"
+              }
+            },
+            {
+              "@type": "Place",
+              "name": "Los Angeles Screening (Cinemark Playa Vista & XD)",
+              "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "12746 W Jefferson Blvd, Suite 3190",
+                "addressLocality": "Playa Vista",
+                "addressRegion": "CA",
+                "postalCode": "90094",
+                "addressCountry": "US"
+              }
+            }
+          ],
+          "organizer": { "@type": "Organization", "name": "Potato Eater Productions", "url": "https://mickskylark.com/" },
+          "offers": {
+            "@type": "Offer",
+            "url": "https://mickskylark.com/#rsvp",
+            "availability": "https://schema.org/InStock",
+            "price": "0",
+            "priceCurrency": "USD"
+          }
+        }
+      ]
+    }
+    </script>
+
     <style>
         :root {
             --primary: #1E3A8A;
@@ -18,11 +98,7 @@
             --dark: #1F2937;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             font-family: 'Poppins', sans-serif;
@@ -31,13 +107,23 @@
             padding-top: 60px;
         }
 
+        /* Focus styles (keyboard accessibility) */
+        a:focus-visible, button:focus-visible, input:focus-visible, iframe:focus-visible {
+            outline: 3px solid var(--gold);
+            outline-offset: 3px;
+            border-radius: 10px;
+        }
+
+        /* Reduce motion support */
+        @media (prefers-reduced-motion: reduce) {
+            * { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+        }
+
         .navbar {
             position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
+            top: 0; left: 0; right: 0;
             background: white;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             z-index: 1000;
             padding: 12px 0;
         }
@@ -62,48 +148,7 @@
             font-size: 0.9rem;
         }
 
-        .nav-link:hover {
-            background: var(--primary);
-            color: white;
-        }
-
-        /* Active nav link (scrollspy) */
-        .nav-link.active {
-            background: var(--primary);
-            color: white;
-        }
-
-        /* Back to top button */
-        .back-to-top {
-            position: fixed;
-            right: 18px;
-            bottom: 18px;
-            z-index: 2000;
-            background: var(--primary);
-            color: white;
-            border: none;
-            border-radius: 999px;
-            padding: 12px 16px;
-            font-weight: 700;
-            cursor: pointer;
-            box-shadow: 0 8px 25px rgba(30, 58, 138, 0.35);
-            transform: translateY(20px);
-            opacity: 0;
-            pointer-events: none;
-            transition: all 0.25s ease;
-            font-family: 'Poppins', sans-serif;
-        }
-
-        .back-to-top.show {
-            opacity: 1;
-            transform: translateY(0);
-            pointer-events: auto;
-        }
-
-        .back-to-top:hover {
-            background: var(--primary-dark);
-            transform: translateY(-2px);
-        }
+        .nav-link:hover { background: var(--primary); color: white; }
 
         .section-blue {
             background: linear-gradient(135deg, #87CEEB 0%, #5DADE2 100%);
@@ -115,15 +160,9 @@
             padding: 80px 20px;
         }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
+        .container { max-width: 1200px; margin: 0 auto; }
 
-        .hero {
-            text-align: center;
-            padding: 40px 20px 80px;
-        }
+        .hero { text-align: center; padding: 40px 20px 80px; }
 
         .hero img {
             width: 100%;
@@ -136,17 +175,9 @@
         }
 
         @keyframes logoReveal {
-            0% {
-                opacity: 0;
-                transform: scale(0.8) translateY(-30px);
-            }
-            60% {
-                transform: scale(1.05) translateY(0);
-            }
-            100% {
-                opacity: 1;
-                transform: scale(1) translateY(0);
-            }
+            0% { opacity: 0; transform: scale(0.8) translateY(-30px); }
+            60% { transform: scale(1.05) translateY(0); }
+            100% { opacity: 1; transform: scale(1) translateY(0); }
         }
 
         .scroll-cta {
@@ -165,11 +196,6 @@
             60% { transform: translateY(-5px); }
         }
 
-        .slider-nav {
-            position: relative;
-            margin: 40px 0;
-        }
-
         .slideshow-wrapper {
             overflow-x: scroll;
             overflow-y: hidden;
@@ -181,19 +207,13 @@
             cursor: grab;
         }
 
-        .slideshow-wrapper:active {
-            cursor: grabbing;
-        }
+        .slideshow-wrapper:active { cursor: grabbing; }
 
-        .slideshow-wrapper::-webkit-scrollbar {
-            height: 8px;
-        }
-
+        .slideshow-wrapper::-webkit-scrollbar { height: 8px; }
         .slideshow-wrapper::-webkit-scrollbar-track {
             background: rgba(0,0,0,0.1);
             border-radius: 10px;
         }
-
         .slideshow-wrapper::-webkit-scrollbar-thumb {
             background: var(--primary);
             border-radius: 10px;
@@ -213,6 +233,7 @@
             border-radius: 15px;
             overflow: hidden;
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            background: rgba(255,255,255,0.35);
         }
 
         .slide img {
@@ -223,10 +244,7 @@
         }
 
         @media (max-width: 768px) {
-            .slide {
-                width: 300px;
-                height: 225px;
-            }
+            .slide { width: 300px; height: 225px; }
         }
 
         .section-title {
@@ -250,7 +268,7 @@
             background-size: 200% 200%;
             animation: gradientShift 8s ease infinite;
             border-radius: 25px;
-            box-shadow: 0 15px 50px rgba(30, 58, 138, 0.4), 
+            box-shadow: 0 15px 50px rgba(30, 58, 138, 0.4),
                         0 0 0 1px rgba(255, 255, 255, 0.1) inset;
             position: relative;
             overflow: hidden;
@@ -260,10 +278,7 @@
         .logline::before {
             content: '';
             position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
+            top: -2px; left: -2px; right: -2px; bottom: -2px;
             background: linear-gradient(45deg, #FCD34D, #FBBF24, #FCD34D);
             border-radius: 25px;
             z-index: -1;
@@ -285,12 +300,10 @@
             0%, 100% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
         }
-
         @keyframes borderPulse {
             0%, 100% { transform: scale(1); opacity: 0.3; }
             50% { transform: scale(1.02); opacity: 0.5; }
         }
-
         @keyframes float {
             0%, 100% { transform: translateY(0px) rotate(0deg); }
             50% { transform: translateY(-10px) rotate(5deg); }
@@ -302,14 +315,6 @@
                 padding: 35px 30px;
                 transform: none;
             }
-        }
-
-        .rating {
-            font-size: 1.1rem;
-            font-weight: 600;
-            text-align: center;
-            margin: 20px 0;
-            color: var(--primary);
         }
 
         .rating-badge {
@@ -326,61 +331,12 @@
             animation: ratingPulse 2s ease-in-out infinite;
         }
 
-        .rating-label {
-            display: inline-block;
-            margin-right: 10px;
-            opacity: 0.9;
-        }
-
-        .rating-value {
-            display: inline-block;
-            font-size: 1.4rem;
-            letter-spacing: 1px;
-        }
+        .rating-label { display: inline-block; margin-right: 10px; opacity: 0.9; }
+        .rating-value { display: inline-block; font-size: 1.4rem; letter-spacing: 1px; }
 
         @keyframes ratingPulse {
-            0%, 100% { 
-                transform: scale(1);
-                box-shadow: 0 6px 25px rgba(30, 58, 138, 0.4);
-            }
-            50% { 
-                transform: scale(1.05);
-                box-shadow: 0 8px 30px rgba(30, 58, 138, 0.6);
-            }
-        }
-
-        .links-section {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-top: 30px;
-        }
-
-        .link-btn {
-            padding: 15px 35px;
-            background: var(--primary);
-            color: white;
-            text-decoration: none;
-            border-radius: 30px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(30, 58, 138, 0.3);
-        }
-
-        .link-btn:hover {
-            background: var(--primary-dark);
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(30, 58, 138, 0.4);
-        }
-
-        .link-btn.secondary {
-            background: var(--secondary);
-            color: var(--dark);
-        }
-
-        .link-btn.secondary:hover {
-            background: var(--gold);
+            0%, 100% { transform: scale(1); box-shadow: 0 6px 25px rgba(30, 58, 138, 0.4); }
+            50% { transform: scale(1.05); box-shadow: 0 8px 30px rgba(30, 58, 138, 0.6); }
         }
 
         .comparable-films-wrapper {
@@ -394,29 +350,19 @@
             cursor: grab;
         }
 
-        .comparable-films-wrapper:active {
-            cursor: grabbing;
-        }
+        .comparable-films-wrapper:active { cursor: grabbing; }
 
-        .comparable-films-wrapper::-webkit-scrollbar {
-            height: 8px;
-        }
-
+        .comparable-films-wrapper::-webkit-scrollbar { height: 8px; }
         .comparable-films-wrapper::-webkit-scrollbar-track {
             background: rgba(0,0,0,0.1);
             border-radius: 10px;
         }
-
         .comparable-films-wrapper::-webkit-scrollbar-thumb {
             background: var(--primary);
             border-radius: 10px;
         }
 
-        .comparable-films {
-            display: inline-flex;
-            gap: 30px;
-            padding: 0 10px;
-        }
+        .comparable-films { display: inline-flex; gap: 30px; padding: 0 10px; }
 
         .film-poster {
             display: inline-block;
@@ -425,36 +371,20 @@
             transition: transform 0.3s ease;
             border-radius: 10px;
             overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
         }
 
         .film-poster:hover {
             transform: translateY(-10px) scale(1.05);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.25);
         }
 
-        .film-poster img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
+        .film-poster img { width: 100%; height: auto; display: block; }
 
-        .screener-info {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-
-        .screener-date {
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--primary);
-            margin-bottom: 15px;
-        }
-
-        .screener-note {
-            font-size: 1.2rem;
-            color: var(--dark);
-        }
+        .screener-info { text-align: center; margin-bottom: 40px; }
+        .screener-date { font-size: 2rem; font-weight: 700; color: var(--primary); margin-bottom: 10px; }
+        .screener-sub { font-size: 1rem; color: #374151; font-weight: 600; margin-bottom: 10px; }
+        .screener-note { font-size: 1.2rem; color: var(--dark); }
 
         .countdown-timer {
             display: flex;
@@ -468,74 +398,18 @@
             background: white;
             padding: 20px 25px;
             border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
             min-width: 100px;
         }
 
-        .countdown-number {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--primary);
-            display: block;
-        }
-
-        .countdown-label {
-            font-size: 0.9rem;
-            color: #666;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .social-share {
-            text-align: center;
-            margin-top: 30px;
-        }
-
-        .share-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-top: 15px;
-            flex-wrap: wrap;
-        }
-
-        .share-btn {
-            padding: 12px 25px;
-            border-radius: 30px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .share-btn.facebook {
-            background: #1877F2;
-            color: white;
-        }
-
-        .share-btn.twitter {
-            background: #1DA1F2;
-            color: white;
-        }
-
-        .share-btn.email {
-            background: #666;
-            color: white;
-        }
-
-        .share-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-        }
+        .countdown-number { font-size: 2.5rem; font-weight: 700; color: var(--primary); display: block; }
+        .countdown-label { font-size: 0.9rem; color: #666; text-transform: uppercase; letter-spacing: 1px; }
 
         .game-container {
             background: white;
             padding: 40px 20px;
             border-radius: 20px;
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.15);
             text-align: center;
         }
 
@@ -550,104 +424,48 @@
             position: relative;
         }
 
-        .controls {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-bottom: 20px;
-        }
+        .controls { display: flex; justify-content: center; gap: 15px; margin-bottom: 20px; }
 
         .control-btn {
             background: white;
             border: 2px solid var(--primary);
             border-radius: 50%;
-            width: 45px;
-            height: 45px;
+            width: 45px; height: 45px;
             cursor: pointer;
             font-size: 1.5rem;
             display: flex;
             align-items: center;
             justify-content: center;
             transition: all 0.3s ease;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
 
-        .control-btn:hover {
-            transform: scale(1.1);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-        }
-
-        .control-btn.active {
-            background: var(--primary);
-            color: white;
-        }
+        .control-btn:hover { transform: scale(1.1); box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
+        .control-btn.active { background: var(--primary); color: white; }
 
         .scorecard {
             background: white;
             border-radius: 15px;
             padding: 20px;
             margin: 30px auto;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
             overflow-x: auto;
         }
 
-        .scorecard h3 {
-            color: var(--primary);
-            margin-bottom: 15px;
-            text-align: center;
-        }
+        .scorecard h3 { color: var(--primary); margin-bottom: 15px; text-align: center; }
 
-        .scorecard table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 0.9rem;
-        }
+        .scorecard table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+        .scorecard th, .scorecard td { padding: 8px; text-align: center; border: 1px solid #e5e7eb; }
+        .scorecard th { background: var(--primary); color: white; font-weight: 600; }
 
-        .scorecard th, .scorecard td {
-            padding: 8px;
-            text-align: center;
-            border: 1px solid #e5e7eb;
-        }
+        .scorecard .par-row { background: #f9fafb; font-weight: 600; }
+        .scorecard .score-row td { font-weight: 700; font-size: 1.1rem; }
 
-        .scorecard th {
-            background: var(--primary);
-            color: white;
-            font-weight: 600;
-        }
-
-        .scorecard .par-row {
-            background: #f9fafb;
-            font-weight: 600;
-        }
-
-        .scorecard .score-row td {
-            font-weight: 700;
-            font-size: 1.1rem;
-        }
-
-        .scorecard .score-row td.birdie {
-            background: #10B981;
-            color: white;
-        }
-
-        .scorecard .score-row td.par {
-            background: #FCD34D;
-        }
-
-        .scorecard .score-row td.bogey {
-            background: #F59E0B;
-            color: white;
-        }
-
-        .scorecard .score-row td.double-bogey {
-            background: #EF4444;
-            color: white;
-        }
-
-        .scorecard .score-row td.pending {
-            background: #f3f4f6;
-            color: #9ca3af;
-        }
+        .scorecard .score-row td.birdie { background: #10B981; color: white; }
+        .scorecard .score-row td.par { background: #FCD34D; }
+        .scorecard .score-row td.bogey { background: #F59E0B; color: white; }
+        .scorecard .score-row td.double-bogey { background: #EF4444; color: white; }
+        .scorecard .score-row td.pending { background: #f3f4f6; color: #9ca3af; }
 
         .game-btn {
             padding: 12px 30px;
@@ -663,56 +481,35 @@
             margin: 5px;
         }
 
-        .game-btn:hover {
-            background: var(--primary-dark);
-            transform: scale(1.05);
-        }
-
-        .game-btn.secondary {
-            background: var(--secondary);
-            color: var(--primary);
-        }
-
-        .game-btn.secondary:hover {
-            background: var(--gold);
-        }
+        .game-btn:hover { background: var(--primary-dark); transform: scale(1.05); }
+        .game-btn.secondary { background: var(--secondary); color: var(--primary); }
+        .game-btn.secondary:hover { background: var(--gold); }
 
         .water-splash {
             position: fixed;
-            top: 50%;
-            left: 50%;
+            top: 50%; left: 50%;
             transform: translate(-50%, -50%);
             font-size: 4rem;
             font-weight: 700;
             color: #1E90FF;
-            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
             animation: splashAnimation 1s ease-out forwards;
             pointer-events: none;
             z-index: 10000;
         }
 
         @keyframes splashAnimation {
-            0% {
-                opacity: 0;
-                transform: translate(-50%, -50%) scale(0.5);
-            }
-            50% {
-                opacity: 1;
-                transform: translate(-50%, -50%) scale(1.2);
-            }
-            100% {
-                opacity: 0;
-                transform: translate(-50%, -50%) scale(1) translateY(-50px);
-            }
+            0% { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
+            50% { opacity: 1; transform: translate(-50%, -50%) scale(1.2); }
+            100% { opacity: 0; transform: translate(-50%, -50%) scale(1) translateY(-50px); }
         }
 
         .celebration-overlay {
             position: fixed;
-            top: 0;
-            left: 0;
+            top: 0; left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.8);
+            background: rgba(0,0,0,0.8);
             display: none;
             justify-content: center;
             align-items: center;
@@ -720,9 +517,7 @@
             animation: fadeIn 0.3s ease;
         }
 
-        .celebration-overlay.active {
-            display: flex;
-        }
+        .celebration-overlay.active { display: flex; }
 
         .celebration-content {
             background: white;
@@ -731,49 +526,17 @@
             text-align: center;
             max-width: 500px;
             animation: scaleIn 0.5s ease;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
         }
 
-        .celebration-emoji {
-            font-size: 5rem;
-            animation: bounce2 1s ease infinite;
-            margin-bottom: 20px;
-        }
+        .celebration-emoji { font-size: 5rem; animation: bounce2 1s ease infinite; margin-bottom: 20px; }
+        .celebration-title { font-size: 2.5rem; color: var(--primary); font-weight: 700; margin-bottom: 15px; }
+        .celebration-score { font-size: 1.5rem; color: var(--gold); font-weight: 600; margin-bottom: 20px; }
+        .celebration-message { font-size: 1.1rem; color: #666; margin-bottom: 30px; }
 
-        .celebration-title {
-            font-size: 2.5rem;
-            color: var(--primary);
-            font-weight: 700;
-            margin-bottom: 15px;
-        }
-
-        .celebration-score {
-            font-size: 1.5rem;
-            color: var(--gold);
-            font-weight: 600;
-            margin-bottom: 20px;
-        }
-
-        .celebration-message {
-            font-size: 1.1rem;
-            color: #666;
-            margin-bottom: 30px;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        @keyframes scaleIn {
-            from { transform: scale(0.5); opacity: 0; }
-            to { transform: scale(1); opacity: 1; }
-        }
-
-        @keyframes bounce2 {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
-        }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes scaleIn { from { transform: scale(0.5); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+        @keyframes bounce2 { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
 
         .confetti {
             position: fixed;
@@ -785,42 +548,16 @@
         }
 
         @keyframes confettiFall {
-            to {
-                transform: translateY(100vh) rotate(360deg);
-                opacity: 0;
-            }
+            to { transform: translateY(100vh) rotate(360deg); opacity: 0; }
         }
 
         @media (max-width: 768px) {
-            .game-container {
-                padding: 20px 10px;
-            }
-            
-            .game-canvas {
-                width: 100% !important;
-                height: auto !important;
-            }
-
-            .celebration-content {
-                padding: 30px 20px;
-                margin: 20px;
-            }
-
-            .celebration-title {
-                font-size: 2rem;
-            }
-
-            .scorecard {
-                font-size: 0.8rem;
-            }
-
-            .scorecard th, .scorecard td {
-                padding: 6px 4px;
-            }
-        }
-
-        .map-container {
-            margin: 40px 0;
+            .game-container { padding: 20px 10px; }
+            .game-canvas { width: 100% !important; height: auto !important; }
+            .celebration-content { padding: 30px 20px; margin: 20px; }
+            .celebration-title { font-size: 2rem; }
+            .scorecard { font-size: 0.8rem; }
+            .scorecard th, .scorecard td { padding: 6px 4px; }
         }
 
         .map-grid {
@@ -834,27 +571,11 @@
             background: white;
             padding: 25px;
             border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
 
-        .location-card h3 {
-            color: var(--primary);
-            margin-bottom: 15px;
-            font-size: 1.3rem;
-        }
-
-        .location-card p {
-            margin: 8px 0;
-            color: var(--dark);
-        }
-
-        .map-embed {
-            width: 100%;
-            height: 450px;
-            border: none;
-            border-radius: 15px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-        }
+        .location-card h3 { color: var(--primary); margin-bottom: 15px; font-size: 1.3rem; }
+        .location-card p { margin: 8px 0; color: var(--dark); }
 
         .cast-grid {
             display: grid;
@@ -868,7 +589,7 @@
             background: white;
             padding: 20px;
             border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
             display: flex;
             align-items: center;
             gap: 20px;
@@ -877,7 +598,7 @@
 
         .cast-member:hover {
             transform: translateY(-5px);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
         }
 
         .cast-photo {
@@ -889,18 +610,8 @@
             flex-shrink: 0;
         }
 
-        .actor-name {
-            font-weight: 700;
-            font-size: 1.1rem;
-            color: var(--primary);
-            margin-bottom: 5px;
-        }
-
-        .character-name {
-            font-size: 0.95rem;
-            color: #666;
-            font-style: italic;
-        }
+        .actor-name { font-weight: 700; font-size: 1.1rem; color: var(--primary); margin-bottom: 5px; }
+        .character-name { font-size: 0.95rem; color: #666; font-style: italic; }
 
         .credits-grid {
             display: grid;
@@ -915,7 +626,7 @@
             padding: 25px;
             border-radius: 15px;
             text-align: center;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
 
         .credit-label {
@@ -926,11 +637,33 @@
             margin-bottom: 10px;
         }
 
-        .credit-name {
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: var(--primary);
+        .credit-name { font-size: 1.2rem; font-weight: 700; color: var(--primary); }
+
+        /* Contact + email capture cards */
+        .card {
+            background: white;
+            border-radius: 18px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+            padding: 28px 24px;
+            max-width: 900px;
+            margin: 0 auto;
         }
+
+        .contact-row {
+            display: flex;
+            gap: 20px;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .contact-row a {
+            color: var(--primary);
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .contact-row a:hover { text-decoration: underline; }
 
         footer {
             background: var(--primary);
@@ -939,17 +672,74 @@
             padding: 40px 20px;
         }
 
-        footer a {
-            color: var(--secondary);
-            text-decoration: none;
-            font-weight: 600;
+        footer a { color: var(--secondary); text-decoration: none; font-weight: 600; }
+        footer a:hover { text-decoration: underline; }
+
+        /* Back-to-top */
+        .back-to-top {
+            position: fixed;
+            right: 18px;
+            bottom: 18px;
+            width: 52px;
+            height: 52px;
+            border-radius: 999px;
+            border: 2px solid rgba(255,255,255,0.7);
+            background: var(--primary);
+            color: white;
+            font-size: 20px;
+            font-weight: 800;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+            opacity: 0;
+            transform: translateY(10px);
+            pointer-events: none;
+            transition: opacity 0.25s ease, transform 0.25s ease;
+            z-index: 10001;
         }
 
-        footer a:hover {
-            text-decoration: underline;
+        .back-to-top.show {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
         }
+
+        .back-to-top:hover { background: var(--primary-dark); transform: translateY(-2px); }
+
+        /* Toast (replaces alert) */
+        .toast {
+            position: fixed;
+            left: 50%;
+            bottom: 90px;
+            transform: translateX(-50%) translateY(10px);
+            background: rgba(17, 24, 39, 0.95);
+            color: white;
+            padding: 12px 16px;
+            border-radius: 999px;
+            box-shadow: 0 12px 30px rgba(0,0,0,0.35);
+            font-weight: 700;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.25s ease, transform 0.25s ease;
+            z-index: 10002;
+            max-width: calc(100% - 40px);
+            text-align: center;
+            line-height: 1.25;
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .toast.good { background: rgba(16, 185, 129, 0.95); }
+        .toast.ok { background: rgba(252, 211, 77, 0.95); color: #111827; }
+        .toast.bad { background: rgba(239, 68, 68, 0.95); }
     </style>
 </head>
+
 <body>
     <!-- Navigation -->
     <nav class="navbar">
@@ -958,47 +748,49 @@
             <a href="index.html#comparable-films" class="nav-link">Similar Films</a>
             <a href="index.html#rsvp" class="nav-link">RSVP</a>
             <a href="screener-survey.html" class="nav-link nav-link-external">Screener Survey</a>
+            <a href="index.html#updates" class="nav-link">Email Updates</a>
             <a href="index.html#game" class="nav-link">Mini Golf Game</a>
             <a href="index.html#cast" class="nav-link">Cast</a>
             <a href="index.html#instagram" class="nav-link">Instagram</a>
             <a href="merch.html" class="nav-link nav-link-external">Merch</a>
             <a href="index.html#credits" class="nav-link">Credits</a>
             <a href="index.html#locations" class="nav-link">Locations</a>
+            <a href="index.html#contact" class="nav-link">Contact</a>
         </div>
     </nav>
 
     <!-- Hero Section -->
     <section id="home" class="section-yellow hero">
         <div class="container">
-            <img src="logo-no-bg.png" alt="Mick Skylark: Mini Golf Prodigy">
-            
+            <img src="logo-no-bg.png" alt="Mick Skylark: Mini Golf Prodigy" decoding="async" />
+
             <div class="scroll-cta">↓ Scroll Down To RSVP ↓</div>
 
             <!-- Horizontal Slideshow -->
-            <div class="slideshow-wrapper" id="bts-slideshow">
+            <div class="slideshow-wrapper" id="bts-slideshow" aria-label="Behind the scenes photos (scroll horizontally)">
                 <div class="slideshow-container">
-                    <div class="slide"><img src="bts-photos/bts1.jpg" alt="BTS 1"></div>
-                    <div class="slide"><img src="bts-photos/bts2.jpg" alt="BTS 2"></div>
-                    <div class="slide"><img src="bts-photos/bts3.jpg" alt="BTS 3"></div>
-                    <div class="slide"><img src="bts-photos/bts4.jpg" alt="BTS 4"></div>
-                    <div class="slide"><img src="bts-photos/bts5.jpg" alt="BTS 5"></div>
-                    <div class="slide"><img src="bts-photos/bts6.jpg" alt="BTS 6"></div>
-                    <div class="slide"><img src="bts-photos/bts7.jpg" alt="BTS 7"></div>
-                    <div class="slide"><img src="bts-photos/bts8.jpg" alt="BTS 8"></div>
-                    <div class="slide"><img src="bts-photos/bts9.jpg" alt="BTS 9"></div>
-                    <div class="slide"><img src="bts-photos/bts10.jpg" alt="BTS 10"></div>
-                    <div class="slide"><img src="bts-photos/bts11.jpg" alt="BTS 11"></div>
+                    <div class="slide"><img src="bts-photos/bts1.jpg" alt="Behind the scenes 1" loading="lazy" decoding="async" /></div>
+                    <div class="slide"><img src="bts-photos/bts2.jpg" alt="Behind the scenes 2" loading="lazy" decoding="async" /></div>
+                    <div class="slide"><img src="bts-photos/bts3.jpg" alt="Behind the scenes 3" loading="lazy" decoding="async" /></div>
+                    <div class="slide"><img src="bts-photos/bts4.jpg" alt="Behind the scenes 4" loading="lazy" decoding="async" /></div>
+                    <div class="slide"><img src="bts-photos/bts5.jpg" alt="Behind the scenes 5" loading="lazy" decoding="async" /></div>
+                    <div class="slide"><img src="bts-photos/bts6.jpg" alt="Behind the scenes 6" loading="lazy" decoding="async" /></div>
+                    <div class="slide"><img src="bts-photos/bts7.jpg" alt="Behind the scenes 7" loading="lazy" decoding="async" /></div>
+                    <div class="slide"><img src="bts-photos/bts8.jpg" alt="Behind the scenes 8" loading="lazy" decoding="async" /></div>
+                    <div class="slide"><img src="bts-photos/bts9.jpg" alt="Behind the scenes 9" loading="lazy" decoding="async" /></div>
+                    <div class="slide"><img src="bts-photos/bts10.jpg" alt="Behind the scenes 10" loading="lazy" decoding="async" /></div>
+                    <div class="slide"><img src="bts-photos/bts11.jpg" alt="Behind the scenes 11" loading="lazy" decoding="async" /></div>
                 </div>
             </div>
 
             <p class="logline">
-                Mick Skylark, coached by his mentor Jonsey, quickly rises to the top as a child mini golf prodigy. 
+                Mick Skylark, coached by his mentor Jonsey, quickly rises to the top as a child mini golf prodigy.
                 When a tragedy strikes that he feels responsible for, he quits the sport for good.
                 <br><br>
                 • Comedic &nbsp;&nbsp; • Family Friendly
             </p>
 
-            <div class="rating-badge">
+            <div class="rating-badge" aria-label="Rating badge">
                 <span class="rating-label">Rating:</span>
                 <span class="rating-value">TBD / PG to PG-13</span>
             </div>
@@ -1012,19 +804,20 @@
             <p style="text-align: center; margin-bottom: 50px; font-size: 1.1rem; color: var(--dark);">
                 Fans of these comedy classics will love Mick Skylark!
             </p>
-            <div class="comparable-films-wrapper" id="films-slideshow">
+
+            <div class="comparable-films-wrapper" id="films-slideshow" aria-label="Comparable films (scroll horizontally)">
                 <div class="comparable-films">
                     <div class="film-poster">
-                        <img src="comparable-films/happy-gilmore.webp" alt="Happy Gilmore">
+                        <img src="comparable-films/happy-gilmore.webp" alt="Happy Gilmore" loading="lazy" decoding="async" />
                     </div>
                     <div class="film-poster">
-                        <img src="comparable-films/dodgeball.webp" alt="Dodgeball">
+                        <img src="comparable-films/dodgeball.webp" alt="Dodgeball" loading="lazy" decoding="async" />
                     </div>
                     <div class="film-poster">
-                        <img src="comparable-films/kingpin.webp" alt="Kingpin">
+                        <img src="comparable-films/kingpin.webp" alt="Kingpin" loading="lazy" decoding="async" />
                     </div>
                     <div class="film-poster">
-                        <img src="comparable-films/young-frankenstein.webp" alt="Young Frankenstein">
+                        <img src="comparable-films/young-frankenstein.webp" alt="Young Frankenstein" loading="lazy" decoding="async" />
                     </div>
                 </div>
             </div>
@@ -1035,9 +828,9 @@
     <section id="rsvp" class="section-yellow">
         <div class="container">
             <h2 class="section-title">Screener RSVP</h2>
-            
+
             <!-- Countdown Timer -->
-            <div class="countdown-timer">
+            <div class="countdown-timer" aria-label="Countdown to screener">
                 <div class="countdown-box">
                     <span class="countdown-number" id="days">--</span>
                     <span class="countdown-label">Days</span>
@@ -1057,12 +850,47 @@
             </div>
 
             <div class="screener-info">
-                <div class="screener-date">Sunday, February 22 @ 3:00 PM</div>
+                <div class="screener-date">Sunday, February 22, 2026 @ 3:00 PM ET</div>
+                <div class="screener-sub">Los Angeles time: 12:00 PM PT</div>
                 <p class="screener-note">Reserve your spot for an exclusive screening!</p>
             </div>
 
             <div style="max-width: 700px; margin: 0 auto;">
-                <iframe data-tally-src="https://tally.so/embed/81xXe5?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1" loading="lazy" width="100%" height="981" frameborder="0" marginheight="0" marginwidth="0" title="RSVP for 'Mick Skylark: Mini Golf Prodigy' Screener"></iframe>
+                <iframe
+                    data-tally-src="https://tally.so/embed/1AVZKg?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"
+                    loading="lazy"
+                    width="100%"
+                    height="980"
+                    frameborder="0"
+                    marginheight="0"
+                    marginwidth="0"
+                    title="RSVP for Mick Skylark: Mini Golf Prodigy Screener">
+                </iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- Email Updates Section -->
+    <section id="updates" class="section-blue">
+        <div class="container">
+            <h2 class="section-title">Email Updates</h2>
+            <div class="card">
+                <p style="text-align:center; font-size:1.1rem; margin-bottom:18px; color:#374151;">
+                    Want updates on future screenings and announcements? Drop your email here.
+                </p>
+
+                <div style="max-width: 700px; margin: 0 auto;">
+                    <iframe
+                        data-tally-src="https://tally.so/embed/2EPqJ9?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"
+                        loading="lazy"
+                        width="100%"
+                        height="380"
+                        frameborder="0"
+                        marginheight="0"
+                        marginwidth="0"
+                        title="Email updates signup">
+                    </iframe>
+                </div>
             </div>
         </div>
     </section>
@@ -1074,16 +902,16 @@
             <p style="text-align: center; margin-bottom: 30px; font-size: 1.1rem;">
                 Click to hit the ball into the hole! Can you beat par on all 18 holes?
             </p>
-            
-            <div class="controls">
-                <button class="control-btn active" id="dayBtn" onclick="setTheme('day')" title="Day Mode">☀️</button>
-                <button class="control-btn" id="nightBtn" onclick="setTheme('night')" title="Night Mode">🌙</button>
-                <button class="control-btn active" id="soundBtn" onclick="toggleSound()" title="Toggle Sound">🔊</button>
+
+            <div class="controls" aria-label="Game controls">
+                <button class="control-btn active" id="dayBtn" onclick="setTheme('day')" title="Day Mode" aria-label="Day mode">☀️</button>
+                <button class="control-btn" id="nightBtn" onclick="setTheme('night')" title="Night Mode" aria-label="Night mode">🌙</button>
+                <button class="control-btn active" id="soundBtn" onclick="toggleSound()" title="Toggle Sound" aria-label="Toggle sound">🔊</button>
             </div>
-            
+
             <div class="game-container">
                 <canvas id="golfCanvas" class="game-canvas" width="500" height="400"></canvas>
-                
+
                 <div class="scorecard">
                     <h3>📋 Scorecard</h3>
                     <table>
@@ -1131,7 +959,7 @@
                         <span style="margin: 0 15px;">⛳ Holes-in-One: <strong id="holesInOneCount">0</strong></span>
                     </div>
                 </div>
-                
+
                 <div style="display: flex; gap: 10px; justify-content: center; margin-top: 20px; flex-wrap: wrap;">
                     <button class="game-btn" onclick="resetGame()">↻ Restart Course</button>
                     <button class="game-btn secondary" onclick="shareChallenge()">👥 Challenge Friends</button>
@@ -1155,132 +983,151 @@
     <section id="cast" class="section-blue">
         <div class="container">
             <div style="text-align: center; margin-bottom: 50px;">
-                <a href="https://pro.imdb.com/title/tt12115818/" target="_blank" class="link-btn" style="font-size: 1.2rem; padding: 15px 40px;">📽️ View on IMDb</a>
+                <a href="https://pro.imdb.com/title/tt12115818/" target="_blank" class="game-btn secondary" style="text-decoration:none; display:inline-block;">
+                    📽️ View on IMDb
+                </a>
             </div>
-            
+
             <h2 class="section-title">Starring</h2>
             <div class="cast-grid">
                 <div class="cast-member">
-                    <img src="cast-photos/brandon-engman.jpg" alt="Brandon Engman" class="cast-photo">
+                    <img src="cast-photos/brandon-engman.jpg" alt="Brandon Engman" class="cast-photo" loading="lazy" decoding="async" />
                     <div class="cast-info">
                         <div class="actor-name">Brandon Engman</div>
                         <div class="character-name">as Mick Skylark</div>
                     </div>
                 </div>
+
                 <div class="cast-member">
-                    <img src="cast-photos/david-koechner.jpg" alt="David Koechner" class="cast-photo">
+                    <img src="cast-photos/david-koechner.jpg" alt="David Koechner" class="cast-photo" loading="lazy" decoding="async" />
                     <div class="cast-info">
                         <div class="actor-name">David Koechner</div>
                         <div class="character-name">as Jonsey</div>
                     </div>
                 </div>
+
                 <div class="cast-member">
-                    <img src="cast-photos/patrick-warburton.jpg" alt="Patrick Warburton" class="cast-photo">
+                    <img src="cast-photos/patrick-warburton.jpg" alt="Patrick Warburton" class="cast-photo" loading="lazy" decoding="async" />
                     <div class="cast-info">
                         <div class="actor-name">Patrick Warburton</div>
                         <div class="character-name">as Dr. Phil</div>
                     </div>
                 </div>
+
                 <div class="cast-member">
-                    <img src="cast-photos/robert-knepper.jpg" alt="Robert Knepper" class="cast-photo">
+                    <img src="cast-photos/robert-knepper.jpg" alt="Robert Knepper" class="cast-photo" loading="lazy" decoding="async" />
                     <div class="cast-info">
                         <div class="actor-name">Robert Knepper</div>
                         <div class="character-name">as Vladimir</div>
                     </div>
                 </div>
+
                 <div class="cast-member">
-                    <img src="cast-photos/cs-lee.jpg" alt="CS Lee" class="cast-photo">
+                    <img src="cast-photos/cs-lee.jpg" alt="CS Lee" class="cast-photo" loading="lazy" decoding="async" />
                     <div class="cast-info">
                         <div class="actor-name">CS Lee</div>
                         <div class="character-name">as Leonard</div>
                     </div>
                 </div>
+
                 <div class="cast-member">
-                    <img src="cast-photos/elizabeth-mitchell.jpg" alt="Elizabeth Mitchell" class="cast-photo">
+                    <img src="cast-photos/elizabeth-mitchell.jpg" alt="Elizabeth Mitchell" class="cast-photo" loading="lazy" decoding="async" />
                     <div class="cast-info">
                         <div class="actor-name">Elizabeth Mitchell</div>
                         <div class="character-name">as Clara</div>
                     </div>
                 </div>
+
                 <div class="cast-member">
-                    <img src="cast-photos/thomas-lennon.jpg" alt="Thomas Lennon" class="cast-photo">
+                    <img src="cast-photos/thomas-lennon.jpg" alt="Thomas Lennon" class="cast-photo" loading="lazy" decoding="async" />
                     <div class="cast-info">
                         <div class="actor-name">Thomas Lennon</div>
                         <div class="character-name">as Tom McDonald</div>
                     </div>
                 </div>
+
                 <div class="cast-member">
-                    <img src="cast-photos/matt-iseman.jpg" alt="Matt Iseman" class="cast-photo">
+                    <img src="cast-photos/matt-iseman.jpg" alt="Matt Iseman" class="cast-photo" loading="lazy" decoding="async" />
                     <div class="cast-info">
                         <div class="actor-name">Matt Iseman</div>
                         <div class="character-name">as Artie Finegold</div>
                     </div>
                 </div>
+
                 <div class="cast-member">
-                    <img src="cast-photos/jorge-garcia.jpg" alt="Jorge Garcia" class="cast-photo">
+                    <img src="cast-photos/jorge-garcia.jpg" alt="Jorge Garcia" class="cast-photo" loading="lazy" decoding="async" />
                     <div class="cast-info">
                         <div class="actor-name">Jorge Garcia</div>
                         <div class="character-name">as Roger</div>
                     </div>
                 </div>
+
                 <div class="cast-member">
-                    <img src="cast-photos/james-murray.jpg" alt="James Murray" class="cast-photo">
+                    <img src="cast-photos/james-murray.jpg" alt="James Murray (Murr)" class="cast-photo" loading="lazy" decoding="async" />
                     <div class="cast-info">
                         <div class="actor-name">James Murray (Murr)</div>
                         <div class="character-name">as Harry Johnson</div>
                     </div>
                 </div>
+
                 <div class="cast-member">
-                    <img src="cast-photos/russell-hodgkinson.jpg" alt="Russell Hodgkinson" class="cast-photo">
+                    <img src="cast-photos/russell-hodgkinson.jpg" alt="Russell Hodgkinson" class="cast-photo" loading="lazy" decoding="async" />
                     <div class="cast-info">
                         <div class="actor-name">Russell Hodgkinson</div>
                         <div class="character-name">as Dave</div>
                     </div>
                 </div>
+
                 <div class="cast-member">
-                    <img src="cast-photos/ali-stoner.jpg" alt="Ali Stoner" class="cast-photo">
+                    <img src="cast-photos/ali-stoner.jpg" alt="Ali Stoner" class="cast-photo" loading="lazy" decoding="async" />
                     <div class="cast-info">
                         <div class="actor-name">Ali Stoner</div>
                         <div class="character-name">as Vanessa</div>
                     </div>
                 </div>
+
                 <div class="cast-member">
-                    <img src="cast-photos/colin-egglesfield.jpg" alt="Colin Egglesfield" class="cast-photo">
+                    <img src="cast-photos/colin-egglesfield.jpg" alt="Colin Egglesfield" class="cast-photo" loading="lazy" decoding="async" />
                     <div class="cast-info">
                         <div class="actor-name">Colin Egglesfield</div>
                         <div class="character-name">as Eagle</div>
                     </div>
                 </div>
+
                 <div class="cast-member">
-                    <img src="cast-photos/violet-bennett.jpg" alt="Violet Bennett" class="cast-photo">
+                    <img src="cast-photos/violet-bennett.jpg" alt="Violet Bennett" class="cast-photo" loading="lazy" decoding="async" />
                     <div class="cast-info">
                         <div class="actor-name">Violet Bennett</div>
                         <div class="character-name">as Lily</div>
                     </div>
                 </div>
+
                 <div class="cast-member">
-                    <img src="cast-photos/urijah-faber.jpg" alt="Urijah Faber" class="cast-photo">
+                    <img src="cast-photos/urijah-faber.jpg" alt="Urijah Faber" class="cast-photo" loading="lazy" decoding="async" />
                     <div class="cast-info">
                         <div class="actor-name">Urijah Faber</div>
                         <div class="character-name">as Foley Dowed</div>
                     </div>
                 </div>
+
                 <div class="cast-member">
-                    <img src="cast-photos/sergio-rizzuto.jpg" alt="Sergio Rizzuto" class="cast-photo">
+                    <img src="cast-photos/sergio-rizzuto.jpg" alt="Sergio Rizzuto" class="cast-photo" loading="lazy" decoding="async" />
                     <div class="cast-info">
                         <div class="actor-name">Sergio Rizzuto</div>
                         <div class="character-name">as Lunch Box</div>
                     </div>
                 </div>
+
                 <div class="cast-member">
-                    <img src="cast-photos/ettore-baccari.jpg" alt="Ettore James Baccari" class="cast-photo">
+                    <img src="cast-photos/ettore-baccari.jpg" alt="Ettore James Baccari" class="cast-photo" loading="lazy" decoding="async" />
                     <div class="cast-info">
                         <div class="actor-name">Ettore James Baccari</div>
                         <div class="character-name">as Young Mick</div>
                     </div>
                 </div>
+
                 <div class="cast-member">
-                    <img src="cast-photos/jett-miller.jpg" alt="Jett Miller" class="cast-photo">
+                    <img src="cast-photos/jett-miller.jpg" alt="Jett Miller" class="cast-photo" loading="lazy" decoding="async" />
                     <div class="cast-info">
                         <div class="actor-name">Jett Miller</div>
                         <div class="character-name">as Humphrey</div>
@@ -1295,27 +1142,6 @@
         <div class="container">
             <h2 class="section-title">Follow Us</h2>
             <figure data-behold-id="0vaqt1r8jA1TN9AvokJQ" style="max-width: 1000px; margin: 0 auto;"></figure>
-        </div>
-    </section>
-
-    <!-- Social Share Section -->
-    <section id="share" class="section-yellow">
-        <div class="container">
-            <div class="social-share">
-                <h2 class="section-title">Share the Film</h2>
-                <p style="font-size: 1.1rem; margin-bottom: 20px;">Help spread the word about Mick Skylark!</p>
-                <div class="share-buttons">
-                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://mickskylark.com" target="_blank" class="share-btn facebook">
-                        📘 Share on Facebook
-                    </a>
-                    <a href="https://twitter.com/intent/tweet?text=Check%20out%20Mick%20Skylark%3A%20Mini%20Golf%20Prodigy!&url=https://mickskylark.com" target="_blank" class="share-btn twitter">
-                        🐦 Share on Twitter
-                    </a>
-                    <a href="mailto:?subject=Check%20out%20Mick%20Skylark&body=I%20thought%20you'd%20enjoy%20this%20film:%20https://mickskylark.com" class="share-btn email">
-                        📧 Share via Email
-                    </a>
-                </div>
-            </div>
         </div>
     </section>
 
@@ -1357,25 +1183,49 @@
                     <h3>🌴 Boca Raton, Florida</h3>
                     <p><strong>Address:</strong><br>313 E Palmetto Park Rd<br>Boca Raton, FL 33432</p>
                     <p><strong>Date:</strong> Sunday, February 22, 2026</p>
-                    <p><strong>Time:</strong> 3:00 PM</p>
+                    <p><strong>Time:</strong> 3:00 PM ET</p>
                 </div>
                 <div class="location-card">
                     <h3>🎬 Los Angeles, California</h3>
                     <p><strong>Venue:</strong> Cinemark Playa Vista & XD</p>
                     <p><strong>Address:</strong><br>12746 W Jefferson Blvd, Suite 3190<br>Playa Vista, CA 90094</p>
                     <p><strong>Date:</strong> Sunday, February 22, 2026</p>
-                    <p><strong>Time:</strong> 3:00 PM</p>
+                    <p><strong>Time:</strong> 12:00 PM PT</p>
                 </div>
             </div>
         </div>
     </section>
 
-   <!-- Footer -->
+    <!-- Contact Section -->
+    <section id="contact" class="section-blue">
+        <div class="container">
+            <h2 class="section-title">Contact</h2>
+            <div class="card">
+                <div class="contact-row">
+                    <div style="min-width: 240px;">
+                        <div style="font-weight:800; color: var(--primary); font-size: 1.2rem;">Potato Eater Productions</div>
+                        <div style="color:#374151; margin-top: 6px;">Press / booking / screening questions</div>
+                    </div>
+
+                    <div style="font-size:1.1rem;">
+                        Email: <a href="mailto:contact@potatoeaterproductions.com">contact@potatoeaterproductions.com</a>
+                    </div>
+
+                    <div style="display:flex; gap:10px; flex-wrap:wrap;">
+                        <a class="game-btn secondary" style="text-decoration:none; display:inline-block;" href="index.html#rsvp">RSVP</a>
+                        <a class="game-btn" style="text-decoration:none; display:inline-block;" href="index.html#updates">Email Updates</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
     <footer>
         <p>&copy; 2025 Mick Skylark: Mini Golf Prodigy. All rights reserved.</p>
         <p style="margin-top: 10px; opacity: 0.8;">A Potato Eater Productions Film</p>
         <p style="margin-top: 15px;">
-            <a href="https://www.instagram.com/mickskylark" target="_blank">Follow us on Instagram!</a>
+            <a href="https://www.instagram.com/mickskylark" target="_blank" rel="noopener">Follow us on Instagram!</a>
         </p>
         <p style="margin-top: 15px;">
             <a href="grokminigolf.html" style="color: #FCD34D; font-weight: 600; text-decoration: none; border: 2px solid #FCD34D; padding: 8px 20px; border-radius: 25px; display: inline-block; transition: all 0.3s ease;">
@@ -1385,109 +1235,89 @@
     </footer>
 
     <!-- Back to top button -->
-    <button class="back-to-top" id="backToTopBtn" aria-label="Back to top">↑ Top</button>
+    <button class="back-to-top" id="backToTop" aria-label="Back to top" title="Back to top">↑</button>
+
+    <!-- Toast -->
+    <div class="toast" id="toast" aria-live="polite" aria-atomic="true"></div>
 
     <script>
         // Behold Instagram widget
         (function(){
-            const d=document,s=d.createElement("script");s.type="module";
-            s.src="https://w.behold.so/widget.js";d.head.append(s);
+            const d=document,s=d.createElement("script"); s.type="module";
+            s.src="https://w.behold.so/widget.js"; d.head.append(s);
         })();
 
-        // Tally embed script
-        var d=document,w="https://tally.so/widgets/embed.js",v=function(){"undefined"!=typeof Tally?Tally.loadEmbeds():d.querySelectorAll("iframe[data-tally-src]:not([src])").forEach((function(e){e.src=e.dataset.tallySrc}))};if("undefined"!=typeof Tally)v();else if(d.querySelector('script[src="'+w+'"]')==null){var s=d.createElement("script");s.src=w,s.onload=v,s.onerror=v,d.body.appendChild(s);}
+        // Tally embed script (handles all iframes with data-tally-src)
+        var d=document,w="https://tally.so/widgets/embed.js",v=function(){
+            "undefined"!=typeof Tally ? Tally.loadEmbeds() :
+            d.querySelectorAll("iframe[data-tally-src]:not([src])").forEach((function(e){ e.src=e.dataset.tallySrc }))
+        };
+        if ("undefined"!=typeof Tally) v();
+        else if (d.querySelector('script[src="'+w+'"]')==null) {
+            var s=d.createElement("script"); s.src=w; s.onload=v; s.onerror=v; d.body.appendChild(s);
+        }
 
-        // One smooth-scroll handler (ONLY for same-page hash links)
-        document.addEventListener('click', (e) => {
-            const link = e.target.closest('a');
-            if (!link) return;
+        // Smooth scroll for nav anchors
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', (e) => {
+                const href = link.getAttribute('href') || '';
+                // skip external pages
+                if (link.classList.contains('nav-link-external')) return;
 
-            const href = link.getAttribute('href');
-            if (!href) return;
-
-            const isHashOnly = href.startsWith('#');
-            const isIndexHash = href.startsWith('index.html#');
-
-            if (isHashOnly || isIndexHash) {
-                e.preventDefault();
-                const hash = isHashOnly ? href.slice(1) : href.split('#')[1];
-                const target = document.getElementById(hash);
-                if (target) target.scrollIntoView({ behavior: 'smooth' });
-            }
-            // else: normal navigation (merch.html, screener-survey.html, etc.)
+                if (href.startsWith('#') || href.includes('index.html#')) {
+                    e.preventDefault();
+                    const hash = href.includes('#') ? href.split('#')[1] : href.replace('#','');
+                    const target = document.getElementById(hash);
+                    if (target) target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
         });
 
-        // Back to top behavior
-        const backToTopBtn = document.getElementById('backToTopBtn');
-        if (backToTopBtn) {
-            const toggleBackToTop = () => {
-                if (window.scrollY > 600) backToTopBtn.classList.add('show');
-                else backToTopBtn.classList.remove('show');
-            };
-
-            window.addEventListener('scroll', toggleBackToTop, { passive: true });
-            toggleBackToTop();
-
-            backToTopBtn.addEventListener('click', () => {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            });
+        // Back to top
+        const backToTopBtn = document.getElementById('backToTop');
+        function onScroll() {
+            if (window.scrollY > 600) backToTopBtn.classList.add('show');
+            else backToTopBtn.classList.remove('show');
         }
+        window.addEventListener('scroll', onScroll, { passive: true });
+        onScroll();
 
-        // Scrollspy: highlight nav link based on section in view
-        const sectionIds = ['home','comparable-films','rsvp','game','cast','instagram','credits','locations'];
-        const sections = sectionIds.map(id => document.getElementById(id)).filter(Boolean);
-        const navLinks = Array.from(document.querySelectorAll('.nav-link'));
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
 
-        function setActiveNav(id) {
-            navLinks.forEach(a => a.classList.remove('active'));
-            const active = navLinks.find(a => {
-                const h = a.getAttribute('href') || '';
-                return h === `#${id}` || h === `index.html#${id}`;
-            });
-            if (active) active.classList.add('active');
-        }
-
-        if (sections.length) {
-            const observer = new IntersectionObserver((entries) => {
-                const visible = entries
-                    .filter(e => e.isIntersecting)
-                    .sort((a,b) => b.intersectionRatio - a.intersectionRatio)[0];
-
-                if (visible && visible.target && visible.target.id) {
-                    setActiveNav(visible.target.id);
-                }
-            }, { root: null, threshold: [0.2, 0.35, 0.5, 0.65] });
-
-            sections.forEach(sec => observer.observe(sec));
-            setActiveNav('home');
-        }
-
-        // Countdown Timer to February 22, 2026 at 3:00 PM
+        // Countdown Timer — explicit timezone offset for ET (Feb = -05:00)
         function updateCountdown() {
-            const screeningDate = new Date('February 22, 2026 15:00:00').getTime();
-            const now = new Date().getTime();
+            const screeningDate = new Date('2026-02-22T15:00:00-05:00').getTime();
+            const now = Date.now();
             const distance = screeningDate - now;
 
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            const days = Math.max(0, Math.floor(distance / (1000 * 60 * 60 * 24)));
+            const hours = Math.max(0, Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)));
+            const minutes = Math.max(0, Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)));
+            const seconds = Math.max(0, Math.floor((distance % (1000 * 60)) / 1000));
 
             document.getElementById('days').textContent = days;
             document.getElementById('hours').textContent = hours;
             document.getElementById('minutes').textContent = minutes;
             document.getElementById('seconds').textContent = seconds;
-
-            if (distance < 0) {
-                document.getElementById('days').textContent = '0';
-                document.getElementById('hours').textContent = '0';
-                document.getElementById('minutes').textContent = '0';
-                document.getElementById('seconds').textContent = '0';
-            }
         }
-
         setInterval(updateCountdown, 1000);
         updateCountdown();
+
+        // Toast helper (replaces alert)
+        const toastEl = document.getElementById('toast');
+        let toastTimer = null;
+
+        function showToast(message, type) {
+            toastEl.textContent = message;
+            toastEl.classList.remove('good','ok','bad','show');
+            if (type) toastEl.classList.add(type);
+            toastEl.classList.add('show');
+
+            if (toastTimer) clearTimeout(toastTimer);
+            toastTimer = setTimeout(() => toastEl.classList.remove('show'), 2200);
+        }
 
         // 18-Hole Mini Golf Game
         const canvas = document.getElementById('golfCanvas');
@@ -1514,7 +1344,7 @@
             const gainNode = audioContext.createGain();
             oscillator.connect(gainNode);
             gainNode.connect(audioContext.destination);
-            
+
             switch(type) {
                 case 'hit':
                     oscillator.frequency.value = 300;
@@ -1607,12 +1437,8 @@
             }
 
             let outScore = 0, inScore = 0;
-            for (let i = 0; i < 9; i++) {
-                if (holeScores[i] !== null) outScore += holeScores[i];
-            }
-            for (let i = 9; i < 18; i++) {
-                if (holeScores[i] !== null) inScore += holeScores[i];
-            }
+            for (let i = 0; i < 9; i++) if (holeScores[i] !== null) outScore += holeScores[i];
+            for (let i = 9; i < 18; i++) if (holeScores[i] !== null) inScore += holeScores[i];
 
             if (holeScores.slice(0, 9).some(s => s !== null)) {
                 document.getElementById('score-out').textContent = outScore || '-';
@@ -1646,7 +1472,14 @@
 
         function createParticles(x, y, color, count = 8) {
             for (let i = 0; i < count; i++) {
-                particles.push({ x: x, y: y, vx: (Math.random() - 0.5) * 4, vy: (Math.random() - 0.5) * 4, life: 30, color: color, size: Math.random() * 3 + 2 });
+                particles.push({
+                    x, y,
+                    vx: (Math.random() - 0.5) * 4,
+                    vy: (Math.random() - 0.5) * 4,
+                    life: 30,
+                    color,
+                    size: Math.random() * 3 + 2
+                });
             }
         }
 
@@ -1663,6 +1496,7 @@
 
         function drawGame() {
             if (!ctx) return;
+
             const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
             if (currentTheme === 'night') {
                 gradient.addColorStop(0, '#1a2332');
@@ -1708,7 +1542,10 @@
             ctx.fillText(totalText, canvas.width - totalWidth - 12, canvas.height - 15);
 
             waterHazards.forEach(water => {
-                const waterGradient = ctx.createRadialGradient(water.x + water.width/2, water.y + water.height/2, 0, water.x + water.width/2, water.y + water.height/2, water.width/2);
+                const waterGradient = ctx.createRadialGradient(
+                    water.x + water.width/2, water.y + water.height/2, 0,
+                    water.x + water.width/2, water.y + water.height/2, water.width/2
+                );
                 waterGradient.addColorStop(0, '#4DA6FF');
                 waterGradient.addColorStop(1, '#1E90FF');
                 ctx.fillStyle = waterGradient;
@@ -1740,10 +1577,10 @@
                     obs.x += obs.speed * obs.direction;
                     if (obs.x <= obs.minX || obs.x >= obs.maxX) obs.direction *= -1;
                 }
-                const gradient = ctx.createLinearGradient(obs.x, obs.y, obs.x + obs.width, obs.y + obs.height);
-                gradient.addColorStop(0, '#D2691E');
-                gradient.addColorStop(1, '#8B4513');
-                ctx.fillStyle = gradient;
+                const g = ctx.createLinearGradient(obs.x, obs.y, obs.x + obs.width, obs.y + obs.height);
+                g.addColorStop(0, '#D2691E');
+                g.addColorStop(1, '#8B4513');
+                ctx.fillStyle = g;
                 ctx.fillRect(obs.x, obs.y, obs.width, obs.height);
                 ctx.fillStyle = '#FFD700';
                 ctx.font = 'bold 20px Arial';
@@ -1753,10 +1590,10 @@
             });
 
             bumpers.forEach(bumper => {
-                const bumperGradient = ctx.createRadialGradient(bumper.x, bumper.y, bumper.radius * 0.3, bumper.x, bumper.y, bumper.radius);
-                bumperGradient.addColorStop(0, '#FF6B6B');
-                bumperGradient.addColorStop(1, '#C92A2A');
-                ctx.fillStyle = bumperGradient;
+                const bg = ctx.createRadialGradient(bumper.x, bumper.y, bumper.radius * 0.3, bumper.x, bumper.y, bumper.radius);
+                bg.addColorStop(0, '#FF6B6B');
+                bg.addColorStop(1, '#C92A2A');
+                ctx.fillStyle = bg;
                 ctx.beginPath();
                 ctx.arc(bumper.x, bumper.y, bumper.radius, 0, Math.PI * 2);
                 ctx.fill();
@@ -1840,6 +1677,7 @@
             ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2);
             ctx.fill();
             ctx.stroke();
+
             ctx.fillStyle = 'rgba(255, 255, 255, 0.5)';
             ctx.beginPath();
             ctx.arc(ball.x - 3, ball.y - 3, 3, 0, Math.PI * 2);
@@ -1848,6 +1686,7 @@
 
         function updateBall() {
             if (!ctx) return;
+
             ball.x += ball.vx;
             ball.y += ball.vy;
 
@@ -1913,37 +1752,28 @@
                 }
             });
 
-            obstacles.forEach(obs => {
-                if (ball.x + ball.radius > obs.x && ball.x - ball.radius < obs.x + obs.width && ball.y + ball.radius > obs.y && ball.y - ball.radius < obs.y + obs.height) {
-                    const overlapLeft = (ball.x + ball.radius) - obs.x;
-                    const overlapRight = (obs.x + obs.width) - (ball.x - ball.radius);
-                    const overlapTop = (ball.y + ball.radius) - obs.y;
-                    const overlapBottom = (obs.y + obs.height) - (ball.y - ball.radius);
-                    const minOverlap = Math.min(overlapLeft, overlapRight, overlapTop, overlapBottom);
-                    if (minOverlap === overlapLeft) { ball.vx = Math.abs(ball.vx) * -0.7; ball.x = obs.x - ball.radius - 1; }
-                    else if (minOverlap === overlapRight) { ball.vx = Math.abs(ball.vx) * 0.7; ball.x = obs.x + obs.width + ball.radius + 1; }
-                    else if (minOverlap === overlapTop) { ball.vy = Math.abs(ball.vy) * -0.7; ball.y = obs.y - ball.radius - 1; }
-                    else if (minOverlap === overlapBottom) { ball.vy = Math.abs(ball.vy) * 0.7; ball.y = obs.y + obs.height + ball.radius + 1; }
-                    createParticles(ball.x, ball.y, '#8B4513', 5);
-                    playSound('wall');
-                }
-            });
+            function collideRect(obs, color) {
+                if (ball.x + ball.radius > obs.x && ball.x - ball.radius < obs.x + obs.width &&
+                    ball.y + ball.radius > obs.y && ball.y - ball.radius < obs.y + obs.height) {
 
-            movingObstacles.forEach(obs => {
-                if (ball.x + ball.radius > obs.x && ball.x - ball.radius < obs.x + obs.width && ball.y + ball.radius > obs.y && ball.y - ball.radius < obs.y + obs.height) {
                     const overlapLeft = (ball.x + ball.radius) - obs.x;
                     const overlapRight = (obs.x + obs.width) - (ball.x - ball.radius);
                     const overlapTop = (ball.y + ball.radius) - obs.y;
                     const overlapBottom = (obs.y + obs.height) - (ball.y - ball.radius);
                     const minOverlap = Math.min(overlapLeft, overlapRight, overlapTop, overlapBottom);
+
                     if (minOverlap === overlapLeft) { ball.vx = Math.abs(ball.vx) * -0.7; ball.x = obs.x - ball.radius - 1; }
                     else if (minOverlap === overlapRight) { ball.vx = Math.abs(ball.vx) * 0.7; ball.x = obs.x + obs.width + ball.radius + 1; }
                     else if (minOverlap === overlapTop) { ball.vy = Math.abs(ball.vy) * -0.7; ball.y = obs.y - ball.radius - 1; }
                     else if (minOverlap === overlapBottom) { ball.vy = Math.abs(ball.vy) * 0.7; ball.y = obs.y + obs.height + ball.radius + 1; }
-                    createParticles(ball.x, ball.y, '#D2691E', 5);
+
+                    createParticles(ball.x, ball.y, color, 5);
                     playSound('wall');
                 }
-            });
+            }
+
+            obstacles.forEach(obs => collideRect(obs, '#8B4513'));
+            movingObstacles.forEach(obs => collideRect(obs, '#D2691E'));
 
             windmills.forEach(mill => {
                 const dx = ball.x - mill.x;
@@ -1966,29 +1796,33 @@
                 createParticles(hole.x, hole.y, '#FFD700', 15);
                 updateScorecard();
                 drawGame();
-                
+
                 if (strokes === 1) {
                     holesInOne++;
                     localStorage.setItem('holesInOne', holesInOne);
                     document.getElementById('holesInOneCount').textContent = holesInOne;
                 }
-                
+
                 setTimeout(() => {
                     if (currentHole === 18) {
                         showCelebration();
                     } else {
                         const currentPar = parValues[currentHole - 1];
                         let msg = `Hole in ${strokes}!`;
-                        if (strokes === 1) msg = '🎉 HOLE IN ONE! 🎉';
-                        else if (strokes < currentPar) msg += ' ⭐ Under par!';
-                        else if (strokes === currentPar) msg += ' ✓ Par';
-                        else msg += ' Over par';
-                        alert(msg);
+                        let type = 'ok';
+
+                        if (strokes === 1) { msg = '🎉 HOLE IN ONE! 🎉'; type = 'good'; }
+                        else if (strokes < currentPar) { msg += ' ⭐ Under par!'; type = 'good'; }
+                        else if (strokes === currentPar) { msg += ' ✓ Par'; type = 'ok'; }
+                        else { msg += ' Over par'; type = 'bad'; }
+
+                        showToast(msg, type);
+
                         currentHole++;
                         loadHole(currentHole);
                         drawGame();
                     }
-                }, 100);
+                }, 120);
             }
 
             drawGame();
@@ -1999,14 +1833,17 @@
             const totalPar = parValues.reduce((a, b) => a + b, 0);
             const overUnder = totalStrokes - totalPar;
             const overUnderText = overUnder === 0 ? 'Even Par!' : overUnder > 0 ? `${overUnder} Over Par` : `${Math.abs(overUnder)} Under Par!`;
+
             document.getElementById('finalScore').textContent = `Total: ${totalStrokes} strokes`;
             document.getElementById('celebrationMessage').textContent = overUnderText;
             document.getElementById('celebrationOverlay').classList.add('active');
+
             if (best === '--' || totalStrokes < parseInt(best)) {
                 best = totalStrokes;
                 localStorage.setItem('bestScore', best);
                 document.getElementById('best').textContent = best;
             }
+
             for (let i = 0; i < 50; i++) createConfetti();
         }
 
@@ -2032,18 +1869,22 @@
 
         function shareChallenge() {
             if (totalStrokes === 0) {
-                alert('Complete at least one hole first!');
+                showToast('Complete at least one hole first!', 'bad');
                 return;
             }
             const totalPar = parValues.slice(0, currentHole - 1).reduce((a, b) => a + b, 0);
             const overUnder = totalStrokes - totalPar;
             const scoreText = overUnder === 0 ? 'Even Par' : overUnder > 0 ? `+${overUnder}` : `${overUnder}`;
-            const challengeText = `🏌️ Can you beat my Glory On The Greens score?\n${totalStrokes} strokes (${scoreText}) through ${currentHole - 1} holes!\n\nPlay at: mickskylark.com`;
+            const challengeText =
+                `🏌️ Can you beat my Glory On The Greens score?\n` +
+                `${totalStrokes} strokes (${scoreText}) through ${currentHole - 1} holes!\n\n` +
+                `Play at: mickskylark.com`;
+
             if (navigator.share) {
                 navigator.share({ title: 'Glory On The Greens Challenge', text: challengeText });
             } else {
                 navigator.clipboard.writeText(challengeText).then(() => {
-                    alert('Challenge copied to clipboard! Share it with friends!');
+                    showToast('Challenge copied to clipboard!', 'good');
                 });
             }
         }
@@ -2066,6 +1907,7 @@
                     const rect = canvas.getBoundingClientRect();
                     const scaleX = canvas.width / rect.width;
                     const scaleY = canvas.height / rect.height;
+
                     let clickX, clickY;
                     if (e.type === 'touchstart') {
                         clickX = (e.touches[0].clientX - rect.left) * scaleX;
@@ -2074,16 +1916,19 @@
                         clickX = (e.clientX - rect.left) * scaleX;
                         clickY = (e.clientY - rect.top) * scaleY;
                     }
+
                     const dx = clickX - ball.x;
                     const dy = clickY - ball.y;
                     const distance = Math.sqrt(dx * dx + dy * dy);
                     const power = Math.min(distance / 20, 8);
+
                     ball.vx = (dx / distance) * power;
                     ball.vy = (dy / distance) * power;
                     strokes++;
                     currentPower = power;
                     playSound('hit');
                     drawGame();
+
                     setTimeout(() => { currentPower = 0; }, 800);
                     updateBall();
                 }
@@ -2105,7 +1950,7 @@
             loadHole(currentHole);
             updateScorecard();
             drawGame();
-        }
+        };
 
         window.setTheme = setTheme;
         window.toggleSound = toggleSound;
@@ -2121,12 +1966,12 @@
             function autoScrollFilms() {
                 filmsScrollAmount += filmsScrollSpeed;
                 filmsWrapper.scrollLeft = filmsScrollAmount;
-                
+
                 if (filmsScrollAmount >= filmsWrapper.scrollWidth - filmsWrapper.clientWidth - 50) {
                     filmsScrollAmount = 0;
                     filmsWrapper.scrollLeft = 0;
                 }
-                
+
                 requestAnimationFrame(autoScrollFilms);
             }
 
