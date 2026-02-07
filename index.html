@@ -3,129 +3,300 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
   <title>Mick Skylark: Mini Golf Prodigy - Official Website</title>
-  <meta name="description" content="Mick Skylark: Mini Golf Prodigy — RSVP for the screener, explore cast, play the mini golf game, and get email updates." />
-  <meta name="robots" content="index,follow" />
-  <meta name="theme-color" content="#1E3A8A" />
 
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
 
   <style>
     :root{
-      --primary:#1E3A8A; --primary-dark:#1E40AF;
-      --secondary:#FCD34D; --gold:#FBBF24;
-      --dark:#1F2937; --cta-blue:#2563EB; --cta-blue-dark:#1D4ED8;
+      --primary:#1E3A8A;
+      --primary-dark:#1E40AF;
+      --secondary:#FCD34D;
+      --gold:#FBBF24;
+      --dark:#1F2937;
+      --cta-blue:#2563EB;
+      --cta-blue-dark:#1D4ED8;
+      --card:#ffffff;
     }
+
     *{margin:0;padding:0;box-sizing:border-box}
-    body{font-family:'Poppins',sans-serif;color:var(--dark);overflow-x:hidden;padding-top:60px}
-
-    a:focus-visible,button:focus-visible,input:focus-visible,iframe:focus-visible{
-      outline:3px solid var(--gold);outline-offset:3px;border-radius:10px
+    body{
+      font-family:'Poppins',sans-serif;
+      color:var(--dark);
+      overflow-x:hidden;
+      padding-top:64px;
+      background:#fff;
     }
 
-    .navbar{position:fixed;top:0;left:0;right:0;background:#fff;box-shadow:0 2px 10px rgba(0,0,0,.1);z-index:1000;padding:12px 0}
-    .nav-container{max-width:1200px;margin:0 auto;display:flex;justify-content:center;gap:12px;flex-wrap:wrap;padding:0 20px}
-    .nav-link{color:var(--primary);text-decoration:none;font-weight:800;padding:8px 16px;border-radius:25px;transition:.25s ease;font-size:.9rem;border:2px solid transparent}
+    /* NAV */
+    .navbar{
+      position:fixed;top:0;left:0;right:0;
+      background:#fff;
+      box-shadow:0 2px 10px rgba(0,0,0,.12);
+      z-index:1000;
+      padding:12px 0;
+    }
+    .nav-container{
+      max-width:1200px;margin:0 auto;
+      display:flex;justify-content:center;gap:12px;
+      flex-wrap:wrap;padding:0 16px;
+    }
+    .nav-link{
+      color:var(--primary);
+      text-decoration:none;font-weight:900;
+      padding:8px 16px;border-radius:999px;
+      transition:.2s ease;
+      border:2px solid transparent;
+      font-size:.92rem;
+    }
     .nav-link:hover{background:var(--primary);color:#fff}
-    .nav-link.cta{color:var(--cta-blue);border-color:rgba(37,99,235,.25);background:rgba(37,99,235,.06)}
-    .nav-link.cta:hover{background:var(--cta-blue-dark);color:#fff;border-color:var(--cta-blue-dark)}
+    .nav-link.cta{
+      color:var(--cta-blue);
+      background:rgba(37,99,235,.08);
+      border-color:rgba(37,99,235,.25);
+    }
+    .nav-link.cta:hover{background:var(--cta-blue-dark);border-color:var(--cta-blue-dark);color:#fff}
 
-    .section-blue{background:linear-gradient(135deg,#87CEEB 0%,#5DADE2 100%);padding:80px 20px}
-    .section-yellow{background:linear-gradient(135deg,#FDE68A 0%,#FCD34D 100%);padding:80px 20px}
+    /* SECTIONS */
+    .section-blue{
+      background:linear-gradient(135deg,#87CEEB 0%,#5DADE2 100%);
+      padding:80px 20px;
+    }
+    .section-yellow{
+      background:linear-gradient(135deg,#FDE68A 0%,#FCD34D 100%);
+      padding:80px 20px;
+    }
     .container{max-width:1200px;margin:0 auto}
+    .section-title{
+      font-size:3rem;font-weight:900;
+      text-align:center;margin-bottom:34px;
+      color:var(--primary);
+    }
+    @media(max-width:768px){.section-title{font-size:2.1rem}}
 
-    .hero{text-align:center;padding:40px 20px 80px}
-    .hero img{width:100%;max-width:600px;margin:0 auto 10px;display:block;border-radius:20px}
+    /* HERO */
+    .hero{text-align:center;padding:40px 20px 70px}
+    .hero img{
+      width:100%;max-width:600px;display:block;margin:0 auto 12px;
+      border-radius:18px;opacity:0;animation:logoReveal 1.1s ease-out forwards;
+    }
+    @keyframes logoReveal{
+      0%{opacity:0;transform:scale(.92) translateY(-18px)}
+      100%{opacity:1;transform:scale(1) translateY(0)}
+    }
+    .scroll-cta{
+      font-size:1.2rem;font-weight:900;color:var(--primary);
+      margin:8px 0 26px;text-transform:uppercase;letter-spacing:1px;
+      animation:bounce 2s infinite;
+    }
+    @keyframes bounce{
+      0%,20%,50%,80%,100%{transform:translateY(0)}
+      40%{transform:translateY(-10px)}
+      60%{transform:translateY(-5px)}
+    }
 
-    .scroll-cta{font-size:1.2rem;font-weight:900;color:var(--primary);margin:8px 0 24px;text-transform:uppercase;letter-spacing:1px}
+    /* SLIDESHOW STRIP */
+    .slideshow-wrapper{
+      overflow-x:auto;white-space:nowrap;padding:18px 0;
+      -webkit-overflow-scrolling:touch;cursor:grab;
+      scrollbar-width:thin;scrollbar-color:var(--primary) transparent;
+    }
+    .slideshow-wrapper:active{cursor:grabbing}
+    .slideshow-container{
+      display:inline-flex;gap:18px;padding:0 10px;
+    }
+    .slide{
+      width:400px;height:300px;flex-shrink:0;
+      border-radius:14px;overflow:hidden;
+      box-shadow:0 10px 28px rgba(0,0,0,.18);
+      background:#fff;
+    }
+    .slide img{width:100%;height:100%;object-fit:cover;display:block}
+    @media(max-width:768px){.slide{width:300px;height:225px}}
 
-    .section-title{font-size:3rem;font-weight:900;text-align:center;margin-bottom:40px;color:var(--primary)}
-    @media (max-width:768px){.section-title{font-size:2.2rem}}
-
-    /* Horizontal image scrollers */
-    .scroller{overflow-x:auto;overflow-y:hidden;white-space:nowrap;-webkit-overflow-scrolling:touch;scrollbar-width:thin;scrollbar-color:var(--primary) transparent;cursor:grab;padding:18px 0}
-    .scroller:active{cursor:grabbing}
-    .row{display:inline-flex;gap:20px;padding:0 10px}
-    .card-img{display:inline-block;width:400px;height:300px;border-radius:15px;overflow:hidden;box-shadow:0 8px 20px rgba(0,0,0,.15);background:rgba(255,255,255,.35)}
-    .card-img img{width:100%;height:100%;object-fit:cover;display:block}
-    @media (max-width:768px){.card-img{width:300px;height:225px}}
-
+    /* LOGLINE CARD */
     .logline{
-      font-size:1.5rem;line-height:1.8;max-width:900px;margin:40px auto 0;text-align:center;
-      color:#fff;font-weight:800;padding:40px 45px;border-radius:25px;
-      background:linear-gradient(135deg,#1E3A8A 0%,#3B82F6 50%,#1E3A8A 100%);background-size:200% 200%;
-      box-shadow:0 15px 50px rgba(30,58,138,.35)
+      font-size:1.45rem;line-height:1.7;
+      max-width:950px;margin:44px auto 22px;
+      text-align:center;color:#fff;font-weight:800;
+      padding:42px 44px;border-radius:22px;
+      background:linear-gradient(135deg,#1E3A8A 0%,#3B82F6 50%,#1E3A8A 100%);
+      background-size:200% 200%;
+      animation:gradientShift 8s ease infinite;
+      box-shadow:0 18px 55px rgba(30,58,138,.35);
+      position:relative;overflow:hidden;
     }
-    @media (max-width:768px){.logline{font-size:1.2rem;padding:28px 22px}}
+    @keyframes gradientShift{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+    @media(max-width:768px){.logline{font-size:1.15rem;padding:30px 22px}}
 
-    /* RSVP countdown */
-    .countdown{display:flex;justify-content:center;gap:18px;flex-wrap:wrap;margin:22px 0 30px}
-    .count-box{background:#fff;padding:18px 22px;border-radius:15px;box-shadow:0 4px 15px rgba(0,0,0,.1);min-width:100px;text-align:center}
-    .count-num{font-size:2.3rem;font-weight:900;color:var(--primary);display:block}
-    .count-label{font-size:.85rem;color:#666;text-transform:uppercase;letter-spacing:1px;font-weight:800}
-
-    .screener-info{text-align:center;margin:0 0 30px}
-    .screener-date{font-size:1.8rem;font-weight:900;color:var(--primary);margin-bottom:6px}
-    .screener-sub{font-size:1rem;color:#374151;font-weight:800;margin-bottom:6px}
-    .screener-note{font-size:1.1rem;color:var(--dark);font-weight:700}
-
-    /* Buttons */
-    .btn{
-      padding:12px 30px;border:none;border-radius:30px;font-weight:900;cursor:pointer;
-      transition:.25s ease;font-size:1rem;font-family:'Poppins',sans-serif;display:inline-block;text-decoration:none
+    .rating-badge{
+      display:inline-block;
+      background:linear-gradient(135deg,var(--primary) 0%,var(--primary-dark) 100%);
+      color:#fff;padding:14px 30px;border-radius:999px;
+      font-weight:900;box-shadow:0 10px 26px rgba(30,58,138,.3);
+      margin:10px auto 0;
     }
-    .btn.primary{background:var(--primary);color:#fff}
-    .btn.primary:hover{background:var(--primary-dark);transform:scale(1.04)}
-    .btn.secondary{background:var(--secondary);color:var(--primary)}
-    .btn.secondary:hover{background:var(--gold);transform:scale(1.04)}
 
-    /* Game */
-    .game-container{background:#fff;padding:40px 20px;border-radius:20px;box-shadow:0 8px 30px rgba(0,0,0,.15);text-align:center}
-    .game-canvas{border:3px solid var(--primary);border-radius:15px;cursor:crosshair;margin:20px auto;display:block;max-width:100%;height:auto}
-    .controls{display:flex;justify-content:center;gap:15px;margin-bottom:12px;flex-wrap:wrap}
-    .control-btn{
-      background:#fff;border:2px solid var(--primary);border-radius:50%;
-      width:45px;height:45px;cursor:pointer;font-size:1.4rem;display:flex;align-items:center;justify-content:center;
-      transition:.25s ease;box-shadow:0 2px 8px rgba(0,0,0,.1)
+    /* CARD */
+    .card{
+      background:var(--card);
+      border-radius:18px;
+      box-shadow:0 12px 34px rgba(0,0,0,.14);
+      padding:22px 18px;
+      max-width:980px;
+      margin:0 auto;
     }
-    .control-btn:hover{transform:scale(1.1)}
-    .control-btn.active{background:var(--primary);color:#fff}
 
-    .scorecard{background:#fff;border-radius:15px;padding:20px;margin:28px auto 0;box-shadow:0 4px 15px rgba(0,0,0,.1);overflow-x:auto}
-    .scorecard h3{color:var(--primary);margin-bottom:15px;text-align:center}
-    .scorecard table{width:100%;border-collapse:collapse;font-size:.9rem}
-    .scorecard th,.scorecard td{padding:8px;text-align:center;border:1px solid #e5e7eb}
+    /* COMPARABLE FILMS */
+    .films-wrapper{overflow-x:auto;white-space:nowrap;padding:18px 0;-webkit-overflow-scrolling:touch;cursor:grab}
+    .films-wrapper:active{cursor:grabbing}
+    .films{display:inline-flex;gap:22px;padding:0 10px}
+    .poster{
+      width:250px;flex-shrink:0;border-radius:12px;overflow:hidden;
+      box-shadow:0 10px 26px rgba(0,0,0,.16);
+      background:#fff;
+      transition:.2s ease;
+    }
+    .poster:hover{transform:translateY(-6px) scale(1.03)}
+    .poster img{width:100%;display:block}
+
+    /* RSVP TIMER */
+    .countdown{
+      display:flex;justify-content:center;gap:16px;flex-wrap:wrap;
+      margin:10px 0 26px;
+    }
+    .countbox{
+      background:#fff;border-radius:14px;
+      box-shadow:0 8px 22px rgba(0,0,0,.12);
+      padding:16px 18px;min-width:100px;text-align:center;
+    }
+    .countnum{font-size:2.2rem;font-weight:900;color:var(--primary);display:block}
+    .countlab{font-size:.85rem;font-weight:900;color:#6b7280;letter-spacing:1px;text-transform:uppercase}
+
+    /* GAME */
+    .game-wrap{
+      background:#fff;border-radius:20px;
+      box-shadow:0 12px 34px rgba(0,0,0,.15);
+      padding:26px 16px;
+      max-width:980px;margin:0 auto;
+      text-align:center;
+    }
+    .controls{
+      display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin:0 0 14px;
+    }
+    .ctrl{
+      width:44px;height:44px;border-radius:999px;
+      border:2px solid var(--primary);background:#fff;
+      font-size:1.3rem;cursor:pointer;
+      box-shadow:0 6px 16px rgba(0,0,0,.12);
+      transition:.15s ease;
+    }
+    .ctrl:hover{transform:scale(1.06)}
+    .ctrl.active{background:var(--primary);color:#fff}
+
+    canvas{
+      border:3px solid var(--primary);
+      border-radius:14px;
+      display:block;margin:10px auto 12px;
+      max-width:100%;
+      height:auto;
+      background:#e5e7eb;
+    }
+
+    .game-btn{
+      padding:12px 26px;border:none;border-radius:999px;
+      background:var(--primary);color:#fff;font-weight:900;
+      cursor:pointer;transition:.15s ease;
+      margin:6px;font-family:'Poppins',sans-serif;
+    }
+    .game-btn:hover{background:var(--primary-dark);transform:translateY(-1px)}
+    .game-btn.secondary{background:var(--secondary);color:#111827}
+    .game-btn.secondary:hover{background:var(--gold)}
+
+    .scorecard{margin-top:16px;overflow-x:auto}
+    .scorecard table{width:100%;border-collapse:collapse;font-size:.88rem}
+    .scorecard th,.scorecard td{border:1px solid #e5e7eb;padding:7px;text-align:center}
     .scorecard th{background:var(--primary);color:#fff;font-weight:900}
     .par-row{background:#f9fafb;font-weight:900}
-    .score-row td{font-weight:900;font-size:1.05rem}
-    .pending{background:#f3f4f6;color:#9ca3af}
-    .birdie{background:#10B981;color:#fff}
-    .par{background:#FCD34D}
-    .bogey{background:#F59E0B;color:#fff}
-    .double-bogey{background:#EF4444;color:#fff}
+    .pending{background:#f3f4f6;color:#9ca3af;font-weight:900}
+    .birdie{background:#10B981;color:#fff;font-weight:900}
+    .par{background:#FCD34D;font-weight:900}
+    .bogey{background:#F59E0B;color:#fff;font-weight:900}
+    .double-bogey{background:#EF4444;color:#fff;font-weight:900}
 
-    /* Contact / Updates cards */
-    .card{background:#fff;border-radius:18px;box-shadow:0 10px 30px rgba(0,0,0,.12);padding:28px 24px;max-width:900px;margin:0 auto}
-    .contact-row{display:flex;gap:18px;justify-content:space-between;align-items:center;flex-wrap:wrap}
-    .contact-row a{color:var(--primary);font-weight:900;text-decoration:none}
-    .contact-row a:hover{text-decoration:underline}
+    /* CAST */
+    .cast-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+      gap:18px;
+      max-width:1100px;margin:0 auto;
+    }
+    .cast-card{
+      background:#fff;border-radius:16px;
+      box-shadow:0 10px 26px rgba(0,0,0,.14);
+      padding:16px;
+      display:flex;align-items:center;gap:14px;
+    }
+    .avatar{
+      width:64px;height:64px;border-radius:999px;
+      border:3px solid var(--primary);
+      overflow:hidden;flex-shrink:0;
+      background:linear-gradient(135deg,#e5e7eb,#f9fafb);
+      display:flex;align-items:center;justify-content:center;
+      font-weight:900;color:var(--primary);
+    }
+    .avatar img{width:100%;height:100%;object-fit:cover;display:block}
+    .cast-name{font-weight:900;color:var(--primary);font-size:1.05rem}
+    .cast-role{font-weight:800;color:#4b5563;font-style:italic;margin-top:2px}
 
-    footer{background:var(--primary);color:#fff;text-align:center;padding:40px 20px}
+    /* CREDITS */
+    .credits-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+      gap:18px;
+      max-width:980px;margin:0 auto;
+    }
+    .credit{
+      background:#fff;border-radius:16px;
+      box-shadow:0 10px 26px rgba(0,0,0,.14);
+      padding:18px;text-align:center;
+    }
+    .credit-label{
+      font-size:.85rem;
+      text-transform:uppercase;
+      letter-spacing:1px;
+      color:#6b7280;
+      font-weight:900;
+      margin-bottom:10px;
+    }
+    .credit-name{font-size:1.1rem;font-weight:900;color:var(--primary);line-height:1.4}
+
+    /* CONTACT */
+    .mail a{color:var(--primary);text-decoration:none;font-weight:900}
+    .mail a:hover{text-decoration:underline}
+
+    /* FOOTER */
+    footer{
+      background:var(--primary);
+      color:#fff;text-align:center;
+      padding:36px 18px;
+    }
     footer a{color:var(--secondary);text-decoration:none;font-weight:900}
     footer a:hover{text-decoration:underline}
 
-    /* Back to top */
+    /* BACK TO TOP */
     .back-to-top{
-      position:fixed;right:18px;bottom:18px;width:52px;height:52px;border-radius:999px;
-      border:2px solid rgba(255,255,255,.7);background:var(--primary);color:#fff;font-size:20px;font-weight:900;
-      display:inline-flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 10px 30px rgba(0,0,0,.25);
-      opacity:0;transform:translateY(10px);pointer-events:none;transition:opacity .25s ease,transform .25s ease;z-index:10001
+      position:fixed;right:16px;bottom:16px;
+      width:48px;height:48px;border-radius:999px;
+      border:none;background:var(--primary);color:#fff;
+      font-size:20px;font-weight:900;cursor:pointer;
+      display:none;box-shadow:0 12px 28px rgba(0,0,0,.25);
+      z-index:2000;transition:.15s ease;
     }
-    .back-to-top.show{opacity:1;transform:translateY(0);pointer-events:auto}
     .back-to-top:hover{background:var(--primary-dark);transform:translateY(-2px)}
+    .back-to-top.show{display:block}
   </style>
 </head>
 
@@ -133,39 +304,37 @@
   <nav class="navbar">
     <div class="nav-container">
       <a href="#home" class="nav-link">Home</a>
-      <a href="#comparable-films" class="nav-link">Similar Films</a>
+      <a href="#comparable" class="nav-link">Similar Films</a>
       <a href="#rsvp" class="nav-link cta">RSVP</a>
-      <a href="./screener-survey.html" class="nav-link cta">Screener Survey</a>
+      <a href="screener-survey.html" class="nav-link cta">Screener Survey</a>
       <a href="#game" class="nav-link">Mini Golf Game</a>
       <a href="#cast" class="nav-link">Cast</a>
-      <a href="#instagram" class="nav-link">Instagram</a>
-      <a href="./merch.html" class="nav-link">Merch</a>
+      <a href="merch.html" class="nav-link">Merch</a>
       <a href="#credits" class="nav-link">Credits</a>
-      <a href="#locations" class="nav-link">Locations</a>
-      <a href="#contact" class="nav-link">Contact</a>
       <a href="#updates" class="nav-link">Email Updates</a>
+      <a href="#contact" class="nav-link">Contact</a>
     </div>
   </nav>
 
+  <!-- HERO -->
   <section id="home" class="section-yellow hero">
     <div class="container">
-      <img src="logo-no-bg.png" alt="Mick Skylark: Mini Golf Prodigy" />
-
+      <img src="logo-no-bg.png" alt="Mick Skylark: Mini Golf Prodigy">
       <div class="scroll-cta">↓ Scroll Down To RSVP ↓</div>
 
-      <div class="scroller" aria-label="Behind the scenes photos (scroll horizontally)">
-        <div class="row">
-          <div class="card-img"><img src="bts-photos/bts1.jpg" alt="Behind the scenes 1" loading="lazy" /></div>
-          <div class="card-img"><img src="bts-photos/bts2.jpg" alt="Behind the scenes 2" loading="lazy" /></div>
-          <div class="card-img"><img src="bts-photos/bts3.jpg" alt="Behind the scenes 3" loading="lazy" /></div>
-          <div class="card-img"><img src="bts-photos/bts4.jpg" alt="Behind the scenes 4" loading="lazy" /></div>
-          <div class="card-img"><img src="bts-photos/bts5.jpg" alt="Behind the scenes 5" loading="lazy" /></div>
-          <div class="card-img"><img src="bts-photos/bts6.jpg" alt="Behind the scenes 6" loading="lazy" /></div>
-          <div class="card-img"><img src="bts-photos/bts7.jpg" alt="Behind the scenes 7" loading="lazy" /></div>
-          <div class="card-img"><img src="bts-photos/bts8.jpg" alt="Behind the scenes 8" loading="lazy" /></div>
-          <div class="card-img"><img src="bts-photos/bts9.jpg" alt="Behind the scenes 9" loading="lazy" /></div>
-          <div class="card-img"><img src="bts-photos/bts10.jpg" alt="Behind the scenes 10" loading="lazy" /></div>
-          <div class="card-img"><img src="bts-photos/bts11.jpg" alt="Behind the scenes 11" loading="lazy" /></div>
+      <div class="slideshow-wrapper" id="bts-slideshow">
+        <div class="slideshow-container">
+          <div class="slide"><img src="bts-photos/bts1.jpg" alt="BTS 1"></div>
+          <div class="slide"><img src="bts-photos/bts2.jpg" alt="BTS 2"></div>
+          <div class="slide"><img src="bts-photos/bts3.jpg" alt="BTS 3"></div>
+          <div class="slide"><img src="bts-photos/bts4.jpg" alt="BTS 4"></div>
+          <div class="slide"><img src="bts-photos/bts5.jpg" alt="BTS 5"></div>
+          <div class="slide"><img src="bts-photos/bts6.jpg" alt="BTS 6"></div>
+          <div class="slide"><img src="bts-photos/bts7.jpg" alt="BTS 7"></div>
+          <div class="slide"><img src="bts-photos/bts8.jpg" alt="BTS 8"></div>
+          <div class="slide"><img src="bts-photos/bts9.jpg" alt="BTS 9"></div>
+          <div class="slide"><img src="bts-photos/bts10.jpg" alt="BTS 10"></div>
+          <div class="slide"><img src="bts-photos/bts11.jpg" alt="BTS 11"></div>
         </div>
       </div>
 
@@ -175,53 +344,50 @@
         <br><br>
         • Comedic &nbsp;&nbsp; • Family Friendly
       </p>
+
+      <div class="rating-badge">Rating: TBD / PG to PG-13</div>
     </div>
   </section>
 
-  <section id="comparable-films" class="section-blue">
+  <!-- COMPARABLE -->
+  <section id="comparable" class="section-blue">
     <div class="container">
       <h2 class="section-title">If You Liked...</h2>
-      <p style="text-align:center;margin-bottom:20px;font-size:1.05rem;color:#374151;font-weight:800;">
+      <p style="text-align:center;margin:-10px auto 28px;max-width:900px;font-weight:900;color:#111827">
         Fans of these comedy classics will love Mick Skylark.
       </p>
 
-      <div class="scroller" aria-label="Comparable films (scroll horizontally)">
-        <div class="row" style="gap:30px">
-          <div class="card-img" style="width:250px;height:auto">
-            <img src="comparable-films/happy-gilmore.webp" alt="Happy Gilmore" loading="lazy" style="height:auto" />
-          </div>
-          <div class="card-img" style="width:250px;height:auto">
-            <img src="comparable-films/dodgeball.webp" alt="Dodgeball" loading="lazy" style="height:auto" />
-          </div>
-          <div class="card-img" style="width:250px;height:auto">
-            <img src="comparable-films/kingpin.webp" alt="Kingpin" loading="lazy" style="height:auto" />
-          </div>
-          <div class="card-img" style="width:250px;height:auto">
-            <img src="comparable-films/young-frankenstein.webp" alt="Young Frankenstein" loading="lazy" style="height:auto" />
-          </div>
+      <div class="films-wrapper" id="films-wrapper">
+        <div class="films">
+          <div class="poster"><img src="comparable-films/happy-gilmore.webp" alt="Happy Gilmore"></div>
+          <div class="poster"><img src="comparable-films/dodgeball.webp" alt="Dodgeball"></div>
+          <div class="poster"><img src="comparable-films/kingpin.webp" alt="Kingpin"></div>
+          <div class="poster"><img src="comparable-films/young-frankenstein.webp" alt="Young Frankenstein"></div>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- RSVP -->
   <section id="rsvp" class="section-yellow">
     <div class="container">
       <h2 class="section-title">Screener RSVP</h2>
 
-      <div class="countdown" aria-label="Countdown to screener">
-        <div class="count-box"><span class="count-num" id="days">--</span><span class="count-label">Days</span></div>
-        <div class="count-box"><span class="count-num" id="hours">--</span><span class="count-label">Hours</span></div>
-        <div class="count-box"><span class="count-num" id="minutes">--</span><span class="count-label">Minutes</span></div>
-        <div class="count-box"><span class="count-num" id="seconds">--</span><span class="count-label">Seconds</span></div>
+      <div class="countdown">
+        <div class="countbox"><span class="countnum" id="days">--</span><span class="countlab">Days</span></div>
+        <div class="countbox"><span class="countnum" id="hours">--</span><span class="countlab">Hours</span></div>
+        <div class="countbox"><span class="countnum" id="minutes">--</span><span class="countlab">Minutes</span></div>
+        <div class="countbox"><span class="countnum" id="seconds">--</span><span class="countlab">Seconds</span></div>
       </div>
 
-      <div class="screener-info">
-        <div class="screener-date">Sunday, February 22, 2026 @ 3:00 PM ET</div>
-        <div class="screener-sub">Los Angeles time: 12:00 PM PT</div>
-        <p class="screener-note">Reserve your spot for an exclusive screening.</p>
+      <div style="text-align:center;margin-bottom:18px">
+        <div style="font-size:1.7rem;font-weight:900;color:var(--primary);margin-bottom:8px">
+          Sunday, February 22 @ 3:00 PM
+        </div>
+        <div style="font-weight:900;color:#111827">Reserve your spot for an exclusive screening.</div>
       </div>
 
-      <div style="max-width:700px;margin:0 auto;">
+      <div style="max-width:740px;margin:0 auto;">
         <iframe
           data-tally-src="https://tally.so/embed/81xXe5?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"
           loading="lazy"
@@ -230,29 +396,30 @@
           frameborder="0"
           marginheight="0"
           marginwidth="0"
-          title="RSVP for Mick Skylark: Mini Golf Prodigy Screener"></iframe>
+          title="RSVP for Mick Skylark Screener"></iframe>
       </div>
     </div>
   </section>
 
+  <!-- GAME -->
   <section id="game" class="section-yellow">
     <div class="container">
       <h2 class="section-title">Play Glory On The Greens!</h2>
-      <p style="text-align:center;margin-bottom:18px;font-size:1.05rem;font-weight:800;">
-        Click to hit the ball into the hole. Beat par on all 18 holes.
+      <p style="text-align:center;margin:-10px auto 22px;max-width:920px;font-weight:900;color:#111827">
+        Click on the course to hit the ball. Finish all 18 holes.
       </p>
 
-      <div class="controls" aria-label="Game controls">
-        <button class="control-btn active" id="dayBtn" onclick="setTheme('day')" title="Day Mode" aria-label="Day mode">☀️</button>
-        <button class="control-btn" id="nightBtn" onclick="setTheme('night')" title="Night Mode" aria-label="Night mode">🌙</button>
-        <button class="control-btn active" id="soundBtn" onclick="toggleSound()" title="Toggle Sound" aria-label="Toggle sound">🔊</button>
-      </div>
+      <div class="game-wrap">
+        <div class="controls">
+          <button class="ctrl active" id="dayBtn" title="Day Mode">☀️</button>
+          <button class="ctrl" id="nightBtn" title="Night Mode">🌙</button>
+          <button class="ctrl active" id="soundBtn" title="Toggle Sound">🔊</button>
+        </div>
 
-      <div class="game-container">
-        <canvas id="golfCanvas" class="game-canvas" width="500" height="400"></canvas>
+        <canvas id="golfCanvas" width="500" height="400"></canvas>
 
         <div class="scorecard">
-          <h3>📋 Scorecard</h3>
+          <h3 style="color:var(--primary);font-weight:900;margin-bottom:12px">📋 Scorecard</h3>
           <table>
             <thead>
               <tr>
@@ -267,8 +434,8 @@
                 <td>3</td><td>3</td><td>4</td><td>3</td><td>3</td><td>4</td><td>3</td><td>4</td><td>3</td><td>30</td>
                 <td>4</td><td>3</td><td>4</td><td>3</td><td>2</td><td>4</td><td>3</td><td>4</td><td>3</td><td>30</td><td>60</td>
               </tr>
-              <tr class="score-row">
-                <td>Score</td>
+              <tr>
+                <td style="font-weight:900">Score</td>
                 <td id="score-1" class="pending">-</td>
                 <td id="score-2" class="pending">-</td>
                 <td id="score-3" class="pending">-</td>
@@ -294,120 +461,193 @@
             </tbody>
           </table>
 
-          <div style="text-align:center;margin-top:15px;padding-top:15px;border-top:1px solid #e5e7eb;color:var(--primary);font-size:.9rem;font-weight:900;">
-            <span style="margin:0 15px;">🏆 Best: <strong id="best">--</strong></span>
-            <span style="margin:0 15px;">⛳ Holes-in-One: <strong id="holesInOneCount">0</strong></span>
+          <div style="margin-top:12px;font-weight:900;color:var(--primary)">
+            🏆 Best: <span id="best">--</span> &nbsp;&nbsp; ⛳ Holes-in-One: <span id="holesInOneCount">0</span>
           </div>
         </div>
 
-        <div style="display:flex;gap:10px;justify-content:center;margin-top:20px;flex-wrap:wrap;">
-          <button class="btn primary" onclick="resetGame()">↻ Restart Course</button>
-          <button class="btn secondary" onclick="shareChallenge()">👥 Challenge Friends</button>
+        <div style="margin-top:14px">
+          <button class="game-btn" id="restartBtn">↻ Restart Course</button>
+          <button class="game-btn secondary" id="shareBtn">👥 Share Score</button>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- CAST -->
   <section id="cast" class="section-blue">
     <div class="container">
-      <div style="text-align:center;margin-bottom:28px;">
-        <a href="https://pro.imdb.com/title/tt12115818/" target="_blank" class="btn secondary">📽️ View on IMDb</a>
+      <div style="text-align:center;margin-bottom:22px">
+        <a href="https://pro.imdb.com/title/tt12115818/" target="_blank"
+           style="display:inline-block;background:var(--primary);color:#fff;text-decoration:none;font-weight:900;padding:14px 28px;border-radius:999px;box-shadow:0 10px 26px rgba(0,0,0,.18)">
+          📽️ View on IMDb
+        </a>
       </div>
 
       <h2 class="section-title">Starring</h2>
 
-      <!-- Keep your existing cast grid exactly as you had it previously.
-           I’m not re-listing it here to keep this file manageable.
-           If you want, I can paste the entire cast block again. -->
-      <div style="max-width:900px;margin:0 auto;text-align:center;font-weight:800;color:#111827;">
-        (Paste your existing Cast grid here)
-      </div>
-    </div>
-  </section>
-
-  <section id="instagram" class="section-yellow">
-    <div class="container">
-      <h2 class="section-title">Follow Us</h2>
-      <figure data-behold-id="0vaqt1r8jA1TN9AvokJQ" style="max-width:1000px;margin:0 auto;"></figure>
-    </div>
-  </section>
-
-  <section id="credits" class="section-blue">
-    <div class="container">
-      <h2 class="section-title">The Team</h2>
-      <div style="max-width:900px;margin:0 auto;text-align:center;font-weight:800;color:#111827;">
-        (Paste your existing Credits grid here)
-      </div>
-    </div>
-  </section>
-
-  <section id="locations" class="section-yellow">
-    <div class="container">
-      <h2 class="section-title">Screening Locations</h2>
-      <div style="max-width:900px;margin:0 auto;text-align:center;font-weight:800;color:#111827;">
-        (Paste your existing Locations cards here)
-      </div>
-    </div>
-  </section>
-
-  <section id="contact" class="section-blue">
-    <div class="container">
-      <h2 class="section-title">Contact</h2>
-      <div class="card">
-        <div class="contact-row">
-          <div style="min-width:240px;">
-            <div style="font-weight:900;color:var(--primary);font-size:1.2rem;">Potato Eater Productions</div>
-            <div style="color:#374151;margin-top:6px;font-weight:800;">Press / booking / screening questions</div>
-          </div>
-          <div style="font-size:1.05rem;font-weight:900;">
-            Email: <a href="mailto:contact@potatoeaterproductions.com">contact@potatoeaterproductions.com</a>
-          </div>
-          <div style="display:flex;gap:10px;flex-wrap:wrap;">
-            <a class="btn secondary" href="#rsvp">RSVP</a>
-            <a class="btn primary" href="#updates">Email Updates</a>
-          </div>
+      <div class="cast-grid">
+        <!-- Text ALWAYS shows. Images are optional. -->
+        <div class="cast-card">
+          <div class="avatar"><img src="cast-photos/brandon-engman.jpg" alt="Brandon Engman" onerror="this.parentNode.textContent='BE'; this.remove();"></div>
+          <div><div class="cast-name">Brandon Engman</div><div class="cast-role">as Mick Skylark</div></div>
+        </div>
+        <div class="cast-card">
+          <div class="avatar"><img src="cast-photos/david-koechner.jpg" alt="David Koechner" onerror="this.parentNode.textContent='DK'; this.remove();"></div>
+          <div><div class="cast-name">David Koechner</div><div class="cast-role">as Jonsey</div></div>
+        </div>
+        <div class="cast-card">
+          <div class="avatar"><img src="cast-photos/patrick-warburton.jpg" alt="Patrick Warburton" onerror="this.parentNode.textContent='PW'; this.remove();"></div>
+          <div><div class="cast-name">Patrick Warburton</div><div class="cast-role">as Dr. Phil</div></div>
+        </div>
+        <div class="cast-card">
+          <div class="avatar"><img src="cast-photos/robert-knepper.jpg" alt="Robert Knepper" onerror="this.parentNode.textContent='RK'; this.remove();"></div>
+          <div><div class="cast-name">Robert Knepper</div><div class="cast-role">as Vladimir</div></div>
+        </div>
+        <div class="cast-card">
+          <div class="avatar"><img src="cast-photos/cs-lee.jpg" alt="CS Lee" onerror="this.parentNode.textContent='CL'; this.remove();"></div>
+          <div><div class="cast-name">CS Lee</div><div class="cast-role">as Leonard</div></div>
+        </div>
+        <div class="cast-card">
+          <div class="avatar"><img src="cast-photos/elizabeth-mitchell.jpg" alt="Elizabeth Mitchell" onerror="this.parentNode.textContent='EM'; this.remove();"></div>
+          <div><div class="cast-name">Elizabeth Mitchell</div><div class="cast-role">as Clara</div></div>
+        </div>
+        <div class="cast-card">
+          <div class="avatar"><img src="cast-photos/thomas-lennon.jpg" alt="Thomas Lennon" onerror="this.parentNode.textContent='TL'; this.remove();"></div>
+          <div><div class="cast-name">Thomas Lennon</div><div class="cast-role">as Tom McDonald</div></div>
+        </div>
+        <div class="cast-card">
+          <div class="avatar"><img src="cast-photos/matt-iseman.jpg" alt="Matt Iseman" onerror="this.parentNode.textContent='MI'; this.remove();"></div>
+          <div><div class="cast-name">Matt Iseman</div><div class="cast-role">as Artie Finegold</div></div>
+        </div>
+        <div class="cast-card">
+          <div class="avatar"><img src="cast-photos/jorge-garcia.jpg" alt="Jorge Garcia" onerror="this.parentNode.textContent='JG'; this.remove();"></div>
+          <div><div class="cast-name">Jorge Garcia</div><div class="cast-role">as Roger</div></div>
+        </div>
+        <div class="cast-card">
+          <div class="avatar"><img src="cast-photos/james-murray.jpg" alt="James Murray" onerror="this.parentNode.textContent='JM'; this.remove();"></div>
+          <div><div class="cast-name">James Murray (Murr)</div><div class="cast-role">as Harry Johnson</div></div>
+        </div>
+        <div class="cast-card">
+          <div class="avatar"><img src="cast-photos/russell-hodgkinson.jpg" alt="Russell Hodgkinson" onerror="this.parentNode.textContent='RH'; this.remove();"></div>
+          <div><div class="cast-name">Russell Hodgkinson</div><div class="cast-role">as Dave</div></div>
+        </div>
+        <div class="cast-card">
+          <div class="avatar"><img src="cast-photos/ali-stoner.jpg" alt="Ali Stoner" onerror="this.parentNode.textContent='AS'; this.remove();"></div>
+          <div><div class="cast-name">Ali Stoner</div><div class="cast-role">as Vanessa</div></div>
+        </div>
+        <div class="cast-card">
+          <div class="avatar"><img src="cast-photos/colin-egglesfield.jpg" alt="Colin Egglesfield" onerror="this.parentNode.textContent='CE'; this.remove();"></div>
+          <div><div class="cast-name">Colin Egglesfield</div><div class="cast-role">as Eagle</div></div>
+        </div>
+        <div class="cast-card">
+          <div class="avatar"><img src="cast-photos/violet-bennett.jpg" alt="Violet Bennett" onerror="this.parentNode.textContent='VB'; this.remove();"></div>
+          <div><div class="cast-name">Violet Bennett</div><div class="cast-role">as Lily</div></div>
+        </div>
+        <div class="cast-card">
+          <div class="avatar"><img src="cast-photos/urijah-faber.jpg" alt="Urijah Faber" onerror="this.parentNode.textContent='UF'; this.remove();"></div>
+          <div><div class="cast-name">Urijah Faber</div><div class="cast-role">as Foley Dowed</div></div>
+        </div>
+        <div class="cast-card">
+          <div class="avatar"><img src="cast-photos/sergio-rizzuto.jpg" alt="Sergio Rizzuto" onerror="this.parentNode.textContent='SR'; this.remove();"></div>
+          <div><div class="cast-name">Sergio Rizzuto</div><div class="cast-role">as Lunch Box</div></div>
+        </div>
+        <div class="cast-card">
+          <div class="avatar"><img src="cast-photos/ettore-baccari.jpg" alt="Ettore James Baccari" onerror="this.parentNode.textContent='EB'; this.remove();"></div>
+          <div><div class="cast-name">Ettore James Baccari</div><div class="cast-role">as Young Mick</div></div>
+        </div>
+        <div class="cast-card">
+          <div class="avatar"><img src="cast-photos/jett-miller.jpg" alt="Jett Miller" onerror="this.parentNode.textContent='JM'; this.remove();"></div>
+          <div><div class="cast-name">Jett Miller</div><div class="cast-role">as Humphrey</div></div>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- CREDITS -->
+  <section id="credits" class="section-blue">
+    <div class="container">
+      <h2 class="section-title">The Team</h2>
+
+      <div class="credits-grid">
+        <div class="credit">
+          <div class="credit-label">Director</div>
+          <div class="credit-name">Sergio Rizzuto</div>
+        </div>
+        <div class="credit">
+          <div class="credit-label">Writer</div>
+          <div class="credit-name">Sergio Rizzuto</div>
+        </div>
+        <div class="credit">
+          <div class="credit-label">Co-Writer</div>
+          <div class="credit-name">Jett Miller</div>
+        </div>
+        <div class="credit">
+          <div class="credit-label">Producers</div>
+          <div class="credit-name">Sergio Rizzuto<br>Tyler Olsen<br>John Michaels</div>
+        </div>
+        <div class="credit">
+          <div class="credit-label">Production Company</div>
+          <div class="credit-name">Potato Eater Productions</div>
+        </div>
+      </div>
+
+      <p style="text-align:center;margin:22px auto 0;max-width:900px;font-weight:900;color:#111827">
+        If you want more credit lines (DP, Editor, Composer, etc.), tell me the names and I’ll add them cleanly.
+      </p>
+    </div>
+  </section>
+
+  <!-- EMAIL UPDATES -->
   <section id="updates" class="section-yellow">
     <div class="container">
       <h2 class="section-title">Email Updates</h2>
       <div class="card">
-        <p style="text-align:center;font-size:1.05rem;margin-bottom:18px;color:#374151;font-weight:900;">
-          Want updates on future screenings and announcements? Drop your email here.
+        <p style="text-align:center;font-weight:900;color:var(--primary);margin-bottom:14px;font-size:1.1rem">
+          Enter your email to get updates.
         </p>
-        <div style="max-width:700px;margin:0 auto;">
+        <div style="max-width:740px;margin:0 auto;">
           <iframe
             data-tally-src="https://tally.so/embed/2EPqJ9?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"
             loading="lazy"
             width="100%"
-            height="380"
+            height="420"
             frameborder="0"
             marginheight="0"
             marginwidth="0"
-            title="Email updates signup"></iframe>
+            title="Email Updates"></iframe>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="section-blue">
+    <div class="container">
+      <h2 class="section-title">Contact</h2>
+      <div class="card mail">
+        <p style="text-align:center;font-weight:900;color:#111827;margin-bottom:10px">
+          For press, screenings, or partnerships:
+        </p>
+        <p style="text-align:center;font-weight:900;font-size:1.2rem;margin-bottom:0">
+          <a href="mailto:contact@potatoeaterproductions">contact@potatoeaterproductions</a>
+        </p>
       </div>
     </div>
   </section>
 
   <footer>
-    <p>&copy; 2025 Mick Skylark: Mini Golf Prodigy. All rights reserved.</p>
-    <p style="margin-top:10px;opacity:.85;font-weight:800;">A Potato Eater Productions Film</p>
-    <p style="margin-top:15px;">
-      <a href="https://www.instagram.com/mickskylark" target="_blank" rel="noopener">Follow us on Instagram!</a>
-    </p>
+    <p style="font-weight:900">&copy; 2025 Mick Skylark: Mini Golf Prodigy. All rights reserved.</p>
+    <p style="margin-top:10px;font-weight:900;opacity:.95">A Potato Eater Productions Film</p>
+    <p style="margin-top:12px"><a href="https://www.instagram.com/mickskylark" target="_blank">Follow on Instagram</a></p>
   </footer>
 
-  <button class="back-to-top" id="backToTop" aria-label="Back to top" title="Back to top">↑</button>
+  <button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
 
   <script>
-    // Instagram (Behold)
-    (function(){ const d=document,s=d.createElement("script"); s.type="module"; s.src="https://w.behold.so/widget.js"; d.head.append(s); })();
-
-    // Tally embeds
+    /* ---------------------------
+       Tally embed loader
+    ----------------------------*/
     (function(){
       var d=document,w="https://tally.so/widgets/embed.js";
       function v(){
@@ -420,56 +660,508 @@
       }
     })();
 
-    // Smooth scroll for # links
-    document.querySelectorAll('.nav-link').forEach(link => {
-      link.addEventListener('click', (e) => {
-        const href = link.getAttribute('href') || '';
-        if (href.startsWith('#')) {
-          e.preventDefault();
-          const target = document.querySelector(href);
-          if (target) target.scrollIntoView({ behavior: 'smooth' });
-        }
+    /* ---------------------------
+       Smooth scroll
+    ----------------------------*/
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click', (e)=>{
+        const id=a.getAttribute('href').slice(1);
+        const t=document.getElementById(id);
+        if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth'});}
       });
     });
 
-    // Back to top
-    const backToTopBtn = document.getElementById('backToTop');
-    function onScroll(){ backToTopBtn.classList.toggle('show', window.scrollY > 600); }
-    window.addEventListener('scroll', onScroll, { passive:true }); onScroll();
-    backToTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-
-    // Countdown (Feb ET = -05:00)
-    function updateCountdown() {
-      const screeningDate = new Date('2026-02-22T15:00:00-05:00').getTime();
-      const now = Date.now();
-      const distance = screeningDate - now;
-
-      const days = Math.max(0, Math.floor(distance / (1000*60*60*24)));
-      const hours = Math.max(0, Math.floor((distance % (1000*60*60*24)) / (1000*60*60)));
-      const minutes = Math.max(0, Math.floor((distance % (1000*60*60)) / (1000*60)));
-      const seconds = Math.max(0, Math.floor((distance % (1000*60)) / 1000));
-
-      document.getElementById('days').textContent = days;
-      document.getElementById('hours').textContent = hours;
-      document.getElementById('minutes').textContent = minutes;
-      document.getElementById('seconds').textContent = seconds;
+    /* ---------------------------
+       Back to top
+    ----------------------------*/
+    const backToTop=document.getElementById('backToTop');
+    function toggleBTT(){
+      if(window.scrollY>500) backToTop.classList.add('show');
+      else backToTop.classList.remove('show');
     }
-    setInterval(updateCountdown, 1000); updateCountdown();
+    window.addEventListener('scroll',toggleBTT);
+    toggleBTT();
+    backToTop.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
 
-    /* ============================
-       MINI GOLF GAME SCRIPT
-       ============================
+    /* ---------------------------
+       Countdown (Feb 22, 2026 @ 3pm)
+    ----------------------------*/
+    function updateCountdown(){
+      const target=new Date('February 22, 2026 15:00:00').getTime();
+      const now=Date.now();
+      const dist=target-now;
 
-       Your game is not loading because the working game JS is not currently in the page.
-       Paste your FULL working game JS below this comment, exactly as it was when it worked.
+      const dEl=document.getElementById('days');
+      const hEl=document.getElementById('hours');
+      const mEl=document.getElementById('minutes');
+      const sEl=document.getElementById('seconds');
+      if(!dEl||!hEl||!mEl||!sEl) return;
 
-       If you don't have it handy:
-       - open your old working index.html
-       - copy everything from its <script> that defines:
-         drawCourse / resetGame / setTheme / toggleSound / shareChallenge / click handlers, etc.
-       - paste it right here, under this line
+      if(dist<=0){
+        dEl.textContent='0';hEl.textContent='0';mEl.textContent='0';sEl.textContent='0';
+        return;
+      }
+      const days=Math.floor(dist/(1000*60*60*24));
+      const hours=Math.floor((dist%(1000*60*60*24))/(1000*60*60));
+      const minutes=Math.floor((dist%(1000*60*60))/(1000*60));
+      const seconds=Math.floor((dist%(1000*60))/1000);
 
-       ============================ */
+      dEl.textContent=days;
+      hEl.textContent=hours;
+      mEl.textContent=minutes;
+      sEl.textContent=seconds;
+    }
+    setInterval(updateCountdown,1000);
+    updateCountdown();
+
+    /* ===========================
+       18-HOLE MINI GOLF GAME
+       (fixed: no NaNs, safer loop,
+       no fatal audio)
+    ============================ */
+
+    const canvas = document.getElementById('golfCanvas');
+    const ctx = canvas ? canvas.getContext('2d') : null;
+
+    const parValues = [3,3,4,3,3,4,3,4,3,4,3,4,3,2,4,3,4,3];
+
+    const holes = [
+      { ball:{x:50,y:350}, hole:{x:450,y:50}, obstacles:[{x:200,y:200,width:20,height:150},{x:350,y:50,width:20,height:200}], sand:[{x:150,y:280,width:80,height:80}], water:[], bumpers:[], windmills:[], moving:[] },
+      { ball:{x:50,y:350}, hole:{x:450,y:100}, obstacles:[{x:200,y:150,width:20,height:150},{x:350,y:200,width:20,height:200}], sand:[{x:250,y:280,width:70,height:70}], water:[], bumpers:[{x:280,y:180,r:25},{x:380,y:280,r:25}], windmills:[], moving:[] },
+      { ball:{x:50,y:200}, hole:{x:450,y:200}, obstacles:[{x:200,y:100,width:20,height:100},{x:300,y:200,width:20,height:100}], sand:[{x:120,y:250,width:60,height:60}], water:[{x:350,y:120,width:70,height:70}], bumpers:[], windmills:[], moving:[] },
+      { ball:{x:450,y:350}, hole:{x:50,y:50}, obstacles:[{x:240,y:0,width:20,height:250},{x:240,y:300,width:20,height:100}], sand:[{x:80,y:150,width:100,height:70}], water:[], bumpers:[{x:350,y:200,r:30}], windmills:[], moving:[] },
+      { ball:{x:250,y:350}, hole:{x:450,y:150}, obstacles:[{x:100,y:100,width:100,height:20},{x:300,y:200,width:100,height:20}], sand:[], water:[{x:180,y:250,width:80,height:80}], bumpers:[], windmills:[{x:350,y:280,r:35,blades:3,angle:0,speed:0.03}], moving:[] },
+      { ball:{x:50,y:350}, hole:{x:450,y:50}, obstacles:[{x:150,y:0,width:20,height:180},{x:330,y:220,width:20,height:180}], sand:[{x:180,y:280,width:70,height:70}], water:[], bumpers:[], windmills:[], moving:[{x:240,y:180,width:20,height:100,dir:1,speed:1.5,minY:100,maxY:280,axis:'v'}] },
+      { ball:{x:50,y:350}, hole:{x:450,y:50}, obstacles:[{x:120,y:100,width:20,height:150},{x:240,y:200,width:20,height:150},{x:360,y:100,width:20,height:150}], sand:[{x:80,y:280,width:60,height:60}], water:[], bumpers:[{x:180,y:150,r:25},{x:300,y:250,r:25}], windmills:[], moving:[] },
+      { ball:{x:50,y:350}, hole:{x:450,y:50}, obstacles:[{x:150,y:0,width:20,height:200},{x:250,y:150,width:20,height:250},{x:350,y:0,width:20,height:200}], sand:[{x:180,y:250,width:60,height:60}], water:[], bumpers:[{x:380,y:280,r:25}], windmills:[], moving:[] },
+      { ball:{x:250,y:350}, hole:{x:250,y:50}, obstacles:[{x:100,y:180,width:80,height:20},{x:320,y:200,width:80,height:20}], sand:[{x:200,y:250,width:100,height:60}], water:[], bumpers:[], windmills:[{x:250,y:130,r:35,blades:4,angle:0,speed:0.02}], moving:[] },
+      { ball:{x:50,y:50}, hole:{x:450,y:350}, obstacles:[{x:200,y:100,width:20,height:150},{x:300,y:150,width:20,height:150}], sand:[{x:120,y:80,width:70,height:70},{x:350,y:280,width:70,height:70}], water:[], bumpers:[{x:380,y:120,r:25}], windmills:[], moving:[] },
+      { ball:{x:250,y:350}, hole:{x:50,y:50}, obstacles:[{x:100,y:150,width:150,height:20},{x:100,y:280,width:150,height:20}], sand:[{x:300,y:100,width:80,height:80}], water:[], bumpers:[{x:170,y:220,r:25}], windmills:[], moving:[] },
+      { ball:{x:50,y:200}, hole:{x:450,y:200}, obstacles:[{x:180,y:80,width:20,height:120},{x:300,y:200,width:20,height:120}], sand:[{x:350,y:250,width:70,height:70}], water:[{x:120,y:120,width:60,height:60}], bumpers:[], windmills:[{x:240,y:200,r:30,blades:3,angle:0,speed:0.03}], moving:[] },
+      { ball:{x:450,y:350}, hole:{x:450,y:50}, obstacles:[{x:350,y:150,width:20,height:150}], sand:[{x:380,y:280,width:60,height:60}], water:[], bumpers:[{x:400,y:200,r:20}], windmills:[], moving:[] },
+      { ball:{x:250,y:350}, hole:{x:250,y:50}, obstacles:[{x:150,y:150,width:20,height:100},{x:330,y:150,width:20,height:100}], sand:[], water:[], bumpers:[], windmills:[{x:250,y:200,r:25,blades:4,angle:0,speed:0.04}], moving:[] },
+      { ball:{x:50,y:350}, hole:{x:450,y:350}, obstacles:[{x:200,y:0,width:20,height:250},{x:280,y:150,width:20,height:250}], sand:[{x:350,y:280,width:80,height:80}], water:[{x:120,y:280,width:70,height:70}], bumpers:[], windmills:[], moving:[] },
+      { ball:{x:250,y:200}, hole:{x:450,y:50}, obstacles:[{x:150,y:100,width:20,height:200},{x:320,y:0,width:20,height:180}], sand:[{x:200,y:250,width:90,height:70}], water:[], bumpers:[{x:380,y:200,r:30}], windmills:[], moving:[] },
+      { ball:{x:50,y:50}, hole:{x:450,y:350}, obstacles:[{x:200,y:0,width:20,height:180},{x:300,y:220,width:20,height:180}], sand:[{x:350,y:280,width:80,height:80}], water:[], bumpers:[], windmills:[], moving:[{x:250,y:180,width:20,height:40,dir:1,speed:2,minY:180,maxY:220,axis:'v'}] },
+      { ball:{x:250,y:350}, hole:{x:250,y:50}, obstacles:[{x:180,y:150,width:20,height:100},{x:300,y:150,width:20,height:100},{x:100,y:250,width:60,height:20},{x:340,y:250,width:60,height:20}], sand:[{x:210,y:260,width:80,height:80}], water:[{x:220,y:100,width:60,height:40}], bumpers:[], windmills:[{x:250,y:200,r:30,blades:3,angle:0,speed:0.025}], moving:[] }
+    ];
+
+    let theme = 'day';
+    let sound = true;
+
+    let holeIndex = 0;
+    let strokes = 0;
+    let totalStrokes = 0;
+
+    let ball = {x:50,y:350,r:10,vx:0,vy:0};
+    let hole = {x:450,y:50,r:20};
+
+    let holeScores = Array(18).fill(null);
+
+    let best = localStorage.getItem('bestScore') || '--';
+    let holesInOne = parseInt(localStorage.getItem('holesInOne') || '0', 10);
+
+    let animating = false;
+
+    let audioCtx = null;
+    function getAudio(){
+      if(!sound) return null;
+      try{
+        if(!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        if(audioCtx.state === 'suspended') audioCtx.resume();
+        return audioCtx;
+      }catch(e){ return null; }
+    }
+    function beep(type){
+      if(!sound) return;
+      const ac = getAudio();
+      if(!ac) return;
+      const o = ac.createOscillator();
+      const g = ac.createGain();
+      o.connect(g); g.connect(ac.destination);
+      if(type==='hit'){o.frequency.value=320;o.type='sine';g.gain.setValueAtTime(.25,ac.currentTime);g.gain.exponentialRampToValueAtTime(.01,ac.currentTime+.09);o.start();o.stop(ac.currentTime+.09);}
+      if(type==='wall'){o.frequency.value=210;o.type='square';g.gain.setValueAtTime(.2,ac.currentTime);g.gain.exponentialRampToValueAtTime(.01,ac.currentTime+.12);o.start();o.stop(ac.currentTime+.12);}
+      if(type==='hole'){o.frequency.value=523;o.type='sine';g.gain.setValueAtTime(.25,ac.currentTime);g.gain.exponentialRampToValueAtTime(.01,ac.currentTime+.45);o.start();o.stop(ac.currentTime+.45);}
+      if(type==='water'){o.frequency.value=150;o.type='sine';g.gain.setValueAtTime(.2,ac.currentTime);g.gain.exponentialRampToValueAtTime(.01,ac.currentTime+.25);o.start();o.stop(ac.currentTime+.25);}
+    }
+
+    function loadHole(i){
+      holeIndex = i;
+      const h = holes[i];
+      ball = {x:h.ball.x, y:h.ball.y, r:10, vx:0, vy:0};
+      hole = {x:h.hole.x, y:h.hole.y, r:20};
+      strokes = 0;
+      animating = false;
+      draw();
+    }
+
+    function clamp(v,min,max){return Math.max(min, Math.min(max, v));}
+
+    function inRect(x,y,rect){
+      return x>rect.x && x<rect.x+rect.width && y>rect.y && y<rect.y+rect.height;
+    }
+
+    function scoreStyle(par, score){
+      const diff = score - par;
+      if(diff < 0) return 'birdie';
+      if(diff === 0) return 'par';
+      if(diff === 1) return 'bogey';
+      return 'double-bogey';
+    }
+
+    function updateScorecard(){
+      // holes
+      for(let i=0;i<18;i++){
+        const cell = document.getElementById(`score-${i+1}`);
+        if(!cell) continue;
+        if(holeScores[i] === null){
+          cell.textContent='-';
+          cell.className='pending';
+        }else{
+          cell.textContent = holeScores[i];
+          cell.className = scoreStyle(parValues[i], holeScores[i]);
+        }
+      }
+
+      const outEl = document.getElementById('score-out');
+      const inEl  = document.getElementById('score-in');
+      const totEl = document.getElementById('score-total');
+
+      let out = 0, inn = 0;
+      let outDone=false, inDone=false;
+
+      for(let i=0;i<9;i++){ if(holeScores[i]!==null){ out += holeScores[i]; outDone=true; } }
+      for(let i=9;i<18;i++){ if(holeScores[i]!==null){ inn += holeScores[i]; inDone=true; } }
+
+      if(outEl){
+        outEl.textContent = outDone ? out : '-';
+        outEl.className = outDone ? '' : 'pending';
+      }
+      if(inEl){
+        inEl.textContent = inDone ? inn : '-';
+        inEl.className = inDone ? '' : 'pending';
+      }
+      if(totEl){
+        const anyDone = holeScores.some(v=>v!==null);
+        totEl.textContent = anyDone ? (out+inn) : '-';
+        totEl.className = anyDone ? '' : 'pending';
+      }
+
+      const bestEl = document.getElementById('best');
+      const hioEl = document.getElementById('holesInOneCount');
+      if(bestEl) bestEl.textContent = best;
+      if(hioEl) hioEl.textContent = holesInOne;
+    }
+
+    function draw(){
+      if(!ctx) return;
+
+      // background
+      const g = ctx.createLinearGradient(0,0,0,canvas.height);
+      if(theme==='night'){ g.addColorStop(0,'#1a2332'); g.addColorStop(1,'#0f1419'); }
+      else { g.addColorStop(0,'#90EE90'); g.addColorStop(1,'#7FD87F'); }
+      ctx.fillStyle = g; ctx.fillRect(0,0,canvas.width,canvas.height);
+
+      const h = holes[holeIndex];
+
+      // water
+      (h.water||[]).forEach(w=>{
+        ctx.fillStyle='#1E90FF';
+        ctx.fillRect(w.x,w.y,w.width,w.height);
+      });
+
+      // sand
+      (h.sand||[]).forEach(s=>{
+        ctx.fillStyle='#F4C430';
+        ctx.fillRect(s.x,s.y,s.width,s.height);
+      });
+
+      // obstacles
+      ctx.fillStyle='#8B4513';
+      (h.obstacles||[]).forEach(o=>ctx.fillRect(o.x,o.y,o.width,o.height));
+
+      // moving obstacles
+      (h.moving||[]).forEach(o=>{
+        if(o.axis==='v'){
+          o.y += o.speed * o.dir;
+          if(o.y<=o.minY || o.y>=o.maxY) o.dir *= -1;
+        }
+        ctx.fillStyle='#A0522D';
+        ctx.fillRect(o.x,o.y,o.width,o.height);
+      });
+
+      // bumpers
+      (h.bumpers||[]).forEach(b=>{
+        ctx.fillStyle='#EF4444';
+        ctx.beginPath(); ctx.arc(b.x,b.y,b.r,0,Math.PI*2); ctx.fill();
+      });
+
+      // windmills
+      (h.windmills||[]).forEach(m=>{
+        m.angle += m.speed;
+        ctx.fillStyle='#654321';
+        ctx.beginPath(); ctx.arc(m.x,m.y,8,0,Math.PI*2); ctx.fill();
+        ctx.save();
+        ctx.translate(m.x,m.y);
+        ctx.rotate(m.angle);
+        for(let i=0;i<m.blades;i++){
+          ctx.rotate((Math.PI*2)/m.blades);
+          ctx.fillStyle='#8B4513';
+          ctx.fillRect(-5,0,10,m.r);
+        }
+        ctx.restore();
+      });
+
+      // hole
+      ctx.fillStyle='#000';
+      ctx.beginPath(); ctx.arc(hole.x,hole.y,hole.r,0,Math.PI*2); ctx.fill();
+      ctx.fillStyle='#333';
+      ctx.beginPath(); ctx.arc(hole.x,hole.y,hole.r-5,0,Math.PI*2); ctx.fill();
+
+      // ball
+      ctx.fillStyle='#fff';
+      ctx.strokeStyle = theme==='night' ? '#FCD34D' : '#000';
+      ctx.lineWidth=2;
+      ctx.beginPath(); ctx.arc(ball.x,ball.y,ball.r,0,Math.PI*2); ctx.fill(); ctx.stroke();
+
+      // HUD
+      ctx.fillStyle='rgba(255,255,255,.9)';
+      ctx.fillRect(8,8,170,48);
+      ctx.fillStyle= theme==='night' ? '#FCD34D' : '#1E3A8A';
+      ctx.font='900 16px Poppins';
+      ctx.fillText(`Hole ${holeIndex+1} of 18`, 16, 28);
+      ctx.font='800 14px Poppins';
+      ctx.fillText(`Par ${parValues[holeIndex]} • Strokes ${strokes}`, 16, 48);
+    }
+
+    function rectCollision(o){
+      if(ball.x+ball.r>o.x && ball.x-ball.r<o.x+o.width && ball.y+ball.r>o.y && ball.y-ball.r<o.y+o.height){
+        // push out by minimal overlap
+        const left  = (ball.x+ball.r) - o.x;
+        const right = (o.x+o.width) - (ball.x-ball.r);
+        const top   = (ball.y+ball.r) - o.y;
+        const bot   = (o.y+o.height) - (ball.y-ball.r);
+        const min = Math.min(left,right,top,bot);
+
+        if(min===left){ ball.x=o.x-ball.r-1; ball.vx=-Math.abs(ball.vx)*.75; }
+        else if(min===right){ ball.x=o.x+o.width+ball.r+1; ball.vx=Math.abs(ball.vx)*.75; }
+        else if(min===top){ ball.y=o.y-ball.r-1; ball.vy=-Math.abs(ball.vy)*.75; }
+        else { ball.y=o.y+o.height+ball.r+1; ball.vy=Math.abs(ball.vy)*.75; }
+
+        beep('wall');
+      }
+    }
+
+    function tick(){
+      if(!ctx) return;
+      const h = holes[holeIndex];
+
+      // move
+      ball.x += ball.vx;
+      ball.y += ball.vy;
+
+      // boundaries
+      if(ball.x-ball.r<0 || ball.x+ball.r>canvas.width){ ball.x=clamp(ball.x,ball.r,canvas.width-ball.r); ball.vx*=-.75; beep('wall'); }
+      if(ball.y-ball.r<0 || ball.y+ball.r>canvas.height){ ball.y=clamp(ball.y,ball.r,canvas.height-ball.r); ball.vy*=-.75; beep('wall'); }
+
+      // water
+      (h.water||[]).forEach(w=>{
+        if(inRect(ball.x,ball.y,w)){
+          beep('water');
+          // reset ball to tee + add penalty stroke
+          ball.x = h.ball.x; ball.y = h.ball.y; ball.vx=0; ball.vy=0;
+          strokes++;
+        }
+      });
+
+      // friction (sand slows more)
+      let inSand=false;
+      (h.sand||[]).forEach(s=>{ if(inRect(ball.x,ball.y,s)) inSand=true; });
+      const fr = inSand ? 0.93 : 0.98;
+      ball.vx *= fr; ball.vy *= fr;
+      if(Math.abs(ball.vx)<0.08) ball.vx=0;
+      if(Math.abs(ball.vy)<0.08) ball.vy=0;
+
+      // obstacle collisions
+      (h.obstacles||[]).forEach(rectCollision);
+      (h.moving||[]).forEach(rectCollision);
+
+      // bumper collisions
+      (h.bumpers||[]).forEach(b=>{
+        const dx=ball.x-b.x, dy=ball.y-b.y;
+        const dist=Math.hypot(dx,dy);
+        if(dist < b.r + ball.r){
+          const nx=dx/(dist||1), ny=dy/(dist||1);
+          const dot = ball.vx*nx + ball.vy*ny;
+          ball.vx = (ball.vx - 2*dot*nx) * 1.2;
+          ball.vy = (ball.vy - 2*dot*ny) * 1.2;
+          ball.x = b.x + nx*(b.r+ball.r+1);
+          ball.y = b.y + ny*(b.r+ball.r+1);
+          beep('wall');
+        }
+      });
+
+      // windmill “zone” bounce
+      (h.windmills||[]).forEach(m=>{
+        const dist=Math.hypot(ball.x-m.x, ball.y-m.y);
+        if(dist < m.r + ball.r && dist > 12){
+          ball.vx *= -0.85;
+          ball.vy *= -0.85;
+          beep('wall');
+        }
+      });
+
+      // hole check
+      const dToHole = Math.hypot(ball.x-hole.x, ball.y-hole.y);
+      if(dToHole < hole.r - 7 && Math.abs(ball.vx) < 2 && Math.abs(ball.vy) < 2){
+        ball.vx=0; ball.vy=0;
+
+        totalStrokes += strokes;
+        holeScores[holeIndex] = strokes;
+        updateScorecard();
+        beep('hole');
+
+        if(strokes === 1){
+          holesInOne++;
+          localStorage.setItem('holesInOne', String(holesInOne));
+        }
+
+        // next hole
+        if(holeIndex === 17){
+          // finish
+          const totalPar = parValues.reduce((a,b)=>a+b,0);
+          const diff = totalStrokes - totalPar;
+          let msg = `Finished: ${totalStrokes} strokes. `;
+          msg += (diff===0) ? 'Even par.' : (diff>0) ? `+${diff} over par.` : `${diff} under par.`;
+          alert(msg);
+
+          if(best === '--' || totalStrokes < parseInt(best,10)){
+            best = String(totalStrokes);
+            localStorage.setItem('bestScore', best);
+          }
+          updateScorecard();
+          animating=false;
+          return;
+        }else{
+          setTimeout(()=>{
+            alert(`Hole ${holeIndex+1} complete in ${strokes}.`);
+            loadHole(holeIndex+1);
+            updateScorecard();
+          }, 50);
+          animating=false;
+          return;
+        }
+      }
+
+      draw();
+
+      if(ball.vx===0 && ball.vy===0){
+        animating=false;
+        return;
+      }
+      requestAnimationFrame(tick);
+    }
+
+    function hitAt(clientX, clientY){
+      if(!ctx) return;
+
+      // resume audio on interaction (but never fatal)
+      getAudio();
+
+      // only hit if ball stopped
+      if(ball.vx!==0 || ball.vy!==0) return;
+
+      const rect = canvas.getBoundingClientRect();
+      const sx = canvas.width / rect.width;
+      const sy = canvas.height / rect.height;
+      const x = (clientX - rect.left) * sx;
+      const y = (clientY - rect.top) * sy;
+
+      let dx = x - ball.x;
+      let dy = y - ball.y;
+      let dist = Math.hypot(dx,dy);
+
+      // FIX: avoid divide-by-zero when clicking on the ball
+      if(dist < 0.001){
+        // give a tiny nudge in a consistent direction
+        dx = 1; dy = 0;
+        dist = 1;
+      }
+
+      const power = Math.min(dist / 20, 8);
+      ball.vx = (dx / dist) * power;
+      ball.vy = (dy / dist) * power;
+
+      strokes++;
+      beep('hit');
+
+      if(!animating){
+        animating=true;
+        requestAnimationFrame(tick);
+      }
+    }
+
+    function resetCourse(){
+      totalStrokes = 0;
+      holeScores = Array(18).fill(null);
+      updateScorecard();
+      loadHole(0);
+      draw();
+    }
+
+    function shareScore(){
+      const done = holeScores.filter(v=>v!==null).length;
+      if(done===0){ alert('Play at least one hole first.'); return; }
+      const parDone = parValues.slice(0,done).reduce((a,b)=>a+b,0);
+      const diff = totalStrokes - parDone;
+      const tag = diff===0 ? 'E' : (diff>0 ? `+${diff}` : `${diff}`);
+      const text = `🏌️ Glory On The Greens: ${totalStrokes} strokes (${tag}) through ${done} holes.`;
+      if(navigator.share){
+        navigator.share({title:'Glory On The Greens', text});
+      }else if(navigator.clipboard){
+        navigator.clipboard.writeText(text).then(()=>alert('Copied score to clipboard.'));
+      }else{
+        alert(text);
+      }
+    }
+
+    // controls
+    document.getElementById('dayBtn').addEventListener('click', ()=>{
+      theme='day';
+      document.getElementById('dayBtn').classList.add('active');
+      document.getElementById('nightBtn').classList.remove('active');
+      draw();
+    });
+    document.getElementById('nightBtn').addEventListener('click', ()=>{
+      theme='night';
+      document.getElementById('nightBtn').classList.add('active');
+      document.getElementById('dayBtn').classList.remove('active');
+      draw();
+    });
+    document.getElementById('soundBtn').addEventListener('click', ()=>{
+      sound=!sound;
+      const btn=document.getElementById('soundBtn');
+      btn.textContent = sound ? '🔊' : '🔇';
+      btn.classList.toggle('active', sound);
+    });
+
+    document.getElementById('restartBtn').addEventListener('click', resetCourse);
+    document.getElementById('shareBtn').addEventListener('click', shareScore);
+
+    // canvas input
+    if(canvas){
+      canvas.addEventListener('click', (e)=>hitAt(e.clientX, e.clientY));
+      canvas.addEventListener('touchstart', (e)=>{
+        e.preventDefault();
+        const t=e.touches[0];
+        hitAt(t.clientX, t.clientY);
+      }, {passive:false});
+    }
+
+    // init
+    updateScorecard();
+    loadHole(0);
+    draw();
   </script>
 </body>
 </html>
