@@ -790,18 +790,34 @@
         ball.vx *= 0.986;
         ball.vy *= 0.986;
 
-        // Wall bounce
-        if(ball.x - ball.r < 0){ ball.x = ball.r; ball.vx *= -0.68; sfx.wall(); }
-        if(ball.x + ball.r > canvas.width){ ball.x = canvas.width - ball.r; ball.vx *= -0.68; sfx.wall(); }
-        if(ball.y - ball.r < 0){ ball.y = ball.r; ball.vy *= -0.68; sfx.wall(); }
-        if(ball.y + ball.r > canvas.height){ ball.y = canvas.height - ball.r; ball.vy *= -0.68; sfx.wall(); }
+        // Wall bounce - improved physics
+        if(ball.x - ball.r < 0){
+          ball.x = ball.r + 1; // Push away from wall
+          if(ball.vx < 0) ball.vx *= -0.75; // Only reverse if moving towards wall
+          sfx.wall();
+        }
+        if(ball.x + ball.r > canvas.width){
+          ball.x = canvas.width - ball.r - 1;
+          if(ball.vx > 0) ball.vx *= -0.75;
+          sfx.wall();
+        }
+        if(ball.y - ball.r < 0){
+          ball.y = ball.r + 1;
+          if(ball.vy < 0) ball.vy *= -0.75;
+          sfx.wall();
+        }
+        if(ball.y + ball.r > canvas.height){
+          ball.y = canvas.height - ball.r - 1;
+          if(ball.vy > 0) ball.vy *= -0.75;
+          sfx.wall();
+        }
 
         const speed = Math.hypot(ball.vx, ball.vy);
         if(speed < 0.06){ ball.vx = 0; ball.vy = 0; }
 
-        // Score detection
+        // Score detection - 25% more forgiving
         const d = Math.hypot(ball.x - hole.x, ball.y - hole.y);
-        if(d < (hole.r - 7) && speed < 2.5){
+        if(d < (hole.r - 4) && speed < 3.5){
           scorePoint();
         }
 
@@ -810,7 +826,7 @@
           const shotElapsed = (performance.now() - shotStartTime) / 1000;
           if(shotElapsed >= 2.5){
             const dd = Math.hypot(ball.x - hole.x, ball.y - hole.y);
-            if(dd >= (hole.r - 7)){
+            if(dd >= (hole.r - 4)){
               missPenalty();
             }
           }
