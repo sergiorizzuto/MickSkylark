@@ -1256,39 +1256,85 @@
             updateBackToTopVisibility();
         }
 
-        // Scroll-spy: highlight nav items when their section is in view
-        const sectionIds = ['home','comparable-films','rsvp','game','cast','instagram','credits','locations'];
-        const navLinksBySection = new Map();
-        document.querySelectorAll('.nav-link[data-section]').forEach(a => {
-            navLinksBySection.set(a.getAttribute('data-section'), a);
-        });
+        <script>
+  // Scroll-spy: reliable active nav highlight
+  (function () {
+    const sectionIds = ['home','comparable-films','rsvp','game','cast','instagram','credits','locations'];
 
-        const sections = sectionIds
-          .map(id => document.getElementById(id))
-          .filter(Boolean);
+    const navLinksBySection = new Map();
+    document.querySelectorAll('.nav-link[data-section]').forEach(a => {
+      navLinksBySection.set(a.getAttribute('data-section'), a);
+    });
 
-        function setActiveNav(sectionId) {
-            navLinksBySection.forEach((link) => link.classList.remove('active'));
-            const link = navLinksBySection.get(sectionId);
-            if (link) link.classList.add('active');
+    const sections = sectionIds
+      .map(id => document.getElementById(id))
+      .filter(Boolean);
+
+    function setActiveNav(sectionId) {
+      navLinksBySection.forEach(link => link.classList.remove('active'));
+      const link = navLinksBySection.get(sectionId);
+      if (link) link.classList.add('active');
+    }
+
+    function getNavOffset() {
+      const nav = document.querySelector('.navbar');
+      return nav ? Math.ceil(nav.getBoundingClientRect().height) : 72;
+    }
+
+    // Keep latest “visibility score” for every section
+    const ratios = new Map();
+    sectionIds.forEach(id => ratios.set(id, 0));
+
+    const navOffset = getNavOffset();
+
+    const observer = new IntersectionObserver((entries) => {
+      // Update scores for any sections that changed
+      entries.forEach(e => {
+        ratios.set(e.target.id, e.isIntersecting ? e.intersectionRatio : 0);
+      });
+
+      // Pick the highest-scoring section overall (not just in `entries`)
+      let bestId = null;
+      let bestRatio = 0;
+
+      ratios.forEach((r, id) => {
+        if (r > bestRatio) {
+          bestRatio = r;
+          bestId = id;
         }
+      });
 
-        // Use IntersectionObserver for reliable mobile behavior
-        const observer = new IntersectionObserver((entries) => {
-            // pick the most visible intersecting entry
-            const visible = entries
-              .filter(e => e.isIntersecting)
-              .sort((a,b) => (b.intersectionRatio - a.intersectionRatio))[0];
-            if (visible && visible.target && visible.target.id) {
-                setActiveNav(visible.target.id);
-            }
-        }, {
-            root: null,
-            threshold: [0.2, 0.35, 0.5, 0.65],
-            rootMargin: "-20% 0px -65% 0px"
+      // Fallback: if nothing is intersecting (rare), pick the nearest to top
+      if (!bestId) {
+        let closest = null;
+        let closestDist = Infinity;
+        sections.forEach(sec => {
+          const d = Math.abs(sec.getBoundingClientRect().top - navOffset);
+          if (d < closestDist) { closestDist = d; closest = sec.id; }
         });
+        bestId = closest;
+      }
 
-        sections.forEach(sec => observer.observe(sec));
+      if (bestId) setActiveNav(bestId);
+    }, {
+      root: null,
+      // “active zone” starts below navbar and ends around mid-screen
+      rootMargin: `-${navOffset}px 0px -55% 0px`,
+      threshold: [0, 0.05, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6]
+    });
+
+    sections.forEach(sec => observer.observe(sec));
+
+    // Set initial active on load
+    const initial = sections
+      .map(sec => ({ id: sec.id, top: sec.getBoundingClientRect().top }))
+      .filter(x => x.top - navOffset <= 5)
+      .sort((a, b) => b.top - a.top)[0];
+
+    setActiveNav(initial?.id || sections[0]?.id || 'home');
+  })();
+</script>
+
 
         // Countdown Timer to February 22, 2026 at 3:00 PM (local time)
         function updateCountdown() {
