@@ -1,13 +1,92 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <title>Mick Skylark: Mini Golf Prodigy - Official Website</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-    
+
+    <!-- SEO -->
+    <meta name="description" content="Official site for Mick Skylark: Mini Golf Prodigy — RSVP for the screener, play the mini golf game, explore cast, locations, and updates." />
+    <meta name="keywords" content="Mick Skylark, Mini Golf Prodigy, comedy film, family friendly, screener RSVP, mini golf game" />
+    <meta name="robots" content="index,follow" />
+    <link rel="canonical" href="https://mickskylark.com/" />
+    <meta name="theme-color" content="#1E3A8A" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Mick Skylark: Mini Golf Prodigy - Official Website" />
+    <meta property="og:description" content="RSVP for the screener, get updates, and play Glory On The Greens." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://mickskylark.com/" />
+    <meta property="og:image" content="https://mickskylark.com/og-image.jpg" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Mick Skylark: Mini Golf Prodigy - Official Website" />
+    <meta name="twitter:description" content="RSVP for the screener, get updates, and play Glory On The Greens." />
+    <meta name="twitter:image" content="https://mickskylark.com/og-image.jpg" />
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context":"https://schema.org",
+      "@type":"Movie",
+      "name":"Mick Skylark: Mini Golf Prodigy",
+      "url":"https://mickskylark.com",
+      "genre":["Comedy","Family"],
+      "productionCompany":{"@type":"Organization","name":"Potato Eater Productions"},
+      "sameAs":["https://www.instagram.com/mickskylark","https://pro.imdb.com/title/tt12115818/"]
+    }
+    </script>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
+
+    <!-- Favicon (optional if you have it) -->
+    <link rel="icon" href="favicon.ico" />
+
+    <!-- Pixels / Analytics placeholders (SAFE: only runs if you paste real IDs) -->
+    <!-- Google tag (gtag.js) -->
+    <script>
+      // To enable GA4: set window.__GA4_ID__ = "G-XXXXXXX";
+      window.__GA4_ID__ = window.__GA4_ID__ || "";
+      (function(){
+        if(!window.__GA4_ID__) return;
+        var s=document.createElement("script");
+        s.async=true;
+        s.src="https://www.googletagmanager.com/gtag/js?id="+encodeURIComponent(window.__GA4_ID__);
+        document.head.appendChild(s);
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        window.gtag = gtag;
+        gtag('js', new Date());
+        gtag('config', window.__GA4_ID__, { anonymize_ip: true });
+      })();
+    </script>
+
+    <!-- Meta Pixel -->
+    <script>
+      // To enable Meta Pixel: set window.__META_PIXEL_ID__ = "1234567890";
+      window.__META_PIXEL_ID__ = window.__META_PIXEL_ID__ || "";
+      (function(){
+        if(!window.__META_PIXEL_ID__) return;
+        !function(f,b,e,v,n,t,s){
+          if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+          n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+          if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+          n.queue=[];t=b.createElement(e);t.async=!0;
+          t.src=v;s=b.getElementsByTagName(e)[0];
+          s.parentNode.insertBefore(t,s)
+        }(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', window.__META_PIXEL_ID__);
+        fbq('track', 'PageView');
+      })();
+    </script>
+    <noscript>
+      <!-- If you enable Meta Pixel, also add your real pixel ID in the image URL below -->
+    </noscript>
+
     <style>
         :root {
             --primary: #1E3A8A;
@@ -16,30 +95,31 @@
             --gold: #FBBF24;
             --light: #FFFFFF;
             --dark: #1F2937;
+            --accent-blue: #2563EB; /* standout link color */
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
 
         body {
             font-family: 'Poppins', sans-serif;
             color: var(--dark);
             overflow-x: hidden;
-            padding-top: 60px;
+            padding-top: 72px; /* slightly taller navbar */
+            background: #fff;
         }
 
+        /* Navigation */
         .navbar {
             position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            background: white;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            top: 0; left: 0; right: 0;
+            background: rgba(255,255,255,0.92);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
             z-index: 1000;
-            padding: 12px 0;
+            padding: 10px 0;
         }
 
         .nav-container {
@@ -47,24 +127,58 @@
             margin: 0 auto;
             display: flex;
             justify-content: center;
-            gap: 15px;
+            gap: 10px;
             flex-wrap: wrap;
-            padding: 0 20px;
+            padding: 0 14px;
         }
 
         .nav-link {
             color: var(--primary);
             text-decoration: none;
             font-weight: 600;
-            padding: 8px 18px;
-            border-radius: 25px;
-            transition: all 0.3s ease;
+            padding: 8px 14px;
+            border-radius: 999px;
+            transition: all 0.2s ease;
             font-size: 0.9rem;
+            line-height: 1;
+            border: 1px solid transparent;
+            outline: none;
         }
 
         .nav-link:hover {
             background: var(--primary);
             color: white;
+        }
+
+        /* Active section highlight */
+        .nav-link.active {
+            background: var(--primary);
+            color: #fff;
+            box-shadow: 0 6px 18px rgba(30, 58, 138, 0.25);
+        }
+
+        /* Standout links in header */
+        .nav-link.nav-standout {
+            color: var(--accent-blue);
+            border-color: rgba(37, 99, 235, 0.25);
+            background: rgba(37, 99, 235, 0.06);
+            font-weight: 700;
+        }
+        .nav-link.nav-standout:hover {
+            background: var(--accent-blue);
+            color: #fff;
+            border-color: transparent;
+        }
+        .nav-link.nav-standout.active {
+            background: var(--accent-blue);
+            color: #fff;
+        }
+
+        /* Better touch targets on mobile */
+        @media (max-width: 768px) {
+            body { padding-top: 90px; }
+            .nav-container { gap: 8px; justify-content: flex-start; }
+            .nav-link { padding: 10px 14px; font-size: 0.95rem; }
         }
 
         .section-blue {
@@ -82,10 +196,7 @@
             margin: 0 auto;
         }
 
-        .hero {
-            text-align: center;
-            padding: 40px 20px 80px;
-        }
+        .hero { text-align: center; padding: 40px 20px 80px; }
 
         .hero img {
             width: 100%;
@@ -98,24 +209,16 @@
         }
 
         @keyframes logoReveal {
-            0% {
-                opacity: 0;
-                transform: scale(0.8) translateY(-30px);
-            }
-            60% {
-                transform: scale(1.05) translateY(0);
-            }
-            100% {
-                opacity: 1;
-                transform: scale(1) translateY(0);
-            }
+            0% { opacity: 0; transform: scale(0.8) translateY(-30px); }
+            60% { transform: scale(1.05) translateY(0); }
+            100% { opacity: 1; transform: scale(1) translateY(0); }
         }
 
         .scroll-cta {
-            font-size: 1.4rem;
+            font-size: 1.2rem;
             font-weight: 700;
             color: var(--primary);
-            margin: 5px 0 30px 0;
+            margin: 8px 0 30px 0;
             animation: bounce 2s infinite;
             text-transform: uppercase;
             letter-spacing: 1px;
@@ -127,10 +230,7 @@
             60% { transform: translateY(-5px); }
         }
 
-        .slider-nav {
-            position: relative;
-            margin: 40px 0;
-        }
+        .slider-nav { position: relative; margin: 40px 0; }
 
         .slideshow-wrapper {
             overflow-x: scroll;
@@ -142,30 +242,12 @@
             scrollbar-color: var(--primary) transparent;
             cursor: grab;
         }
+        .slideshow-wrapper:active { cursor: grabbing; }
+        .slideshow-wrapper::-webkit-scrollbar { height: 8px; }
+        .slideshow-wrapper::-webkit-scrollbar-track { background: rgba(0,0,0,0.1); border-radius: 10px; }
+        .slideshow-wrapper::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 10px; }
 
-        .slideshow-wrapper:active {
-            cursor: grabbing;
-        }
-
-        .slideshow-wrapper::-webkit-scrollbar {
-            height: 8px;
-        }
-
-        .slideshow-wrapper::-webkit-scrollbar-track {
-            background: rgba(0,0,0,0.1);
-            border-radius: 10px;
-        }
-
-        .slideshow-wrapper::-webkit-scrollbar-thumb {
-            background: var(--primary);
-            border-radius: 10px;
-        }
-
-        .slideshow-container {
-            display: inline-flex;
-            gap: 20px;
-            padding: 0 10px;
-        }
+        .slideshow-container { display: inline-flex; gap: 20px; padding: 0 10px; }
 
         .slide {
             display: inline-block;
@@ -176,19 +258,11 @@
             overflow: hidden;
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
         }
-
-        .slide img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
+        .slide img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
         @media (max-width: 768px) {
-            .slide {
-                width: 300px;
-                height: 225px;
-            }
+            .slide { width: 300px; height: 225px; }
+            .scroll-cta { font-size: 1.05rem; }
         }
 
         .section-title {
@@ -199,37 +273,37 @@
             color: var(--primary);
         }
 
+        @media (max-width: 768px) {
+            .section-title { font-size: 2.2rem; margin-bottom: 30px; }
+        }
+
         .logline {
-            font-size: 1.8rem;
+            font-size: 1.6rem;
             line-height: 1.9;
             max-width: 900px;
             margin: 50px auto;
             text-align: center;
             color: white;
             font-weight: 600;
-            padding: 50px 60px;
+            padding: 45px 50px;
             background: linear-gradient(135deg, #1E3A8A 0%, #3B82F6 50%, #1E3A8A 100%);
             background-size: 200% 200%;
             animation: gradientShift 8s ease infinite;
             border-radius: 25px;
-            box-shadow: 0 15px 50px rgba(30, 58, 138, 0.4), 
+            box-shadow: 0 15px 50px rgba(30, 58, 138, 0.35),
                         0 0 0 1px rgba(255, 255, 255, 0.1) inset;
             position: relative;
             overflow: hidden;
-            transform: perspective(1000px) rotateX(2deg);
         }
 
         .logline::before {
             content: '';
             position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
+            top: -2px; left: -2px; right: -2px; bottom: -2px;
             background: linear-gradient(45deg, #FCD34D, #FBBF24, #FCD34D);
             border-radius: 25px;
             z-index: -1;
-            opacity: 0.3;
+            opacity: 0.25;
             animation: borderPulse 3s ease-in-out infinite;
         }
 
@@ -247,68 +321,36 @@
             0%, 100% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
         }
-
         @keyframes borderPulse {
-            0%, 100% { transform: scale(1); opacity: 0.3; }
-            50% { transform: scale(1.02); opacity: 0.5; }
+            0%, 100% { transform: scale(1); opacity: 0.25; }
+            50% { transform: scale(1.02); opacity: 0.45; }
         }
-
         @keyframes float {
             0%, 100% { transform: translateY(0px) rotate(0deg); }
             50% { transform: translateY(-10px) rotate(5deg); }
         }
 
         @media (max-width: 768px) {
-            .logline {
-                font-size: 1.3rem;
-                padding: 35px 30px;
-                transform: none;
-            }
-        }
-
-        .rating {
-            font-size: 1.1rem;
-            font-weight: 600;
-            text-align: center;
-            margin: 20px 0;
-            color: var(--primary);
+            .logline { font-size: 1.15rem; padding: 30px 22px; margin: 30px auto; }
         }
 
         .rating-badge {
             display: inline-block;
             background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
             color: white;
-            padding: 15px 35px;
+            padding: 14px 30px;
             border-radius: 50px;
-            box-shadow: 0 6px 25px rgba(30, 58, 138, 0.4);
-            margin: 30px auto;
+            box-shadow: 0 6px 25px rgba(30, 58, 138, 0.35);
+            margin: 20px auto;
             text-align: center;
-            font-size: 1.3rem;
+            font-size: 1.15rem;
             font-weight: 700;
             animation: ratingPulse 2s ease-in-out infinite;
         }
 
-        .rating-label {
-            display: inline-block;
-            margin-right: 10px;
-            opacity: 0.9;
-        }
-
-        .rating-value {
-            display: inline-block;
-            font-size: 1.4rem;
-            letter-spacing: 1px;
-        }
-
         @keyframes ratingPulse {
-            0%, 100% { 
-                transform: scale(1);
-                box-shadow: 0 6px 25px rgba(30, 58, 138, 0.4);
-            }
-            50% { 
-                transform: scale(1.05);
-                box-shadow: 0 8px 30px rgba(30, 58, 138, 0.6);
-            }
+            0%, 100% { transform: scale(1); box-shadow: 0 6px 25px rgba(30, 58, 138, 0.35); }
+            50% { transform: scale(1.04); box-shadow: 0 8px 30px rgba(30, 58, 138, 0.55); }
         }
 
         .links-section {
@@ -329,21 +371,13 @@
             transition: all 0.3s ease;
             box-shadow: 0 4px 15px rgba(30, 58, 138, 0.3);
         }
-
         .link-btn:hover {
             background: var(--primary-dark);
             transform: translateY(-3px);
             box-shadow: 0 6px 20px rgba(30, 58, 138, 0.4);
         }
-
-        .link-btn.secondary {
-            background: var(--secondary);
-            color: var(--dark);
-        }
-
-        .link-btn.secondary:hover {
-            background: var(--gold);
-        }
+        .link-btn.secondary { background: var(--secondary); color: var(--dark); }
+        .link-btn.secondary:hover { background: var(--gold); }
 
         .comparable-films-wrapper {
             overflow-x: scroll;
@@ -355,30 +389,12 @@
             scrollbar-color: var(--primary) transparent;
             cursor: grab;
         }
+        .comparable-films-wrapper:active { cursor: grabbing; }
+        .comparable-films-wrapper::-webkit-scrollbar { height: 8px; }
+        .comparable-films-wrapper::-webkit-scrollbar-track { background: rgba(0,0,0,0.1); border-radius: 10px; }
+        .comparable-films-wrapper::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 10px; }
 
-        .comparable-films-wrapper:active {
-            cursor: grabbing;
-        }
-
-        .comparable-films-wrapper::-webkit-scrollbar {
-            height: 8px;
-        }
-
-        .comparable-films-wrapper::-webkit-scrollbar-track {
-            background: rgba(0,0,0,0.1);
-            border-radius: 10px;
-        }
-
-        .comparable-films-wrapper::-webkit-scrollbar-thumb {
-            background: var(--primary);
-            border-radius: 10px;
-        }
-
-        .comparable-films {
-            display: inline-flex;
-            gap: 30px;
-            padding: 0 10px;
-        }
+        .comparable-films { display: inline-flex; gap: 30px; padding: 0 10px; }
 
         .film-poster {
             display: inline-block;
@@ -389,34 +405,15 @@
             overflow: hidden;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
         }
-
         .film-poster:hover {
             transform: translateY(-10px) scale(1.05);
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
         }
+        .film-poster img { width: 100%; height: auto; display: block; }
 
-        .film-poster img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-
-        .screener-info {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-
-        .screener-date {
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--primary);
-            margin-bottom: 15px;
-        }
-
-        .screener-note {
-            font-size: 1.2rem;
-            color: var(--dark);
-        }
+        .screener-info { text-align: center; margin-bottom: 40px; }
+        .screener-date { font-size: 2rem; font-weight: 700; color: var(--primary); margin-bottom: 15px; }
+        .screener-note { font-size: 1.2rem; color: var(--dark); }
 
         .countdown-timer {
             display: flex;
@@ -425,7 +422,6 @@
             margin: 30px 0;
             flex-wrap: wrap;
         }
-
         .countdown-box {
             background: white;
             padding: 20px 25px;
@@ -433,34 +429,11 @@
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
             min-width: 100px;
         }
+        .countdown-number { font-size: 2.5rem; font-weight: 700; color: var(--primary); display: block; }
+        .countdown-label { font-size: 0.9rem; color: #666; text-transform: uppercase; letter-spacing: 1px; }
 
-        .countdown-number {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--primary);
-            display: block;
-        }
-
-        .countdown-label {
-            font-size: 0.9rem;
-            color: #666;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .social-share {
-            text-align: center;
-            margin-top: 30px;
-        }
-
-        .share-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-top: 15px;
-            flex-wrap: wrap;
-        }
-
+        .social-share { text-align: center; margin-top: 30px; }
+        .share-buttons { display: flex; justify-content: center; gap: 15px; margin-top: 15px; flex-wrap: wrap; }
         .share-btn {
             padding: 12px 25px;
             border-radius: 30px;
@@ -472,26 +445,10 @@
             gap: 8px;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
-
-        .share-btn.facebook {
-            background: #1877F2;
-            color: white;
-        }
-
-        .share-btn.twitter {
-            background: #1DA1F2;
-            color: white;
-        }
-
-        .share-btn.email {
-            background: #666;
-            color: white;
-        }
-
-        .share-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-        }
+        .share-btn.facebook { background: #1877F2; color: white; }
+        .share-btn.twitter { background: #1DA1F2; color: white; }
+        .share-btn.email { background: #666; color: white; }
+        .share-btn:hover { transform: translateY(-3px); box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); }
 
         .game-container {
             background: white;
@@ -510,6 +467,7 @@
             max-width: 100%;
             height: auto;
             position: relative;
+            touch-action: none; /* better mobile touch */
         }
 
         .controls {
@@ -517,6 +475,7 @@
             justify-content: center;
             gap: 15px;
             margin-bottom: 20px;
+            flex-wrap: wrap;
         }
 
         .control-btn {
@@ -530,19 +489,11 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         }
-
-        .control-btn:hover {
-            transform: scale(1.1);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-        }
-
-        .control-btn.active {
-            background: var(--primary);
-            color: white;
-        }
+        .control-btn:hover { transform: scale(1.06); box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); }
+        .control-btn.active { background: var(--primary); color: white; }
 
         .scorecard {
             background: white;
@@ -552,64 +503,17 @@
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
             overflow-x: auto;
         }
-
-        .scorecard h3 {
-            color: var(--primary);
-            margin-bottom: 15px;
-            text-align: center;
-        }
-
-        .scorecard table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 0.9rem;
-        }
-
-        .scorecard th, .scorecard td {
-            padding: 8px;
-            text-align: center;
-            border: 1px solid #e5e7eb;
-        }
-
-        .scorecard th {
-            background: var(--primary);
-            color: white;
-            font-weight: 600;
-        }
-
-        .scorecard .par-row {
-            background: #f9fafb;
-            font-weight: 600;
-        }
-
-        .scorecard .score-row td {
-            font-weight: 700;
-            font-size: 1.1rem;
-        }
-
-        .scorecard .score-row td.birdie {
-            background: #10B981;
-            color: white;
-        }
-
-        .scorecard .score-row td.par {
-            background: #FCD34D;
-        }
-
-        .scorecard .score-row td.bogey {
-            background: #F59E0B;
-            color: white;
-        }
-
-        .scorecard .score-row td.double-bogey {
-            background: #EF4444;
-            color: white;
-        }
-
-        .scorecard .score-row td.pending {
-            background: #f3f4f6;
-            color: #9ca3af;
-        }
+        .scorecard h3 { color: var(--primary); margin-bottom: 15px; text-align: center; }
+        .scorecard table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+        .scorecard th, .scorecard td { padding: 8px; text-align: center; border: 1px solid #e5e7eb; }
+        .scorecard th { background: var(--primary); color: white; font-weight: 600; }
+        .scorecard .par-row { background: #f9fafb; font-weight: 600; }
+        .scorecard .score-row td { font-weight: 700; font-size: 1.1rem; }
+        .scorecard .score-row td.birdie { background: #10B981; color: white; }
+        .scorecard .score-row td.par { background: #FCD34D; }
+        .scorecard .score-row td.bogey { background: #F59E0B; color: white; }
+        .scorecard .score-row td.double-bogey { background: #EF4444; color: white; }
+        .scorecard .score-row td.pending { background: #f3f4f6; color: #9ca3af; }
 
         .game-btn {
             padding: 12px 30px;
@@ -619,25 +523,14 @@
             border-radius: 30px;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
             font-size: 1rem;
             font-family: 'Poppins', sans-serif;
             margin: 5px;
         }
-
-        .game-btn:hover {
-            background: var(--primary-dark);
-            transform: scale(1.05);
-        }
-
-        .game-btn.secondary {
-            background: var(--secondary);
-            color: var(--primary);
-        }
-
-        .game-btn.secondary:hover {
-            background: var(--gold);
-        }
+        .game-btn:hover { background: var(--primary-dark); transform: scale(1.03); }
+        .game-btn.secondary { background: var(--secondary); color: var(--primary); }
+        .game-btn.secondary:hover { background: var(--gold); }
 
         .water-splash {
             position: fixed;
@@ -652,28 +545,16 @@
             pointer-events: none;
             z-index: 10000;
         }
-
         @keyframes splashAnimation {
-            0% {
-                opacity: 0;
-                transform: translate(-50%, -50%) scale(0.5);
-            }
-            50% {
-                opacity: 1;
-                transform: translate(-50%, -50%) scale(1.2);
-            }
-            100% {
-                opacity: 0;
-                transform: translate(-50%, -50%) scale(1) translateY(-50px);
-            }
+            0% { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
+            50% { opacity: 1; transform: translate(-50%, -50%) scale(1.2); }
+            100% { opacity: 0; transform: translate(-50%, -50%) scale(1) translateY(-50px); }
         }
 
         .celebration-overlay {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
             background: rgba(0, 0, 0, 0.8);
             display: none;
             justify-content: center;
@@ -681,11 +562,7 @@
             z-index: 9999;
             animation: fadeIn 0.3s ease;
         }
-
-        .celebration-overlay.active {
-            display: flex;
-        }
-
+        .celebration-overlay.active { display: flex; }
         .celebration-content {
             background: white;
             padding: 50px;
@@ -695,47 +572,14 @@
             animation: scaleIn 0.5s ease;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
         }
+        .celebration-emoji { font-size: 5rem; animation: bounce2 1s ease infinite; margin-bottom: 20px; }
+        .celebration-title { font-size: 2.5rem; color: var(--primary); font-weight: 700; margin-bottom: 15px; }
+        .celebration-score { font-size: 1.5rem; color: var(--gold); font-weight: 600; margin-bottom: 20px; }
+        .celebration-message { font-size: 1.1rem; color: #666; margin-bottom: 30px; }
 
-        .celebration-emoji {
-            font-size: 5rem;
-            animation: bounce2 1s ease infinite;
-            margin-bottom: 20px;
-        }
-
-        .celebration-title {
-            font-size: 2.5rem;
-            color: var(--primary);
-            font-weight: 700;
-            margin-bottom: 15px;
-        }
-
-        .celebration-score {
-            font-size: 1.5rem;
-            color: var(--gold);
-            font-weight: 600;
-            margin-bottom: 20px;
-        }
-
-        .celebration-message {
-            font-size: 1.1rem;
-            color: #666;
-            margin-bottom: 30px;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        @keyframes scaleIn {
-            from { transform: scale(0.5); opacity: 0; }
-            to { transform: scale(1); opacity: 1; }
-        }
-
-        @keyframes bounce2 {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
-        }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes scaleIn { from { transform: scale(0.5); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+        @keyframes bounce2 { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
 
         .confetti {
             position: fixed;
@@ -745,71 +589,33 @@
             position: absolute;
             animation: confettiFall 3s linear forwards;
         }
-
         @keyframes confettiFall {
-            to {
-                transform: translateY(100vh) rotate(360deg);
-                opacity: 0;
-            }
+            to { transform: translateY(100vh) rotate(360deg); opacity: 0; }
         }
 
         @media (max-width: 768px) {
-            .game-container {
-                padding: 20px 10px;
-            }
-            
-            .game-canvas {
-                width: 100% !important;
-                height: auto !important;
-            }
-
-            .celebration-content {
-                padding: 30px 20px;
-                margin: 20px;
-            }
-
-            .celebration-title {
-                font-size: 2rem;
-            }
-
-            .scorecard {
-                font-size: 0.8rem;
-            }
-
-            .scorecard th, .scorecard td {
-                padding: 6px 4px;
-            }
+            .game-container { padding: 20px 10px; }
+            .celebration-content { padding: 30px 20px; margin: 20px; }
+            .celebration-title { font-size: 2rem; }
+            .scorecard { font-size: 0.8rem; }
+            .scorecard th, .scorecard td { padding: 6px 4px; }
         }
 
-        .map-container {
-            margin: 40px 0;
-        }
-
+        .map-container { margin: 40px 0; }
         .map-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 30px;
             margin-bottom: 30px;
         }
-
         .location-card {
             background: white;
             padding: 25px;
             border-radius: 15px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
         }
-
-        .location-card h3 {
-            color: var(--primary);
-            margin-bottom: 15px;
-            font-size: 1.3rem;
-        }
-
-        .location-card p {
-            margin: 8px 0;
-            color: var(--dark);
-        }
-
+        .location-card h3 { color: var(--primary); margin-bottom: 15px; font-size: 1.3rem; }
+        .location-card p { margin: 8px 0; color: var(--dark); }
         .map-embed {
             width: 100%;
             height: 450px;
@@ -825,7 +631,6 @@
             max-width: 1200px;
             margin: 0 auto;
         }
-
         .cast-member {
             background: white;
             padding: 20px;
@@ -836,33 +641,16 @@
             gap: 20px;
             transition: transform 0.3s ease;
         }
-
-        .cast-member:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-        }
-
+        .cast-member:hover { transform: translateY(-5px); box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15); }
         .cast-photo {
-            width: 70px;
-            height: 70px;
+            width: 70px; height: 70px;
             border-radius: 50%;
             object-fit: cover;
             border: 3px solid var(--primary);
             flex-shrink: 0;
         }
-
-        .actor-name {
-            font-weight: 700;
-            font-size: 1.1rem;
-            color: var(--primary);
-            margin-bottom: 5px;
-        }
-
-        .character-name {
-            font-size: 0.95rem;
-            color: #666;
-            font-style: italic;
-        }
+        .actor-name { font-weight: 700; font-size: 1.1rem; color: var(--primary); margin-bottom: 5px; }
+        .character-name { font-size: 0.95rem; color: #666; font-style: italic; }
 
         .credits-grid {
             display: grid;
@@ -871,7 +659,6 @@
             max-width: 900px;
             margin: 0 auto;
         }
-
         .credit-item {
             background: white;
             padding: 25px;
@@ -879,82 +666,121 @@
             text-align: center;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
         }
+        .credit-label { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; color: #666; margin-bottom: 10px; }
+        .credit-name { font-size: 1.2rem; font-weight: 700; color: var(--primary); }
 
-        .credit-label {
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: #666;
-            margin-bottom: 10px;
-        }
-
-        .credit-name {
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: var(--primary);
-        }
-
+        /* Footer + Updates block */
         footer {
             background: var(--primary);
             color: white;
             text-align: center;
-            padding: 40px 20px;
+            padding: 44px 20px;
         }
+        footer a { color: var(--secondary); text-decoration: none; font-weight: 600; }
+        footer a:hover { text-decoration: underline; }
 
-        footer a {
-            color: var(--secondary);
-            text-decoration: none;
+        .footer-updates {
+            max-width: 800px;
+            margin: 0 auto 24px;
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 18px;
+            padding: 18px 16px 8px;
+        }
+        .footer-updates h3 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+        .footer-contact {
+            margin-top: 18px;
+            font-size: 1.05rem;
             font-weight: 600;
         }
+        .footer-contact a { color: var(--secondary); }
 
-        footer a:hover {
-            text-decoration: underline;
+        /* Back-to-top arrow */
+        .back-to-top {
+            position: fixed;
+            right: 16px;
+            bottom: 18px;
+            z-index: 2000;
+            width: 48px;
+            height: 48px;
+            border-radius: 999px;
+            border: none;
+            background: rgba(255,255,255,0.9);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.18);
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            color: var(--primary);
+            transition: transform 0.15s ease, opacity 0.15s ease;
+        }
+        .back-to-top:hover { transform: translateY(-2px); }
+        .back-to-top.show { display: flex; }
+        @media (max-width: 768px) {
+            .back-to-top { right: 12px; bottom: 14px; }
+        }
+
+        /* Accessibility focus */
+        .nav-link:focus-visible,
+        .game-btn:focus-visible,
+        .control-btn:focus-visible,
+        .back-to-top:focus-visible {
+            outline: 3px solid rgba(252, 211, 77, 0.9);
+            outline-offset: 2px;
         }
     </style>
 </head>
 
 <body>
     <!-- Navigation -->
-    <nav class="navbar">
+    <nav class="navbar" aria-label="Primary navigation">
         <div class="nav-container">
-            <a href="index.html#home" class="nav-link">Home</a>
-            <a href="index.html#comparable-films" class="nav-link">Similar Films</a>
-            <a href="index.html#rsvp" class="nav-link">RSVP</a>
-            <a href="index.html#game" class="nav-link">Mini Golf Game</a>
-            <a href="index.html#cast" class="nav-link">Cast</a>
-            <a href="index.html#instagram" class="nav-link">Instagram</a>
+            <a href="index.html#home" class="nav-link" data-section="home">Home</a>
+            <a href="index.html#comparable-films" class="nav-link" data-section="comparable-films">Similar Films</a>
+            <a href="index.html#rsvp" class="nav-link nav-standout" data-section="rsvp">RSVP</a>
+            <a href="screener-survey.html" class="nav-link nav-standout nav-link-external">Screener Survey</a>
+            <a href="index.html#game" class="nav-link" data-section="game">Mini Golf Game</a>
+            <a href="index.html#cast" class="nav-link" data-section="cast">Cast</a>
+            <a href="index.html#instagram" class="nav-link" data-section="instagram">Instagram</a>
             <a href="merch.html" class="nav-link nav-link-external">Merch</a>
-            <a href="index.html#credits" class="nav-link">Credits</a>
-            <a href="index.html#locations" class="nav-link">Locations</a>
+            <a href="index.html#credits" class="nav-link" data-section="credits">Credits</a>
+            <a href="index.html#locations" class="nav-link" data-section="locations">Locations</a>
         </div>
     </nav>
+
+    <!-- Back to top -->
+    <button class="back-to-top" id="backToTop" aria-label="Scroll to top" title="Back to top">↑</button>
 
     <!-- Hero Section -->
     <section id="home" class="section-yellow hero">
         <div class="container">
-            <img src="logo-no-bg.png" alt="Mick Skylark: Mini Golf Prodigy">
-            
+            <img src="logo-no-bg.png" alt="Mick Skylark: Mini Golf Prodigy" loading="eager" />
             <div class="scroll-cta">↓ Scroll Down To RSVP ↓</div>
 
             <!-- Horizontal Slideshow -->
-            <div class="slideshow-wrapper" id="bts-slideshow">
+            <div class="slideshow-wrapper" id="bts-slideshow" aria-label="Behind the scenes photos">
                 <div class="slideshow-container">
-                    <div class="slide"><img src="bts-photos/bts1.jpg" alt="BTS 1"></div>
-                    <div class="slide"><img src="bts-photos/bts2.jpg" alt="BTS 2"></div>
-                    <div class="slide"><img src="bts-photos/bts3.jpg" alt="BTS 3"></div>
-                    <div class="slide"><img src="bts-photos/bts4.jpg" alt="BTS 4"></div>
-                    <div class="slide"><img src="bts-photos/bts5.jpg" alt="BTS 5"></div>
-                    <div class="slide"><img src="bts-photos/bts6.jpg" alt="BTS 6"></div>
-                    <div class="slide"><img src="bts-photos/bts7.jpg" alt="BTS 7"></div>
-                    <div class="slide"><img src="bts-photos/bts8.jpg" alt="BTS 8"></div>
-                    <div class="slide"><img src="bts-photos/bts9.jpg" alt="BTS 9"></div>
-                    <div class="slide"><img src="bts-photos/bts10.jpg" alt="BTS 10"></div>
-                    <div class="slide"><img src="bts-photos/bts11.jpg" alt="BTS 11"></div>
+                    <div class="slide"><img src="bts-photos/bts1.jpg" alt="Behind the scenes photo 1" loading="lazy"></div>
+                    <div class="slide"><img src="bts-photos/bts2.jpg" alt="Behind the scenes photo 2" loading="lazy"></div>
+                    <div class="slide"><img src="bts-photos/bts3.jpg" alt="Behind the scenes photo 3" loading="lazy"></div>
+                    <div class="slide"><img src="bts-photos/bts4.jpg" alt="Behind the scenes photo 4" loading="lazy"></div>
+                    <div class="slide"><img src="bts-photos/bts5.jpg" alt="Behind the scenes photo 5" loading="lazy"></div>
+                    <div class="slide"><img src="bts-photos/bts6.jpg" alt="Behind the scenes photo 6" loading="lazy"></div>
+                    <div class="slide"><img src="bts-photos/bts7.jpg" alt="Behind the scenes photo 7" loading="lazy"></div>
+                    <div class="slide"><img src="bts-photos/bts8.jpg" alt="Behind the scenes photo 8" loading="lazy"></div>
+                    <div class="slide"><img src="bts-photos/bts9.jpg" alt="Behind the scenes photo 9" loading="lazy"></div>
+                    <div class="slide"><img src="bts-photos/bts10.jpg" alt="Behind the scenes photo 10" loading="lazy"></div>
+                    <div class="slide"><img src="bts-photos/bts11.jpg" alt="Behind the scenes photo 11" loading="lazy"></div>
                 </div>
             </div>
 
             <p class="logline">
-                Mick Skylark, coached by his mentor Jonsey, quickly rises to the top as a child mini golf prodigy. 
+                Mick Skylark, coached by his mentor Jonsey, quickly rises to the top as a child mini golf prodigy.
                 When a tragedy strikes that he feels responsible for, he quits the sport for good.
                 <br><br>
                 • Comedic &nbsp;&nbsp; • Family Friendly
@@ -976,18 +802,10 @@
             </p>
             <div class="comparable-films-wrapper" id="films-slideshow">
                 <div class="comparable-films">
-                    <div class="film-poster">
-                        <img src="comparable-films/happy-gilmore.webp" alt="Happy Gilmore">
-                    </div>
-                    <div class="film-poster">
-                        <img src="comparable-films/dodgeball.webp" alt="Dodgeball">
-                    </div>
-                    <div class="film-poster">
-                        <img src="comparable-films/kingpin.webp" alt="Kingpin">
-                    </div>
-                    <div class="film-poster">
-                        <img src="comparable-films/young-frankenstein.webp" alt="Young Frankenstein">
-                    </div>
+                    <div class="film-poster"><img src="comparable-films/happy-gilmore.webp" alt="Happy Gilmore" loading="lazy"></div>
+                    <div class="film-poster"><img src="comparable-films/dodgeball.webp" alt="Dodgeball" loading="lazy"></div>
+                    <div class="film-poster"><img src="comparable-films/kingpin.webp" alt="Kingpin" loading="lazy"></div>
+                    <div class="film-poster"><img src="comparable-films/young-frankenstein.webp" alt="Young Frankenstein" loading="lazy"></div>
                 </div>
             </div>
         </div>
@@ -997,9 +815,9 @@
     <section id="rsvp" class="section-yellow">
         <div class="container">
             <h2 class="section-title">Screener RSVP</h2>
-            
+
             <!-- Countdown Timer -->
-            <div class="countdown-timer">
+            <div class="countdown-timer" aria-label="Countdown to screening">
                 <div class="countdown-box">
                     <span class="countdown-number" id="days">--</span>
                     <span class="countdown-label">Days</span>
@@ -1024,7 +842,15 @@
             </div>
 
             <div style="max-width: 700px; margin: 0 auto;">
-                <iframe data-tally-src="https://tally.so/embed/81xXe5?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1" loading="lazy" width="100%" height="981" frameborder="0" marginheight="0" marginwidth="0" title="RSVP for 'Mick Skylark: Mini Golf Prodigy' Screener"></iframe>
+                <iframe
+                    data-tally-src="https://tally.so/embed/81xXe5?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"
+                    loading="lazy"
+                    width="100%"
+                    height="981"
+                    frameborder="0"
+                    marginheight="0"
+                    marginwidth="0"
+                    title="RSVP for 'Mick Skylark: Mini Golf Prodigy' Screener"></iframe>
             </div>
         </div>
     </section>
@@ -1034,18 +860,18 @@
         <div class="container">
             <h2 class="section-title">Play Glory On The Greens!</h2>
             <p style="text-align: center; margin-bottom: 30px; font-size: 1.1rem;">
-                Click to hit the ball into the hole! Can you beat par on all 18 holes?
+                Tap/click to hit the ball into the hole! Can you beat par on all 18 holes?
             </p>
-            
-            <div class="controls">
-                <button class="control-btn active" id="dayBtn" onclick="setTheme('day')" title="Day Mode">☀️</button>
-                <button class="control-btn" id="nightBtn" onclick="setTheme('night')" title="Night Mode">🌙</button>
-                <button class="control-btn active" id="soundBtn" onclick="toggleSound()" title="Toggle Sound">🔊</button>
+
+            <div class="controls" aria-label="Game controls">
+                <button class="control-btn active" id="dayBtn" onclick="setTheme('day')" title="Day Mode" aria-label="Day mode">☀️</button>
+                <button class="control-btn" id="nightBtn" onclick="setTheme('night')" title="Night Mode" aria-label="Night mode">🌙</button>
+                <button class="control-btn active" id="soundBtn" onclick="toggleSound()" title="Toggle Sound" aria-label="Toggle sound">🔊</button>
             </div>
-            
+
             <div class="game-container">
-                <canvas id="golfCanvas" class="game-canvas" width="500" height="400"></canvas>
-                
+                <canvas id="golfCanvas" class="game-canvas" width="500" height="400" aria-label="Mini golf game canvas"></canvas>
+
                 <div class="scorecard">
                     <h3>📋 Scorecard</h3>
                     <table>
@@ -1088,12 +914,13 @@
                             </tr>
                         </tbody>
                     </table>
+
                     <div style="text-align: center; margin-top: 15px; padding-top: 15px; border-top: 1px solid #e5e7eb; color: var(--primary); font-size: 0.9rem;">
                         <span style="margin: 0 15px;">🏆 Best: <strong id="best">--</strong></span>
                         <span style="margin: 0 15px;">⛳ Holes-in-One: <strong id="holesInOneCount">0</strong></span>
                     </div>
                 </div>
-                
+
                 <div style="display: flex; gap: 10px; justify-content: center; margin-top: 20px; flex-wrap: wrap;">
                     <button class="game-btn" onclick="resetGame()">↻ Restart Course</button>
                     <button class="game-btn secondary" onclick="shareChallenge()">👥 Challenge Friends</button>
@@ -1117,132 +944,132 @@
     <section id="cast" class="section-blue">
         <div class="container">
             <div style="text-align: center; margin-bottom: 50px;">
-                <a href="https://pro.imdb.com/title/tt12115818/" target="_blank" class="link-btn" style="font-size: 1.2rem; padding: 15px 40px;">📽️ View on IMDb</a>
+                <a href="https://pro.imdb.com/title/tt12115818/" target="_blank" rel="noopener" class="link-btn" style="font-size: 1.2rem; padding: 15px 40px;">📽️ View on IMDb</a>
             </div>
-            
+
             <h2 class="section-title">Starring</h2>
             <div class="cast-grid">
                 <div class="cast-member">
-                    <img src="cast-photos/brandon-engman.jpg" alt="Brandon Engman" class="cast-photo">
+                    <img src="cast-photos/brandon-engman.jpg" alt="Brandon Engman" class="cast-photo" loading="lazy">
                     <div class="cast-info">
                         <div class="actor-name">Brandon Engman</div>
                         <div class="character-name">as Mick Skylark</div>
                     </div>
                 </div>
                 <div class="cast-member">
-                    <img src="cast-photos/david-koechner.jpg" alt="David Koechner" class="cast-photo">
+                    <img src="cast-photos/david-koechner.jpg" alt="David Koechner" class="cast-photo" loading="lazy">
                     <div class="cast-info">
                         <div class="actor-name">David Koechner</div>
                         <div class="character-name">as Jonsey</div>
                     </div>
                 </div>
                 <div class="cast-member">
-                    <img src="cast-photos/patrick-warburton.jpg" alt="Patrick Warburton" class="cast-photo">
+                    <img src="cast-photos/patrick-warburton.jpg" alt="Patrick Warburton" class="cast-photo" loading="lazy">
                     <div class="cast-info">
                         <div class="actor-name">Patrick Warburton</div>
                         <div class="character-name">as Dr. Phil</div>
                     </div>
                 </div>
                 <div class="cast-member">
-                    <img src="cast-photos/robert-knepper.jpg" alt="Robert Knepper" class="cast-photo">
+                    <img src="cast-photos/robert-knepper.jpg" alt="Robert Knepper" class="cast-photo" loading="lazy">
                     <div class="cast-info">
                         <div class="actor-name">Robert Knepper</div>
                         <div class="character-name">as Vladimir</div>
                     </div>
                 </div>
                 <div class="cast-member">
-                    <img src="cast-photos/cs-lee.jpg" alt="CS Lee" class="cast-photo">
+                    <img src="cast-photos/cs-lee.jpg" alt="CS Lee" class="cast-photo" loading="lazy">
                     <div class="cast-info">
                         <div class="actor-name">CS Lee</div>
                         <div class="character-name">as Leonard</div>
                     </div>
                 </div>
                 <div class="cast-member">
-                    <img src="cast-photos/elizabeth-mitchell.jpg" alt="Elizabeth Mitchell" class="cast-photo">
+                    <img src="cast-photos/elizabeth-mitchell.jpg" alt="Elizabeth Mitchell" class="cast-photo" loading="lazy">
                     <div class="cast-info">
                         <div class="actor-name">Elizabeth Mitchell</div>
                         <div class="character-name">as Clara</div>
                     </div>
                 </div>
                 <div class="cast-member">
-                    <img src="cast-photos/thomas-lennon.jpg" alt="Thomas Lennon" class="cast-photo">
+                    <img src="cast-photos/thomas-lennon.jpg" alt="Thomas Lennon" class="cast-photo" loading="lazy">
                     <div class="cast-info">
                         <div class="actor-name">Thomas Lennon</div>
                         <div class="character-name">as Tom McDonald</div>
                     </div>
                 </div>
                 <div class="cast-member">
-                    <img src="cast-photos/matt-iseman.jpg" alt="Matt Iseman" class="cast-photo">
+                    <img src="cast-photos/matt-iseman.jpg" alt="Matt Iseman" class="cast-photo" loading="lazy">
                     <div class="cast-info">
                         <div class="actor-name">Matt Iseman</div>
                         <div class="character-name">as Artie Finegold</div>
                     </div>
                 </div>
                 <div class="cast-member">
-                    <img src="cast-photos/jorge-garcia.jpg" alt="Jorge Garcia" class="cast-photo">
+                    <img src="cast-photos/jorge-garcia.jpg" alt="Jorge Garcia" class="cast-photo" loading="lazy">
                     <div class="cast-info">
                         <div class="actor-name">Jorge Garcia</div>
                         <div class="character-name">as Roger</div>
                     </div>
                 </div>
                 <div class="cast-member">
-                    <img src="cast-photos/james-murray.jpg" alt="James Murray" class="cast-photo">
+                    <img src="cast-photos/james-murray.jpg" alt="James Murray" class="cast-photo" loading="lazy">
                     <div class="cast-info">
                         <div class="actor-name">James Murray (Murr)</div>
                         <div class="character-name">as Harry Johnson</div>
                     </div>
                 </div>
                 <div class="cast-member">
-                    <img src="cast-photos/russell-hodgkinson.jpg" alt="Russell Hodgkinson" class="cast-photo">
+                    <img src="cast-photos/russell-hodgkinson.jpg" alt="Russell Hodgkinson" class="cast-photo" loading="lazy">
                     <div class="cast-info">
                         <div class="actor-name">Russell Hodgkinson</div>
                         <div class="character-name">as Dave</div>
                     </div>
                 </div>
                 <div class="cast-member">
-                    <img src="cast-photos/ali-stoner.jpg" alt="Ali Stoner" class="cast-photo">
+                    <img src="cast-photos/ali-stoner.jpg" alt="Ali Stoner" class="cast-photo" loading="lazy">
                     <div class="cast-info">
                         <div class="actor-name">Ali Stoner</div>
                         <div class="character-name">as Vanessa</div>
                     </div>
                 </div>
                 <div class="cast-member">
-                    <img src="cast-photos/colin-egglesfield.jpg" alt="Colin Egglesfield" class="cast-photo">
+                    <img src="cast-photos/colin-egglesfield.jpg" alt="Colin Egglesfield" class="cast-photo" loading="lazy">
                     <div class="cast-info">
                         <div class="actor-name">Colin Egglesfield</div>
                         <div class="character-name">as Eagle</div>
                     </div>
                 </div>
                 <div class="cast-member">
-                    <img src="cast-photos/violet-bennett.jpg" alt="Violet Bennett" class="cast-photo">
+                    <img src="cast-photos/violet-bennett.jpg" alt="Violet Bennett" class="cast-photo" loading="lazy">
                     <div class="cast-info">
                         <div class="actor-name">Violet Bennett</div>
                         <div class="character-name">as Lily</div>
                     </div>
                 </div>
                 <div class="cast-member">
-                    <img src="cast-photos/urijah-faber.jpg" alt="Urijah Faber" class="cast-photo">
+                    <img src="cast-photos/urijah-faber.jpg" alt="Urijah Faber" class="cast-photo" loading="lazy">
                     <div class="cast-info">
                         <div class="actor-name">Urijah Faber</div>
                         <div class="character-name">as Foley Dowed</div>
                     </div>
                 </div>
                 <div class="cast-member">
-                    <img src="cast-photos/sergio-rizzuto.jpg" alt="Sergio Rizzuto" class="cast-photo">
+                    <img src="cast-photos/sergio-rizzuto.jpg" alt="Sergio Rizzuto" class="cast-photo" loading="lazy">
                     <div class="cast-info">
                         <div class="actor-name">Sergio Rizzuto</div>
                         <div class="character-name">as Lunch Box</div>
                     </div>
                 </div>
                 <div class="cast-member">
-                    <img src="cast-photos/ettore-baccari.jpg" alt="Ettore James Baccari" class="cast-photo">
+                    <img src="cast-photos/ettore-baccari.jpg" alt="Ettore James Baccari" class="cast-photo" loading="lazy">
                     <div class="cast-info">
                         <div class="actor-name">Ettore James Baccari</div>
                         <div class="character-name">as Young Mick</div>
                     </div>
                 </div>
                 <div class="cast-member">
-                    <img src="cast-photos/jett-miller.jpg" alt="Jett Miller" class="cast-photo">
+                    <img src="cast-photos/jett-miller.jpg" alt="Jett Miller" class="cast-photo" loading="lazy">
                     <div class="cast-info">
                         <div class="actor-name">Jett Miller</div>
                         <div class="character-name">as Humphrey</div>
@@ -1267,10 +1094,10 @@
                 <h2 class="section-title">Share the Film</h2>
                 <p style="font-size: 1.1rem; margin-bottom: 20px;">Help spread the word about Mick Skylark!</p>
                 <div class="share-buttons">
-                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://mickskylark.com" target="_blank" class="share-btn facebook">
+                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://mickskylark.com" target="_blank" rel="noopener" class="share-btn facebook">
                         📘 Share on Facebook
                     </a>
-                    <a href="https://twitter.com/intent/tweet?text=Check%20out%20Mick%20Skylark%3A%20Mini%20Golf%20Prodigy!&url=https://mickskylark.com" target="_blank" class="share-btn twitter">
+                    <a href="https://twitter.com/intent/tweet?text=Check%20out%20Mick%20Skylark%3A%20Mini%20Golf%20Prodigy!&url=https://mickskylark.com" target="_blank" rel="noopener" class="share-btn twitter">
                         🐦 Share on Twitter
                     </a>
                     <a href="mailto:?subject=Check%20out%20Mick%20Skylark&body=I%20thought%20you'd%20enjoy%20this%20film:%20https://mickskylark.com" class="share-btn email">
@@ -1323,7 +1150,7 @@
                 </div>
                 <div class="location-card">
                     <h3>🎬 Los Angeles, California</h3>
-                    <p><strong>Venue:</strong> Cinemark Playa Vista & XD</p>
+                    <p><strong>Venue:</strong> Cinemark Playa Vista &amp; XD</p>
                     <p><strong>Address:</strong><br>12746 W Jefferson Blvd, Suite 3190<br>Playa Vista, CA 90094</p>
                     <p><strong>Date:</strong> Sunday, February 22, 2026</p>
                     <p><strong>Time:</strong> 3:00 PM</p>
@@ -1332,18 +1159,41 @@
         </div>
     </section>
 
-   <!-- Footer -->
-    <footer>
+    <!-- Footer -->
+    <footer id="footer">
+        <!-- Email updates (requested) -->
+        <div class="footer-updates">
+            <h3>Get Email Updates</h3>
+            <div style="max-width: 680px; margin: 0 auto;">
+                <iframe
+                    data-tally-src="https://tally.so/embed/1AVZKg?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"
+                    loading="lazy"
+                    width="100%"
+                    height="400"
+                    frameborder="0"
+                    marginheight="0"
+                    marginwidth="0"
+                    title="Email Updates Signup"></iframe>
+            </div>
+        </div>
+
         <p>&copy; 2025 Mick Skylark: Mini Golf Prodigy. All rights reserved.</p>
-        <p style="margin-top: 10px; opacity: 0.8;">A Potato Eater Productions Film</p>
+        <p style="margin-top: 10px; opacity: 0.85;">A Potato Eater Productions Film</p>
+
         <p style="margin-top: 15px;">
-            <a href="https://www.instagram.com/mickskylark" target="_blank">Follow us on Instagram!</a>
+            <a href="https://www.instagram.com/mickskylark" target="_blank" rel="noopener">Follow us on Instagram!</a>
         </p>
+
         <p style="margin-top: 15px;">
-            <a href="grokminigolf.html" style="color: #FCD34D; font-weight: 600; text-decoration: none; border: 2px solid #FCD34D; padding: 8px 20px; border-radius: 25px; display: inline-block; transition: all 0.3s ease;">
+            <a href="grokminigolf.html" style="color: #FCD34D; font-weight: 700; text-decoration: none; border: 2px solid #FCD34D; padding: 8px 20px; border-radius: 25px; display: inline-block; transition: all 0.2s ease;">
                 ⛳ Play Grok Mini Golf
             </a>
         </p>
+
+        <!-- Contact (requested) -->
+        <div class="footer-contact">
+            Reach out: <a href="mailto:Contact@PotatoEaterProductions.com">Contact@PotatoEaterProductions.com</a>
+        </div>
     </footer>
 
     <script>
@@ -1356,33 +1206,79 @@
         // Tally embed script
         var d=document,w="https://tally.so/widgets/embed.js",v=function(){"undefined"!=typeof Tally?Tally.loadEmbeds():d.querySelectorAll("iframe[data-tally-src]:not([src])").forEach((function(e){e.src=e.dataset.tallySrc}))};if("undefined"!=typeof Tally)v();else if(d.querySelector('script[src="'+w+'"]')==null){var s=d.createElement("script");s.src=w,s.onload=v,s.onerror=v,d.body.appendChild(s);}
 
-        // Smooth scroll for nav
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth' });
-                }
-            });
-        });
-
-        // Smooth scroll for navigation (skip external links)
+        // Smooth scroll for nav (only for in-page anchors)
         document.querySelectorAll('.nav-link').forEach(link => {
             link.addEventListener('click', (e) => {
                 const href = link.getAttribute('href');
-                if (href && (href.startsWith('#') || href.includes('index.html#'))) {
-                    e.preventDefault();
-                    const hash = href.includes('#') ? href.split('#')[1] : '';
-                    const target = document.getElementById(hash);
-                    if (target) {
-                        target.scrollIntoView({ behavior: 'smooth' });
+                if (!href) return;
+
+                const isExternal = link.classList.contains('nav-link-external') && !href.includes('#');
+                if (isExternal) return;
+
+                // Support "index.html#section" + "#section"
+                if (href.includes('#')) {
+                    const hash = href.split('#')[1];
+                    if (hash) {
+                        const target = document.getElementById(hash);
+                        if (target) {
+                            e.preventDefault();
+                            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        }
                     }
                 }
             });
         });
 
-        // Countdown Timer to February 22, 2026 at 3:00 PM
+        // Back-to-top button behavior
+        const backToTopBtn = document.getElementById('backToTop');
+        function updateBackToTopVisibility() {
+            if (!backToTopBtn) return;
+            const show = window.scrollY > 500;
+            backToTopBtn.classList.toggle('show', show);
+        }
+        if (backToTopBtn) {
+            backToTopBtn.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+            window.addEventListener('scroll', updateBackToTopVisibility, { passive: true });
+            updateBackToTopVisibility();
+        }
+
+        // Scroll-spy: highlight nav items when their section is in view
+        const sectionIds = ['home','comparable-films','rsvp','game','cast','instagram','credits','locations'];
+        const navLinksBySection = new Map();
+        document.querySelectorAll('.nav-link[data-section]').forEach(a => {
+            navLinksBySection.set(a.getAttribute('data-section'), a);
+        });
+
+        const sections = sectionIds
+          .map(id => document.getElementById(id))
+          .filter(Boolean);
+
+        function setActiveNav(sectionId) {
+            navLinksBySection.forEach((link) => link.classList.remove('active'));
+            const link = navLinksBySection.get(sectionId);
+            if (link) link.classList.add('active');
+        }
+
+        // Use IntersectionObserver for reliable mobile behavior
+        const observer = new IntersectionObserver((entries) => {
+            // pick the most visible intersecting entry
+            const visible = entries
+              .filter(e => e.isIntersecting)
+              .sort((a,b) => (b.intersectionRatio - a.intersectionRatio))[0];
+            if (visible && visible.target && visible.target.id) {
+                setActiveNav(visible.target.id);
+            }
+        }, {
+            root: null,
+            threshold: [0.2, 0.35, 0.5, 0.65],
+            rootMargin: "-20% 0px -65% 0px"
+        });
+
+        sections.forEach(sec => observer.observe(sec));
+
+        // Countdown Timer to February 22, 2026 at 3:00 PM (local time)
         function updateCountdown() {
             const screeningDate = new Date('February 22, 2026 15:00:00').getTime();
             const now = new Date().getTime();
@@ -1393,19 +1289,25 @@
             const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
             const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-            document.getElementById('days').textContent = days;
-            document.getElementById('hours').textContent = hours;
-            document.getElementById('minutes').textContent = minutes;
-            document.getElementById('seconds').textContent = seconds;
+            const dEl = document.getElementById('days');
+            const hEl = document.getElementById('hours');
+            const mEl = document.getElementById('minutes');
+            const sEl = document.getElementById('seconds');
+
+            if (!dEl || !hEl || !mEl || !sEl) return;
+
+            dEl.textContent = Math.max(0, days);
+            hEl.textContent = Math.max(0, hours);
+            mEl.textContent = Math.max(0, minutes);
+            sEl.textContent = Math.max(0, seconds);
 
             if (distance < 0) {
-                document.getElementById('days').textContent = '0';
-                document.getElementById('hours').textContent = '0';
-                document.getElementById('minutes').textContent = '0';
-                document.getElementById('seconds').textContent = '0';
+                dEl.textContent = '0';
+                hEl.textContent = '0';
+                mEl.textContent = '0';
+                sEl.textContent = '0';
             }
         }
-
         setInterval(updateCountdown, 1000);
         updateCountdown();
 
@@ -1426,47 +1328,54 @@
         let particles = [];
         let holeScores = Array(18).fill(null);
 
-        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        // Audio: only create context after a user gesture (mobile friendly)
+        let audioContext = null;
+        function getAudioContext() {
+            if (!audioContext) audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            return audioContext;
+        }
 
         function playSound(type) {
             if (!soundEnabled) return;
-            const oscillator = audioContext.createOscillator();
-            const gainNode = audioContext.createGain();
+            const ac = getAudioContext();
+            if (ac.state === 'suspended') ac.resume().catch(()=>{});
+            const oscillator = ac.createOscillator();
+            const gainNode = ac.createGain();
             oscillator.connect(gainNode);
-            gainNode.connect(audioContext.destination);
-            
+            gainNode.connect(ac.destination);
+
             switch(type) {
                 case 'hit':
                     oscillator.frequency.value = 300;
                     oscillator.type = 'sine';
-                    gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
-                    gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.1);
-                    oscillator.start(audioContext.currentTime);
-                    oscillator.stop(audioContext.currentTime + 0.1);
+                    gainNode.gain.setValueAtTime(0.3, ac.currentTime);
+                    gainNode.gain.exponentialRampToValueAtTime(0.01, ac.currentTime + 0.1);
+                    oscillator.start(ac.currentTime);
+                    oscillator.stop(ac.currentTime + 0.1);
                     break;
                 case 'wall':
                     oscillator.frequency.value = 200;
                     oscillator.type = 'square';
-                    gainNode.gain.setValueAtTime(0.2, audioContext.currentTime);
-                    gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.15);
-                    oscillator.start(audioContext.currentTime);
-                    oscillator.stop(audioContext.currentTime + 0.15);
+                    gainNode.gain.setValueAtTime(0.2, ac.currentTime);
+                    gainNode.gain.exponentialRampToValueAtTime(0.01, ac.currentTime + 0.15);
+                    oscillator.start(ac.currentTime);
+                    oscillator.stop(ac.currentTime + 0.15);
                     break;
                 case 'hole':
                     oscillator.frequency.value = 523;
                     oscillator.type = 'sine';
-                    gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
-                    gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.5);
-                    oscillator.start(audioContext.currentTime);
-                    oscillator.stop(audioContext.currentTime + 0.5);
+                    gainNode.gain.setValueAtTime(0.3, ac.currentTime);
+                    gainNode.gain.exponentialRampToValueAtTime(0.01, ac.currentTime + 0.5);
+                    oscillator.start(ac.currentTime);
+                    oscillator.stop(ac.currentTime + 0.5);
                     break;
                 case 'water':
                     oscillator.frequency.value = 150;
                     oscillator.type = 'sine';
-                    gainNode.gain.setValueAtTime(0.25, audioContext.currentTime);
-                    gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.3);
-                    oscillator.start(audioContext.currentTime);
-                    oscillator.stop(audioContext.currentTime + 0.3);
+                    gainNode.gain.setValueAtTime(0.25, ac.currentTime);
+                    gainNode.gain.exponentialRampToValueAtTime(0.01, ac.currentTime + 0.3);
+                    oscillator.start(ac.currentTime);
+                    oscillator.stop(ac.currentTime + 0.3);
                     break;
             }
         }
@@ -1474,14 +1383,20 @@
         function toggleSound() {
             soundEnabled = !soundEnabled;
             const btn = document.getElementById('soundBtn');
-            btn.textContent = soundEnabled ? '🔊' : '🔇';
-            btn.classList.toggle('active', soundEnabled);
+            if (btn) {
+                btn.textContent = soundEnabled ? '🔊' : '🔇';
+                btn.classList.toggle('active', soundEnabled);
+            }
         }
 
         function setTheme(theme) {
             currentTheme = theme;
-            document.getElementById('dayBtn').classList.toggle('active', theme === 'day');
-            document.getElementById('nightBtn').classList.toggle('active', theme === 'night');
+            const dayBtn = document.getElementById('dayBtn');
+            const nightBtn = document.getElementById('nightBtn');
+            if (dayBtn && nightBtn) {
+                dayBtn.classList.toggle('active', theme === 'day');
+                nightBtn.classList.toggle('active', theme === 'night');
+            }
             drawGame();
         }
 
@@ -1511,11 +1426,10 @@
         let currentHoleData = holes[0];
         let obstacles = [], sandTraps = [], windmills = [], movingObstacles = [], waterHazards = [], bumpers = [];
 
-
         function updateScorecard() {
             for (let i = 0; i < 18; i++) {
                 const scoreCell = document.getElementById(`score-${i + 1}`);
-                if (holeScores[i] !== null) {
+                if (holeScores[i] !== null && scoreCell) {
                     scoreCell.textContent = holeScores[i];
                     scoreCell.classList.remove('pending', 'birdie', 'par', 'bogey', 'double-bogey');
                     const par = parValues[i];
@@ -1528,24 +1442,24 @@
             }
 
             let outScore = 0, inScore = 0;
-            for (let i = 0; i < 9; i++) {
-                if (holeScores[i] !== null) outScore += holeScores[i];
-            }
-            for (let i = 9; i < 18; i++) {
-                if (holeScores[i] !== null) inScore += holeScores[i];
-            }
+            for (let i = 0; i < 9; i++) if (holeScores[i] !== null) outScore += holeScores[i];
+            for (let i = 9; i < 18; i++) if (holeScores[i] !== null) inScore += holeScores[i];
 
-            if (holeScores.slice(0, 9).some(s => s !== null)) {
-                document.getElementById('score-out').textContent = outScore || '-';
-                document.getElementById('score-out').classList.remove('pending');
+            const outEl = document.getElementById('score-out');
+            const inEl = document.getElementById('score-in');
+            const totalEl = document.getElementById('score-total');
+
+            if (outEl && holeScores.slice(0, 9).some(s => s !== null)) {
+                outEl.textContent = outScore || '-';
+                outEl.classList.remove('pending');
             }
-            if (holeScores.slice(9, 18).some(s => s !== null)) {
-                document.getElementById('score-in').textContent = inScore || '-';
-                document.getElementById('score-in').classList.remove('pending');
+            if (inEl && holeScores.slice(9, 18).some(s => s !== null)) {
+                inEl.textContent = inScore || '-';
+                inEl.classList.remove('pending');
             }
-            if (holeScores.some(s => s !== null)) {
-                document.getElementById('score-total').textContent = outScore + inScore;
-                document.getElementById('score-total').classList.remove('pending');
+            if (totalEl && holeScores.some(s => s !== null)) {
+                totalEl.textContent = outScore + inScore;
+                totalEl.classList.remove('pending');
             }
         }
 
@@ -1553,7 +1467,7 @@
             currentHoleData = holes[holeNum - 1];
             ball = { ...currentHoleData.ball, radius: 10, vx: 0, vy: 0 };
             hole = { ...currentHoleData.hole, radius: 20 };
-            obstacles = currentHoleData.obstacles;
+            obstacles = currentHoleData.obstacles || [];
             sandTraps = currentHoleData.sandTraps || [];
             windmills = currentHoleData.windmills || [];
             movingObstacles = currentHoleData.movingObstacles || [];
@@ -1567,7 +1481,14 @@
 
         function createParticles(x, y, color, count = 8) {
             for (let i = 0; i < count; i++) {
-                particles.push({ x: x, y: y, vx: (Math.random() - 0.5) * 4, vy: (Math.random() - 0.5) * 4, life: 30, color: color, size: Math.random() * 3 + 2 });
+                particles.push({
+                    x, y,
+                    vx: (Math.random() - 0.5) * 4,
+                    vy: (Math.random() - 0.5) * 4,
+                    life: 30,
+                    color,
+                    size: Math.random() * 3 + 2
+                });
             }
         }
 
@@ -1584,6 +1505,8 @@
 
         function drawGame() {
             if (!ctx) return;
+
+            // background
             const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
             if (currentTheme === 'night') {
                 gradient.addColorStop(0, '#1a2332');
@@ -1595,39 +1518,49 @@
             ctx.fillStyle = gradient;
             ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-            ctx.fillStyle = currentTheme === 'night' ? '#1E3A8A' : '#fff';
-            ctx.fillRect(5, 5, 150, 50);
+            // HUD (kept ONLY what you requested):
+            // - Hole x of 18
+            // - This hole: x
+            // - Power %
+            // - Total: x
+            // (Removed: extra "Hole", "Over/Under", etc. No added HUDs.)
+
+            // Hole x of 18 (top-left)
+            ctx.fillStyle = currentTheme === 'night' ? 'rgba(30,58,138,0.85)' : 'rgba(255,255,255,0.92)';
+            ctx.fillRect(8, 8, 150, 34);
             ctx.fillStyle = currentTheme === 'night' ? '#FCD34D' : '#1E3A8A';
             ctx.font = 'bold 16px Poppins';
-            ctx.fillText(`Hole ${currentHole} of 18`, 15, 25);
-            ctx.font = '14px Poppins';
-            ctx.fillText(`Par ${parValues[currentHole - 1]}`, 15, 45);
+            ctx.fillText(`Hole ${currentHole} of 18`, 16, 31);
 
+            // Power % (top-right)
             if (currentPower > 0) {
                 const powerPercent = Math.round((currentPower / 8) * 100);
-                ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
-                ctx.fillRect(canvas.width - 75, 5, 70, 30);
+                ctx.fillStyle = 'rgba(255, 255, 255, 0.92)';
+                ctx.fillRect(canvas.width - 84, 8, 76, 34);
                 ctx.font = 'bold 18px Poppins';
-                ctx.fillStyle = powerPercent > 75 ? '#EF4444' : powerPercent > 50 ? '#FCD34D' : '#10B981';
-                ctx.fillText(`${powerPercent}%`, canvas.width - 60, 28);
+                ctx.fillStyle = powerPercent > 75 ? '#EF4444' : powerPercent > 50 ? '#F59E0B' : '#10B981';
+                ctx.fillText(`${powerPercent}%`, canvas.width - 70, 32);
             }
 
-            ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
-            ctx.fillRect(5, canvas.height - 35, 100, 30);
+            // This hole: strokes (bottom-left)
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.92)';
+            ctx.fillRect(8, canvas.height - 42, 150, 34);
             ctx.fillStyle = currentTheme === 'night' ? '#FCD34D' : '#1E3A8A';
             ctx.font = '14px Poppins';
-            ctx.fillText('This Hole:', 10, canvas.height - 18);
+            ctx.fillText('This hole:', 14, canvas.height - 20);
             ctx.font = 'bold 20px Poppins';
-            ctx.fillText(strokes, 85, canvas.height - 15);
+            ctx.fillText(String(strokes), 110, canvas.height - 18);
 
+            // Total: totalStrokes (bottom-right)
             const totalText = `Total: ${totalStrokes}`;
+            ctx.font = 'bold 16px Poppins';
             const totalWidth = ctx.measureText(totalText).width;
-            ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
-            ctx.fillRect(canvas.width - totalWidth - 20, canvas.height - 35, totalWidth + 15, 30);
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.92)';
+            ctx.fillRect(canvas.width - totalWidth - 22, canvas.height - 42, totalWidth + 14, 34);
             ctx.fillStyle = currentTheme === 'night' ? '#FCD34D' : '#1E3A8A';
-            ctx.font = '14px Poppins';
-            ctx.fillText(totalText, canvas.width - totalWidth - 12, canvas.height - 15);
+            ctx.fillText(totalText, canvas.width - totalWidth - 15, canvas.height - 18);
 
+            // hazards
             waterHazards.forEach(water => {
                 const waterGradient = ctx.createRadialGradient(water.x + water.width/2, water.y + water.height/2, 0, water.x + water.width/2, water.y + water.height/2, water.width/2);
                 waterGradient.addColorStop(0, '#4DA6FF');
@@ -1650,9 +1583,11 @@
                 }
             });
 
+            // obstacles
             ctx.fillStyle = '#8B4513';
             obstacles.forEach(obs => ctx.fillRect(obs.x, obs.y, obs.width, obs.height));
 
+            // moving obstacles
             movingObstacles.forEach(obs => {
                 if (obs.axis === 'vertical') {
                     obs.y += obs.speed * obs.direction;
@@ -1661,18 +1596,14 @@
                     obs.x += obs.speed * obs.direction;
                     if (obs.x <= obs.minX || obs.x >= obs.maxX) obs.direction *= -1;
                 }
-                const gradient = ctx.createLinearGradient(obs.x, obs.y, obs.x + obs.width, obs.y + obs.height);
-                gradient.addColorStop(0, '#D2691E');
-                gradient.addColorStop(1, '#8B4513');
-                ctx.fillStyle = gradient;
+                const g = ctx.createLinearGradient(obs.x, obs.y, obs.x + obs.width, obs.y + obs.height);
+                g.addColorStop(0, '#D2691E');
+                g.addColorStop(1, '#8B4513');
+                ctx.fillStyle = g;
                 ctx.fillRect(obs.x, obs.y, obs.width, obs.height);
-                ctx.fillStyle = '#FFD700';
-                ctx.font = 'bold 20px Arial';
-                ctx.textAlign = 'center';
-                const arrow = obs.axis === 'vertical' ? (obs.direction > 0 ? '↓' : '↑') : (obs.direction > 0 ? '→' : '←');
-                ctx.fillText(arrow, obs.x + obs.width/2, obs.y + obs.height/2 + 7);
             });
 
+            // bumpers
             bumpers.forEach(bumper => {
                 const bumperGradient = ctx.createRadialGradient(bumper.x, bumper.y, bumper.radius * 0.3, bumper.x, bumper.y, bumper.radius);
                 bumperGradient.addColorStop(0, '#FF6B6B');
@@ -1687,6 +1618,7 @@
                 ctx.fill();
             });
 
+            // windmills
             windmills.forEach(mill => {
                 mill.angle += mill.speed;
                 ctx.fillStyle = '#654321';
@@ -1707,6 +1639,7 @@
                 ctx.restore();
             });
 
+            // hole
             ctx.fillStyle = '#000';
             ctx.beginPath();
             ctx.arc(hole.x, hole.y, hole.radius, 0, Math.PI * 2);
@@ -1716,6 +1649,7 @@
             ctx.arc(hole.x, hole.y, hole.radius - 5, 0, Math.PI * 2);
             ctx.fill();
 
+            // flag
             ctx.strokeStyle = currentTheme === 'night' ? '#FCD34D' : '#000';
             ctx.lineWidth = 2;
             ctx.beginPath();
@@ -1729,6 +1663,7 @@
             ctx.lineTo(hole.x, hole.y - 20);
             ctx.fill();
 
+            // trail
             ctx.globalAlpha = 0.3;
             ballTrail.forEach((pos, index) => {
                 const alpha = index / ballTrail.length * 0.5;
@@ -1740,6 +1675,7 @@
             });
             ctx.globalAlpha = 1.0;
 
+            // particles
             particles = particles.filter(p => {
                 p.x += p.vx; p.y += p.vy; p.life--;
                 if (p.life > 0) {
@@ -1754,6 +1690,7 @@
                 return false;
             });
 
+            // ball
             ctx.fillStyle = '#FFF';
             ctx.strokeStyle = currentTheme === 'night' ? '#FCD34D' : '#000';
             ctx.lineWidth = 2;
@@ -1834,37 +1771,28 @@
                 }
             });
 
-            obstacles.forEach(obs => {
-                if (ball.x + ball.radius > obs.x && ball.x - ball.radius < obs.x + obs.width && ball.y + ball.radius > obs.y && ball.y - ball.radius < obs.y + obs.height) {
-                    const overlapLeft = (ball.x + ball.radius) - obs.x;
-                    const overlapRight = (obs.x + obs.width) - (ball.x - ball.radius);
-                    const overlapTop = (ball.y + ball.radius) - obs.y;
-                    const overlapBottom = (obs.y + obs.height) - (ball.y - ball.radius);
-                    const minOverlap = Math.min(overlapLeft, overlapRight, overlapTop, overlapBottom);
-                    if (minOverlap === overlapLeft) { ball.vx = Math.abs(ball.vx) * -0.7; ball.x = obs.x - ball.radius - 1; }
-                    else if (minOverlap === overlapRight) { ball.vx = Math.abs(ball.vx) * 0.7; ball.x = obs.x + obs.width + ball.radius + 1; }
-                    else if (minOverlap === overlapTop) { ball.vy = Math.abs(ball.vy) * -0.7; ball.y = obs.y - ball.radius - 1; }
-                    else if (minOverlap === overlapBottom) { ball.vy = Math.abs(ball.vy) * 0.7; ball.y = obs.y + obs.height + ball.radius + 1; }
-                    createParticles(ball.x, ball.y, '#8B4513', 5);
-                    playSound('wall');
-                }
-            });
+            function resolveObstacleCollision(obs, particleColor) {
+                if (ball.x + ball.radius > obs.x && ball.x - ball.radius < obs.x + obs.width &&
+                    ball.y + ball.radius > obs.y && ball.y - ball.radius < obs.y + obs.height) {
 
-            movingObstacles.forEach(obs => {
-                if (ball.x + ball.radius > obs.x && ball.x - ball.radius < obs.x + obs.width && ball.y + ball.radius > obs.y && ball.y - ball.radius < obs.y + obs.height) {
                     const overlapLeft = (ball.x + ball.radius) - obs.x;
                     const overlapRight = (obs.x + obs.width) - (ball.x - ball.radius);
                     const overlapTop = (ball.y + ball.radius) - obs.y;
                     const overlapBottom = (obs.y + obs.height) - (ball.y - ball.radius);
                     const minOverlap = Math.min(overlapLeft, overlapRight, overlapTop, overlapBottom);
+
                     if (minOverlap === overlapLeft) { ball.vx = Math.abs(ball.vx) * -0.7; ball.x = obs.x - ball.radius - 1; }
                     else if (minOverlap === overlapRight) { ball.vx = Math.abs(ball.vx) * 0.7; ball.x = obs.x + obs.width + ball.radius + 1; }
                     else if (minOverlap === overlapTop) { ball.vy = Math.abs(ball.vy) * -0.7; ball.y = obs.y - ball.radius - 1; }
                     else if (minOverlap === overlapBottom) { ball.vy = Math.abs(ball.vy) * 0.7; ball.y = obs.y + obs.height + ball.radius + 1; }
-                    createParticles(ball.x, ball.y, '#D2691E', 5);
+
+                    createParticles(ball.x, ball.y, particleColor, 5);
                     playSound('wall');
                 }
-            });
+            }
+
+            obstacles.forEach(obs => resolveObstacleCollision(obs, '#8B4513'));
+            movingObstacles.forEach(obs => resolveObstacleCollision(obs, '#D2691E'));
 
             windmills.forEach(mill => {
                 const dx = ball.x - mill.x;
@@ -1887,13 +1815,14 @@
                 createParticles(hole.x, hole.y, '#FFD700', 15);
                 updateScorecard();
                 drawGame();
-                
+
                 if (strokes === 1) {
                     holesInOne++;
                     localStorage.setItem('holesInOne', holesInOne);
-                    document.getElementById('holesInOneCount').textContent = holesInOne;
+                    const hioEl = document.getElementById('holesInOneCount');
+                    if (hioEl) hioEl.textContent = holesInOne;
                 }
-                
+
                 setTimeout(() => {
                     if (currentHole === 18) {
                         showCelebration();
@@ -1905,6 +1834,7 @@
                         else if (strokes === currentPar) msg += ' ✓ Par';
                         else msg += ' Over par';
                         alert(msg);
+
                         currentHole++;
                         loadHole(currentHole);
                         drawGame();
@@ -1920,19 +1850,27 @@
             const totalPar = parValues.reduce((a, b) => a + b, 0);
             const overUnder = totalStrokes - totalPar;
             const overUnderText = overUnder === 0 ? 'Even Par!' : overUnder > 0 ? `${overUnder} Over Par` : `${Math.abs(overUnder)} Under Par!`;
-            document.getElementById('finalScore').textContent = `Total: ${totalStrokes} strokes`;
-            document.getElementById('celebrationMessage').textContent = overUnderText;
-            document.getElementById('celebrationOverlay').classList.add('active');
+
+            const finalScoreEl = document.getElementById('finalScore');
+            const msgEl = document.getElementById('celebrationMessage');
+            const overlay = document.getElementById('celebrationOverlay');
+
+            if (finalScoreEl) finalScoreEl.textContent = `Total: ${totalStrokes} strokes`;
+            if (msgEl) msgEl.textContent = overUnderText;
+            if (overlay) overlay.classList.add('active');
+
             if (best === '--' || totalStrokes < parseInt(best)) {
                 best = totalStrokes;
                 localStorage.setItem('bestScore', best);
-                document.getElementById('best').textContent = best;
+                const bestEl = document.getElementById('best');
+                if (bestEl) bestEl.textContent = best;
             }
             for (let i = 0; i < 50; i++) createConfetti();
         }
 
         function closeCelebration() {
-            document.getElementById('celebrationOverlay').classList.remove('active');
+            const overlay = document.getElementById('celebrationOverlay');
+            if (overlay) overlay.classList.remove('active');
             currentHole = 1;
             totalStrokes = 0;
             holeScores = Array(18).fill(null);
@@ -1942,12 +1880,14 @@
         }
 
         function createConfetti() {
+            const overlay = document.getElementById('celebrationOverlay');
+            if (!overlay) return;
             const confetti = document.createElement('div');
             confetti.className = 'confetti';
             confetti.style.left = Math.random() * 100 + '%';
             confetti.style.background = ['#FCD34D', '#FBBF24', '#1E3A8A', '#3B82F6'][Math.floor(Math.random() * 4)];
             confetti.style.animationDelay = Math.random() * 2 + 's';
-            document.getElementById('celebrationOverlay').appendChild(confetti);
+            overlay.appendChild(confetti);
             setTimeout(() => confetti.remove(), 3000);
         }
 
@@ -1960,33 +1900,45 @@
             const overUnder = totalStrokes - totalPar;
             const scoreText = overUnder === 0 ? 'Even Par' : overUnder > 0 ? `+${overUnder}` : `${overUnder}`;
             const challengeText = `🏌️ Can you beat my Glory On The Greens score?\n${totalStrokes} strokes (${scoreText}) through ${currentHole - 1} holes!\n\nPlay at: mickskylark.com`;
+
             if (navigator.share) {
-                navigator.share({ title: 'Glory On The Greens Challenge', text: challengeText });
-            } else {
+                navigator.share({ title: 'Glory On The Greens Challenge', text: challengeText }).catch(()=>{});
+            } else if (navigator.clipboard && navigator.clipboard.writeText) {
                 navigator.clipboard.writeText(challengeText).then(() => {
                     alert('Challenge copied to clipboard! Share it with friends!');
+                }).catch(() => {
+                    alert(challengeText);
                 });
+            } else {
+                alert(challengeText);
             }
         }
 
         if (canvas) {
             function resizeCanvas() {
                 const container = canvas.parentElement;
+                if (!container) return;
                 const containerWidth = container.offsetWidth - 40;
+
+                // keep internal resolution stable; only scale via CSS
                 if (window.innerWidth <= 768 && containerWidth < 500) {
                     const scale = containerWidth / 500;
                     canvas.style.width = containerWidth + 'px';
                     canvas.style.height = (400 * scale) + 'px';
+                } else {
+                    canvas.style.width = '500px';
+                    canvas.style.height = '400px';
                 }
             }
             resizeCanvas();
-            window.addEventListener('resize', resizeCanvas);
+            window.addEventListener('resize', resizeCanvas, { passive: true });
 
             function handleHit(e) {
                 if (ball.vx === 0 && ball.vy === 0) {
                     const rect = canvas.getBoundingClientRect();
                     const scaleX = canvas.width / rect.width;
                     const scaleY = canvas.height / rect.height;
+
                     let clickX, clickY;
                     if (e.type === 'touchstart') {
                         clickX = (e.touches[0].clientX - rect.left) * scaleX;
@@ -1995,14 +1947,17 @@
                         clickX = (e.clientX - rect.left) * scaleX;
                         clickY = (e.clientY - rect.top) * scaleY;
                     }
+
                     const dx = clickX - ball.x;
                     const dy = clickY - ball.y;
-                    const distance = Math.sqrt(dx * dx + dy * dy);
+                    const distance = Math.sqrt(dx * dx + dy * dy) || 1;
                     const power = Math.min(distance / 20, 8);
+
                     ball.vx = (dx / distance) * power;
                     ball.vy = (dy / distance) * power;
                     strokes++;
                     currentPower = power;
+
                     playSound('hit');
                     drawGame();
                     setTimeout(() => { currentPower = 0; }, 800);
@@ -2011,10 +1966,13 @@
             }
 
             canvas.addEventListener('click', handleHit);
-            canvas.addEventListener('touchstart', (e) => { e.preventDefault(); handleHit(e); });
+            canvas.addEventListener('touchstart', (e) => { e.preventDefault(); handleHit(e); }, { passive: false });
 
-            document.getElementById('best').textContent = best;
-            document.getElementById('holesInOneCount').textContent = holesInOne;
+            const bestEl = document.getElementById('best');
+            const hioEl = document.getElementById('holesInOneCount');
+            if (bestEl) bestEl.textContent = best;
+            if (hioEl) hioEl.textContent = holesInOne;
+
             loadHole(1);
             drawGame();
         }
@@ -2042,15 +2000,13 @@
             function autoScrollFilms() {
                 filmsScrollAmount += filmsScrollSpeed;
                 filmsWrapper.scrollLeft = filmsScrollAmount;
-                
+
                 if (filmsScrollAmount >= filmsWrapper.scrollWidth - filmsWrapper.clientWidth - 50) {
                     filmsScrollAmount = 0;
                     filmsWrapper.scrollLeft = 0;
                 }
-                
                 requestAnimationFrame(autoScrollFilms);
             }
-
             autoScrollFilms();
         }
     </script>
