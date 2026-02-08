@@ -48,12 +48,12 @@
       background:rgba(255,255,255,0.95);
       backdrop-filter:blur(10px);
       -webkit-backdrop-filter:blur(10px);
-      box-shadow:0 2px 12px rgba(0,0,0,0.1);
+      box-shadow:0 2px 10px rgba(0,0,0,0.08);
       z-index:1000;
-      padding:12px 0;
+      padding:10px 0;
     }
     .nav-container{
-      max-width:1100px;
+      max-width:1200px;
       margin:0 auto;
       display:flex;
       justify-content:center;
@@ -64,33 +64,26 @@
     .nav-link{
       color:var(--primary);
       text-decoration:none;
-      font-weight:700;
-      padding:8px 16px;
-      border-radius:25px;
-      border:2px solid transparent;
+      font-weight:600;
+      padding:8px 14px;
+      border-radius:999px;
       transition:all 0.2s ease;
       font-size:0.9rem;
-      white-space:nowrap;
+      line-height:1;
+      border:1px solid transparent;
+      outline:none;
     }
-    .nav-link:hover{
-      background:var(--primary);
-      color:#fff;
-    }
+    .nav-link:hover{background:var(--primary);color:#fff;}
     .nav-link.active{
       background:var(--primary);
       color:#fff;
-      box-shadow:0 4px 12px rgba(30,58,138,0.3);
+      box-shadow:0 6px 18px rgba(30,58,138,0.25);
     }
 
     @media (max-width:768px){
-      body{padding-top:85px;}
-      .nav-container{
-        gap:8px;
-        justify-content:flex-start;
-        overflow-x:auto;
-        -webkit-overflow-scrolling:touch;
-      }
-      .nav-link{padding:8px 14px;font-size:0.85rem;}
+      body{padding-top:90px;}
+      .nav-container{gap:8px;justify-content:flex-start;}
+      .nav-link{padding:10px 14px;font-size:0.95rem;}
     }
 
     .container{
@@ -101,21 +94,24 @@
 
     .header{
       text-align:center;
-      margin-bottom:30px;
+      margin-bottom:35px;
     }
 
     h1{
-      font-size:2.8rem;
+      font-size:2.5rem;
       font-weight:900;
       color:var(--primary);
-      margin-bottom:10px;
-      text-shadow:2px 2px 4px rgba(0,0,0,0.1);
+      margin-bottom:12px;
     }
 
     .subtitle{
       font-size:1.1rem;
-      color:rgba(31,41,55,0.85);
-      font-weight:600;
+      color:rgba(31,41,55,0.8);
+    }
+
+    @media (max-width:768px){
+      h1{font-size:2rem;}
+      .subtitle{font-size:1rem;}
     }
 
     .card{
@@ -200,21 +196,23 @@
       text-decoration:underline;
     }
 
-    .back-link{
-      display:inline-block;
-      margin-top:20px;
-      color:var(--primary);
-      text-decoration:none;
-      font-weight:700;
-      font-size:1.05rem;
+    footer{
+      background:var(--primary);
+      color:#fff;
+      text-align:center;
+      padding:30px 20px;
+      margin-top:40px;
     }
-    .back-link:hover{
-      text-decoration:underline;
+    footer a{color:var(--secondary);text-decoration:none;font-weight:600;}
+    footer a:hover{text-decoration:underline;}
+
+    /* Accessibility focus */
+    .nav-link:focus-visible{
+      outline:3px solid rgba(252,211,77,0.9);
+      outline-offset:2px;
     }
 
     @media (max-width:768px){
-      h1{font-size:2.2rem;}
-      .subtitle{font-size:1rem;}
       .card{padding:25px 20px;}
       h2{font-size:1.3rem;}
       .section p{font-size:0.95rem;}
@@ -241,6 +239,25 @@
 
     <div class="card">
       
+      <!-- TEST SCREENER NOTICE -->
+      <div class="section">
+        <h2>🎬 Test Screener Notice</h2>
+        <div class="info-box">
+          <p><strong>This is an unfinished test screening of "Mick Skylark: Mini Golf Prodigy."</strong></p>
+        </div>
+        <p>The purpose of this screening is to gather valuable audience feedback to help us improve the film before its final release. This is a work-in-progress, and certain elements (including visual effects, sound mixing, color grading, and editing) may not be complete.</p>
+        <p><strong>By attending, you agree to:</strong></p>
+        <ul>
+          <li>Fill out a post-screening survey to provide constructive feedback</li>
+          <li>Understand this is an unfinished version of the film</li>
+          <li>Help us make the film better with your honest opinions</li>
+          <li>Provide feedback on story, characters, pacing, and overall experience</li>
+        </ul>
+        <div class="info-box" style="margin-top:15px;">
+          <p><strong>Your feedback is crucial to our filmmaking process. Thank you for being part of our test audience!</strong></p>
+        </div>
+      </div>
+      
       <!-- NO RECORDING - Main Priority -->
       <div class="section">
         <h2>📵 No Recording Policy</h2>
@@ -265,20 +282,37 @@
         <p>RSVPs are non-transferable. The screening is free to attend.</p>
       </div>
 
+      <!-- Post-Screening Survey -->
+      <div class="section">
+        <h2>📝 Post-Screening Survey Requirement</h2>
+        <div class="info-box">
+          <p><strong>All attendees are required to complete a post-screening survey.</strong></p>
+        </div>
+        <p>As this is a test screening, your feedback is essential to our production process. After the screening, you will receive a survey link to provide your thoughts on:</p>
+        <ul>
+          <li>Story and character development</li>
+          <li>Pacing and editing</li>
+          <li>Comedy and emotional moments</li>
+          <li>Overall viewing experience</li>
+          <li>Suggestions for improvement</li>
+        </ul>
+        <p>The survey takes approximately 10-15 minutes to complete. Your honest feedback helps us create the best possible final version of the film.</p>
+      </div>
+
       <!-- Behavior -->
       <div class="section">
         <h2>🎬 Screening Etiquette</h2>
         <p>We ask that all attendees:</p>
         <ul>
           <li>Silence mobile devices</li>
-          <li>Avoid talking during the film</li>
-          <li>Respect other attendees</li>
-          <li>Follow venue staff instructions</li>
+          <li>Refrain from talking during the film</li>
+          <li>Be respectful of other attendees</li>
+          <li>Follow all venue staff instructions</li>
         </ul>
-        <p>We reserve the right to refuse entry or remove anyone disrupting the screening.</p>
+        <p>We reserve the right to refuse entry or remove anyone who disrupts the screening experience.</p>
       </div>
 
-      <!-- Content Warning -->
+      <!-- Rating -->
       <div class="section">
         <h2>⚠️ Content & Rating</h2>
         <div class="info-box">
@@ -311,9 +345,15 @@
       </div>
 
     </div>
-
-    <a href="index.html" class="back-link">← Back to Home</a>
   </div>
+
+  <footer>
+    <p>&copy; 2025 Mick Skylark: Mini Golf Prodigy. All rights reserved.</p>
+    <p style="margin-top:10px;opacity:0.85;">A Potato Eater Productions Film</p>
+    <p style="margin-top:14px;">
+      <a href="index.html">Back to home</a>
+    </p>
+  </footer>
 
 </body>
 </html>
