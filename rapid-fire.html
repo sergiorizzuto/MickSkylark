@@ -22,7 +22,6 @@
     *{margin:0;padding:0;box-sizing:border-box;}
     html{
       overflow-x:hidden;
-      position:fixed;
       width:100%;
       height:100%;
     }
@@ -31,11 +30,11 @@
       background: linear-gradient(135deg, #FDE68A 0%, #FCD34D 100%);
       color:var(--dark);
       min-height:100vh;
+      min-height:-webkit-fill-available;
       padding:72px 14px 40px;
       overflow-x:hidden;
       overflow-y:auto;
       width:100%;
-      height:100%;
       -webkit-overflow-scrolling:touch;
     }
 
@@ -393,18 +392,20 @@
     /* Combo multiplier */
     .combo-display{
       position:absolute;
-      top:20px;
-      right:20px;
-      background:rgba(255,107,53,0.9);
+      top:10px;
+      right:10px;
+      background:rgba(255,107,53,0.55);
       color:#fff;
-      padding:10px 18px;
+      padding:8px 14px;
       border-radius:999px;
       font-weight:900;
-      font-size:1.1rem;
-      box-shadow:0 8px 20px rgba(255,107,53,0.4);
+      font-size:0.95rem;
+      box-shadow:0 6px 16px rgba(255,107,53,0.25);
       transform:scale(0);
       transition:transform 0.3s ease;
       z-index:50;
+      backdrop-filter:blur(6px);
+      -webkit-backdrop-filter:blur(6px);
     }
     .combo-display.active{
       transform:scale(1);
@@ -414,6 +415,25 @@
     @keyframes comboBounce{
       0%, 100%{transform:scale(1);}
       50%{transform:scale(1.15);}
+    }
+    
+    /* Power-up overlays */
+    .starpower-overlay{
+      position:fixed;
+      inset:0;
+      background:radial-gradient(circle, rgba(255,217,61,0.25) 0%, rgba(244,196,48,0.1) 100%);
+      pointer-events:none;
+      opacity:0;
+      transition:opacity 0.3s ease;
+      z-index:5;
+    }
+    .starpower-overlay.active{
+      opacity:1;
+      animation:starPulse 1.5s ease-in-out infinite;
+    }
+    @keyframes starPulse{
+      0%,100%{opacity:0.25;}
+      50%{opacity:0.4;}
     }
   </style>
 </head>
@@ -461,6 +481,7 @@
         </div>
         
         <div class="combo-display" id="comboDisplay">🔥 STREAK x<span id="comboNum">3</span>!</div>
+        <div class="starpower-overlay" id="starpowerOverlay"></div>
       </div>
 
       <div class="overlay" id="overlay" role="dialog" aria-modal="true">
@@ -552,6 +573,20 @@
       let bonusTargets = [];
       let nextBonusSpawn = 0;
       
+      // Power-ups
+      let activePowerUps = {
+        bigHole: { active: false, endTime: 0 },
+        starPower: { active: false, endTime: 0 },
+        slowMo: { active: false, endTime: 0 }
+      };
+      
+      // Moving obstacles
+      let movingObstacles = [];
+      let nextObstacleSpawn = 0;
+      
+      // Mega bonus tracker
+      let nextMegaBonusCheck = 1.0; // Check every second
+      
       // Level system
       let currentLevel = 0;
       let lastLevelScore = 0;
@@ -590,7 +625,22 @@
         miss(){ beep(160, 0.14, 'sawtooth', 0.16); beep(120, 0.14, 'sawtooth', 0.12); },
         bonus(){ beep(920, 0.10, 'triangle', 0.20); beep(1230, 0.12, 'triangle', 0.16); },
         streak(){ beep(660, 0.08, 'sine', 0.18); beep(880, 0.08, 'sine', 0.18); beep(1100, 0.10, 'sine', 0.18); },
-        end(){ beep(220, 0.12, 'sine', 0.18); beep(165, 0.18, 'sine', 0.14); }
+        end(){ beep(220, 0.12, 'sine', 0.18); beep(165, 0.18, 'sine', 0.14); },
+        starPower(){ 
+          // Pleasant ascending melody
+          beep(523, 0.15, 'sine', 0.20);  // C
+          setTimeout(() => beep(659, 0.15, 'sine', 0.20), 150);  // E
+          setTimeout(() => beep(784, 0.15, 'sine', 0.20), 300);  // G
+          setTimeout(() => beep(1047, 0.25, 'sine', 0.22), 450); // C (octave)
+        },
+        bigHole(){ beep(440, 0.12, 'sine', 0.22); beep(554, 0.12, 'sine', 0.18); },
+        slowMo(){ beep(220, 0.20, 'sine', 0.16); beep(165, 0.25, 'sine', 0.14); },
+        megaBonus(){ 
+          // Epic sound
+          beep(1047, 0.12, 'sine', 0.24);
+          setTimeout(() => beep(1319, 0.12, 'sine', 0.24), 120);
+          setTimeout(() => beep(1568, 0.15, 'sine', 0.26), 240);
+        }
       };
 
       function clamp(v, lo, hi){ return Math.max(lo, Math.min(hi, v)); }
@@ -615,26 +665,90 @@
       
       function getRandomBonus(){
         const r = Math.random();
-        // Weighted random: +1 most common, then +2, then +3, then -1/-2, then +4/+5 rarest
-        if(r < 0.35) return 1;        // 35% chance
-        if(r < 0.60) return 2;        // 25% chance
-        if(r < 0.75) return 3;        // 15% chance
-        if(r < 0.85) return -1;       // 10% chance
-        if(r < 0.92) return -2;       // 7% chance
-        if(r < 0.96) return 4;        // 4% chance
-        return 5;                      // 4% chance
+        // Weighted random with power-ups
+        if(r < 0.25) return { type: 'time', value: 1 };      // 25%
+        if(r < 0.45) return { type: 'time', value: 2 };      // 20%
+        if(r < 0.60) return { type: 'time', value: 3 };      // 15%
+        if(r < 0.70) return { type: 'time', value: -1 };     // 10%
+        if(r < 0.77) return { type: 'time', value: -2 };     // 7%
+        if(r < 0.84) return { type: 'powerup', value: 'bigHole' };   // 7% - Big Hole
+        if(r < 0.91) return { type: 'powerup', value: 'starPower' }; // 7% - Star Power
+        if(r < 0.95) return { type: 'powerup', value: 'slowMo' };    // 4% - Slow Mo
+        if(r < 0.97) return { type: 'time', value: 4 };      // 2%
+        return { type: 'time', value: 5 };                    // 3%
       }
       
       function spawnBonusTarget(){
         const pad = 80;
-        const value = getRandomBonus();
+        const bonus = getRandomBonus();
+        
         bonusTargets.push({
           x: rand(pad, canvas.width - pad),
           y: rand(pad, canvas.height - pad),
           r: 18,
-          value: value,
-          life: 5.0 // seconds before it disappears
+          type: bonus.type,
+          value: bonus.value,
+          life: 5.0
         });
+        
+        // After 30 points, sometimes spawn extra negative
+        if(score >= 30 && Math.random() < 0.3){
+          bonusTargets.push({
+            x: rand(pad, canvas.width - pad),
+            y: rand(pad, canvas.height - pad),
+            r: 18,
+            type: 'time',
+            value: Math.random() < 0.5 ? -1 : -2,
+            life: 5.0
+          });
+        }
+        
+        // After 60 points, even more chance for extra negative
+        if(score >= 60 && Math.random() < 0.4){
+          bonusTargets.push({
+            x: rand(pad, canvas.width - pad),
+            y: rand(pad, canvas.height - pad),
+            r: 18,
+            type: 'time',
+            value: Math.random() < 0.5 ? -1 : -2,
+            life: 5.0
+          });
+        }
+      }
+      
+      function spawnMovingObstacle(){
+        const pad = 60;
+        const isVertical = Math.random() < 0.5;
+        
+        if(isVertical){
+          movingObstacles.push({
+            x: rand(pad, canvas.width - pad),
+            y: rand(pad, canvas.height - pad - 100),
+            width: 20,
+            height: 100,
+            vx: 0,
+            vy: rand(1.5, 3.0) * (Math.random() < 0.5 ? 1 : -1),
+            life: rand(4, 8)
+          });
+        } else {
+          movingObstacles.push({
+            x: rand(pad, canvas.width - pad - 100),
+            y: rand(pad, canvas.height - pad),
+            width: 100,
+            height: 20,
+            vx: rand(1.5, 3.0) * (Math.random() < 0.5 ? 1 : -1),
+            vy: 0,
+            life: rand(4, 8)
+          });
+        }
+      }
+      
+      function randomBallPosition(){
+        const pad = 60;
+        return {
+          x: rand(pad, canvas.width * 0.35),
+          y: rand(canvas.height * 0.5, canvas.height - pad)
+        };
       }
 
       function randomHole(){
@@ -662,8 +776,18 @@
         nextBonusSpawn = 0;
         currentLevel = 0;
         lastLevelScore = 0;
+        movingObstacles = [];
+        nextObstacleSpawn = rand(5, 10);
+        nextMegaBonusCheck = 1.0;
+        activePowerUps = {
+          bigHole: { active: false, endTime: 0 },
+          starPower: { active: false, endTime: 0 },
+          slowMo: { active: false, endTime: 0 }
+        };
 
-        ball.x = startBallPos.x; ball.y = startBallPos.y;
+        const pos = randomBallPosition();
+        ball.x = pos.x;
+        ball.y = pos.y;
         ball.vx = 0; ball.vy = 0;
         hole = randomHole();
 
@@ -781,14 +905,15 @@
       }
 
       function scorePoint(){
-        score += 1;
+        const points = activePowerUps.starPower.active ? 2 : 1;
+        score += points;
         streak += 1;
         maxStreak = Math.max(maxStreak, streak);
 
         scoreEl.textContent = score;
         streakEl.textContent = streak;
 
-        addParticles(hole.x, hole.y, '#FBBF24', 28);
+        addParticles(hole.x, hole.y, activePowerUps.starPower.active ? '#FFD93D' : '#FBBF24', 28);
         sfx.make();
         
         // Check for level change
@@ -818,8 +943,10 @@
           setTimeout(()=> comboDisplay.classList.remove('active'), 2000);
         }
 
-        // Reset for next shot
-        ball.x = startBallPos.x; ball.y = startBallPos.y;
+        // Reset for next shot with random position
+        const pos = randomBallPosition();
+        ball.x = pos.x;
+        ball.y = pos.y;
         ball.vx = 0; ball.vy = 0;
         hole = randomHole();
         shotInProgress = false;
@@ -828,8 +955,11 @@
       function update(dt){
         if(!running) return;
 
+        // Apply slow-mo effect (time passes slower)
+        const effectiveDt = activePowerUps.slowMo.active ? dt * 0.5 : dt;
+
         // Timer
-        time -= dt;
+        time -= effectiveDt;
         if(time <= 0){
           time = 0;
           timeEl.textContent = time.toFixed(1);
@@ -846,7 +976,7 @@
         }
         
         // Spawn bonus targets periodically (every 4-7 seconds)
-        nextBonusSpawn -= dt;
+        nextBonusSpawn -= effectiveDt;
         if(nextBonusSpawn <= 0){
           spawnBonusTarget();
           nextBonusSpawn = rand(4, 7);
@@ -854,7 +984,7 @@
         
         // Update bonus targets
         bonusTargets = bonusTargets.filter(bt => {
-          bt.life -= dt;
+          bt.life -= effectiveDt;
           return bt.life > 0;
         });
 
@@ -900,15 +1030,39 @@
           const bt = bonusTargets[i];
           const dist = Math.hypot(ball.x - bt.x, ball.y - bt.y);
           if(dist < ball.r + bt.r){
-            // Hit bonus target!
-            time += bt.value;
-            time = Math.max(0, time); // Don't go negative
-            timeEl.textContent = time.toFixed(1);
-            
-            const sign = bt.value > 0 ? '+' : '';
-            spawnPop(`${sign}${bt.value} !`, bt.value > 0 ? 'plus' : 'minus');
-            addParticles(bt.x, bt.y, bt.value > 0 ? '#10B981' : '#EF4444', 24);
-            if(bt.value > 0) sfx.bonus(); else sfx.miss();
+            if(bt.type === 'time'){
+              // Time bonus
+              time += bt.value;
+              time = Math.max(0, time);
+              timeEl.textContent = time.toFixed(1);
+              
+              const sign = bt.value > 0 ? '+' : '';
+              spawnPop(`${sign}${bt.value} !`, bt.value > 0 ? 'plus' : 'minus');
+              addParticles(bt.x, bt.y, bt.value > 0 ? '#10B981' : '#EF4444', 24);
+              if(bt.value > 0) sfx.bonus(); else sfx.miss();
+            } else if(bt.type === 'powerup'){
+              // Power-up activation
+              if(bt.value === 'bigHole'){
+                activePowerUps.bigHole.active = true;
+                activePowerUps.bigHole.endTime = time - 5.0; // 5 second duration
+                spawnPop('🎯 BIG HOLE!', 'plus');
+                addParticles(bt.x, bt.y, '#4DA6FF', 30);
+                sfx.bigHole();
+              } else if(bt.value === 'starPower'){
+                activePowerUps.starPower.active = true;
+                activePowerUps.starPower.endTime = time - 10.0; // 10 second duration
+                spawnPop('⭐ STAR POWER!', 'plus');
+                addParticles(bt.x, bt.y, '#FFD93D', 40);
+                sfx.starPower();
+                document.getElementById('starpowerOverlay').classList.add('active');
+              } else if(bt.value === 'slowMo'){
+                activePowerUps.slowMo.active = true;
+                activePowerUps.slowMo.endTime = time - 8.0; // 8 second duration
+                spawnPop('🐌 SLOW-MO!', 'plus');
+                addParticles(bt.x, bt.y, '#9B59B6', 30);
+                sfx.slowMo();
+              }
+            }
             
             bonusTargets.splice(i, 1);
             
@@ -918,10 +1072,85 @@
             }
           }
         }
+        
+        // Check power-up expiration
+        if(activePowerUps.bigHole.active && time <= activePowerUps.bigHole.endTime){
+          activePowerUps.bigHole.active = false;
+        }
+        if(activePowerUps.starPower.active && time <= activePowerUps.starPower.endTime){
+          activePowerUps.starPower.active = false;
+          document.getElementById('starpowerOverlay').classList.remove('active');
+        }
+        if(activePowerUps.slowMo.active && time <= activePowerUps.slowMo.endTime){
+          activePowerUps.slowMo.active = false;
+        }
+        
+        // Spawn moving obstacles (randomly throughout game)
+        nextObstacleSpawn -= effectiveDt;
+        if(nextObstacleSpawn <= 0){
+          spawnMovingObstacle();
+          nextObstacleSpawn = rand(8, 15); // Spawn every 8-15 seconds
+        }
+        
+        // Update moving obstacles
+        movingObstacles = movingObstacles.filter(obs => {
+          obs.x += obs.vx * effectiveDt * 60; // Scale to ~60fps equivalent
+          obs.y += obs.vy * effectiveDt * 60;
+          obs.life -= effectiveDt;
+          
+          // Bounce off walls
+          if(obs.x <= 0 || obs.x + obs.width >= canvas.width) obs.vx *= -1;
+          if(obs.y <= 0 || obs.y + obs.height >= canvas.height) obs.vy *= -1;
+          
+          // Keep in bounds
+          obs.x = clamp(obs.x, 0, canvas.width - obs.width);
+          obs.y = clamp(obs.y, 0, canvas.height - obs.height);
+          
+          return obs.life > 0;
+        });
+        
+        // Check obstacle collisions with ball
+        movingObstacles.forEach(obs => {
+          if(ball.x + ball.r > obs.x && ball.x - ball.r < obs.x + obs.width &&
+             ball.y + ball.r > obs.y && ball.y - ball.r < obs.y + obs.height){
+            // Simple bounce
+            if(Math.abs(ball.vx) > Math.abs(ball.vy)){
+              ball.vx *= -0.7;
+            } else {
+              ball.vy *= -0.7;
+            }
+            addParticles(ball.x, ball.y, '#8B4513', 8);
+            sfx.wall();
+          }
+        });
+        
+        // Mega bonus check (1/500 chance per second for +20 seconds)
+        nextMegaBonusCheck -= effectiveDt;
+        if(nextMegaBonusCheck <= 0){
+          nextMegaBonusCheck = 1.0; // Check again in 1 second
+          
+          if(Math.random() < 1/500){
+            // MEGA BONUS!
+            const pad = 100;
+            bonusTargets.push({
+              x: rand(pad, canvas.width - pad),
+              y: rand(pad, canvas.height - pad),
+              r: 28, // Bigger!
+              type: 'time',
+              value: 20,
+              life: 8.0, // Lasts longer
+              mega: true
+            });
+            
+            spawnPop('💎 MEGA!', 'plus');
+            sfx.megaBonus();
+          }
+        }
 
         // Score detection - 40% more forgiving on speed, bigger detection zone
+        const currentHoleRadius = activePowerUps.bigHole.active ? hole.r * 2 : hole.r;
         const d = Math.hypot(ball.x - hole.x, ball.y - hole.y);
-        if(d < (hole.r - 3) && speed < 6.2){
+        if(d < (currentHoleRadius - 3) && speed < 6.5){
           scorePoint();
         }
 
@@ -930,7 +1159,7 @@
           const shotElapsed = (performance.now() - shotStartTime) / 1000;
           if(shotElapsed >= 2.5){
             const dd = Math.hypot(ball.x - hole.x, ball.y - hole.y);
-            if(dd >= (hole.r - 3)){
+            if(dd >= (currentHoleRadius - 3)){
               missPenalty();
             }
           }
@@ -970,7 +1199,7 @@
         // Bonus targets
         bonusTargets.forEach(bt => {
           // Pulsing effect based on life remaining
-          const pulse = 0.9 + Math.sin(Date.now() * 0.005) * 0.1;
+          const pulse = bt.mega ? (0.95 + Math.sin(Date.now() * 0.008) * 0.15) : (0.9 + Math.sin(Date.now() * 0.005) * 0.1);
           const fadeAlpha = bt.life < 1.0 ? bt.life : 1.0;
           
           ctx.globalAlpha = fadeAlpha;
@@ -983,44 +1212,108 @@
           
           // Circle with gradient
           const btGrad = ctx.createRadialGradient(bt.x-3, bt.y-3, 0, bt.x, bt.y, bt.r);
-          if(bt.value > 0){
+          
+          if(bt.mega){
+            // Mega bonus - rainbow gradient
+            btGrad.addColorStop(0, '#FF69B4');
+            btGrad.addColorStop(0.5, '#9B59B6');
+            btGrad.addColorStop(1, '#3498DB');
+          } else if(bt.type === 'powerup'){
+            // Power-up colors
+            if(bt.value === 'bigHole'){
+              btGrad.addColorStop(0, '#6DD5FA');
+              btGrad.addColorStop(1, '#2980B9');
+            } else if(bt.value === 'starPower'){
+              btGrad.addColorStop(0, '#FFE66D');
+              btGrad.addColorStop(1, '#FF6B6B');
+            } else if(bt.value === 'slowMo'){
+              btGrad.addColorStop(0, '#BB8FCE');
+              btGrad.addColorStop(1, '#7D3C98');
+            }
+          } else if(bt.value > 0){
             btGrad.addColorStop(0, '#FFD93D');
             btGrad.addColorStop(1, '#FBBF24');
           } else {
             btGrad.addColorStop(0, '#FF6B6B');
             btGrad.addColorStop(1, '#C92A2A');
           }
+          
           ctx.fillStyle = btGrad;
           ctx.beginPath();
           ctx.arc(bt.x, bt.y, bt.r * pulse, 0, Math.PI*2);
           ctx.fill();
           
           // Border
-          ctx.strokeStyle = bt.value > 0 ? '#F4C430' : '#8B0000';
-          ctx.lineWidth = 2;
+          if(bt.mega){
+            ctx.strokeStyle = '#FFD700';
+            ctx.lineWidth = 3;
+          } else if(bt.type === 'powerup'){
+            ctx.strokeStyle = '#fff';
+            ctx.lineWidth = 2;
+          } else {
+            ctx.strokeStyle = bt.value > 0 ? '#F4C430' : '#8B0000';
+            ctx.lineWidth = 2;
+          }
           ctx.stroke();
           
-          // Value text
-          ctx.fillStyle = '#000';
-          ctx.font = 'bold 16px Poppins';
+          // Value/icon text
+          ctx.fillStyle = bt.type === 'powerup' ? '#fff' : '#000';
+          ctx.font = bt.mega ? 'bold 20px Poppins' : 'bold 16px Poppins';
           ctx.textAlign = 'center';
           ctx.textBaseline = 'middle';
-          const sign = bt.value > 0 ? '+' : '';
-          ctx.fillText(`${sign}${bt.value}`, bt.x, bt.y);
+          
+          let displayText = '';
+          if(bt.mega){
+            displayText = '💎';
+          } else if(bt.type === 'powerup'){
+            if(bt.value === 'bigHole') displayText = '🎯';
+            else if(bt.value === 'starPower') displayText = '⭐';
+            else if(bt.value === 'slowMo') displayText = '🐌';
+          } else {
+            const sign = bt.value > 0 ? '+' : '';
+            displayText = `${sign}${bt.value}`;
+          }
+          
+          ctx.fillText(displayText, bt.x, bt.y);
           
           ctx.globalAlpha = 1;
         });
 
+        // Moving obstacles
+        movingObstacles.forEach(obs => {
+          const obsGrad = ctx.createLinearGradient(obs.x, obs.y, obs.x + obs.width, obs.y + obs.height);
+          obsGrad.addColorStop(0, '#D2691E');
+          obsGrad.addColorStop(1, '#8B4513');
+          
+          ctx.fillStyle = obsGrad;
+          ctx.fillRect(obs.x, obs.y, obs.width, obs.height);
+          
+          ctx.strokeStyle = '#654321';
+          ctx.lineWidth = 2;
+          ctx.strokeRect(obs.x, obs.y, obs.width, obs.height);
+          
+          // Directional arrow
+          ctx.fillStyle = '#FFD700';
+          ctx.font = 'bold 24px Arial';
+          ctx.textAlign = 'center';
+          ctx.textBaseline = 'middle';
+          const arrow = obs.vx !== 0 ? (obs.vx > 0 ? '→' : '←') : (obs.vy > 0 ? '↓' : '↑');
+          ctx.fillText(arrow, obs.x + obs.width/2, obs.y + obs.height/2);
+        });
+
+        // Hole with dynamic size (bigger during bigHole power-up)
+        const currentHoleRadius = activePowerUps.bigHole.active ? hole.r * 2 : hole.r;
+        
         // Hole shadow
         ctx.fillStyle = 'rgba(0,0,0,0.3)';
         ctx.beginPath();
-        ctx.arc(hole.x+2.5, hole.y+3.5, hole.r, 0, Math.PI*2);
+        ctx.arc(hole.x+2.5, hole.y+3.5, currentHoleRadius, 0, Math.PI*2);
         ctx.fill();
 
         // Hole
         ctx.fillStyle = '#0a0a0a';
         ctx.beginPath();
-        ctx.arc(hole.x, hole.y, hole.r, 0, Math.PI*2);
+        ctx.arc(hole.x, hole.y, currentHoleRadius, 0, Math.PI*2);
         ctx.fill();
 
         ctx.fillStyle = '#2d2d2d';
@@ -1081,6 +1374,32 @@
           ctx.fill();
         }
         ctx.globalAlpha = 1;
+
+        // Star power sparkle trail
+        if(activePowerUps.starPower.active && (ball.vx !== 0 || ball.vy !== 0)){
+          for(let i = 0; i < 3; i++){
+            const offset = i * 8;
+            const alpha = 0.6 - i * 0.2;
+            const size = (3 - i) * 2;
+            
+            ctx.globalAlpha = alpha;
+            ctx.fillStyle = '#FFD93D';
+            ctx.beginPath();
+            ctx.arc(ball.x - ball.vx * offset, ball.y - ball.vy * offset, size, 0, Math.PI*2);
+            ctx.fill();
+            
+            // Random sparkles
+            if(Math.random() < 0.3){
+              const sparkX = ball.x - ball.vx * offset + (Math.random() - 0.5) * 10;
+              const sparkY = ball.y - ball.vy * offset + (Math.random() - 0.5) * 10;
+              ctx.fillStyle = '#FFF';
+              ctx.beginPath();
+              ctx.arc(sparkX, sparkY, 1.5, 0, Math.PI*2);
+              ctx.fill();
+            }
+          }
+          ctx.globalAlpha = 1;
+        }
 
         // Ball shadow
         ctx.fillStyle = 'rgba(0,0,0,0.22)';
