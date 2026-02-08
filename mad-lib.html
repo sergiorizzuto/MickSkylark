@@ -143,6 +143,8 @@
     .container{
       max-width:900px;
       margin:80px auto 0;
+      overflow:visible;
+      width:100%;
     }
 
     h1{
@@ -176,6 +178,10 @@
       justify-content:center;
       flex-wrap:wrap;
       margin-bottom:25px;
+      width:100%;
+      overflow:visible;
+      position:relative;
+      z-index:100;
     }
 
     .btn{
@@ -221,6 +227,8 @@
     .btn.green{
       background:var(--green);
       color:#fff;
+      display:inline-block !important;
+      visibility:visible !important;
     }
     .btn.green:hover{
       background:#059669;
@@ -395,9 +403,11 @@
       }
       
       .controls{
-        gap:10px;
+        display:flex;
         flex-direction:column;
+        gap:0;
         width:100%;
+        max-width:100%;
       }
       
       .btn{
@@ -405,7 +415,20 @@
         font-size:1rem;
         width:100%;
         max-width:100%;
-        min-height:48px;
+        min-height:50px;
+        display:block;
+        margin:0 0 10px 0;
+      }
+      
+      .btn:last-child{
+        margin-bottom:0;
+      }
+      
+      #shareBtn,
+      #generateBtn,
+      #clearBtn,
+      #printBtn{
+        display:block !important;
       }
       
       .card{
@@ -425,14 +448,6 @@
       .blank input{
         font-size:0.95rem;
       }
-      
-      .stats-badge{
-        top:70px;
-        right:10px;
-        padding:8px 12px;
-        font-size:0.8rem;
-      }
-      .stats-number{font-size:1.1rem;}
     }
     
     @media (max-width:480px){
@@ -448,14 +463,6 @@
       .subtitle{font-size:0.95rem;}
       
       .container{margin-top:70px;}
-      
-      .stats-badge{
-        top:65px;
-        right:8px;
-        padding:6px 10px;
-        font-size:0.75rem;
-        left:auto;
-      }
       
       .btn{
         padding:12px 18px;
@@ -489,6 +496,10 @@
       color:var(--primary);
       font-size:0.9rem;
       z-index:999;
+      pointer-events:none;
+    }
+    .stats-badge *{
+      pointer-events:auto;
     }
     .stats-number{
       color:var(--gold);
@@ -497,8 +508,18 @@
     }
 
     @media (max-width:768px){
-      .stats-badge{top:70px;right:10px;padding:8px 12px;font-size:0.8rem;}
-      .stats-number{font-size:1.1rem;}
+      .stats-badge{
+        position:fixed;
+        top:auto;
+        bottom:15px;
+        right:15px;
+        left:auto;
+        padding:6px 10px;
+        font-size:0.75rem;
+        z-index:50;
+        max-width:140px;
+      }
+      .stats-number{font-size:1rem;}
     }
   </style>
 </head>
@@ -524,10 +545,10 @@
     <p class="subtitle">Fill in the blanks for a hilarious mini golf story!</p>
 
     <div class="controls">
-      <button class="btn primary" id="generateBtn">🎲 New Mad Lib</button>
-      <button class="btn secondary" id="clearBtn">🧹 Clear Answers</button>
-      <button class="btn green" id="shareBtn">📤 Share Story</button>
-      <button class="btn primary" id="printBtn">🖨️ Print</button>
+      <button class="btn primary" id="generateBtn" aria-label="Generate new mad lib">🎲 New Mad Lib</button>
+      <button class="btn secondary" id="clearBtn" aria-label="Clear answers">🧹 Clear Answers</button>
+      <button class="btn green" id="shareBtn" aria-label="Share story">📤 Share Story</button>
+      <button class="btn primary" id="printBtn" aria-label="Print story">🖨️ Print</button>
     </div>
 
     <!-- Input Form (shown before completion) -->
