@@ -197,9 +197,17 @@
       -webkit-tap-highlight-color:transparent;
       touch-action:manipulation;
     }
+    .btn:disabled{
+      opacity:0.6;
+      cursor:not-allowed;
+    }
     .btn:hover{
       transform:translateY(-2px);
       box-shadow:0 6px 18px rgba(0,0,0,0.18);
+    }
+    .btn:disabled:hover{
+      transform:none;
+      box-shadow:0 4px 12px rgba(0,0,0,0.12);
     }
     @media (hover: none) and (pointer: coarse) {
       .btn:hover{
@@ -341,15 +349,22 @@
       text-align:center;
       padding:20px;
       background:rgba(16,185,129,0.1);
+      border:2px solid var(--green);
       border-radius:16px;
       margin-top:20px;
+      animation:slideIn 0.3s ease;
     }
 
     .share-text{
       font-weight:700;
       color:var(--green);
       margin-bottom:12px;
-      font-size:1.1rem;
+      font-size:1.2rem;
+    }
+
+    @keyframes slideIn{
+      from{opacity:0;transform:translateY(-10px);}
+      to{opacity:1;transform:translateY(0);}
     }
 
     .warning{
@@ -550,6 +565,8 @@
       <button class="btn green" id="shareBtn" aria-label="Share story">📤 Share Story</button>
       <button class="btn primary" id="printBtn" aria-label="Print story">🖨️ Print</button>
     </div>
+    
+    <p style="text-align:center;font-size:0.85rem;color:rgba(31,41,55,0.7);margin:-10px 0 20px 0;">💡 Complete a story to share it with friends!</p>
 
     <!-- Input Form (shown before completion) -->
     <div class="card" id="inputCard">
@@ -885,8 +902,10 @@ Mick laughed and gave him a high-five. Having Gordo around always made tournamen
 
     // Share story
     async function shareStory() {
-      if (!currentTemplate || Object.keys(userInputs).length === 0) {
-        alert('Complete a story first!');
+      // Check if story exists and is displayed
+      const storyCard = document.getElementById('storyCard');
+      if (storyCard.style.display === 'none' || !currentTemplate || Object.keys(userInputs).length === 0) {
+        alert('Complete a story first before sharing! 📝');
         return;
       }
 
@@ -900,38 +919,68 @@ Mick laughed and gave him a high-five. Having Gordo around always made tournamen
       plainText += story;
       plainText += '\n\n---\nCreated with Mick Skylark Mad Libs!\nmickskylark.com/mad-lib.html';
 
-      // Try native share API
+      // Try native share API first (best for mobile)
       if (navigator.share) {
         try {
           await navigator.share({
-            title: 'My Mini Golf Mad Lib',
+            title: '⛳ My Mini Golf Mad Lib',
             text: plainText
           });
+          // Success! Show confirmation
+          const shareSection = document.getElementById('shareSection');
+          shareSection.innerHTML = '<div class="share-text">✅ Shared successfully!</div>';
+          shareSection.style.display = 'block';
+          setTimeout(() => {
+            shareSection.style.display = 'none';
+          }, 2000);
           return;
         } catch (err) {
-          // Fall through to clipboard
+          // User cancelled or error - only fall through if not user cancellation
+          if (err.name === 'AbortError') {
+            // User cancelled, don't show error
+            return;
+          }
+          // Other error, try clipboard
+          console.log('Share API failed, trying clipboard:', err);
         }
       }
 
-      // Fallback to clipboard
+      // Fallback to clipboard API
       try {
         await navigator.clipboard.writeText(plainText);
-        document.getElementById('shareSection').style.display = 'block';
+        const shareSection = document.getElementById('shareSection');
+        shareSection.innerHTML = '<div class="share-text">📋 Copied to clipboard!</div><p style="font-size:0.95rem;color:#666;margin-top:8px;">Now you can paste it anywhere to share!</p>';
+        shareSection.style.display = 'block';
         setTimeout(() => {
-          document.getElementById('shareSection').style.display = 'none';
+          shareSection.style.display = 'none';
         }, 3000);
       } catch (err) {
-        // Manual fallback
-        const textarea = document.createElement('textarea');
-        textarea.value = plainText;
-        document.body.appendChild(textarea);
-        textarea.select();
-        document.execCommand('copy');
-        document.body.removeChild(textarea);
-        document.getElementById('shareSection').style.display = 'block';
-        setTimeout(() => {
-          document.getElementById('shareSection').style.display = 'none';
-        }, 3000);
+        console.log('Clipboard API failed, trying manual:', err);
+        // Manual fallback for older browsers
+        try {
+          const textarea = document.createElement('textarea');
+          textarea.value = plainText;
+          textarea.style.position = 'fixed';
+          textarea.style.opacity = '0';
+          document.body.appendChild(textarea);
+          textarea.select();
+          textarea.setSelectionRange(0, 99999); // For mobile
+          const success = document.execCommand('copy');
+          document.body.removeChild(textarea);
+          
+          if (success) {
+            const shareSection = document.getElementById('shareSection');
+            shareSection.innerHTML = '<div class="share-text">📋 Copied to clipboard!</div><p style="font-size:0.95rem;color:#666;margin-top:8px;">Now you can paste it anywhere to share!</p>';
+            shareSection.style.display = 'block';
+            setTimeout(() => {
+              shareSection.style.display = 'none';
+            }, 3000);
+          } else {
+            alert('Unable to copy automatically. Please screenshot and share! 📸');
+          }
+        } catch (finalErr) {
+          alert('Unable to share. Please screenshot the story and share! 📸');
+        }
       }
     }
 
@@ -939,7 +988,21 @@ Mick laughed and gave him a high-five. Having Gordo around always made tournamen
     document.getElementById('generateBtn').addEventListener('click', generateMadLib);
     document.getElementById('clearBtn').addEventListener('click', clearInputs);
     document.getElementById('completeBtn').addEventListener('click', completeStory);
-    document.getElementById('shareBtn').addEventListener('click', shareStory);
+    
+    // Share button with visual feedback
+    document.getElementById('shareBtn').addEventListener('click', async (e) => {
+      const btn = e.currentTarget;
+      const originalText = btn.innerHTML;
+      btn.innerHTML = '⏳ Sharing...';
+      btn.disabled = true;
+      
+      await shareStory();
+      
+      setTimeout(() => {
+        btn.innerHTML = originalText;
+        btn.disabled = false;
+      }, 500);
+    });
 
     // Stats Counter
     let storiesCreated = parseInt(localStorage.getItem('madLibsCreated') || '0');
