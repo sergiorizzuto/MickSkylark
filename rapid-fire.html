@@ -819,7 +819,7 @@
 
         // Score detection - 40% more forgiving on speed, bigger detection zone
         const d = Math.hypot(ball.x - hole.x, ball.y - hole.y);
-        if(d < (hole.r - 3) && speed < 6){
+        if(d < (hole.r - 3) && speed < 6.5){
           scorePoint();
         }
 
