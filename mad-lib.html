@@ -5,15 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover" />
   <title>Mini Golf Mad Libs Game - Mick Skylark: Mini Golf Prodigy</title>
 
-  <!-- SEO -->
+  <!-- SEO Meta Tags -->
   <meta name="description" content="Play hilarious mini golf-themed Mad Libs featuring Mick Skylark characters! Fill in the blanks for funny stories about mini golf tournaments, crazy competitors, and wacky adventures. Family-friendly word game fun!" />
+  <meta name="keywords" content="mad libs, mini golf, word game, Mick Skylark, family game, comedy, fill in the blanks, funny stories, mini golf prodigy" />
   <meta name="robots" content="index, follow" />
   <meta name="author" content="Potato Eater Productions" />
   <link rel="canonical" href="https://mickskylark.com/mad-lib.html" />
   <meta name="theme-color" content="#FCD34D" />
-  <meta name="referrer" content="strict-origin-when-cross-origin" />
 
-  <!-- Open Graph -->
+  <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://mickskylark.com/mad-lib.html" />
   <meta property="og:title" content="Mini Golf Mad Libs - Hilarious Word Game!" />
@@ -30,30 +30,21 @@
   <meta name="twitter:description" content="Create funny mini golf stories with Mick Skylark characters! Fill in the blanks for laugh-out-loud adventures. Play now!" />
   <meta name="twitter:image" content="https://mickskylark.com/og-image.jpg" />
 
-  <!-- Favicon -->
-  <link rel="icon" href="favicon.ico" />
-  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
-
-  <!-- Fonts (performance: preconnect + display=swap already in your URL) -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet" />
-
-  <!-- Structured Data (improved) -->
+  <!-- Structured Data / JSON-LD -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "WebApplication",
+    "@type": "Game",
     "name": "Mini Golf Mad Libs",
     "description": "Interactive Mad Libs word game featuring characters from Mick Skylark: Mini Golf Prodigy. Fill in the blanks to create hilarious mini golf stories!",
     "url": "https://mickskylark.com/mad-lib.html",
-    "applicationCategory": "GameApplication",
-    "operatingSystem": "Any",
+    "genre": "Word Game",
+    "numberOfPlayers": "1+",
+    "gamePlatform": "Web Browser",
     "isAccessibleForFree": true,
-    "publisher": {
+    "parentOrganization": {
       "@type": "Organization",
-      "name": "Potato Eater Productions",
-      "url": "https://mickskylark.com"
+      "name": "Potato Eater Productions"
     },
     "about": {
       "@type": "Movie",
@@ -63,8 +54,18 @@
   }
   </script>
 
+  <!-- Favicon -->
+  <link rel="icon" href="favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet" />
+
   <!-- Analytics Placeholders (SAFE: only runs if you paste real IDs) -->
   <script>
+    // To enable GA4: set window.__GA4_ID__ = "G-XXXXXXX";
     window.__GA4_ID__ = window.__GA4_ID__ || "";
     (function(){
       if(!window.__GA4_ID__) return;
@@ -90,32 +91,13 @@
       --green:#10B981;
     }
     *{margin:0;padding:0;box-sizing:border-box}
-
-    /* Fixed topbar: give body enough top padding so content never sits under it */
     body{
       font-family:'Poppins',sans-serif;
       color:var(--dark);
       background:linear-gradient(135deg,#FDE68A 0%,#FCD34D 100%);
       min-height:100vh;
-      padding:96px 14px 50px; /* IMPORTANT: replaced margin-top tricks with real padding */
+      padding:20px 14px 50px;
     }
-
-    /* Skip link (accessibility + SEO crawl friendliness) */
-    .skip-link{
-      position:absolute;
-      top:-40px;
-      left:10px;
-      background:#fff;
-      color:var(--primary);
-      padding:10px 12px;
-      border-radius:10px;
-      font-weight:800;
-      text-decoration:none;
-      box-shadow:0 8px 20px rgba(0,0,0,0.18);
-      z-index:2000;
-      transition:top .15s ease;
-    }
-    .skip-link:focus{ top:10px; }
 
     /* Navigation */
     .topbar{
@@ -125,7 +107,6 @@
       right:0;
       background:rgba(255,255,255,0.95);
       backdrop-filter:blur(10px);
-      -webkit-backdrop-filter:blur(10px);
       box-shadow:0 2px 12px rgba(0,0,0,0.1);
       z-index:1000;
       padding:12px 0;
@@ -143,4 +124,853 @@
       color:var(--primary);
       text-decoration:none;
       font-weight:700;
-      padd
+      padding:8px 16px;
+      border-radius:25px;
+      border:2px solid transparent;
+      transition:all 0.2s ease;
+      font-size:0.9rem;
+    }
+    .nav-link:hover{
+      background:var(--primary);
+      color:#fff;
+    }
+    .nav-link.active{
+      background:var(--primary);
+      color:#fff;
+      box-shadow:0 4px 12px rgba(30,58,138,0.3);
+    }
+
+    .container{
+      max-width:900px;
+      margin:80px auto 0;
+      overflow:visible;
+      width:100%;
+    }
+
+    h1{
+      text-align:center;
+      font-size:2.8rem;
+      font-weight:900;
+      color:var(--primary);
+      margin-bottom:10px;
+      text-shadow:2px 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .subtitle{
+      text-align:center;
+      font-size:1.15rem;
+      color:rgba(31,41,55,0.85);
+      margin-bottom:30px;
+      font-weight:600;
+    }
+
+    .card{
+      background:#fff;
+      border-radius:20px;
+      box-shadow:0 12px 40px rgba(0,0,0,0.15);
+      padding:30px 24px;
+      margin-bottom:20px;
+    }
+
+    .controls{
+      display:flex;
+      gap:12px;
+      justify-content:center;
+      flex-wrap:wrap;
+      margin-bottom:25px;
+      width:100%;
+      overflow:visible;
+      position:relative;
+      z-index:100;
+    }
+
+    .btn{
+      padding:12px 24px;
+      border:none;
+      border-radius:999px;
+      font-weight:700;
+      font-family:'Poppins',sans-serif;
+      font-size:1rem;
+      cursor:pointer;
+      transition:all 0.2s ease;
+      box-shadow:0 4px 12px rgba(0,0,0,0.12);
+      -webkit-tap-highlight-color:transparent;
+      touch-action:manipulation;
+    }
+    .btn:hover{
+      transform:translateY(-2px);
+      box-shadow:0 6px 18px rgba(0,0,0,0.18);
+    }
+    @media (hover: none) and (pointer: coarse) {
+      .btn:hover{
+        transform:none;
+        box-shadow:0 4px 12px rgba(0,0,0,0.12);
+      }
+      .btn:active{
+        transform:scale(0.98);
+      }
+    }
+    .btn.primary{
+      background:var(--primary);
+      color:#fff;
+    }
+    .btn.primary:hover{
+      background:var(--primary-dark);
+    }
+    .btn.secondary{
+      background:var(--secondary);
+      color:var(--dark);
+    }
+    .btn.secondary:hover{
+      background:var(--gold);
+    }
+    .btn.green{
+      background:var(--green);
+      color:#fff;
+      display:inline-block !important;
+      visibility:visible !important;
+    }
+    .btn.green:hover{
+      background:#059669;
+    }
+
+    .story-section{
+      font-size:1.15rem;
+      line-height:1.9;
+      color:var(--dark);
+      margin-bottom:25px;
+    }
+
+    .blank{
+      display:inline-block;
+      min-width:120px;
+      padding:6px 12px;
+      border:2px solid var(--primary);
+      border-radius:8px;
+      background:rgba(252,211,77,0.2);
+      font-weight:700;
+      color:var(--primary);
+      text-align:center;
+      transition:all 0.2s ease;
+    }
+    .blank:focus-within{
+      background:rgba(252,211,77,0.4);
+      box-shadow:0 0 0 3px rgba(30,58,138,0.2);
+    }
+
+    .blank input{
+      border:none;
+      background:transparent;
+      text-align:center;
+      font-family:'Poppins',sans-serif;
+      font-weight:700;
+      font-size:1.05rem;
+      color:var(--primary);
+      width:100%;
+      outline:none;
+    }
+    .blank input::placeholder{
+      color:rgba(30,58,138,0.5);
+      font-weight:600;
+    }
+
+    .filled{
+      background:var(--secondary);
+      border-color:var(--gold);
+      animation:fillPop 0.3s ease;
+    }
+
+    @keyframes fillPop{
+      0%{transform:scale(1);}
+      50%{transform:scale(1.08);}
+      100%{transform:scale(1);}
+    }
+
+    .input-form{
+      background:rgba(30,58,138,0.05);
+      border-radius:16px;
+      padding:20px;
+      margin-bottom:25px;
+    }
+
+    .input-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+      gap:16px;
+    }
+
+    .input-item{
+      display:flex;
+      flex-direction:column;
+      gap:6px;
+    }
+
+    .input-label{
+      font-weight:700;
+      color:var(--primary);
+      font-size:0.9rem;
+      text-transform:uppercase;
+      letter-spacing:0.5px;
+    }
+
+    .input-field{
+      padding:10px 14px;
+      border:2px solid var(--primary);
+      border-radius:10px;
+      font-family:'Poppins',sans-serif;
+      font-size:1rem;
+      font-weight:600;
+      color:var(--dark);
+      transition:all 0.2s ease;
+      -webkit-appearance:none;
+      appearance:none;
+      min-height:44px;
+    }
+    .input-field:focus{
+      outline:none;
+      border-color:var(--gold);
+      box-shadow:0 0 0 3px rgba(252,211,77,0.3);
+    }
+
+    .complete-btn-wrap{
+      text-align:center;
+      margin-top:20px;
+    }
+
+    .share-section{
+      text-align:center;
+      padding:20px;
+      background:rgba(16,185,129,0.1);
+      border-radius:16px;
+      margin-top:20px;
+    }
+
+    .share-text{
+      font-weight:700;
+      color:var(--green);
+      margin-bottom:12px;
+      font-size:1.1rem;
+    }
+
+    .warning{
+      background:rgba(239,68,68,0.1);
+      border:2px solid rgba(239,68,68,0.3);
+      border-radius:12px;
+      padding:12px 16px;
+      margin-top:10px;
+      color:#B91C1C;
+      font-weight:700;
+      font-size:0.95rem;
+      display:none;
+    }
+    .warning.show{
+      display:block;
+      animation:shake 0.5s ease;
+    }
+
+    @keyframes shake{
+      0%,100%{transform:translateX(0);}
+      25%{transform:translateX(-10px);}
+      75%{transform:translateX(10px);}
+    }
+
+    @media (max-width:768px){
+      body{padding:15px 12px 40px;}
+      
+      .topbar{padding:10px 0;}
+      .nav-wrap{
+        gap:8px;
+        padding:0 10px;
+        justify-content:flex-start;
+        overflow-x:auto;
+        -webkit-overflow-scrolling:touch;
+      }
+      .nav-link{
+        padding:8px 14px;
+        font-size:0.85rem;
+        white-space:nowrap;
+        flex-shrink:0;
+      }
+      
+      h1{font-size:2rem;margin-bottom:8px;}
+      .subtitle{font-size:1rem;margin-bottom:20px;}
+      
+      .story-section{font-size:1.05rem;line-height:1.7;}
+      
+      .input-grid{
+        grid-template-columns:1fr;
+        gap:14px;
+      }
+      
+      .controls{
+        display:flex;
+        flex-direction:column;
+        gap:0;
+        width:100%;
+        max-width:100%;
+      }
+      
+      .btn{
+        padding:14px 20px;
+        font-size:1rem;
+        width:100%;
+        max-width:100%;
+        min-height:50px;
+        display:block;
+        margin:0 0 10px 0;
+      }
+      
+      .btn:last-child{
+        margin-bottom:0;
+      }
+      
+      #shareBtn,
+      #generateBtn,
+      #clearBtn,
+      #printBtn{
+        display:block !important;
+      }
+      
+      .card{
+        padding:20px 16px;
+        margin-bottom:15px;
+      }
+      
+      .input-form{
+        padding:16px;
+      }
+      
+      .blank{
+        min-width:100px;
+        font-size:0.95rem;
+      }
+      
+      .blank input{
+        font-size:0.95rem;
+      }
+    }
+    
+    @media (max-width:480px){
+      body{padding:12px 10px 40px;}
+      
+      .topbar{padding:8px 0;}
+      .nav-link{
+        padding:7px 12px;
+        font-size:0.8rem;
+      }
+      
+      h1{font-size:1.8rem;}
+      .subtitle{font-size:0.95rem;}
+      
+      .container{margin-top:70px;}
+      
+      .btn{
+        padding:12px 18px;
+        font-size:0.95rem;
+      }
+      
+      .story-section{font-size:1rem;}
+    }
+
+    /* Print Styles */
+    @media print{
+      .topbar, .controls, .input-form, .share-section, .warning, .stats-badge{
+        display:none!important;
+      }
+      body{background:#fff;padding-top:20px;}
+      .card{box-shadow:none;border:2px solid #ddd;}
+      .story-section{color:#000;}
+      h1{color:#000;}
+    }
+
+    /* Stats Badge */
+    .stats-badge{
+      position:fixed;
+      top:80px;
+      right:20px;
+      background:rgba(255,255,255,0.95);
+      padding:12px 18px;
+      border-radius:12px;
+      box-shadow:0 4px 12px rgba(0,0,0,0.15);
+      font-weight:700;
+      color:var(--primary);
+      font-size:0.9rem;
+      z-index:999;
+      pointer-events:none;
+    }
+    .stats-badge *{
+      pointer-events:auto;
+    }
+    .stats-number{
+      color:var(--gold);
+      font-size:1.3rem;
+      margin-right:4px;
+    }
+
+    @media (max-width:768px){
+      .stats-badge{
+        position:fixed;
+        top:auto;
+        bottom:15px;
+        right:15px;
+        left:auto;
+        padding:6px 10px;
+        font-size:0.75rem;
+        z-index:50;
+        max-width:140px;
+      }
+      .stats-number{font-size:1rem;}
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Stats Badge -->
+  <div class="stats-badge" id="statsBadge">
+    📝 <span class="stats-number" id="statsCount">0</span> Stories Created
+  </div>
+
+  <!-- Navigation -->
+  <nav class="topbar">
+    <div class="nav-wrap">
+      <a href="index.html" class="nav-link">🏠 Home</a>
+      <a href="rapid-fire.html" class="nav-link">⚡ Rapid Fire</a>
+      <a href="grokminigolf.html" class="nav-link">⛳ Mini Golf</a>
+      <a href="mad-lib.html" class="nav-link active">📝 Mad Libs</a>
+    </div>
+  </nav>
+
+  <div class="container">
+    <h1>⛳ Mini Golf Mad Libs! 📝</h1>
+    <p class="subtitle">Fill in the blanks for a hilarious mini golf story!</p>
+
+    <div class="controls">
+      <button class="btn primary" id="generateBtn" aria-label="Generate new mad lib">🎲 New Mad Lib</button>
+      <button class="btn secondary" id="clearBtn" aria-label="Clear answers">🧹 Clear Answers</button>
+      <button class="btn green" id="shareBtn" aria-label="Share story">📤 Share Story</button>
+      <button class="btn primary" id="printBtn" aria-label="Print story">🖨️ Print</button>
+    </div>
+
+    <!-- Input Form (shown before completion) -->
+    <div class="card" id="inputCard">
+      <div class="input-form">
+        <div class="input-grid" id="inputGrid">
+          <!-- Dynamically generated inputs -->
+        </div>
+        <div class="complete-btn-wrap">
+          <button class="btn primary" id="completeBtn">✨ Complete Story</button>
+        </div>
+      </div>
+      <div class="warning" id="warning">⚠️ Please watch your language! Let's keep it family-friendly! ⚠️</div>
+    </div>
+
+    <!-- Story Display -->
+    <div class="card" id="storyCard" style="display:none;">
+      <div class="story-section" id="storyDisplay"></div>
+      
+      <div class="share-section" id="shareSection" style="display:none;">
+        <div class="share-text">📤 Story copied to clipboard!</div>
+        <p style="font-size:0.95rem;color:#666;">Now you can paste it anywhere to share with friends!</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Profanity filter (basic but effective)
+    const badWords = [
+      'damn', 'hell', 'crap', 'piss', 'ass', 'bastard', 'bitch', 'shit', 'fuck', 'dick', 'cock',
+      'pussy', 'slut', 'whore', 'fag', 'dyke', 'retard', 'nigger', 'chink', 'spic', 'kike',
+      'asshole', 'douche', 'turd', 'bullshit', 'horseshit', 'dipshit', 'jackass', 'dumbass'
+    ];
+
+    function containsProfanity(text) {
+      const lower = text.toLowerCase();
+      return badWords.some(word => {
+        const regex = new RegExp(`\\b${word}\\b`, 'i');
+        return regex.test(lower);
+      });
+    }
+
+    // Mad Lib Templates
+    const madLibTemplates = [
+      {
+        title: "Mick's First Tournament",
+        blanks: [
+          { type: 'adjective', label: 'Adjective' },
+          { type: 'verb', label: 'Verb (past tense)' },
+          { type: 'noun', label: 'Noun' },
+          { type: 'adjective2', label: 'Adjective' },
+          { type: 'bodyPart', label: 'Body Part' },
+          { type: 'number', label: 'Number' },
+          { type: 'verb2', label: 'Verb (ing)' },
+          { type: 'exclamation', label: 'Exclamation' },
+          { type: 'food', label: 'Food' }
+        ],
+        story: `Mick Skylark arrived at the {adjective} mini golf tournament feeling nervous. His mentor Jonsey had {verb} him all week at Bawlls Mini Golf. "Remember," Jonsey said, tapping his {noun}, "mini golf is {adjective2}!" 
+
+On the first hole, Mick gripped his putter with his {bodyPart} and took {number} practice swings. Vanessa was {verb2} nearby, trying to intimidate him. Her father Vladimir whispered something to Leonard, his mini golf lab scientist.
+
+"{exclamation}!" shouted Humphrey from the sidelines, chomping on a {food}. Dr. Phil, who was there to support Clara (Mick's mom), couldn't stop talking about frogs. Despite the chaos, Mick stayed focused and sank his putt!`
+      },
+      {
+        title: "Humphrey's Workout Routine",
+        blanks: [
+          { type: 'adjective', label: 'Adjective' },
+          { type: 'number', label: 'Number' },
+          { type: 'verb', label: 'Verb (past tense)' },
+          { type: 'adverb', label: 'Adverb' },
+          { type: 'noun', label: 'Noun (plural)' },
+          { type: 'adjective2', label: 'Adjective' },
+          { type: 'bodyPart', label: 'Body Part' },
+          { type: 'sound', label: 'Sound/Noise' }
+        ],
+        story: `Humphrey, the {adjective} looking hunchback man, spent {number} hours every day on his human-sized hamster wheel. He {verb} {adverb} while eating turkey {noun}. 
+
+"This is how I stay {adjective2}!" he declared, his balding head glistening with sweat. His large nose twitched as he ran. Vanessa, his best friend, watched him exercise while planning her next mini golf strategy.
+
+Suddenly, his {bodyPart} cramped up and he made a loud "{sound}!" sound. Humphrey tumbled off the wheel but immediately grabbed another turkey leg. "Worth it!" he shouted, taking a massive bite.`
+      },
+      {
+        title: "Dr. Phil's Frog Collection",
+        blanks: [
+          { type: 'adjective', label: 'Adjective' },
+          { type: 'number', label: 'Number' },
+          { type: 'verb', label: 'Verb (ing)' },
+          { type: 'color', label: 'Color' },
+          { type: 'adjective2', label: 'Adjective' },
+          { type: 'noun', label: 'Noun' },
+          { type: 'exclamation', label: 'Exclamation' },
+          { type: 'verb2', label: 'Verb (past tense)' }
+        ],
+        story: `Dr. Phil, the {adjective} doctor, had a collection of {number} frogs. He spent his afternoons {verb} them and telling everyone about their {color} spots.
+
+"This one is particularly {adjective2}!" he told Clara during a date. He pulled a frog from his {noun} and held it up. "{exclamation}!" the frog seemed to say (though it definitely didn't).
+
+Clara {verb2} politely and tried to change the subject to mini golf. But Dr. Phil was already showing her another frog. Somehow, she still found him charming.`
+      },
+      {
+        title: "The Origins of Mini Golf",
+        blanks: [
+          { type: 'adjective', label: 'Adjective' },
+          { type: 'verb', label: 'Verb (past tense)' },
+          { type: 'noun', label: 'Noun (plural)' },
+          { type: 'number', label: 'Number' },
+          { type: 'adjective2', label: 'Adjective' },
+          { type: 'verb2', label: 'Verb (ing)' },
+          { type: 'bodyPart', label: 'Body Part (plural)' },
+          { type: 'exclamation', label: 'Exclamation' }
+        ],
+        story: `William G Williamson III of III and his {adjective} companion Dave {verb} mini golf during the Revolutionary War. They used their {noun} as putters!
+
+"Just like wiffle ball came before baseball, mini golf came before {number}-hole golf!" William declared {adjective2}ly.
+
+Dave was too busy {verb2} to respond. They set up obstacles using their {bodyPart} and whatever they could find. "{exclamation}!" shouted a British soldier, confused by their game.
+
+And that's how mini golf was born - much more important than winning the war, obviously.`
+      },
+      {
+        title: "Vladimir's Evil Plan",
+        blanks: [
+          { type: 'adjective', label: 'Adjective' },
+          { type: 'verb', label: 'Verb (ing)' },
+          { type: 'noun', label: 'Noun' },
+          { type: 'adjective2', label: 'Adjective' },
+          { type: 'number', label: 'Number' },
+          { type: 'verb2', label: 'Verb (past tense)' },
+          { type: 'color', label: 'Color' },
+          { type: 'exclamation', label: 'Exclamation' }
+        ],
+        story: `Vladimir, Vanessa's {adjective} father, was {verb} in his secret lab. "Leonard!" he called to his scientist. "Bring me the {noun}!"
+
+Leonard scurried over with a {adjective2} device. "Sir, are you sure this will help Vanessa win? It looks dangerous..."
+
+"Silence! I've spent {number} years on this!" Vladimir {verb2} his hands together and pressed a {color} button. "{exclamation}!" The machine whirred to life.
+
+Meanwhile, Vanessa had no idea her dad was being so ridiculous. She was perfectly capable of winning on her own.`
+      },
+      {
+        title: "Bowling Alley Drama",
+        blanks: [
+          { type: 'adjective', label: 'Adjective' },
+          { type: 'verb', label: 'Verb (past tense)' },
+          { type: 'noun', label: 'Noun (plural)' },
+          { type: 'adverb', label: 'Adverb' },
+          { type: 'adjective2', label: 'Adjective' },
+          { type: 'verb2', label: 'Verb (ing)' },
+          { type: 'bodyPart', label: 'Body Part' },
+          { type: 'exclamation', label: 'Exclamation' }
+        ],
+        story: `At the {adjective} bowling alley, Mick {verb} with his coworkers Roger and Lily. They were organizing {noun} when Lily {adverb} dropped one.
+
+"Oops!" she said, turning {adjective2}. She had been {verb2} up the courage to talk to Mick all day. Roger noticed and elbowed Mick in the {bodyPart}.
+
+Meanwhile, Mick's terrible girlfriend Krystal walked in. "{exclamation}!" she yelled. "Why are you talking to HER?"
+
+Lily rolled her eyes. Roger whispered "Yikes" and backed away slowly. Just another normal day at the bowling alley.`
+      },
+      {
+        title: "Eagle's Eternal Second Place",
+        blanks: [
+          { type: 'adjective', label: 'Adjective' },
+          { type: 'verb', label: 'Verb (past tense)' },
+          { type: 'number', label: 'Number' },
+          { type: 'adverb', label: 'Adverb' },
+          { type: 'noun', label: 'Noun' },
+          { type: 'adjective2', label: 'Adjective' },
+          { type: 'exclamation', label: 'Exclamation' },
+          { type: 'verb2', label: 'Verb (ing)' }
+        ],
+        story: `Eagle, the {adjective} competitor, {verb} at the final hole. He had come in second place for the {number}th time.
+
+"Why can't I ever win?!" he cried {adverb}, throwing his {noun} on the ground. No matter how {adjective2} he tried, someone always beat him.
+
+"{exclamation}!" shouted the crowd as Mick sank the winning putt. Eagle stood there {verb2}, watching his dreams of first place disappear yet again.
+
+Jessica, who placed 4th, patted him on the shoulder. "At least you beat me!" she said cheerfully. Eagle sighed deeply.`
+      },
+      {
+        title: "Jonsey's Wisdom",
+        blanks: [
+          { type: 'adjective', label: 'Adjective' },
+          { type: 'verb', label: 'Verb (ing)' },
+          { type: 'noun', label: 'Noun' },
+          { type: 'adjective2', label: 'Adjective' },
+          { type: 'bodyPart', label: 'Body Part (plural)' },
+          { type: 'verb2', label: 'Verb (past tense)' },
+          { type: 'animal', label: 'Animal' },
+          { type: 'exclamation', label: 'Exclamation' }
+        ],
+        story: `Jonsey, Mick's {adjective} mentor, stood at Bawlls Mini Golf {verb} at the sky. "You see that {noun}?" he asked Mick philosophically.
+
+"That's {adjective2}, just like mini golf." Mick squinted. He wasn't sure Jonsey was making sense. Jonsey continued anyway, waving his {bodyPart} around.
+
+"When William G Williamson III of III {verb2} this sport with muskets, he knew... he knew that a {animal} could never truly understand!" Jonsey exclaimed.
+
+"{exclamation}!" Mick replied, pretending to understand. Jonsey's lessons were always weird, but they somehow worked. That's why Mick was getting so good at mini golf!`
+      },
+      {
+        title: "The Commentary Team",
+        blanks: [
+          { type: 'adjective', label: 'Adjective' },
+          { type: 'verb', label: 'Verb (past tense)' },
+          { type: 'adverb', label: 'Adverb' },
+          { type: 'noun', label: 'Noun' },
+          { type: 'adjective2', label: 'Adjective' },
+          { type: 'number', label: 'Number' },
+          { type: 'exclamation', label: 'Exclamation' },
+          { type: 'verb2', label: 'Verb (ing)' }
+        ],
+        story: `Artie Finegold and Tom McDonald, the {adjective} mini golf commentators, {verb} into their microphones {adverb}.
+
+"What a {noun}!" shouted Artie. "In my 60 years as an ex-pro, I've never seen anything so {adjective2}!"
+
+Tom nodded. "That shot had at least {number} degrees of spin! {exclamation}!" They were both getting too excited, {verb2} and waving their arms dramatically.
+
+Frank, the rough 60-year-old course owner, walked by shaking his head. "These two clowns..." he muttered. But secretly, he loved their enthusiasm.`
+      },
+      {
+        title: "Gordo's Support",
+        blanks: [
+          { type: 'adjective', label: 'Adjective' },
+          { type: 'verb', label: 'Verb (ing)' },
+          { type: 'noun', label: 'Noun (plural)' },
+          { type: 'number', label: 'Number' },
+          { type: 'adjective2', label: 'Adjective' },
+          { type: 'exclamation', label: 'Exclamation' },
+          { type: 'color', label: 'Color' },
+          { type: 'verb2', label: 'Verb (past tense)' }
+        ],
+        story: `Gordo, Mick's {adjective} fan and the mini golf groundskeeper, was {verb} around the course picking up {noun}. He had been Mick's biggest supporter for {number} years.
+
+"You're the most {adjective2} player I've ever seen!" Gordo told Mick. "{exclamation}! That last shot was incredible!"
+
+He pulled out a {color} flag and {verb2} it wildly. "MICK! MICK! MICK!" he chanted, despite being the only one there.
+
+Mick laughed and gave him a high-five. Having Gordo around always made tournaments more fun, even when things got stressful.`
+      }
+    ];
+
+    let currentTemplate = null;
+    let userInputs = {};
+
+    // Generate new mad lib
+    function generateMadLib() {
+      // Select random template
+      currentTemplate = madLibTemplates[Math.floor(Math.random() * madLibTemplates.length)];
+      userInputs = {};
+
+      // Clear previous inputs
+      const inputGrid = document.getElementById('inputGrid');
+      inputGrid.innerHTML = '';
+
+      // Create input fields
+      currentTemplate.blanks.forEach((blank, idx) => {
+        const div = document.createElement('div');
+        div.className = 'input-item';
+        div.innerHTML = `
+          <label class="input-label">${blank.label}</label>
+          <input type="text" class="input-field" data-type="${blank.type}" placeholder="Enter ${blank.label.toLowerCase()}" />
+        `;
+        inputGrid.appendChild(div);
+      });
+
+      // Show input card, hide story
+      document.getElementById('inputCard').style.display = 'block';
+      document.getElementById('storyCard').style.display = 'none';
+      document.getElementById('warning').classList.remove('show');
+      document.getElementById('shareSection').style.display = 'none';
+    }
+
+    // Clear inputs but keep same template
+    function clearInputs() {
+      const inputs = document.querySelectorAll('.input-field');
+      inputs.forEach(input => {
+        input.value = '';
+      });
+      userInputs = {};
+      document.getElementById('inputCard').style.display = 'block';
+      document.getElementById('storyCard').style.display = 'none';
+      document.getElementById('warning').classList.remove('show');
+      document.getElementById('shareSection').style.display = 'none';
+    }
+
+    // Complete story
+    function completeStory() {
+      const inputs = document.querySelectorAll('.input-field');
+      let allFilled = true;
+      let hasBadWords = false;
+
+      // Collect inputs
+      inputs.forEach(input => {
+        const value = input.value.trim();
+        if (!value) {
+          allFilled = false;
+        } else {
+          if (containsProfanity(value)) {
+            hasBadWords = true;
+          }
+          userInputs[input.dataset.type] = value;
+        }
+      });
+
+      if (!allFilled) {
+        alert('Please fill in all the blanks!');
+        return;
+      }
+
+      if (hasBadWords) {
+        document.getElementById('warning').classList.add('show');
+        setTimeout(() => {
+          document.getElementById('warning').classList.remove('show');
+        }, 3000);
+        return;
+      }
+
+      // Replace blanks in story
+      let story = currentTemplate.story;
+      Object.keys(userInputs).forEach(type => {
+        const regex = new RegExp(`\\{${type}\\}`, 'g');
+        story = story.replace(regex, `<span class="blank filled"><input type="text" value="${userInputs[type]}" readonly /></span>`);
+      });
+
+      // Display story
+      document.getElementById('storyDisplay').innerHTML = story;
+      document.getElementById('inputCard').style.display = 'none';
+      document.getElementById('storyCard').style.display = 'block';
+      document.getElementById('shareSection').style.display = 'none';
+      
+      // Increment stats counter
+      incrementStats();
+    }
+
+    // Share story
+    async function shareStory() {
+      if (!currentTemplate || Object.keys(userInputs).length === 0) {
+        alert('Complete a story first!');
+        return;
+      }
+
+      // Create plain text version
+      let plainText = `⛳ ${currentTemplate.title} ⛳\n\n`;
+      let story = currentTemplate.story;
+      Object.keys(userInputs).forEach(type => {
+        const regex = new RegExp(`\\{${type}\\}`, 'g');
+        story = story.replace(regex, userInputs[type].toUpperCase());
+      });
+      plainText += story;
+      plainText += '\n\n---\nCreated with Mick Skylark Mad Libs!\nmickskylark.com/mad-lib.html';
+
+      // Try native share API
+      if (navigator.share) {
+        try {
+          await navigator.share({
+            title: 'My Mini Golf Mad Lib',
+            text: plainText
+          });
+          return;
+        } catch (err) {
+          // Fall through to clipboard
+        }
+      }
+
+      // Fallback to clipboard
+      try {
+        await navigator.clipboard.writeText(plainText);
+        document.getElementById('shareSection').style.display = 'block';
+        setTimeout(() => {
+          document.getElementById('shareSection').style.display = 'none';
+        }, 3000);
+      } catch (err) {
+        // Manual fallback
+        const textarea = document.createElement('textarea');
+        textarea.value = plainText;
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textarea);
+        document.getElementById('shareSection').style.display = 'block';
+        setTimeout(() => {
+          document.getElementById('shareSection').style.display = 'none';
+        }, 3000);
+      }
+    }
+
+    // Event listeners
+    document.getElementById('generateBtn').addEventListener('click', generateMadLib);
+    document.getElementById('clearBtn').addEventListener('click', clearInputs);
+    document.getElementById('completeBtn').addEventListener('click', completeStory);
+    document.getElementById('shareBtn').addEventListener('click', shareStory);
+
+    // Stats Counter
+    let storiesCreated = parseInt(localStorage.getItem('madLibsCreated') || '0');
+    const statsCount = document.getElementById('statsCount');
+    statsCount.textContent = storiesCreated;
+
+    function incrementStats() {
+      storiesCreated++;
+      localStorage.setItem('madLibsCreated', storiesCreated);
+      statsCount.textContent = storiesCreated;
+      
+      // Animate the counter
+      const badge = document.getElementById('statsBadge');
+      badge.style.transform = 'scale(1.1)';
+      setTimeout(() => {
+        badge.style.transform = 'scale(1)';
+      }, 200);
+    }
+
+    // Print Functionality
+    const printBtn = document.getElementById('printBtn');
+    printBtn.addEventListener('click', () => {
+      if (document.getElementById('storyCard').style.display === 'none') {
+        alert('Complete a story first before printing!');
+        return;
+      }
+      window.print();
+    });
+
+    // Initialize with first mad lib
+    generateMadLib();
+  </script>
+</body>
+</html>
