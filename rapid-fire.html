@@ -547,6 +547,14 @@
       // Miss tracking
       let shotInProgress = false;
       let shotStartTime = 0;
+      
+      // Bonus targets
+      let bonusTargets = [];
+      let nextBonusSpawn = 0;
+      
+      // Level system
+      let currentLevel = 0;
+      let lastLevelScore = 0;
 
       // particles
       let particles = [];
@@ -587,6 +595,47 @@
 
       function clamp(v, lo, hi){ return Math.max(lo, Math.min(hi, v)); }
       function rand(lo, hi){ return lo + Math.random()*(hi-lo); }
+      
+      // Level color schemes
+      const levelColors = [
+        { start: '#A8E6A1', end: '#7FD87F', name: 'Green' },      // 0-9: Regular green
+        { start: '#4A7C59', end: '#2D5F3F', name: 'Dark Green' }, // 10-19: Dark green
+        { start: '#87CEEB', end: '#5DADE2', name: 'Blue' },       // 20-29: Blue
+        { start: '#FF6B6B', end: '#C92A2A', name: 'Red' },        // 30-39: Red
+        { start: '#FFD93D', end: '#F4C430', name: 'Yellow' },     // 40-49: Yellow
+        { start: '#FF8C42', end: '#D4682A', name: 'Orange' },     // 50-59: Orange
+        { start: '#FFB3D9', end: '#FF69B4', name: 'Pink' },       // 60-69: Pink
+        { start: '#6495ED', end: '#4169E1', name: 'Legendary' }   // 100+: Legendary blue
+      ];
+      
+      function getLevelFromScore(s){
+        if(s >= 100) return 7; // Legendary
+        return Math.min(Math.floor(s / 10), 6);
+      }
+      
+      function getRandomBonus(){
+        const r = Math.random();
+        // Weighted random: +1 most common, then +2, then +3, then -1/-2, then +4/+5 rarest
+        if(r < 0.35) return 1;        // 35% chance
+        if(r < 0.60) return 2;        // 25% chance
+        if(r < 0.75) return 3;        // 15% chance
+        if(r < 0.85) return -1;       // 10% chance
+        if(r < 0.92) return -2;       // 7% chance
+        if(r < 0.96) return 4;        // 4% chance
+        return 5;                      // 4% chance
+      }
+      
+      function spawnBonusTarget(){
+        const pad = 80;
+        const value = getRandomBonus();
+        bonusTargets.push({
+          x: rand(pad, canvas.width - pad),
+          y: rand(pad, canvas.height - pad),
+          r: 18,
+          value: value,
+          life: 5.0 // seconds before it disappears
+        });
+      }
 
       function randomHole(){
         const pad = 70;
@@ -609,6 +658,10 @@
         particles = [];
         aim.active = false;
         pointerDown = false;
+        bonusTargets = [];
+        nextBonusSpawn = 0;
+        currentLevel = 0;
+        lastLevelScore = 0;
 
         ball.x = startBallPos.x; ball.y = startBallPos.y;
         ball.vx = 0; ball.vy = 0;
@@ -737,6 +790,18 @@
 
         addParticles(hole.x, hole.y, '#FBBF24', 28);
         sfx.make();
+        
+        // Check for level change
+        const newLevel = getLevelFromScore(score);
+        if(newLevel > currentLevel){
+          currentLevel = newLevel;
+          if(score >= 100){
+            spawnPop('Legendary!!!', 'streak');
+          } else {
+            spawnPop(`Level ${newLevel}!`, 'streak');
+          }
+          sfx.streak();
+        }
 
         // 3 in a row => +3 seconds
         if(streak % 3 === 0){
@@ -779,6 +844,19 @@
         } else {
           timePill.classList.remove('warning');
         }
+        
+        // Spawn bonus targets periodically (every 4-7 seconds)
+        nextBonusSpawn -= dt;
+        if(nextBonusSpawn <= 0){
+          spawnBonusTarget();
+          nextBonusSpawn = rand(4, 7);
+        }
+        
+        // Update bonus targets
+        bonusTargets = bonusTargets.filter(bt => {
+          bt.life -= dt;
+          return bt.life > 0;
+        });
 
         // Ball physics
         ball.x += ball.vx;
@@ -816,10 +894,34 @@
 
         const speed = Math.hypot(ball.vx, ball.vy);
         if(speed < 0.06){ ball.vx = 0; ball.vy = 0; }
+        
+        // Check bonus target collisions
+        for(let i = bonusTargets.length - 1; i >= 0; i--){
+          const bt = bonusTargets[i];
+          const dist = Math.hypot(ball.x - bt.x, ball.y - bt.y);
+          if(dist < ball.r + bt.r){
+            // Hit bonus target!
+            time += bt.value;
+            time = Math.max(0, time); // Don't go negative
+            timeEl.textContent = time.toFixed(1);
+            
+            const sign = bt.value > 0 ? '+' : '';
+            spawnPop(`${sign}${bt.value} !`, bt.value > 0 ? 'plus' : 'minus');
+            addParticles(bt.x, bt.y, bt.value > 0 ? '#10B981' : '#EF4444', 24);
+            if(bt.value > 0) sfx.bonus(); else sfx.miss();
+            
+            bonusTargets.splice(i, 1);
+            
+            if(time <= 0){
+              endRound();
+              return;
+            }
+          }
+        }
 
         // Score detection - 40% more forgiving on speed, bigger detection zone
         const d = Math.hypot(ball.x - hole.x, ball.y - hole.y);
-        if(d < (hole.r - 3) && speed < 6.5){
+        if(d < (hole.r - 3) && speed < 6.2){
           scorePoint();
         }
 
@@ -844,10 +946,12 @@
       }
 
       function draw(){
-        // Background gradient
+        // Background gradient - changes with level
+        const level = getLevelFromScore(score);
+        const colors = levelColors[level];
         const g = ctx.createLinearGradient(0,0,0,canvas.height);
-        g.addColorStop(0,'#A8E6A1');
-        g.addColorStop(1,'#7FD87F');
+        g.addColorStop(0, colors.start);
+        g.addColorStop(1, colors.end);
         ctx.fillStyle = g;
         ctx.fillRect(0,0,canvas.width,canvas.height);
 
@@ -862,6 +966,50 @@
         // Tee area
         ctx.fillStyle = 'rgba(255,255,255,0.2)';
         ctx.fillRect(0, canvas.height*0.6, canvas.width*0.32, canvas.height*0.4);
+        
+        // Bonus targets
+        bonusTargets.forEach(bt => {
+          // Pulsing effect based on life remaining
+          const pulse = 0.9 + Math.sin(Date.now() * 0.005) * 0.1;
+          const fadeAlpha = bt.life < 1.0 ? bt.life : 1.0;
+          
+          ctx.globalAlpha = fadeAlpha;
+          
+          // Shadow
+          ctx.fillStyle = 'rgba(0,0,0,0.25)';
+          ctx.beginPath();
+          ctx.arc(bt.x+2, bt.y+2, bt.r * pulse, 0, Math.PI*2);
+          ctx.fill();
+          
+          // Circle with gradient
+          const btGrad = ctx.createRadialGradient(bt.x-3, bt.y-3, 0, bt.x, bt.y, bt.r);
+          if(bt.value > 0){
+            btGrad.addColorStop(0, '#FFD93D');
+            btGrad.addColorStop(1, '#FBBF24');
+          } else {
+            btGrad.addColorStop(0, '#FF6B6B');
+            btGrad.addColorStop(1, '#C92A2A');
+          }
+          ctx.fillStyle = btGrad;
+          ctx.beginPath();
+          ctx.arc(bt.x, bt.y, bt.r * pulse, 0, Math.PI*2);
+          ctx.fill();
+          
+          // Border
+          ctx.strokeStyle = bt.value > 0 ? '#F4C430' : '#8B0000';
+          ctx.lineWidth = 2;
+          ctx.stroke();
+          
+          // Value text
+          ctx.fillStyle = '#000';
+          ctx.font = 'bold 16px Poppins';
+          ctx.textAlign = 'center';
+          ctx.textBaseline = 'middle';
+          const sign = bt.value > 0 ? '+' : '';
+          ctx.fillText(`${sign}${bt.value}`, bt.x, bt.y);
+          
+          ctx.globalAlpha = 1;
+        });
 
         // Hole shadow
         ctx.fillStyle = 'rgba(0,0,0,0.3)';
@@ -940,10 +1088,15 @@
         ctx.arc(ball.x+2.5, ball.y+3.5, ball.r, 0, Math.PI*2);
         ctx.fill();
 
-        // Ball
+        // Ball - light blue at legendary level (100+)
         const ballGradient = ctx.createRadialGradient(ball.x-3, ball.y-3, 0, ball.x, ball.y, ball.r);
-        ballGradient.addColorStop(0, '#fff');
-        ballGradient.addColorStop(1, '#e8e8e8');
+        if(score >= 100){
+          ballGradient.addColorStop(0, '#ADD8E6'); // Light blue
+          ballGradient.addColorStop(1, '#87CEEB');
+        } else {
+          ballGradient.addColorStop(0, '#fff');
+          ballGradient.addColorStop(1, '#e8e8e8');
+        }
         ctx.fillStyle = ballGradient;
         ctx.strokeStyle = '#1a1a1a';
         ctx.lineWidth = 2.5;
