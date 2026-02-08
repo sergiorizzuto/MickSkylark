@@ -199,14 +199,17 @@
         .hero { text-align: center; padding: 40px 20px 80px; }
 
         .hero img {
-            width: 100%;
-            max-width: 600px;
-            margin: 0 auto 10px;
-            display: block;
-            border-radius: 20px;
-            opacity: 0;
-            animation: logoReveal 1.5s ease-out forwards;
-        }
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto 10px;
+    display: block;
+    border-radius: 20px;
+    opacity: 0;
+    animation: logoReveal 1.5s ease-out forwards;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3),
+                0 10px 30px rgba(30, 58, 138, 0.2);
+    filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.15));
+}
 
         @keyframes logoReveal {
             0% { opacity: 0; transform: scale(0.8) translateY(-30px); }
