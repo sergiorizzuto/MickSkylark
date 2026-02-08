@@ -577,15 +577,31 @@
       let activePowerUps = {
         bigHole: { active: false, endTime: 0 },
         starPower: { active: false, endTime: 0 },
-        slowMo: { active: false, endTime: 0 }
+        slowMo: { active: false, endTime: 0 },
+        clownCurse: { active: false, endTime: 0 } // Pink shrink
       };
       
       // Moving obstacles
       let movingObstacles = [];
       let nextObstacleSpawn = 0;
       
+      // Static obstacles (8 second duration)
+      let staticObstacles = [];
+      let nextStaticObstacle = rand(5, 10);
+      
+      // Boost/Hazard zones (after level 60)
+      let zones = [];
+      let nextZoneSpawn = 0;
+      
+      // Sand traps (after level 30)
+      let sandTraps = [];
+      let nextSandTrap = 0;
+      
       // Mega bonus tracker
       let nextMegaBonusCheck = 1.0; // Check every second
+      
+      // Clown tracker (after level 100)
+      let nextClownCheck = 1.0;
       
       // Level system
       let currentLevel = 0;
@@ -665,34 +681,46 @@
       
       function getRandomBonus(){
         const r = Math.random();
-        // Weighted random with power-ups
+        // Weighted random with power-ups and extreme minus
         if(r < 0.25) return { type: 'time', value: 1 };      // 25%
         if(r < 0.45) return { type: 'time', value: 2 };      // 20%
         if(r < 0.60) return { type: 'time', value: 3 };      // 15%
         if(r < 0.70) return { type: 'time', value: -1 };     // 10%
         if(r < 0.77) return { type: 'time', value: -2 };     // 7%
-        if(r < 0.84) return { type: 'powerup', value: 'bigHole' };   // 7% - Big Hole
-        if(r < 0.91) return { type: 'powerup', value: 'starPower' }; // 7% - Star Power
-        if(r < 0.95) return { type: 'powerup', value: 'slowMo' };    // 4% - Slow Mo
+        if(r < 0.84) return { type: 'powerup', value: 'bigHole' };   // 7%
+        if(r < 0.91) return { type: 'powerup', value: 'starPower' }; // 7%
+        if(r < 0.95) return { type: 'powerup', value: 'slowMo' };    // 4%
         if(r < 0.97) return { type: 'time', value: 4 };      // 2%
-        return { type: 'time', value: 5 };                    // 3%
+        if(r < 0.985) return { type: 'time', value: 5 };     // 1.5%
+        // Extreme drifting minus bubbles
+        if(r < 0.995) return { type: 'time', value: -5, drift: true };  // 1%
+        return { type: 'time', value: -8, drift: true };     // 0.5% - SKULL
       }
       
       function spawnBonusTarget(){
         const pad = 80;
         const bonus = getRandomBonus();
         
-        bonusTargets.push({
+        const target = {
           x: rand(pad, canvas.width - pad),
           y: rand(pad, canvas.height - pad),
-          r: 18,
+          r: bonus.value === -8 ? 22 : 18, // Skull is bigger
           type: bonus.type,
           value: bonus.value,
           life: 5.0
-        });
+        };
+        
+        // Add drift for extreme minus bubbles
+        if(bonus.drift){
+          target.vx = rand(-1.5, 1.5);
+          target.vy = rand(-1.5, 1.5);
+          target.drift = true;
+        }
+        
+        bonusTargets.push(target);
         
         // After 30 points, sometimes spawn extra negative
-        if(score >= 30 && Math.random() < 0.3){
+        if(score >= 30 && score < 80 && Math.random() < 0.3){
           bonusTargets.push({
             x: rand(pad, canvas.width - pad),
             y: rand(pad, canvas.height - pad),
@@ -704,7 +732,7 @@
         }
         
         // After 60 points, even more chance for extra negative
-        if(score >= 60 && Math.random() < 0.4){
+        if(score >= 60 && score < 80 && Math.random() < 0.4){
           bonusTargets.push({
             x: rand(pad, canvas.width - pad),
             y: rand(pad, canvas.height - pad),
@@ -714,33 +742,116 @@
             life: 5.0
           });
         }
+        
+        // After 80 points: 2-3 HARSH minus bubbles (-2 to -4 seconds)
+        if(score >= 80){
+          const count = Math.floor(rand(2, 4)); // 2 or 3
+          for(let i = 0; i < count; i++){
+            bonusTargets.push({
+              x: rand(pad, canvas.width - pad),
+              y: rand(pad, canvas.height - pad),
+              r: 18,
+              type: 'time',
+              value: -Math.floor(rand(2, 5)), // -2, -3, or -4
+              life: 5.0
+            });
+          }
+        }
       }
       
       function spawnMovingObstacle(){
         const pad = 60;
         const isVertical = Math.random() < 0.5;
         
+        // After level 60: spawn 1-3 obstacles
+        const count = score >= 60 ? Math.floor(rand(1, 4)) : 1;
+        
+        for(let i = 0; i < count; i++){
+          if(isVertical){
+            movingObstacles.push({
+              x: rand(pad, canvas.width - pad),
+              y: rand(pad, canvas.height - pad - 100),
+              width: 20,
+              height: 100,
+              vx: 0,
+              vy: rand(1.5, 3.0) * (Math.random() < 0.5 ? 1 : -1),
+              life: rand(4, 8)
+            });
+          } else {
+            movingObstacles.push({
+              x: rand(pad, canvas.width - pad - 100),
+              y: rand(pad, canvas.height - pad),
+              width: 100,
+              height: 20,
+              vx: rand(1.5, 3.0) * (Math.random() < 0.5 ? 1 : -1),
+              vy: 0,
+              life: rand(4, 8)
+            });
+          }
+        }
+      }
+      
+      function spawnStaticObstacle(){
+        const pad = 60;
+        const isVertical = Math.random() < 0.5;
+        
         if(isVertical){
-          movingObstacles.push({
-            x: rand(pad, canvas.width - pad),
+          staticObstacles.push({
+            x: rand(pad, canvas.width - pad - 20),
             y: rand(pad, canvas.height - pad - 100),
             width: 20,
             height: 100,
-            vx: 0,
-            vy: rand(1.5, 3.0) * (Math.random() < 0.5 ? 1 : -1),
-            life: rand(4, 8)
+            life: 8.0
           });
         } else {
-          movingObstacles.push({
+          staticObstacles.push({
             x: rand(pad, canvas.width - pad - 100),
-            y: rand(pad, canvas.height - pad),
+            y: rand(pad, canvas.height - pad - 20),
             width: 100,
             height: 20,
-            vx: rand(1.5, 3.0) * (Math.random() < 0.5 ? 1 : -1),
-            vy: 0,
-            life: rand(4, 8)
+            life: 8.0
           });
         }
+      }
+      
+      function spawnZone(){
+        const pad = 70;
+        const types = ['boost', 'reverse', 'spin'];
+        const type = types[Math.floor(Math.random() * types.length)];
+        
+        zones.push({
+          x: rand(pad, canvas.width - pad),
+          y: rand(pad, canvas.height - pad),
+          r: 30,
+          type: type,
+          life: rand(6, 10)
+        });
+      }
+      
+      function spawnSandTrap(){
+        const pad = 70;
+        sandTraps.push({
+          x: rand(pad, canvas.width - pad),
+          y: rand(pad, canvas.height - pad),
+          r: 35,
+          life: rand(8, 12)
+        });
+      }
+      
+      function spawnClown(){
+        const pad = 80;
+        bonusTargets.push({
+          x: rand(pad, canvas.width - pad),
+          y: rand(pad, canvas.height - pad),
+          r: 25,
+          type: 'clown',
+          value: 0,
+          life: 6.0,
+          vx: rand(-1, 1),
+          vy: rand(-1, 1)
+        });
+        
+        spawnPop('🤡 CLOWN!', 'minus');
       }
       
       function randomBallPosition(){
@@ -778,16 +889,25 @@
         lastLevelScore = 0;
         movingObstacles = [];
         nextObstacleSpawn = rand(5, 10);
+        staticObstacles = [];
+        nextStaticObstacle = rand(5, 10);
+        zones = [];
+        nextZoneSpawn = 0;
+        sandTraps = [];
+        nextSandTrap = 0;
         nextMegaBonusCheck = 1.0;
+        nextClownCheck = 1.0;
         activePowerUps = {
           bigHole: { active: false, endTime: 0 },
           starPower: { active: false, endTime: 0 },
-          slowMo: { active: false, endTime: 0 }
+          slowMo: { active: false, endTime: 0 },
+          clownCurse: { active: false, endTime: 0 }
         };
 
         const pos = randomBallPosition();
         ball.x = pos.x;
         ball.y = pos.y;
+        ball.r = 11; // Reset size
         ball.vx = 0; ball.vy = 0;
         hole = randomHole();
 
@@ -928,11 +1048,11 @@
           sfx.streak();
         }
 
-        // 3 in a row => +3 seconds
+        // 3 in a row => +2 seconds
         if(streak % 3 === 0){
-          time += 3.0;
+          time += 2.0;
           timeEl.textContent = time.toFixed(1);
-          spawnPop('+3 !', 'plus');
+          spawnPop('+2 !', 'plus');
           addParticles(hole.x, hole.y, '#10B981', 20);
           sfx.bonus();
           
@@ -982,11 +1102,80 @@
           nextBonusSpawn = rand(4, 7);
         }
         
-        // Update bonus targets
+        // Update bonus targets (with drift for extreme minus)
         bonusTargets = bonusTargets.filter(bt => {
           bt.life -= effectiveDt;
+          
+          // Drift logic for extreme minus and clown
+          if(bt.drift || bt.type === 'clown'){
+            bt.x += bt.vx;
+            bt.y += bt.vy;
+            
+            // Bounce off walls
+            if(bt.x - bt.r <= 0 || bt.x + bt.r >= canvas.width) bt.vx *= -1;
+            if(bt.y - bt.r <= 0 || bt.y + bt.r >= canvas.height) bt.vy *= -1;
+            
+            // Keep in bounds
+            bt.x = clamp(bt.x, bt.r, canvas.width - bt.r);
+            bt.y = clamp(bt.y, bt.r, canvas.height - bt.r);
+          }
+          
           return bt.life > 0;
         });
+        
+        // Spawn static obstacles periodically
+        nextStaticObstacle -= effectiveDt;
+        if(nextStaticObstacle <= 0){
+          spawnStaticObstacle();
+          nextStaticObstacle = rand(10, 18);
+        }
+        
+        // Update static obstacles
+        staticObstacles = staticObstacles.filter(obs => {
+          obs.life -= effectiveDt;
+          return obs.life > 0;
+        });
+        
+        // Spawn zones after level 60
+        if(score >= 60){
+          nextZoneSpawn -= effectiveDt;
+          if(nextZoneSpawn <= 0){
+            spawnZone();
+            nextZoneSpawn = rand(8, 14);
+          }
+        }
+        
+        // Update zones
+        zones = zones.filter(z => {
+          z.life -= effectiveDt;
+          return z.life > 0;
+        });
+        
+        // Spawn sand traps after level 30
+        if(score >= 30){
+          nextSandTrap -= effectiveDt;
+          if(nextSandTrap <= 0){
+            spawnSandTrap();
+            nextSandTrap = rand(10, 16);
+          }
+        }
+        
+        // Update sand traps
+        sandTraps = sandTraps.filter(st => {
+          st.life -= effectiveDt;
+          return st.life > 0;
+        });
+        
+        // Clown spawn after level 100 (1/250 chance per second)
+        if(score >= 100){
+          nextClownCheck -= effectiveDt;
+          if(nextClownCheck <= 0){
+            nextClownCheck = 1.0;
+            if(Math.random() < 1/250){
+              spawnClown();
+            }
+          }
+        }
 
         // Ball physics
         ball.x += ball.vx;
@@ -1018,9 +1207,47 @@
         
         if(bounced) sfx.wall();
 
-        // Friction AFTER bounce
-        ball.vx *= 0.986;
-        ball.vy *= 0.986;
+        // Check sand trap friction (50% slower)
+        let inSandTrap = false;
+        sandTraps.forEach(st => {
+          const dist = Math.hypot(ball.x - st.x, ball.y - st.y);
+          if(dist < st.r){
+            inSandTrap = true;
+          }
+        });
+        
+        // Check zone effects
+        zones.forEach(z => {
+          const dist = Math.hypot(ball.x - z.x, ball.y - z.y);
+          if(dist < z.r && speed > 0.5){
+            if(z.type === 'boost'){
+              // Speed boost!
+              const boostMultiplier = 1.8;
+              ball.vx *= boostMultiplier;
+              ball.vy *= boostMultiplier;
+              addParticles(ball.x, ball.y, '#10B981', 16);
+              z.life = 0; // Remove after use
+            } else if(z.type === 'reverse'){
+              // Reverse direction!
+              ball.vx *= -1.2;
+              ball.vy *= -1.2;
+              addParticles(ball.x, ball.y, '#EF4444', 16);
+              z.life = 0;
+            } else if(z.type === 'spin'){
+              // Spin/curve effect
+              const temp = ball.vx;
+              ball.vx = -ball.vy * 1.1;
+              ball.vy = temp * 1.1;
+              addParticles(ball.x, ball.y, '#FFD93D', 16);
+              z.life = 0;
+            }
+          }
+        });
+
+        // Friction AFTER bounce (with sand trap penalty)
+        const frictionMultiplier = inSandTrap ? 0.5 : 1.0;
+        ball.vx *= (0.986 * frictionMultiplier);
+        ball.vy *= (0.986 * frictionMultiplier);
 
         const speed = Math.hypot(ball.vx, ball.vy);
         if(speed < 0.06){ ball.vx = 0; ball.vy = 0; }
@@ -1037,9 +1264,18 @@
               timeEl.textContent = time.toFixed(1);
               
               const sign = bt.value > 0 ? '+' : '';
-              spawnPop(`${sign}${bt.value} !`, bt.value > 0 ? 'plus' : 'minus');
+              const isSkull = bt.value === -8;
+              spawnPop(isSkull ? '💀 SKULL!' : `${sign}${bt.value} !`, bt.value > 0 ? 'plus' : 'minus');
               addParticles(bt.x, bt.y, bt.value > 0 ? '#10B981' : '#EF4444', 24);
               if(bt.value > 0) sfx.bonus(); else sfx.miss();
+            } else if(bt.type === 'clown'){
+              // Clown curse!
+              activePowerUps.clownCurse.active = true;
+              activePowerUps.clownCurse.endTime = time - 6.0;
+              ball.r = 11 * 0.7; // Shrink by 30%
+              spawnPop('🤡 CURSED!', 'minus');
+              addParticles(bt.x, bt.y, '#FF1493', 35);
+              sfx.miss();
             } else if(bt.type === 'powerup'){
               // Power-up activation
               if(bt.value === 'bigHole'){
@@ -1084,6 +1320,10 @@
         if(activePowerUps.slowMo.active && time <= activePowerUps.slowMo.endTime){
           activePowerUps.slowMo.active = false;
         }
+        if(activePowerUps.clownCurse.active && time <= activePowerUps.clownCurse.endTime){
+          activePowerUps.clownCurse.active = false;
+          ball.r = 11; // Restore normal size
+        }
         
         // Spawn moving obstacles (randomly throughout game)
         nextObstacleSpawn -= effectiveDt;
@@ -1120,6 +1360,21 @@
               ball.vy *= -0.7;
             }
             addParticles(ball.x, ball.y, '#8B4513', 8);
+            sfx.wall();
+          }
+        });
+        
+        // Check static obstacle collisions
+        staticObstacles.forEach(obs => {
+          if(ball.x + ball.r > obs.x && ball.x - ball.r < obs.x + obs.width &&
+             ball.y + ball.r > obs.y && ball.y - ball.r < obs.y + obs.height){
+            // Simple bounce
+            if(Math.abs(ball.vx) > Math.abs(ball.vy)){
+              ball.vx *= -0.7;
+            } else {
+              ball.vy *= -0.7;
+            }
+            addParticles(ball.x, ball.y, '#555', 8);
             sfx.wall();
           }
         });
@@ -1196,6 +1451,90 @@
         ctx.fillStyle = 'rgba(255,255,255,0.2)';
         ctx.fillRect(0, canvas.height*0.6, canvas.width*0.32, canvas.height*0.4);
         
+        // Sand traps (brown circles that slow ball)
+        sandTraps.forEach(st => {
+          const pulse = 0.95 + Math.sin(Date.now() * 0.003) * 0.05;
+          const fadeAlpha = st.life < 2.0 ? st.life / 2.0 : 1.0;
+          
+          ctx.globalAlpha = fadeAlpha * 0.7;
+          
+          // Sand gradient
+          const sandGrad = ctx.createRadialGradient(st.x, st.y, 0, st.x, st.y, st.r);
+          sandGrad.addColorStop(0, '#DEB887');
+          sandGrad.addColorStop(1, '#8B7355');
+          ctx.fillStyle = sandGrad;
+          ctx.beginPath();
+          ctx.arc(st.x, st.y, st.r * pulse, 0, Math.PI*2);
+          ctx.fill();
+          
+          // Sand texture dots
+          ctx.fillStyle = 'rgba(139, 115, 85, 0.3)';
+          for(let i = 0; i < 15; i++){
+            const angle = (i / 15) * Math.PI * 2;
+            const dist = st.r * 0.6 * Math.random();
+            const px = st.x + Math.cos(angle) * dist;
+            const py = st.y + Math.sin(angle) * dist;
+            ctx.fillRect(px, py, 2, 2);
+          }
+          
+          ctx.globalAlpha = 1;
+        });
+        
+        // Boost/Hazard zones
+        zones.forEach(z => {
+          const pulse = 0.9 + Math.sin(Date.now() * 0.006) * 0.1;
+          const fadeAlpha = z.life < 2.0 ? z.life / 2.0 : 1.0;
+          
+          ctx.globalAlpha = fadeAlpha * 0.6;
+          
+          const zoneGrad = ctx.createRadialGradient(z.x, z.y, 0, z.x, z.y, z.r);
+          if(z.type === 'boost'){
+            zoneGrad.addColorStop(0, '#10B981');
+            zoneGrad.addColorStop(1, '#059669');
+          } else if(z.type === 'reverse'){
+            zoneGrad.addColorStop(0, '#EF4444');
+            zoneGrad.addColorStop(1, '#DC2626');
+          } else if(z.type === 'spin'){
+            zoneGrad.addColorStop(0, '#F59E0B');
+            zoneGrad.addColorStop(1, '#D97706');
+          }
+          
+          ctx.fillStyle = zoneGrad;
+          ctx.beginPath();
+          ctx.arc(z.x, z.y, z.r * pulse, 0, Math.PI*2);
+          ctx.fill();
+          
+          // Zone icon
+          ctx.globalAlpha = fadeAlpha;
+          ctx.fillStyle = '#fff';
+          ctx.font = 'bold 20px Arial';
+          ctx.textAlign = 'center';
+          ctx.textBaseline = 'middle';
+          const icon = z.type === 'boost' ? '🚀' : z.type === 'reverse' ? '↩️' : '🌀';
+          ctx.fillText(icon, z.x, z.y);
+          
+          ctx.globalAlpha = 1;
+        });
+        
+        // Static obstacles
+        staticObstacles.forEach(obs => {
+          const fadeAlpha = obs.life < 2.0 ? obs.life / 2.0 : 1.0;
+          ctx.globalAlpha = fadeAlpha;
+          
+          const obsGrad = ctx.createLinearGradient(obs.x, obs.y, obs.x + obs.width, obs.y + obs.height);
+          obsGrad.addColorStop(0, '#555');
+          obsGrad.addColorStop(1, '#333');
+          
+          ctx.fillStyle = obsGrad;
+          ctx.fillRect(obs.x, obs.y, obs.width, obs.height);
+          
+          ctx.strokeStyle = '#222';
+          ctx.lineWidth = 2;
+          ctx.strokeRect(obs.x, obs.y, obs.width, obs.height);
+          
+          ctx.globalAlpha = 1;
+        });
+        
         // Bonus targets
         bonusTargets.forEach(bt => {
           // Pulsing effect based on life remaining
@@ -1218,6 +1557,10 @@
             btGrad.addColorStop(0, '#FF69B4');
             btGrad.addColorStop(0.5, '#9B59B6');
             btGrad.addColorStop(1, '#3498DB');
+          } else if(bt.type === 'clown'){
+            // Clown curse - pink/purple gradient
+            btGrad.addColorStop(0, '#FF1493');
+            btGrad.addColorStop(1, '#8B008B');
           } else if(bt.type === 'powerup'){
             // Power-up colors
             if(bt.value === 'bigHole'){
@@ -1247,6 +1590,9 @@
           if(bt.mega){
             ctx.strokeStyle = '#FFD700';
             ctx.lineWidth = 3;
+          } else if(bt.type === 'clown'){
+            ctx.strokeStyle = '#FF1493';
+            ctx.lineWidth = 3;
           } else if(bt.type === 'powerup'){
             ctx.strokeStyle = '#fff';
             ctx.lineWidth = 2;
@@ -1265,13 +1611,16 @@
           let displayText = '';
           if(bt.mega){
             displayText = '💎';
+          } else if(bt.type === 'clown'){
+            displayText = '🤡';
           } else if(bt.type === 'powerup'){
             if(bt.value === 'bigHole') displayText = '🎯';
             else if(bt.value === 'starPower') displayText = '⭐';
             else if(bt.value === 'slowMo') displayText = '🐌';
           } else {
             const sign = bt.value > 0 ? '+' : '';
-            displayText = `${sign}${bt.value}`;
+            // Skull for -8 second bubble
+            displayText = bt.value === -8 ? '💀' : `${sign}${bt.value}`;
           }
           
           ctx.fillText(displayText, bt.x, bt.y);
@@ -1407,9 +1756,12 @@
         ctx.arc(ball.x+2.5, ball.y+3.5, ball.r, 0, Math.PI*2);
         ctx.fill();
 
-        // Ball - light blue at legendary level (100+)
+        // Ball - pink if clown cursed, light blue at legendary level (100+)
         const ballGradient = ctx.createRadialGradient(ball.x-3, ball.y-3, 0, ball.x, ball.y, ball.r);
-        if(score >= 100){
+        if(activePowerUps.clownCurse.active){
+          ballGradient.addColorStop(0, '#FFB6C1'); // Light pink
+          ballGradient.addColorStop(1, '#FF69B4'); // Hot pink
+        } else if(score >= 100){
           ballGradient.addColorStop(0, '#ADD8E6'); // Light blue
           ballGradient.addColorStop(1, '#87CEEB');
         } else {
