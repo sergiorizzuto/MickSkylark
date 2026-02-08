@@ -3,11 +3,83 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>Mad Libs - Mick Skylark: Mini Golf Prodigy</title>
+  <title>Mini Golf Mad Libs Game - Mick Skylark: Mini Golf Prodigy</title>
 
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="Play hilarious mini golf-themed Mad Libs featuring Mick Skylark characters! Fill in the blanks for funny stories about mini golf tournaments, crazy competitors, and wacky adventures. Family-friendly word game fun!" />
+  <meta name="keywords" content="mad libs, mini golf, word game, Mick Skylark, family game, comedy, fill in the blanks, funny stories, mini golf prodigy" />
+  <meta name="robots" content="index, follow" />
+  <meta name="author" content="Potato Eater Productions" />
+  <link rel="canonical" href="https://mickskylark.com/mad-lib.html" />
+  <meta name="theme-color" content="#FCD34D" />
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://mickskylark.com/mad-lib.html" />
+  <meta property="og:title" content="Mini Golf Mad Libs - Hilarious Word Game!" />
+  <meta property="og:description" content="Create funny mini golf stories with Mick Skylark characters! Fill in the blanks for laugh-out-loud adventures. Play now!" />
+  <meta property="og:image" content="https://mickskylark.com/og-image.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:site_name" content="Mick Skylark: Mini Golf Prodigy" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:url" content="https://mickskylark.com/mad-lib.html" />
+  <meta name="twitter:title" content="Mini Golf Mad Libs - Hilarious Word Game!" />
+  <meta name="twitter:description" content="Create funny mini golf stories with Mick Skylark characters! Fill in the blanks for laugh-out-loud adventures. Play now!" />
+  <meta name="twitter:image" content="https://mickskylark.com/og-image.jpg" />
+
+  <!-- Structured Data / JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Game",
+    "name": "Mini Golf Mad Libs",
+    "description": "Interactive Mad Libs word game featuring characters from Mick Skylark: Mini Golf Prodigy. Fill in the blanks to create hilarious mini golf stories!",
+    "url": "https://mickskylark.com/mad-lib.html",
+    "genre": "Word Game",
+    "numberOfPlayers": "1+",
+    "gamePlatform": "Web Browser",
+    "isAccessibleForFree": true,
+    "parentOrganization": {
+      "@type": "Organization",
+      "name": "Potato Eater Productions"
+    },
+    "about": {
+      "@type": "Movie",
+      "name": "Mick Skylark: Mini Golf Prodigy",
+      "url": "https://mickskylark.com"
+    }
+  }
+  </script>
+
+  <!-- Favicon -->
+  <link rel="icon" href="favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Analytics Placeholders (SAFE: only runs if you paste real IDs) -->
+  <script>
+    // To enable GA4: set window.__GA4_ID__ = "G-XXXXXXX";
+    window.__GA4_ID__ = window.__GA4_ID__ || "";
+    (function(){
+      if(!window.__GA4_ID__) return;
+      var s=document.createElement("script");
+      s.async=true;
+      s.src="https://www.googletagmanager.com/gtag/js?id="+encodeURIComponent(window.__GA4_ID__);
+      document.head.appendChild(s);
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      window.gtag = gtag;
+      gtag('js', new Date());
+      gtag('config', window.__GA4_ID__, { anonymize_ip: true });
+    })();
+  </script>
 
   <style>
     :root{
@@ -287,10 +359,51 @@
       .controls{gap:10px;}
       .btn{padding:10px 18px;font-size:0.95rem;}
     }
+
+    /* Print Styles */
+    @media print{
+      .topbar, .controls, .input-form, .share-section, .warning, .stats-badge{
+        display:none!important;
+      }
+      body{background:#fff;padding-top:20px;}
+      .card{box-shadow:none;border:2px solid #ddd;}
+      .story-section{color:#000;}
+      h1{color:#000;}
+    }
+
+    /* Stats Badge */
+    .stats-badge{
+      position:fixed;
+      top:80px;
+      right:20px;
+      background:rgba(255,255,255,0.95);
+      padding:12px 18px;
+      border-radius:12px;
+      box-shadow:0 4px 12px rgba(0,0,0,0.15);
+      font-weight:700;
+      color:var(--primary);
+      font-size:0.9rem;
+      z-index:999;
+    }
+    .stats-number{
+      color:var(--gold);
+      font-size:1.3rem;
+      margin-right:4px;
+    }
+
+    @media (max-width:768px){
+      .stats-badge{top:70px;right:10px;padding:8px 12px;font-size:0.8rem;}
+      .stats-number{font-size:1.1rem;}
+    }
   </style>
 </head>
 
 <body>
+  <!-- Stats Badge -->
+  <div class="stats-badge" id="statsBadge">
+    📝 <span class="stats-number" id="statsCount">0</span> Stories Created
+  </div>
+
   <!-- Navigation -->
   <nav class="topbar">
     <div class="nav-wrap">
@@ -309,6 +422,7 @@
       <button class="btn primary" id="generateBtn">🎲 New Mad Lib</button>
       <button class="btn secondary" id="clearBtn">🧹 Clear Answers</button>
       <button class="btn green" id="shareBtn">📤 Share Story</button>
+      <button class="btn primary" id="printBtn">🖨️ Print</button>
     </div>
 
     <!-- Input Form (shown before completion) -->
@@ -638,6 +752,9 @@ Mick laughed and gave him a high-five. Having Gordo around always made tournamen
       document.getElementById('inputCard').style.display = 'none';
       document.getElementById('storyCard').style.display = 'block';
       document.getElementById('shareSection').style.display = 'none';
+      
+      // Increment stats counter
+      incrementStats();
     }
 
     // Share story
@@ -697,6 +814,34 @@ Mick laughed and gave him a high-five. Having Gordo around always made tournamen
     document.getElementById('clearBtn').addEventListener('click', clearInputs);
     document.getElementById('completeBtn').addEventListener('click', completeStory);
     document.getElementById('shareBtn').addEventListener('click', shareStory);
+
+    // Stats Counter
+    let storiesCreated = parseInt(localStorage.getItem('madLibsCreated') || '0');
+    const statsCount = document.getElementById('statsCount');
+    statsCount.textContent = storiesCreated;
+
+    function incrementStats() {
+      storiesCreated++;
+      localStorage.setItem('madLibsCreated', storiesCreated);
+      statsCount.textContent = storiesCreated;
+      
+      // Animate the counter
+      const badge = document.getElementById('statsBadge');
+      badge.style.transform = 'scale(1.1)';
+      setTimeout(() => {
+        badge.style.transform = 'scale(1)';
+      }, 200);
+    }
+
+    // Print Functionality
+    const printBtn = document.getElementById('printBtn');
+    printBtn.addEventListener('click', () => {
+      if (document.getElementById('storyCard').style.display === 'none') {
+        alert('Complete a story first before printing!');
+        return;
+      }
+      window.print();
+    });
 
     // Initialize with first mad lib
     generateMadLib();
