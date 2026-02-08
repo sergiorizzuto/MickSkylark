@@ -597,6 +597,10 @@
       let sandTraps = [];
       let nextSandTrap = 0;
       
+      // Water traps (random spawn)
+      let waterTraps = [];
+      let nextWaterTrap = rand(6, 12);
+      
       // Mega bonus tracker
       let nextMegaBonusCheck = 1.0; // Check every second
       
@@ -664,19 +668,27 @@
       
       // Level color schemes
       const levelColors = [
-        { start: '#A8E6A1', end: '#7FD87F', name: 'Green' },      // 0-9: Regular green
-        { start: '#4A7C59', end: '#2D5F3F', name: 'Dark Green' }, // 10-19: Dark green
-        { start: '#87CEEB', end: '#5DADE2', name: 'Blue' },       // 20-29: Blue
-        { start: '#FF6B6B', end: '#C92A2A', name: 'Red' },        // 30-39: Red
-        { start: '#FFD93D', end: '#F4C430', name: 'Yellow' },     // 40-49: Yellow
-        { start: '#FF8C42', end: '#D4682A', name: 'Orange' },     // 50-59: Orange
-        { start: '#FFB3D9', end: '#FF69B4', name: 'Pink' },       // 60-69: Pink
-        { start: '#6495ED', end: '#4169E1', name: 'Legendary' }   // 100+: Legendary blue
+        { start: '#A8E6A1', end: '#7FD87F', name: 'Green' },          // 0-9
+        { start: '#4A7C59', end: '#2D5F3F', name: 'Dark Green' },     // 10-19
+        { start: '#ADD8E6', end: '#87CEEB', name: 'Light Blue' },     // 20-29
+        { start: '#1E3A8A', end: '#1E40AF', name: 'Dark Blue' },      // 30-39
+        { start: '#FFFACD', end: '#FFE66D', name: 'Light Yellow' },   // 40-49
+        { start: '#DAA520', end: '#B8860B', name: 'Dark Yellow' },    // 50-59
+        { start: '#FFD1A9', end: '#FFB347', name: 'Light Orange' },   // 60-69
+        { start: '#FF8C00', end: '#D2691E', name: 'Dark Orange' },    // 70-79
+        { start: '#AFEEEE', end: '#7FFFD4', name: 'Light Teal' },     // 80-89
+        { start: '#008B8B', end: '#006666', name: 'Dark Teal' },      // 90-99
+        { start: '#D2B48C', end: '#BC9A6B', name: 'Light Brown' },    // 100-109
+        { start: '#8B4513', end: '#654321', name: 'Dark Brown' },     // 110-119
+        { start: '#FFFFFF', end: '#F0F0F0', name: 'White' },          // 120-129
+        { start: '#FFB3D9', end: '#FF69B4', name: 'Pink' }            // 130-139
+        // After 140, it wraps back to green (0)
       ];
       
       function getLevelFromScore(s){
-        if(s >= 100) return 7; // Legendary
-        return Math.min(Math.floor(s / 10), 6);
+        // Rotate through 14 colors, then repeat
+        const colorIndex = Math.floor(s / 10) % 14;
+        return colorIndex;
       }
       
       function getRandomBonus(){
@@ -838,6 +850,16 @@
         });
       }
       
+      function spawnWaterTrap(){
+        const pad = 70;
+        waterTraps.push({
+          x: rand(pad, canvas.width - pad),
+          y: rand(pad, canvas.height - pad),
+          r: 40,
+          life: rand(10, 15)
+        });
+      }
+      
       function spawnClown(){
         const pad = 80;
         bonusTargets.push({
@@ -895,6 +917,8 @@
         nextZoneSpawn = 0;
         sandTraps = [];
         nextSandTrap = 0;
+        waterTraps = [];
+        nextWaterTrap = rand(6, 12);
         nextMegaBonusCheck = 1.0;
         nextClownCheck = 1.0;
         activePowerUps = {
@@ -1166,6 +1190,19 @@
           return st.life > 0;
         });
         
+        // Spawn water traps randomly
+        nextWaterTrap -= effectiveDt;
+        if(nextWaterTrap <= 0){
+          spawnWaterTrap();
+          nextWaterTrap = rand(8, 16);
+        }
+        
+        // Update water traps
+        waterTraps = waterTraps.filter(wt => {
+          wt.life -= effectiveDt;
+          return wt.life > 0;
+        });
+        
         // Clown spawn after level 100 (1/250 chance per second)
         if(score >= 100){
           nextClownCheck -= effectiveDt;
@@ -1206,6 +1243,28 @@
         }
         
         if(bounced) sfx.wall();
+        
+        // Check water trap collisions (splash and reset)
+        waterTraps.forEach(wt => {
+          const dist = Math.hypot(ball.x - wt.x, ball.y - wt.y);
+          if(dist < wt.r){
+            // SPLASH! Reset ball to starting position
+            const pos = randomBallPosition();
+            ball.x = pos.x;
+            ball.y = pos.y;
+            ball.vx = 0;
+            ball.vy = 0;
+            
+            // Splash effects
+            addParticles(wt.x, wt.y, '#4DA6FF', 30);
+            spawnPop('💦 SPLASH!', 'minus');
+            sfx.miss();
+            
+            // Penalty: lose 1 second
+            time = Math.max(0, time - 1.0);
+            timeEl.textContent = time.toFixed(1);
+          }
+        });
 
         // Check sand trap friction (50% slower)
         let inSandTrap = false;
@@ -1215,41 +1274,52 @@
             inSandTrap = true;
           }
         });
-        
-        // Check zone effects
-        zones.forEach(z => {
-          const dist = Math.hypot(ball.x - z.x, ball.y - z.y);
-          if(dist < z.r && speed > 0.5){
-            if(z.type === 'boost'){
-              // Speed boost!
-              const boostMultiplier = 1.8;
-              ball.vx *= boostMultiplier;
-              ball.vy *= boostMultiplier;
-              addParticles(ball.x, ball.y, '#10B981', 16);
-              z.life = 0; // Remove after use
-            } else if(z.type === 'reverse'){
-              // Reverse direction!
-              ball.vx *= -1.2;
-              ball.vy *= -1.2;
-              addParticles(ball.x, ball.y, '#EF4444', 16);
-              z.life = 0;
-            } else if(z.type === 'spin'){
-              // Spin/curve effect
-              const temp = ball.vx;
-              ball.vx = -ball.vy * 1.1;
-              ball.vy = temp * 1.1;
-              addParticles(ball.x, ball.y, '#FFD93D', 16);
-              z.life = 0;
-            }
-          }
-        });
 
         // Friction AFTER bounce (with sand trap penalty)
         const frictionMultiplier = inSandTrap ? 0.5 : 1.0;
         ball.vx *= (0.986 * frictionMultiplier);
         ball.vy *= (0.986 * frictionMultiplier);
 
-        const speed = Math.hypot(ball.vx, ball.vy);
+        let speed = Math.hypot(ball.vx, ball.vy);
+        
+        // Check zone effects (only when ball is moving fast enough)
+        if(speed > 0.5){
+          zones.forEach(z => {
+            const dist = Math.hypot(ball.x - z.x, ball.y - z.y);
+            if(dist < z.r && !z.triggered){
+              z.triggered = true; // Prevent multiple triggers
+              
+              if(z.type === 'boost'){
+                // Speed boost!
+                const boostMultiplier = 1.8;
+                ball.vx *= boostMultiplier;
+                ball.vy *= boostMultiplier;
+                addParticles(ball.x, ball.y, '#10B981', 16);
+                sfx.bonus();
+                z.life = 0; // Remove after use
+              } else if(z.type === 'reverse'){
+                // Reverse direction!
+                ball.vx *= -1.2;
+                ball.vy *= -1.2;
+                addParticles(ball.x, ball.y, '#EF4444', 16);
+                sfx.wall();
+                z.life = 0;
+              } else if(z.type === 'spin'){
+                // Spin/curve effect
+                const temp = ball.vx;
+                ball.vx = -ball.vy * 1.1;
+                ball.vy = temp * 1.1;
+                addParticles(ball.x, ball.y, '#FFD93D', 16);
+                sfx.hit();
+                z.life = 0;
+              }
+              
+              // Recalculate speed after zone effect
+              speed = Math.hypot(ball.vx, ball.vy);
+            }
+          });
+        }
+        
         if(speed < 0.06){ ball.vx = 0; ball.vy = 0; }
         
         // Check bonus target collisions
@@ -1475,6 +1545,38 @@
             const px = st.x + Math.cos(angle) * dist;
             const py = st.y + Math.sin(angle) * dist;
             ctx.fillRect(px, py, 2, 2);
+          }
+          
+          ctx.globalAlpha = 1;
+        });
+        
+        // Water traps (blue circles that splash and reset)
+        waterTraps.forEach(wt => {
+          const pulse = 0.92 + Math.sin(Date.now() * 0.004) * 0.08;
+          const fadeAlpha = wt.life < 2.0 ? wt.life / 2.0 : 1.0;
+          
+          ctx.globalAlpha = fadeAlpha * 0.75;
+          
+          // Water gradient
+          const waterGrad = ctx.createRadialGradient(wt.x, wt.y, 0, wt.x, wt.y, wt.r);
+          waterGrad.addColorStop(0, '#87CEEB');
+          waterGrad.addColorStop(0.6, '#4DA6FF');
+          waterGrad.addColorStop(1, '#1E90FF');
+          ctx.fillStyle = waterGrad;
+          ctx.beginPath();
+          ctx.arc(wt.x, wt.y, wt.r * pulse, 0, Math.PI*2);
+          ctx.fill();
+          
+          // Water ripple effect
+          ctx.globalAlpha = fadeAlpha * 0.3;
+          ctx.strokeStyle = '#fff';
+          ctx.lineWidth = 2;
+          for(let i = 0; i < 3; i++){
+            const ripplePhase = (Date.now() * 0.003 + i * 0.3) % 1;
+            const rippleRadius = wt.r * (0.5 + ripplePhase * 0.4);
+            ctx.beginPath();
+            ctx.arc(wt.x, wt.y, rippleRadius, 0, Math.PI*2);
+            ctx.stroke();
           }
           
           ctx.globalAlpha = 1;
