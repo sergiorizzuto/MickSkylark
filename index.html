@@ -2082,6 +2082,24 @@ setActiveNav(sections[0]?.id || 'home');
             }
             autoScrollFilms();
         }
+        // Randomize BTS photos on page load
+(function() {
+    const container = document.querySelector('#bts-slideshow .slideshow-container');
+    if (!container) return;
+    
+    // Get all slide elements
+    const slides = Array.from(container.querySelectorAll('.slide'));
+    
+    // Fisher-Yates shuffle algorithm
+    for (let i = slides.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [slides[i], slides[j]] = [slides[j], slides[i]];
+    }
+    
+    // Clear container and re-append in random order
+    container.innerHTML = '';
+    slides.forEach(slide => container.appendChild(slide));
+})();
     </script>
 </body>
 </html>
