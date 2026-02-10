@@ -46,13 +46,11 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
 
-    <!-- Favicon (optional if you have it) -->
+    <!-- Favicon -->
     <link rel="icon" href="favicon.ico" />
 
-    <!-- Pixels / Analytics placeholders (SAFE: only runs if you paste real IDs) -->
     <!-- Google tag (gtag.js) -->
     <script>
-      // To enable GA4: set window.__GA4_ID__ = "G-XXXXXXX";
       window.__GA4_ID__ = window.__GA4_ID__ || "";
       (function(){
         if(!window.__GA4_ID__) return;
@@ -70,7 +68,6 @@
 
     <!-- Meta Pixel -->
     <script>
-      // To enable Meta Pixel: set window.__META_PIXEL_ID__ = "1234567890";
       window.__META_PIXEL_ID__ = window.__META_PIXEL_ID__ || "";
       (function(){
         if(!window.__META_PIXEL_ID__) return;
@@ -86,86 +83,49 @@
         fbq('track', 'PageView');
       })();
     </script>
-    <noscript>
-      <!-- If you enable Meta Pixel, also add your real pixel ID in the image URL below -->
-    </noscript>
 
     <style>
         /* Sticky RSVP Button */
-.sticky-rsvp {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    z-index: 999;
-    background: linear-gradient(135deg, #1E3A8A 0%, #1E40AF 100%);
-    color: #fff;
-    padding: 16px 24px;
-    border-radius: 50px;
-    text-decoration: none;
-    font-weight: 900;
-    font-size: 1.1rem;
-    box-shadow: 0 8px 25px rgba(30, 58, 138, 0.4);
-    transition: all 0.3s ease;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 2px;
-    animation: pulse 2s ease-in-out infinite;
-    cursor: pointer;
-}
+        .sticky-rsvp {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 999;
+            background: linear-gradient(135deg, #1E3A8A 0%, #1E40AF 100%);
+            color: #fff;
+            padding: 16px 24px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 900;
+            font-size: 1.1rem;
+            box-shadow: 0 8px 25px rgba(30, 58, 138, 0.4);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2px;
+            animation: pulse 2s ease-in-out infinite;
+            cursor: pointer;
+        }
+        .sticky-rsvp:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 12px 35px rgba(30, 58, 138, 0.5);
+            background: linear-gradient(135deg, #1E40AF 0%, #2563EB 100%);
+        }
+        .rsvp-text { font-size: 1.1rem; line-height: 1; }
+        .rsvp-subtext { font-size: 0.75rem; font-weight: 700; opacity: 0.9; color: #FCD34D; }
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 8px 25px rgba(30, 58, 138, 0.4); }
+            50% { box-shadow: 0 8px 35px rgba(30, 58, 138, 0.6), 0 0 0 8px rgba(30, 58, 138, 0.1); }
+        }
+        @media (max-width: 768px) {
+            .sticky-rsvp { bottom: 15px; right: 15px; padding: 14px 20px; font-size: 1rem; }
+            .rsvp-text { font-size: 1rem; }
+            .rsvp-subtext { font-size: 0.7rem; }
+        }
+        .sticky-rsvp.hidden { opacity: 0; pointer-events: none; }
 
-.sticky-rsvp:hover {
-    transform: translateY(-3px) scale(1.05);
-    box-shadow: 0 12px 35px rgba(30, 58, 138, 0.5);
-    background: linear-gradient(135deg, #1E40AF 0%, #2563EB 100%);
-}
-
-.rsvp-text {
-    font-size: 1.1rem;
-    line-height: 1;
-}
-
-.rsvp-subtext {
-    font-size: 0.75rem;
-    font-weight: 700;
-    opacity: 0.9;
-    color: #FCD34D;
-}
-
-@keyframes pulse {
-    0%, 100% {
-        box-shadow: 0 8px 25px rgba(30, 58, 138, 0.4);
-    }
-    50% {
-        box-shadow: 0 8px 35px rgba(30, 58, 138, 0.6),
-                    0 0 0 8px rgba(30, 58, 138, 0.1);
-    }
-}
-
-/* Mobile adjustments */
-@media (max-width: 768px) {
-    .sticky-rsvp {
-        bottom: 15px;
-        right: 15px;
-        padding: 14px 20px;
-        font-size: 1rem;
-    }
-    
-    .rsvp-text {
-        font-size: 1rem;
-    }
-    
-    .rsvp-subtext {
-        font-size: 0.7rem;
-    }
-}
-
-/* Hide on RSVP section (no need for button when already there) */
-.sticky-rsvp.hidden {
-    opacity: 0;
-    pointer-events: none;
-}
-        /* root */
+        /* Root */
         :root {
             --primary: #1E3A8A;
             --primary-dark: #1E40AF;
@@ -173,354 +133,200 @@
             --gold: #FBBF24;
             --light: #FFFFFF;
             --dark: #1F2937;
-            --accent-blue: #2563EB; /* standout link color */
+            --accent-blue: #2563EB;
         }
-
         * { margin: 0; padding: 0; box-sizing: border-box; }
-
         html { scroll-behavior: smooth; }
-
         body {
             font-family: 'Poppins', sans-serif;
             color: var(--dark);
             overflow-x: hidden;
-            padding-top: 72px; /* slightly taller navbar */
+            padding-top: 72px;
             background: #fff;
         }
 
         /* Navigation */
         .navbar {
-            position: fixed;
-            top: 0; left: 0; right: 0;
+            position: fixed; top: 0; left: 0; right: 0;
             background: rgba(255,255,255,0.92);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
-            z-index: 1000;
-            padding: 10px 0;
+            z-index: 1000; padding: 10px 0;
         }
-
         .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            flex-wrap: wrap;
-            padding: 0 14px;
+            max-width: 1200px; margin: 0 auto;
+            display: flex; justify-content: center;
+            gap: 10px; flex-wrap: wrap; padding: 0 14px;
         }
-
         .nav-link {
-            color: var(--primary);
-            text-decoration: none;
-            font-weight: 600;
-            padding: 8px 14px;
-            border-radius: 999px;
-            transition: all 0.2s ease;
-            font-size: 0.9rem;
-            line-height: 1;
-            border: 1px solid transparent;
-            outline: none;
+            color: var(--primary); text-decoration: none; font-weight: 600;
+            padding: 8px 14px; border-radius: 999px;
+            transition: all 0.2s ease; font-size: 0.9rem;
+            line-height: 1; border: 1px solid transparent; outline: none;
         }
-
-        .nav-link:hover {
-            background: var(--primary);
-            color: white;
-        }
-
-        /* Active section highlight */
+        .nav-link:hover { background: var(--primary); color: white; }
         .nav-link.active {
-            background: var(--primary);
-            color: #fff;
+            background: var(--primary); color: #fff;
             box-shadow: 0 6px 18px rgba(30, 58, 138, 0.25);
         }
-
-        /* Standout links in header */
         .nav-link.nav-standout {
             color: var(--accent-blue);
             border-color: rgba(37, 99, 235, 0.25);
             background: rgba(37, 99, 235, 0.06);
             font-weight: 700;
         }
-        .nav-link.nav-standout:hover {
-            background: var(--accent-blue);
-            color: #fff;
-            border-color: transparent;
-        }
-        .nav-link.nav-standout.active {
-            background: var(--accent-blue);
-            color: #fff;
-        }
-
-        /* Better touch targets on mobile */
+        .nav-link.nav-standout:hover { background: var(--accent-blue); color: #fff; border-color: transparent; }
+        .nav-link.nav-standout.active { background: var(--accent-blue); color: #fff; }
         @media (max-width: 768px) {
             body { padding-top: 130px; }
             .nav-container { gap: 8px; justify-content: flex-start; }
             .nav-link { padding: 10px 14px; font-size: 0.95rem; }
         }
 
-        .section-blue {
-            background: linear-gradient(135deg, #87CEEB 0%, #5DADE2 100%);
-            padding: 80px 20px;
-        }
+        /* Sections */
+        .section-blue { background: linear-gradient(135deg, #87CEEB 0%, #5DADE2 100%); padding: 80px 20px; }
+        .section-yellow { background: linear-gradient(135deg, #FDE68A 0%, #FCD34D 100%); padding: 80px 20px; }
+        .container { max-width: 1200px; margin: 0 auto; }
 
-        .section-yellow {
-            background: linear-gradient(135deg, #FDE68A 0%, #FCD34D 100%);
-            padding: 80px 20px;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
+        /* Hero */
         .hero { text-align: center; padding: 40px 20px 80px; }
-
-       .hero img {
-    width: 100%;
-    max-width: 600px;
-    margin: 0 auto 10px;
-    display: block;
-    border-radius: 20px;
-    opacity: 0;
-    animation: logoReveal 1.5s ease-out forwards;
-}
-
+        .hero img {
+            width: 100%; max-width: 600px; margin: 0 auto 10px;
+            display: block; border-radius: 20px; opacity: 0;
+            animation: logoReveal 1.5s ease-out forwards;
+        }
         @keyframes logoReveal {
             0% { opacity: 0; transform: scale(0.8) translateY(-30px); }
             60% { transform: scale(1.05) translateY(0); }
             100% { opacity: 1; transform: scale(1) translateY(0); }
         }
-
         .scroll-cta {
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: var(--primary);
-            margin: 8px 0 30px 0;
-            animation: bounce 2s infinite;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            font-size: 1.2rem; font-weight: 700; color: var(--primary);
+            margin: 8px 0 30px 0; animation: bounce 2s infinite;
+            text-transform: uppercase; letter-spacing: 1px;
         }
-
         @keyframes bounce {
             0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
             40% { transform: translateY(-10px); }
             60% { transform: translateY(-5px); }
         }
 
-        .slider-nav { position: relative; margin: 40px 0; }
-
+        /* Slideshow */
         .slideshow-wrapper {
-            overflow-x: scroll;
-            overflow-y: hidden;
-            white-space: nowrap;
-            padding: 20px 0;
-            -webkit-overflow-scrolling: touch;
-            scrollbar-width: thin;
-            scrollbar-color: var(--primary) transparent;
-            cursor: grab;
+            overflow-x: scroll; overflow-y: hidden; white-space: nowrap;
+            padding: 20px 0; -webkit-overflow-scrolling: touch;
+            scrollbar-width: thin; scrollbar-color: var(--primary) transparent; cursor: grab;
         }
         .slideshow-wrapper:active { cursor: grabbing; }
         .slideshow-wrapper::-webkit-scrollbar { height: 8px; }
         .slideshow-wrapper::-webkit-scrollbar-track { background: rgba(0,0,0,0.1); border-radius: 10px; }
         .slideshow-wrapper::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 10px; }
-
         .slideshow-container { display: inline-flex; gap: 20px; padding: 0 10px; }
-
         .slide {
-            display: inline-block;
-            width: 400px;
-            height: 300px;
-            flex-shrink: 0;
-            border-radius: 15px;
-            overflow: hidden;
+            display: inline-block; width: 400px; height: 300px; flex-shrink: 0;
+            border-radius: 15px; overflow: hidden;
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
         }
         .slide img { width: 100%; height: 100%; object-fit: cover; display: block; }
-
         @media (max-width: 768px) {
             .slide { width: 300px; height: 225px; }
             .scroll-cta { font-size: 1.05rem; }
         }
 
         .section-title {
-            font-size: 3rem;
-            font-weight: 700;
-            text-align: center;
-            margin-bottom: 50px;
-            color: var(--primary);
+            font-size: 3rem; font-weight: 700; text-align: center;
+            margin-bottom: 50px; color: var(--primary);
         }
+        @media (max-width: 768px) { .section-title { font-size: 2.2rem; margin-bottom: 30px; } }
 
-        @media (max-width: 768px) {
-            .section-title { font-size: 2.2rem; margin-bottom: 30px; }
-        }
-
+        /* Logline */
         .logline {
-            font-size: 1.6rem;
-            line-height: 1.9;
-            max-width: 900px;
-            margin: 50px auto;
-            text-align: center;
-            color: white;
-            font-weight: 600;
-            padding: 45px 50px;
+            font-size: 1.6rem; line-height: 1.9; max-width: 900px; margin: 50px auto;
+            text-align: center; color: white; font-weight: 600; padding: 45px 50px;
             background: linear-gradient(135deg, #1E3A8A 0%, #3B82F6 50%, #1E3A8A 100%);
-            background-size: 200% 200%;
-            animation: gradientShift 8s ease infinite;
+            background-size: 200% 200%; animation: gradientShift 8s ease infinite;
             border-radius: 25px;
-            box-shadow: 0 15px 50px rgba(30, 58, 138, 0.35),
-                        0 0 0 1px rgba(255, 255, 255, 0.1) inset;
-            position: relative;
-            overflow: hidden;
+            box-shadow: 0 15px 50px rgba(30, 58, 138, 0.35), 0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+            position: relative; overflow: hidden;
         }
-
         .logline::before {
-            content: '';
-            position: absolute;
+            content: ''; position: absolute;
             top: -2px; left: -2px; right: -2px; bottom: -2px;
             background: linear-gradient(45deg, #FCD34D, #FBBF24, #FCD34D);
-            border-radius: 25px;
-            z-index: -1;
-            opacity: 0.25;
+            border-radius: 25px; z-index: -1; opacity: 0.25;
             animation: borderPulse 3s ease-in-out infinite;
         }
-
         .logline::after {
-            content: '🎬';
-            position: absolute;
-            font-size: 3rem;
-            top: 15px;
-            right: 20px;
-            opacity: 0.2;
+            content: '🎬'; position: absolute; font-size: 3rem;
+            top: 15px; right: 20px; opacity: 0.2;
             animation: float 3s ease-in-out infinite;
         }
-
-        @keyframes gradientShift {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-        }
-        @keyframes borderPulse {
-            0%, 100% { transform: scale(1); opacity: 0.25; }
-            50% { transform: scale(1.02); opacity: 0.45; }
-        }
-        @keyframes float {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-10px) rotate(5deg); }
-        }
-
-        @media (max-width: 768px) {
-            .logline { font-size: 1.15rem; padding: 30px 22px; margin: 30px auto; }
-        }
+        @keyframes gradientShift { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+        @keyframes borderPulse { 0%, 100% { transform: scale(1); opacity: 0.25; } 50% { transform: scale(1.02); opacity: 0.45; } }
+        @keyframes float { 0%, 100% { transform: translateY(0px) rotate(0deg); } 50% { transform: translateY(-10px) rotate(5deg); } }
+        @media (max-width: 768px) { .logline { font-size: 1.15rem; padding: 30px 22px; margin: 30px auto; } }
 
         .rating-badge {
             display: inline-block;
             background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-            color: white;
-            padding: 14px 30px;
-            border-radius: 50px;
+            color: white; padding: 14px 30px; border-radius: 50px;
             box-shadow: 0 6px 25px rgba(30, 58, 138, 0.35);
-            margin: 20px auto;
-            text-align: center;
-            font-size: 1.15rem;
-            font-weight: 700;
-            animation: ratingPulse 2s ease-in-out infinite;
+            margin: 20px auto; text-align: center; font-size: 1.15rem;
+            font-weight: 700; animation: ratingPulse 2s ease-in-out infinite;
         }
-
         @keyframes ratingPulse {
             0%, 100% { transform: scale(1); box-shadow: 0 6px 25px rgba(30, 58, 138, 0.35); }
             50% { transform: scale(1.04); box-shadow: 0 8px 30px rgba(30, 58, 138, 0.55); }
         }
 
-        .links-section {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-top: 30px;
-        }
-
         .link-btn {
-            padding: 15px 35px;
-            background: var(--primary);
-            color: white;
-            text-decoration: none;
-            border-radius: 30px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(30, 58, 138, 0.3);
+            padding: 15px 35px; background: var(--primary); color: white;
+            text-decoration: none; border-radius: 30px; font-weight: 600;
+            transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(30, 58, 138, 0.3);
         }
-        .link-btn:hover {
-            background: var(--primary-dark);
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(30, 58, 138, 0.4);
-        }
+        .link-btn:hover { background: var(--primary-dark); transform: translateY(-3px); box-shadow: 0 6px 20px rgba(30, 58, 138, 0.4); }
         .link-btn.secondary { background: var(--secondary); color: var(--dark); }
         .link-btn.secondary:hover { background: var(--gold); }
 
+        /* Comparable Films */
         .comparable-films-wrapper {
-            overflow-x: scroll;
-            overflow-y: hidden;
-            white-space: nowrap;
-            padding: 20px 0;
-            -webkit-overflow-scrolling: touch;
-            scrollbar-width: thin;
-            scrollbar-color: var(--primary) transparent;
-            cursor: grab;
+            overflow-x: scroll; overflow-y: hidden; white-space: nowrap;
+            padding: 20px 0; -webkit-overflow-scrolling: touch;
+            scrollbar-width: thin; scrollbar-color: var(--primary) transparent; cursor: grab;
         }
         .comparable-films-wrapper:active { cursor: grabbing; }
         .comparable-films-wrapper::-webkit-scrollbar { height: 8px; }
         .comparable-films-wrapper::-webkit-scrollbar-track { background: rgba(0,0,0,0.1); border-radius: 10px; }
         .comparable-films-wrapper::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 10px; }
-
         .comparable-films { display: inline-flex; gap: 30px; padding: 0 10px; }
-
         .film-poster {
-            display: inline-block;
-            width: 250px;
-            flex-shrink: 0;
-            transition: transform 0.3s ease;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+            display: inline-block; width: 250px; flex-shrink: 0;
+            transition: transform 0.3s ease; border-radius: 10px;
+            overflow: hidden; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
         }
-        .film-poster:hover {
-            transform: translateY(-10px) scale(1.05);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
-        }
+        .film-poster:hover { transform: translateY(-10px) scale(1.05); box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25); }
         .film-poster img { width: 100%; height: auto; display: block; }
 
+        /* RSVP */
         .screener-info { text-align: center; margin-bottom: 40px; }
         .screener-date { font-size: 2rem; font-weight: 700; color: var(--primary); margin-bottom: 15px; }
         .screener-note { font-size: 1.2rem; color: var(--dark); }
-
-        .countdown-timer {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin: 30px 0;
-            flex-wrap: wrap;
-        }
+        .countdown-timer { display: flex; justify-content: center; gap: 20px; margin: 30px 0; flex-wrap: wrap; }
         .countdown-box {
-            background: white;
-            padding: 20px 25px;
-            border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            min-width: 100px;
+            background: white; padding: 20px 25px; border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); min-width: 100px;
         }
         .countdown-number { font-size: 2.5rem; font-weight: 700; color: var(--primary); display: block; }
         .countdown-label { font-size: 0.9rem; color: #666; text-transform: uppercase; letter-spacing: 1px; }
 
+        /* Social */
         .social-share { text-align: center; margin-top: 30px; }
         .share-buttons { display: flex; justify-content: center; gap: 15px; margin-top: 15px; flex-wrap: wrap; }
         .share-btn {
-            padding: 12px 25px;
-            border-radius: 30px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
+            padding: 12px 25px; border-radius: 30px; text-decoration: none;
+            font-weight: 600; transition: all 0.3s ease;
+            display: inline-flex; align-items: center; gap: 8px;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
         .share-btn.facebook { background: #1877F2; color: white; }
@@ -528,58 +334,30 @@
         .share-btn.email { background: #666; color: white; }
         .share-btn:hover { transform: translateY(-3px); box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); }
 
+        /* Game */
         .game-container {
-            background: white;
-            padding: 40px 20px;
-            border-radius: 20px;
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
-            text-align: center;
+            background: white; padding: 40px 20px; border-radius: 20px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15); text-align: center;
         }
-
         .game-canvas {
-            border: 3px solid var(--primary);
-            border-radius: 15px;
-            cursor: crosshair;
-            margin: 20px auto;
-            display: block;
-            max-width: 100%;
-            height: auto;
-            position: relative;
-            touch-action: none; /* better mobile touch */
+            border: 3px solid var(--primary); border-radius: 15px; cursor: crosshair;
+            margin: 20px auto; display: block; max-width: 100%; height: auto;
+            position: relative; touch-action: none;
         }
-
-        .controls {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-        }
-
+        .controls { display: flex; justify-content: center; gap: 15px; margin-bottom: 20px; flex-wrap: wrap; }
         .control-btn {
-            background: white;
-            border: 2px solid var(--primary);
-            border-radius: 50%;
-            width: 45px;
-            height: 45px;
-            cursor: pointer;
-            font-size: 1.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.2s ease;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            background: white; border: 2px solid var(--primary); border-radius: 50%;
+            width: 45px; height: 45px; cursor: pointer; font-size: 1.5rem;
+            display: flex; align-items: center; justify-content: center;
+            transition: all 0.2s ease; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         }
         .control-btn:hover { transform: scale(1.06); box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); }
         .control-btn.active { background: var(--primary); color: white; }
 
+        /* Scorecard */
         .scorecard {
-            background: white;
-            border-radius: 15px;
-            padding: 20px;
-            margin: 30px auto;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            overflow-x: auto;
+            background: white; border-radius: 15px; padding: 20px;
+            margin: 30px auto; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); overflow-x: auto;
         }
         .scorecard h3 { color: var(--primary); margin-bottom: 15px; text-align: center; }
         .scorecard table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
@@ -594,34 +372,22 @@
         .scorecard .score-row td.pending { background: #f3f4f6; color: #9ca3af; }
 
         .game-btn {
-            padding: 12px 30px;
-            background: var(--primary);
-            color: white;
-            border: none;
-            border-radius: 30px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            font-size: 1rem;
-            font-family: 'Poppins', sans-serif;
-            margin: 5px;
+            padding: 12px 30px; background: var(--primary); color: white;
+            border: none; border-radius: 30px; font-weight: 600; cursor: pointer;
+            transition: all 0.2s ease; font-size: 1rem;
+            font-family: 'Poppins', sans-serif; margin: 5px;
         }
         .game-btn:hover { background: var(--primary-dark); transform: scale(1.03); }
         .game-btn.secondary { background: var(--secondary); color: var(--primary); }
         .game-btn.secondary:hover { background: var(--gold); }
 
+        /* Effects */
         .water-splash {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 4rem;
-            font-weight: 700;
-            color: #1E90FF;
-            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+            position: fixed; top: 50%; left: 50%;
+            transform: translate(-50%, -50%); font-size: 4rem; font-weight: 700;
+            color: #1E90FF; text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
             animation: splashAnimation 1s ease-out forwards;
-            pointer-events: none;
-            z-index: 10000;
+            pointer-events: none; z-index: 10000;
         }
         @keyframes splashAnimation {
             0% { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
@@ -630,46 +396,29 @@
         }
 
         .celebration-overlay {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-            animation: fadeIn 0.3s ease;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.8); display: none;
+            justify-content: center; align-items: center;
+            z-index: 9999; animation: fadeIn 0.3s ease;
         }
         .celebration-overlay.active { display: flex; }
         .celebration-content {
-            background: white;
-            padding: 50px;
-            border-radius: 30px;
-            text-align: center;
-            max-width: 500px;
-            animation: scaleIn 0.5s ease;
+            background: white; padding: 50px; border-radius: 30px;
+            text-align: center; max-width: 500px; animation: scaleIn 0.5s ease;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
         }
         .celebration-emoji { font-size: 5rem; animation: bounce2 1s ease infinite; margin-bottom: 20px; }
         .celebration-title { font-size: 2.5rem; color: var(--primary); font-weight: 700; margin-bottom: 15px; }
         .celebration-score { font-size: 1.5rem; color: var(--gold); font-weight: 600; margin-bottom: 20px; }
         .celebration-message { font-size: 1.1rem; color: #666; margin-bottom: 30px; }
-
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         @keyframes scaleIn { from { transform: scale(0.5); opacity: 0; } to { transform: scale(1); opacity: 1; } }
         @keyframes bounce2 { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
-
         .confetti {
-            position: fixed;
-            width: 10px;
-            height: 10px;
-            background: var(--gold);
-            position: absolute;
-            animation: confettiFall 3s linear forwards;
+            position: absolute; width: 10px; height: 10px;
+            background: var(--gold); animation: confettiFall 3s linear forwards;
         }
-        @keyframes confettiFall {
-            to { transform: translateY(100vh) rotate(360deg); opacity: 0; }
-        }
+        @keyframes confettiFall { to { transform: translateY(100vh) rotate(360deg); opacity: 0; } }
 
         @media (max-width: 768px) {
             .game-container { padding: 20px 10px; }
@@ -679,148 +428,97 @@
             .scorecard th, .scorecard td { padding: 6px 4px; }
         }
 
-        .map-container { margin: 40px 0; }
+        /* Locations */
         .map-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-bottom: 30px;
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px; margin-bottom: 30px;
         }
         .location-card {
-            background: white;
-            padding: 25px;
-            border-radius: 15px;
+            background: white; padding: 25px; border-radius: 15px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
         }
         .location-card h3 { color: var(--primary); margin-bottom: 15px; font-size: 1.3rem; }
         .location-card p { margin: 8px 0; color: var(--dark); }
-        .map-embed {
-            width: 100%;
-            height: 450px;
-            border: none;
-            border-radius: 15px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-        }
 
+        /* Cast */
         .cast-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-            max-width: 1200px;
-            margin: 0 auto;
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px; max-width: 1200px; margin: 0 auto;
         }
         .cast-member {
-            background: white;
-            padding: 20px;
-            border-radius: 15px;
+            background: white; padding: 20px; border-radius: 15px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            transition: transform 0.3s ease;
+            display: flex; align-items: center; gap: 20px; transition: transform 0.3s ease;
         }
         .cast-member:hover { transform: translateY(-5px); box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15); }
         .cast-photo {
-            width: 70px; height: 70px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 3px solid var(--primary);
-            flex-shrink: 0;
+            width: 70px; height: 70px; border-radius: 50%; object-fit: cover;
+            border: 3px solid var(--primary); flex-shrink: 0;
         }
         .actor-name { font-weight: 700; font-size: 1.1rem; color: var(--primary); margin-bottom: 5px; }
         .character-name { font-size: 0.95rem; color: #666; font-style: italic; }
 
+        /* Credits */
         .credits-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            max-width: 900px;
-            margin: 0 auto;
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px; max-width: 900px; margin: 0 auto;
         }
         .credit-item {
-            background: white;
-            padding: 25px;
-            border-radius: 15px;
-            text-align: center;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            background: white; padding: 25px; border-radius: 15px;
+            text-align: center; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
         }
         .credit-label { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; color: #666; margin-bottom: 10px; }
         .credit-name { font-size: 1.2rem; font-weight: 700; color: var(--primary); }
 
-        /* Footer + Updates block */
+        /* Footer */
         footer {
-            background: var(--primary);
-            color: white;
-            text-align: center;
-            padding: 44px 20px;
+            background: var(--primary); color: white; text-align: center; padding: 44px 20px;
         }
         footer a { color: var(--secondary); text-decoration: none; font-weight: 600; }
         footer a:hover { text-decoration: underline; }
-
         .footer-updates {
-            max-width: 800px;
-            margin: 0 auto 24px;
+            max-width: 800px; margin: 0 auto 24px;
             background: rgba(255,255,255,0.08);
             border: 1px solid rgba(255,255,255,0.15);
-            border-radius: 18px;
-            padding: 18px 16px 8px;
+            border-radius: 18px; padding: 18px 16px 8px;
         }
-        .footer-updates h3 {
-            font-size: 1.2rem;
-            margin-bottom: 10px;
-            color: #fff;
-        }
-        .footer-contact {
-            margin-top: 18px;
-            font-size: 1.05rem;
-            font-weight: 600;
-        }
+        .footer-updates h3 { font-size: 1.2rem; margin-bottom: 10px; color: #fff; }
+        .footer-contact { margin-top: 18px; font-size: 1.05rem; font-weight: 600; }
         .footer-contact a { color: var(--secondary); }
 
-        /* Back-to-top arrow */
+        /* FIX: Back-to-top on LEFT side to avoid overlap with sticky RSVP (right side) */
         .back-to-top {
             position: fixed;
-            right: 16px;
+            left: 16px;
             bottom: 18px;
             z-index: 2000;
-            width: 48px;
-            height: 48px;
-            border-radius: 999px;
-            border: none;
+            width: 48px; height: 48px; border-radius: 999px; border: none;
             background: rgba(255,255,255,0.9);
             box-shadow: 0 10px 25px rgba(0,0,0,0.18);
-            cursor: pointer;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.4rem;
-            color: var(--primary);
+            cursor: pointer; display: none;
+            align-items: center; justify-content: center;
+            font-size: 1.4rem; color: var(--primary);
             transition: transform 0.15s ease, opacity 0.15s ease;
         }
         .back-to-top:hover { transform: translateY(-2px); }
         .back-to-top.show { display: flex; }
-        @media (max-width: 768px) {
-            .back-to-top { right: 12px; bottom: 14px; }
-        }
+        @media (max-width: 768px) { .back-to-top { left: 12px; bottom: 14px; } }
 
         /* Accessibility focus */
-        .nav-link:focus-visible,
-        .game-btn:focus-visible,
-        .control-btn:focus-visible,
-        .back-to-top:focus-visible {
-            outline: 3px solid rgba(252, 211, 77, 0.9);
-            outline-offset: 2px;
+        .nav-link:focus-visible, .game-btn:focus-visible,
+        .control-btn:focus-visible, .back-to-top:focus-visible {
+            outline: 3px solid rgba(252, 211, 77, 0.9); outline-offset: 2px;
         }
     </style>
 </head>
 
 <body>
-      <!-- Sticky RSVP Button -->
+    <!-- Sticky RSVP Button -->
     <a href="#rsvp" class="sticky-rsvp" aria-label="RSVP for screening">
         <span class="rsvp-text">🎟️ RSVP Now</span>
         <span class="rsvp-subtext">Seats Filling Fast!</span>
     </a>
-    
+
     <!-- Navigation -->
     <nav class="navbar" aria-label="Primary navigation">
         <div class="nav-container">
@@ -836,11 +534,11 @@
             <a href="index.html#game" class="nav-link" data-section="game">Mini Golf</a>
             <a href="rapid-fire.html" class="nav-link nav-link-external">Rapid Fire</a>
             <a href="mad-lib.html" class="nav-link nav-link-external">Mad Libs</a>
-            <a href="terms.html" class="nav-link nav-link-external">Terms & Conditions</a>
+            <a href="terms.html" class="nav-link nav-link-external">Terms &amp; Conditions</a>
         </div>
     </nav>
 
-    <!-- Back to top -->
+    <!-- Back to top (LEFT side — avoids sticky RSVP on right) -->
     <button class="back-to-top" id="backToTop" aria-label="Scroll to top" title="Back to top">↑</button>
 
     <!-- Hero Section -->
@@ -878,16 +576,12 @@
                 <span class="rating-value">TBD / PG to PG-13</span>
             </div>
             <div style="margin-top: 18px; text-align: center;">
-  <a
-    href="https://deadline.com/2025/11/david-koechner-robert-knepper-thomas-lennon-mick-skylark-1236625639/"
-    target="_blank"
-    rel="noopener noreferrer"
-    class="link-btn secondary"
-    aria-label="Open Deadline Article on IMDb Pro"
-  >
-    📰 Deadline Article
-  </a>
-</div>
+                <a href="https://deadline.com/2025/11/david-koechner-robert-knepper-thomas-lennon-mick-skylark-1236625639/"
+                   target="_blank" rel="noopener noreferrer" class="link-btn secondary"
+                   aria-label="Open Deadline Article">
+                    📰 Deadline Article
+                </a>
+            </div>
         </div>
     </section>
 
@@ -934,40 +628,25 @@
                 </div>
             </div>
 
-        <div class="screener-info">
-  <div class="screener-date">Sunday, February 22 @ 3:00 PM</div>
-            
-<p class="screener-note">Reserve your spot for an exclusive screening!</p>
-
-  <p class="screener-note" style="
-    display:inline-block;
-    margin-top: 10px;
-    padding: 10px 16px;
-    border-radius: 999px;
-    background: #1E3A8A;
-    color: #fff;
-    font-weight: 800;
-    letter-spacing: 0.4px;
-    text-transform: uppercase;
-    box-shadow: 0 10px 25px rgba(30, 58, 138, 0.25);
-  ">
-     Seats are First Come, First Served!
-      <p style="text-align:center; font-size:0.9rem; margin-top:15px; color:rgba(31,41,55,0.8);">
-  By RSVPing, you agree to our <a href="terms.html" style="color:#1E3A8A; font-weight:700; text-decoration:underline;">Terms & Conditions</a>
-</p>
-  </p>
-</div>
-                        
+            <div class="screener-info">
+                <div class="screener-date">Sunday, February 22 @ 3:00 PM</div>
+                <p class="screener-note">Reserve your spot for an exclusive screening!</p>
+                <!-- FIX: Was a <p> nested inside another <p> — now separate elements -->
+                <div style="display:inline-block; margin-top: 10px; padding: 10px 16px; border-radius: 999px;
+                            background: #1E3A8A; color: #fff; font-weight: 800; letter-spacing: 0.4px;
+                            text-transform: uppercase; box-shadow: 0 10px 25px rgba(30, 58, 138, 0.25);">
+                    Seats are First Come, First Served!
+                </div>
+                <p style="text-align:center; font-size:0.9rem; margin-top:15px; color:rgba(31,41,55,0.8);">
+                    By RSVPing, you agree to our <a href="terms.html" style="color:#1E3A8A; font-weight:700; text-decoration:underline;">Terms &amp; Conditions</a>
+                </p>
+            </div>
 
             <div style="max-width: 700px; margin: 0 auto;">
                 <iframe
                     data-tally-src="https://tally.so/embed/81xXe5?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"
-                    loading="lazy"
-                    width="100%"
-                    height="981"
-                    frameborder="0"
-                    marginheight="0"
-                    marginwidth="0"
+                    loading="lazy" width="100%" height="981" frameborder="0"
+                    marginheight="0" marginwidth="0"
                     title="RSVP for 'Mick Skylark: Mini Golf Prodigy' Screener"></iframe>
             </div>
         </div>
@@ -977,11 +656,11 @@
     <section style="background: linear-gradient(135deg, #FDE68A 0%, #FCD34D 100%); padding: 30px 20px; text-align: center;">
         <div style="max-width: 800px; margin: 0 auto;">
             <p style="font-size: 0.95rem; color: rgba(31,41,55,0.85); line-height: 1.6;">
-                By RSVPing or attending the screening, you agree to our <a href="terms.html" style="color:#1E3A8A; font-weight:700; text-decoration:underline;">Terms & Conditions</a>, including our <strong style="color:#1E3A8A;">NO RECORDING policy</strong>.
+                By RSVPing or attending the screening, you agree to our <a href="terms.html" style="color:#1E3A8A; font-weight:700; text-decoration:underline;">Terms &amp; Conditions</a>, including our <strong style="color:#1E3A8A;">NO RECORDING policy</strong>.
             </p>
         </div>
     </section>
-    
+
     <!-- Mini Golf Game Section -->
     <section id="game" class="section-yellow">
         <div class="container">
@@ -1017,31 +696,20 @@
                             </tr>
                             <tr class="score-row">
                                 <td>Score</td>
-                                <td id="score-1" class="pending">-</td>
-                                <td id="score-2" class="pending">-</td>
-                                <td id="score-3" class="pending">-</td>
-                                <td id="score-4" class="pending">-</td>
-                                <td id="score-5" class="pending">-</td>
-                                <td id="score-6" class="pending">-</td>
-                                <td id="score-7" class="pending">-</td>
-                                <td id="score-8" class="pending">-</td>
-                                <td id="score-9" class="pending">-</td>
-                                <td id="score-out" class="pending">-</td>
-                                <td id="score-10" class="pending">-</td>
-                                <td id="score-11" class="pending">-</td>
-                                <td id="score-12" class="pending">-</td>
-                                <td id="score-13" class="pending">-</td>
-                                <td id="score-14" class="pending">-</td>
-                                <td id="score-15" class="pending">-</td>
-                                <td id="score-16" class="pending">-</td>
-                                <td id="score-17" class="pending">-</td>
-                                <td id="score-18" class="pending">-</td>
-                                <td id="score-in" class="pending">-</td>
+                                <td id="score-1" class="pending">-</td><td id="score-2" class="pending">-</td>
+                                <td id="score-3" class="pending">-</td><td id="score-4" class="pending">-</td>
+                                <td id="score-5" class="pending">-</td><td id="score-6" class="pending">-</td>
+                                <td id="score-7" class="pending">-</td><td id="score-8" class="pending">-</td>
+                                <td id="score-9" class="pending">-</td><td id="score-out" class="pending">-</td>
+                                <td id="score-10" class="pending">-</td><td id="score-11" class="pending">-</td>
+                                <td id="score-12" class="pending">-</td><td id="score-13" class="pending">-</td>
+                                <td id="score-14" class="pending">-</td><td id="score-15" class="pending">-</td>
+                                <td id="score-16" class="pending">-</td><td id="score-17" class="pending">-</td>
+                                <td id="score-18" class="pending">-</td><td id="score-in" class="pending">-</td>
                                 <td id="score-total" class="pending">-</td>
                             </tr>
                         </tbody>
                     </table>
-
                     <div style="text-align: center; margin-top: 15px; padding-top: 15px; border-top: 1px solid #e5e7eb; color: var(--primary); font-size: 0.9rem;">
                         <span style="margin: 0 15px;">🏆 Best: <strong id="best">--</strong></span>
                         <span style="margin: 0 15px;">⛳ Holes-in-One: <strong id="holesInOneCount">0</strong></span>
@@ -1056,6 +724,7 @@
         </div>
     </section>
 
+    <!-- Celebration Overlay -->
     <div class="celebration-overlay" id="celebrationOverlay">
         <div class="celebration-content">
             <div class="celebration-emoji">🎉</div>
@@ -1078,156 +747,101 @@
             <div class="cast-grid">
                 <div class="cast-member">
                     <img src="cast-photos/brandon-engman.jpg" alt="Brandon Engman" class="cast-photo" loading="lazy">
-                    <div class="cast-info">
-                        <div class="actor-name">Brandon Engman</div>
-                        <div class="character-name">as Mick Skylark</div>
-                    </div>
+                    <div class="cast-info"><div class="actor-name">Brandon Engman</div><div class="character-name">as Mick Skylark</div></div>
                 </div>
                 <div class="cast-member">
                     <img src="cast-photos/david-koechner.jpg" alt="David Koechner" class="cast-photo" loading="lazy">
-                    <div class="cast-info">
-                        <div class="actor-name">David Koechner</div>
-                        <div class="character-name">as Jonsey</div>
-                    </div>
+                    <div class="cast-info"><div class="actor-name">David Koechner</div><div class="character-name">as Jonsey</div></div>
                 </div>
                 <div class="cast-member">
                     <img src="cast-photos/patrick-warburton.jpg" alt="Patrick Warburton" class="cast-photo" loading="lazy">
-                    <div class="cast-info">
-                        <div class="actor-name">Patrick Warburton</div>
-                        <div class="character-name">as Dr. Phil</div>
-                    </div>
+                    <div class="cast-info"><div class="actor-name">Patrick Warburton</div><div class="character-name">as Dr. Phil</div></div>
                 </div>
                 <div class="cast-member">
                     <img src="cast-photos/robert-knepper.jpg" alt="Robert Knepper" class="cast-photo" loading="lazy">
-                    <div class="cast-info">
-                        <div class="actor-name">Robert Knepper</div>
-                        <div class="character-name">as Vladimir</div>
-                    </div>
+                    <div class="cast-info"><div class="actor-name">Robert Knepper</div><div class="character-name">as Vladimir</div></div>
                 </div>
                 <div class="cast-member">
                     <img src="cast-photos/cs-lee.jpg" alt="CS Lee" class="cast-photo" loading="lazy">
-                    <div class="cast-info">
-                        <div class="actor-name">CS Lee</div>
-                        <div class="character-name">as Leonard</div>
-                    </div>
+                    <div class="cast-info"><div class="actor-name">CS Lee</div><div class="character-name">as Leonard</div></div>
                 </div>
                 <div class="cast-member">
                     <img src="cast-photos/elizabeth-mitchell.jpg" alt="Elizabeth Mitchell" class="cast-photo" loading="lazy">
-                    <div class="cast-info">
-                        <div class="actor-name">Elizabeth Mitchell</div>
-                        <div class="character-name">as Clara</div>
-                    </div>
+                    <div class="cast-info"><div class="actor-name">Elizabeth Mitchell</div><div class="character-name">as Clara</div></div>
                 </div>
                 <div class="cast-member">
                     <img src="cast-photos/thomas-lennon.jpg" alt="Thomas Lennon" class="cast-photo" loading="lazy">
-                    <div class="cast-info">
-                        <div class="actor-name">Thomas Lennon</div>
-                        <div class="character-name">as Tom McDonald</div>
-                    </div>
+                    <div class="cast-info"><div class="actor-name">Thomas Lennon</div><div class="character-name">as Tom McDonald</div></div>
                 </div>
                 <div class="cast-member">
                     <img src="cast-photos/matt-iseman.jpg" alt="Matt Iseman" class="cast-photo" loading="lazy">
-                    <div class="cast-info">
-                        <div class="actor-name">Matt Iseman</div>
-                        <div class="character-name">as Artie Finegold</div>
-                    </div>
+                    <div class="cast-info"><div class="actor-name">Matt Iseman</div><div class="character-name">as Artie Finegold</div></div>
                 </div>
                 <div class="cast-member">
                     <img src="cast-photos/jorge-garcia.jpg" alt="Jorge Garcia" class="cast-photo" loading="lazy">
-                    <div class="cast-info">
-                        <div class="actor-name">Jorge Garcia</div>
-                        <div class="character-name">as Roger</div>
-                    </div>
+                    <div class="cast-info"><div class="actor-name">Jorge Garcia</div><div class="character-name">as Roger</div></div>
                 </div>
                 <div class="cast-member">
                     <img src="cast-photos/james-murray.jpg" alt="James Murray" class="cast-photo" loading="lazy">
-                    <div class="cast-info">
-                        <div class="actor-name">James Murray (Murr)</div>
-                        <div class="character-name">as Harry Johnson</div>
-                    </div>
+                    <div class="cast-info"><div class="actor-name">James Murray (Murr)</div><div class="character-name">as Harry Johnson</div></div>
                 </div>
                 <div class="cast-member">
                     <img src="cast-photos/russell-hodgkinson.jpg" alt="Russell Hodgkinson" class="cast-photo" loading="lazy">
-                    <div class="cast-info">
-                        <div class="actor-name">Russell Hodgkinson</div>
-                        <div class="character-name">as Dave</div>
-                    </div>
+                    <div class="cast-info"><div class="actor-name">Russell Hodgkinson</div><div class="character-name">as Dave</div></div>
                 </div>
                 <div class="cast-member">
                     <img src="cast-photos/ali-stoner.jpg" alt="Ali Stoner" class="cast-photo" loading="lazy">
-                    <div class="cast-info">
-                        <div class="actor-name">Ali Stoner</div>
-                        <div class="character-name">as Vanessa</div>
-                    </div>
+                    <div class="cast-info"><div class="actor-name">Ali Stoner</div><div class="character-name">as Vanessa</div></div>
                 </div>
                 <div class="cast-member">
                     <img src="cast-photos/colin-egglesfield.jpg" alt="Colin Egglesfield" class="cast-photo" loading="lazy">
-                    <div class="cast-info">
-                        <div class="actor-name">Colin Egglesfield</div>
-                        <div class="character-name">as Eagle</div>
-                    </div>
+                    <div class="cast-info"><div class="actor-name">Colin Egglesfield</div><div class="character-name">as Eagle</div></div>
                 </div>
                 <div class="cast-member">
                     <img src="cast-photos/violet-bennett.jpg" alt="Violet Bennett" class="cast-photo" loading="lazy">
-                    <div class="cast-info">
-                        <div class="actor-name">Violet Bennett</div>
-                        <div class="character-name">as Lily</div>
-                    </div>
+                    <div class="cast-info"><div class="actor-name">Violet Bennett</div><div class="character-name">as Lily</div></div>
                 </div>
                 <div class="cast-member">
                     <img src="cast-photos/urijah-faber.jpg" alt="Urijah Faber" class="cast-photo" loading="lazy">
-                    <div class="cast-info">
-                        <div class="actor-name">Urijah Faber</div>
-                        <div class="character-name">as Foley Dowed</div>
-                    </div>
+                    <div class="cast-info"><div class="actor-name">Urijah Faber</div><div class="character-name">as Foley Dowed</div></div>
                 </div>
                 <div class="cast-member">
                     <img src="cast-photos/sergio-rizzuto.jpg" alt="Sergio Rizzuto" class="cast-photo" loading="lazy">
-                    <div class="cast-info">
-                        <div class="actor-name">Sergio Rizzuto</div>
-                        <div class="character-name">as Lunch Box</div>
-                    </div>
+                    <div class="cast-info"><div class="actor-name">Sergio Rizzuto</div><div class="character-name">as Lunch Box</div></div>
                 </div>
                 <div class="cast-member">
                     <img src="cast-photos/ettore-baccari.jpg" alt="Ettore James Baccari" class="cast-photo" loading="lazy">
-                    <div class="cast-info">
-                        <div class="actor-name">Ettore James Baccari</div>
-                        <div class="character-name">as Young Mick</div>
-                    </div>
+                    <div class="cast-info"><div class="actor-name">Ettore James Baccari</div><div class="character-name">as Young Mick</div></div>
                 </div>
                 <div class="cast-member">
                     <img src="cast-photos/jett-miller.jpg" alt="Jett Miller" class="cast-photo" loading="lazy">
-                    <div class="cast-info">
-                        <div class="actor-name">Jett Miller</div>
-                        <div class="character-name">as Humphrey</div>
-                    </div>
+                    <div class="cast-info"><div class="actor-name">Jett Miller</div><div class="character-name">as Humphrey</div></div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Instagram Section -->
-<!-- Follow on Instagram CTA Section -->
-<section style="background: linear-gradient(135deg, #E1306C 0%, #C13584 50%, #833AB4 100%); padding: 60px 20px; text-align: center;">
-    <div style="max-width: 800px; margin: 0 auto;">
-        <h2 style="color: #fff; font-size: 2.5rem; font-weight: 900; margin-bottom: 15px; text-shadow: 0 4px 10px rgba(0,0,0,0.3);">
-            📸 Follow Our Journey!
-        </h2>
-        <p style="color: rgba(255,255,255,0.95); font-size: 1.2rem; margin-bottom: 30px; font-weight: 600;">
-            Behind-the-scenes content, cast interviews, and exclusive updates
-        </p>
-        <a href="https://www.instagram.com/mickskylark" target="_blank" rel="noopener noreferrer" 
-           style="display: inline-flex; align-items: center; gap: 12px; background: #fff; color: #C13584; 
-                  padding: 18px 40px; border-radius: 50px; text-decoration: none; font-weight: 900; 
-                  font-size: 1.3rem; box-shadow: 0 8px 25px rgba(0,0,0,0.3); 
-                  transition: all 0.3s ease; border: 3px solid transparent;">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-            </svg>
-            @MickSkylark
-        </a>
-    </div>
-</section>
+    <!-- FIX: Added id="instagram" so nav link data-section="instagram" connects properly -->
+    <section id="instagram" style="background: linear-gradient(135deg, #E1306C 0%, #C13584 50%, #833AB4 100%); padding: 60px 20px; text-align: center;">
+        <div style="max-width: 800px; margin: 0 auto;">
+            <h2 style="color: #fff; font-size: 2.5rem; font-weight: 900; margin-bottom: 15px; text-shadow: 0 4px 10px rgba(0,0,0,0.3);">
+                📸 Follow Our Journey!
+            </h2>
+            <p style="color: rgba(255,255,255,0.95); font-size: 1.2rem; margin-bottom: 30px; font-weight: 600;">
+                Behind-the-scenes content, cast interviews, and exclusive updates
+            </p>
+            <a href="https://www.instagram.com/mickskylark" target="_blank" rel="noopener noreferrer"
+               style="display: inline-flex; align-items: center; gap: 12px; background: #fff; color: #C13584;
+                      padding: 18px 40px; border-radius: 50px; text-decoration: none; font-weight: 900;
+                      font-size: 1.3rem; box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+                      transition: all 0.3s ease; border: 3px solid transparent;">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                </svg>
+                @MickSkylark
+            </a>
+        </div>
+    </section>
 
     <!-- Social Share Section -->
     <section id="share" class="section-yellow">
@@ -1236,15 +850,9 @@
                 <h2 class="section-title">Share the Film</h2>
                 <p style="font-size: 1.1rem; margin-bottom: 20px;">Help spread the word about Mick Skylark!</p>
                 <div class="share-buttons">
-                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://mickskylark.com" target="_blank" rel="noopener" class="share-btn facebook">
-                        📘 Share on Facebook
-                    </a>
-                    <a href="https://twitter.com/intent/tweet?text=Check%20out%20Mick%20Skylark%3A%20Mini%20Golf%20Prodigy!&url=https://mickskylark.com" target="_blank" rel="noopener" class="share-btn twitter">
-                        🐦 Share on Twitter
-                    </a>
-                    <a href="mailto:?subject=Check%20out%20Mick%20Skylark&body=I%20thought%20you'd%20enjoy%20this%20film:%20https://mickskylark.com" class="share-btn email">
-                        📧 Share via Email
-                    </a>
+                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://mickskylark.com" target="_blank" rel="noopener" class="share-btn facebook">📘 Share on Facebook</a>
+                    <a href="https://twitter.com/intent/tweet?text=Check%20out%20Mick%20Skylark%3A%20Mini%20Golf%20Prodigy!&url=https://mickskylark.com" target="_blank" rel="noopener" class="share-btn twitter">🐦 Share on Twitter</a>
+                    <a href="mailto:?subject=Check%20out%20Mick%20Skylark&body=I%20thought%20you'd%20enjoy%20this%20film:%20https://mickskylark.com" class="share-btn email">📧 Share via Email</a>
                 </div>
             </div>
         </div>
@@ -1255,26 +863,11 @@
         <div class="container">
             <h2 class="section-title">The Team</h2>
             <div class="credits-grid">
-                <div class="credit-item">
-                    <div class="credit-label">Director</div>
-                    <div class="credit-name">Sergio Rizzuto</div>
-                </div>
-                <div class="credit-item">
-                    <div class="credit-label">Writer</div>
-                    <div class="credit-name">Sergio Rizzuto</div>
-                </div>
-                <div class="credit-item">
-                    <div class="credit-label">Co-Writer</div>
-                    <div class="credit-name">Jett Miller</div>
-                </div>
-                <div class="credit-item">
-                    <div class="credit-label">Producers</div>
-                    <div class="credit-name">Sergio Rizzuto<br>Tyler Olson<br>John Michaels</div>
-                </div>
-                <div class="credit-item">
-                    <div class="credit-label">Production Company</div>
-                    <div class="credit-name">Potato Eater Productions</div>
-                </div>
+                <div class="credit-item"><div class="credit-label">Director</div><div class="credit-name">Sergio Rizzuto</div></div>
+                <div class="credit-item"><div class="credit-label">Writer</div><div class="credit-name">Sergio Rizzuto</div></div>
+                <div class="credit-item"><div class="credit-label">Co-Writer</div><div class="credit-name">Jett Miller</div></div>
+                <div class="credit-item"><div class="credit-label">Producers</div><div class="credit-name">Sergio Rizzuto<br>Tyler Olson<br>John Michaels</div></div>
+                <div class="credit-item"><div class="credit-label">Production Company</div><div class="credit-name">Potato Eater Productions</div></div>
             </div>
         </div>
     </section>
@@ -1286,7 +879,8 @@
             <div class="map-grid">
                 <div class="location-card">
                     <h3>🌴 Boca Raton, Florida</h3>
-                    <p><strong>Venue:</strong> Cinemark Palace 20 & XD &amp; XD</p>
+                    <!-- FIX: Was "Cinemark Palace 20 & XD &amp; XD" (double XD) -->
+                    <p><strong>Venue:</strong> Cinemark Palace 20 &amp; XD</p>
                     <p><strong>Address:</strong><br>3200 Airport Rd<br>Boca Raton, FL 33431</p>
                     <p><strong>Date:</strong> Sunday, February 22, 2026</p>
                     <p><strong>Time:</strong> 3:00 PM</p>
@@ -1304,37 +898,25 @@
 
     <!-- Footer -->
     <footer id="footer">
-        <!-- Email updates (requested) -->
         <div class="footer-updates">
             <h3>Get Email Updates</h3>
             <div style="max-width: 680px; margin: 0 auto;">
-                <iframe
-                    data-tally-src="https://tally.so/r/2EPqJ9"
-                    loading="lazy"
-                    width="100%"
-                    height="400"
-                    frameborder="0"
-                    marginheight="0"
-                    marginwidth="0"
+                <iframe data-tally-src="https://tally.so/r/2EPqJ9" loading="lazy"
+                    width="100%" height="400" frameborder="0" marginheight="0" marginwidth="0"
                     title="Email Updates Signup"></iframe>
             </div>
         </div>
-
         <p>&copy; 2025 Mick Skylark: Mini Golf Prodigy. All rights reserved.</p>
         <p style="margin-top: 10px; opacity: 0.85;">A Potato Eater Productions Film</p>
-
         <p style="margin-top: 15px;">
             <a href="https://www.instagram.com/mickskylark" target="_blank" rel="noopener">Follow us on Instagram!</a>
         </p>
-
         <p style="margin-top: 15px;">
             <a href="grokminigolf.html" style="color: #FCD34D; font-weight: 700; text-decoration: none; border: 2px solid #FCD34D; padding: 8px 20px; border-radius: 25px; display: inline-block; transition: all 0.2s ease;">
                 ⛳ Play Mini Golf
             </a>
         </p>
-
-        <a href="terms.html">Terms & Conditions</a>
-        <!-- Contact (requested) -->
+        <p style="margin-top: 15px;"><a href="terms.html">Terms &amp; Conditions</a></p>
         <div class="footer-contact">
             Reach out: <a href="mailto:Contact@PotatoEaterProductions.com">Contact@PotatoEaterProductions.com</a>
         </div>
@@ -1355,11 +937,8 @@
             link.addEventListener('click', (e) => {
                 const href = link.getAttribute('href');
                 if (!href) return;
-
                 const isExternal = link.classList.contains('nav-link-external') && !href.includes('#');
                 if (isExternal) return;
-
-                // Support "index.html#section" + "#section"
                 if (href.includes('#')) {
                     const hash = href.split('#')[1];
                     if (hash) {
@@ -1377,19 +956,18 @@
         const backToTopBtn = document.getElementById('backToTop');
         function updateBackToTopVisibility() {
             if (!backToTopBtn) return;
-            const show = window.scrollY > 500;
-            backToTopBtn.classList.toggle('show', show);
+            backToTopBtn.classList.toggle('show', window.scrollY > 500);
         }
         if (backToTopBtn) {
-            backToTopBtn.addEventListener('click', () => {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            });
+            backToTopBtn.addEventListener('click', () => { window.scrollTo({ top: 0, behavior: 'smooth' }); });
             window.addEventListener('scroll', updateBackToTopVisibility, { passive: true });
             updateBackToTopVisibility();
         }
 
-        // Scroll-spy: highlight nav items when their section is in view
-        const sectionIds = ['home','comparable-films','rsvp','game','cast','instagram','credits','locations'];
+        // FIX: Scroll-spy sectionIds now only contains sections that have matching nav links
+        // with data-section attributes. Removed 'comparable-films' and 'credits' which had
+        // no corresponding nav link data-section.
+        const sectionIds = ['home','rsvp','game','cast','instagram','locations'];
         const navLinksBySection = new Map();
         document.querySelectorAll('.nav-link[data-section]').forEach(a => {
             navLinksBySection.set(a.getAttribute('data-section'), a);
@@ -1405,86 +983,63 @@
             if (link) link.classList.add('active');
         }
 
-        // Use IntersectionObserver for reliable active-nav behavior
-const navEl = document.querySelector('.navbar');
-const navOffset = navEl ? Math.ceil(navEl.getBoundingClientRect().height) : 72;
+        // IntersectionObserver for reliable active-nav behavior
+        const navEl = document.querySelector('.navbar');
+        const navOffset = navEl ? Math.ceil(navEl.getBoundingClientRect().height) : 72;
+        const ratioById = new Map(sectionIds.map(id => [id, 0]));
 
-// Keep latest intersection ratios for ALL sections
-const ratioById = new Map(sectionIds.map(id => [id, 0]));
+        const observer = new IntersectionObserver((entries) => {
+          for (const e of entries) {
+            ratioById.set(e.target.id, e.isIntersecting ? e.intersectionRatio : 0);
+          }
+          let bestId = null;
+          let bestRatio = 0;
+          for (const [id, r] of ratioById.entries()) {
+            if (r > bestRatio) { bestRatio = r; bestId = id; }
+          }
+          if (!bestId) {
+            let closestId = null;
+            let closestDist = Infinity;
+            for (const sec of sections) {
+              const d = Math.abs(sec.getBoundingClientRect().top - navOffset);
+              if (d < closestDist) { closestDist = d; closestId = sec.id; }
+            }
+            bestId = closestId;
+          }
+          if (bestId) setActiveNav(bestId);
+        }, {
+          root: null,
+          rootMargin: `-${navOffset}px 0px -55% 0px`,
+          threshold: [0, 0.05, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6]
+        });
 
-const observer = new IntersectionObserver((entries) => {
-  // Update ratios for sections that changed
-  for (const e of entries) {
-    ratioById.set(e.target.id, e.isIntersecting ? e.intersectionRatio : 0);
-  }
+        sections.forEach(sec => observer.observe(sec));
+        setActiveNav(sections[0]?.id || 'home');
 
-  // Pick best section overall (not just the entries that changed)
-  let bestId = null;
-  let bestRatio = 0;
-
-  for (const [id, r] of ratioById.entries()) {
-    if (r > bestRatio) { bestRatio = r; bestId = id; }
-  }
-
-  // If nothing intersecting (can happen with aggressive margins), pick nearest to navbar line
-  if (!bestId) {
-    let closestId = null;
-    let closestDist = Infinity;
-    for (const sec of sections) {
-      const d = Math.abs(sec.getBoundingClientRect().top - navOffset);
-      if (d < closestDist) { closestDist = d; closestId = sec.id; }
-    }
-    bestId = closestId;
-  }
-
-  if (bestId) setActiveNav(bestId);
-}, {
-  root: null,
-  // Detection window: starts under navbar and extends to about mid-screen
-  rootMargin: `-${navOffset}px 0px -55% 0px`,
-  threshold: [0, 0.05, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6]
-});
-
-sections.forEach(sec => observer.observe(sec));
-
-// Set initial active immediately
-setActiveNav(sections[0]?.id || 'home');
-
-
-        // Countdown Timer to February 22, 2026 at 3:00 PM (local time)
+        // Countdown Timer to February 22, 2026 at 3:00 PM
         function updateCountdown() {
             const screeningDate = new Date('February 22, 2026 15:00:00').getTime();
             const now = new Date().getTime();
             const distance = screeningDate - now;
-
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
             const dEl = document.getElementById('days');
             const hEl = document.getElementById('hours');
             const mEl = document.getElementById('minutes');
             const sEl = document.getElementById('seconds');
-
             if (!dEl || !hEl || !mEl || !sEl) return;
-
-            dEl.textContent = Math.max(0, days);
-            hEl.textContent = Math.max(0, hours);
-            mEl.textContent = Math.max(0, minutes);
-            sEl.textContent = Math.max(0, seconds);
-
             if (distance < 0) {
-                dEl.textContent = '0';
-                hEl.textContent = '0';
-                mEl.textContent = '0';
-                sEl.textContent = '0';
+                dEl.textContent = '0'; hEl.textContent = '0';
+                mEl.textContent = '0'; sEl.textContent = '0';
+                return;
             }
+            dEl.textContent = Math.floor(distance / (1000 * 60 * 60 * 24));
+            hEl.textContent = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            mEl.textContent = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            sEl.textContent = Math.floor((distance % (1000 * 60)) / 1000);
         }
         setInterval(updateCountdown, 1000);
         updateCountdown();
 
-        // 18-Hole Mini Golf Game
+        // ===== 18-Hole Mini Golf Game =====
         const canvas = document.getElementById('golfCanvas');
         const ctx = canvas ? canvas.getContext('2d') : null;
 
@@ -1501,7 +1056,6 @@ setActiveNav(sections[0]?.id || 'home');
         let particles = [];
         let holeScores = Array(18).fill(null);
 
-        // Audio: only create context after a user gesture (mobile friendly)
         let audioContext = null;
         function getAudioContext() {
             if (!audioContext) audioContext = new (window.AudioContext || window.webkitAudioContext)();
@@ -1516,50 +1070,34 @@ setActiveNav(sections[0]?.id || 'home');
             const gainNode = ac.createGain();
             oscillator.connect(gainNode);
             gainNode.connect(ac.destination);
-
             switch(type) {
                 case 'hit':
-                    oscillator.frequency.value = 300;
-                    oscillator.type = 'sine';
+                    oscillator.frequency.value = 300; oscillator.type = 'sine';
                     gainNode.gain.setValueAtTime(0.3, ac.currentTime);
                     gainNode.gain.exponentialRampToValueAtTime(0.01, ac.currentTime + 0.1);
-                    oscillator.start(ac.currentTime);
-                    oscillator.stop(ac.currentTime + 0.1);
-                    break;
+                    oscillator.start(ac.currentTime); oscillator.stop(ac.currentTime + 0.1); break;
                 case 'wall':
-                    oscillator.frequency.value = 200;
-                    oscillator.type = 'square';
+                    oscillator.frequency.value = 200; oscillator.type = 'square';
                     gainNode.gain.setValueAtTime(0.2, ac.currentTime);
                     gainNode.gain.exponentialRampToValueAtTime(0.01, ac.currentTime + 0.15);
-                    oscillator.start(ac.currentTime);
-                    oscillator.stop(ac.currentTime + 0.15);
-                    break;
+                    oscillator.start(ac.currentTime); oscillator.stop(ac.currentTime + 0.15); break;
                 case 'hole':
-                    oscillator.frequency.value = 523;
-                    oscillator.type = 'sine';
+                    oscillator.frequency.value = 523; oscillator.type = 'sine';
                     gainNode.gain.setValueAtTime(0.3, ac.currentTime);
                     gainNode.gain.exponentialRampToValueAtTime(0.01, ac.currentTime + 0.5);
-                    oscillator.start(ac.currentTime);
-                    oscillator.stop(ac.currentTime + 0.5);
-                    break;
+                    oscillator.start(ac.currentTime); oscillator.stop(ac.currentTime + 0.5); break;
                 case 'water':
-                    oscillator.frequency.value = 150;
-                    oscillator.type = 'sine';
+                    oscillator.frequency.value = 150; oscillator.type = 'sine';
                     gainNode.gain.setValueAtTime(0.25, ac.currentTime);
                     gainNode.gain.exponentialRampToValueAtTime(0.01, ac.currentTime + 0.3);
-                    oscillator.start(ac.currentTime);
-                    oscillator.stop(ac.currentTime + 0.3);
-                    break;
+                    oscillator.start(ac.currentTime); oscillator.stop(ac.currentTime + 0.3); break;
             }
         }
 
         function toggleSound() {
             soundEnabled = !soundEnabled;
             const btn = document.getElementById('soundBtn');
-            if (btn) {
-                btn.textContent = soundEnabled ? '🔊' : '🔇';
-                btn.classList.toggle('active', soundEnabled);
-            }
+            if (btn) { btn.textContent = soundEnabled ? '🔊' : '🔇'; btn.classList.toggle('active', soundEnabled); }
         }
 
         function setTheme(theme) {
@@ -1613,27 +1151,15 @@ setActiveNav(sections[0]?.id || 'home');
                     else if (diff >= 2) scoreCell.classList.add('double-bogey');
                 }
             }
-
             let outScore = 0, inScore = 0;
             for (let i = 0; i < 9; i++) if (holeScores[i] !== null) outScore += holeScores[i];
             for (let i = 9; i < 18; i++) if (holeScores[i] !== null) inScore += holeScores[i];
-
             const outEl = document.getElementById('score-out');
             const inEl = document.getElementById('score-in');
             const totalEl = document.getElementById('score-total');
-
-            if (outEl && holeScores.slice(0, 9).some(s => s !== null)) {
-                outEl.textContent = outScore || '-';
-                outEl.classList.remove('pending');
-            }
-            if (inEl && holeScores.slice(9, 18).some(s => s !== null)) {
-                inEl.textContent = inScore || '-';
-                inEl.classList.remove('pending');
-            }
-            if (totalEl && holeScores.some(s => s !== null)) {
-                totalEl.textContent = outScore + inScore;
-                totalEl.classList.remove('pending');
-            }
+            if (outEl && holeScores.slice(0, 9).some(s => s !== null)) { outEl.textContent = outScore || '-'; outEl.classList.remove('pending'); }
+            if (inEl && holeScores.slice(9, 18).some(s => s !== null)) { inEl.textContent = inScore || '-'; inEl.classList.remove('pending'); }
+            if (totalEl && holeScores.some(s => s !== null)) { totalEl.textContent = outScore + inScore; totalEl.classList.remove('pending'); }
         }
 
         function loadHole(holeNum) {
@@ -1646,22 +1172,13 @@ setActiveNav(sections[0]?.id || 'home');
             movingObstacles = currentHoleData.movingObstacles || [];
             waterHazards = currentHoleData.waterHazards || [];
             bumpers = currentHoleData.bumpers || [];
-            ballTrail = [];
-            particles = [];
-            strokes = 0;
+            ballTrail = []; particles = []; strokes = 0;
             drawGame();
         }
 
         function createParticles(x, y, color, count = 8) {
             for (let i = 0; i < count; i++) {
-                particles.push({
-                    x, y,
-                    vx: (Math.random() - 0.5) * 4,
-                    vy: (Math.random() - 0.5) * 4,
-                    life: 30,
-                    color,
-                    size: Math.random() * 3 + 2
-                });
+                particles.push({ x, y, vx: (Math.random()-0.5)*4, vy: (Math.random()-0.5)*4, life: 30, color, size: Math.random()*3+2 });
             }
         }
 
@@ -1669,8 +1186,7 @@ setActiveNav(sections[0]?.id || 'home');
 
         function showWaterSplash() {
             const splash = document.createElement('div');
-            splash.className = 'water-splash';
-            splash.textContent = 'Oops! 💦';
+            splash.className = 'water-splash'; splash.textContent = 'Oops! 💦';
             document.body.appendChild(splash);
             playSound('water');
             setTimeout(() => splash.remove(), 1000);
@@ -1678,27 +1194,13 @@ setActiveNav(sections[0]?.id || 'home');
 
         function drawGame() {
             if (!ctx) return;
-
-            // background
             const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
-            if (currentTheme === 'night') {
-                gradient.addColorStop(0, '#1a2332');
-                gradient.addColorStop(1, '#0f1419');
-            } else {
-                gradient.addColorStop(0, '#90EE90');
-                gradient.addColorStop(1, '#7FD87F');
-            }
+            if (currentTheme === 'night') { gradient.addColorStop(0, '#1a2332'); gradient.addColorStop(1, '#0f1419'); }
+            else { gradient.addColorStop(0, '#90EE90'); gradient.addColorStop(1, '#7FD87F'); }
             ctx.fillStyle = gradient;
             ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-            // HUD (kept ONLY what you requested):
-            // - Hole x of 18
-            // - This hole: x
-            // - Power %
-            // - Total: x
-            // (Removed: extra "Hole", "Over/Under", etc. No added HUDs.)
-
-            // Hole x of 18 (top-left)
+            // HUD: Hole x of 18 (top-left)
             ctx.fillStyle = currentTheme === 'night' ? 'rgba(30,58,138,0.85)' : 'rgba(255,255,255,0.92)';
             ctx.fillRect(8, 8, 150, 34);
             ctx.fillStyle = currentTheme === 'night' ? '#FCD34D' : '#1E3A8A';
@@ -1719,12 +1221,10 @@ setActiveNav(sections[0]?.id || 'home');
             ctx.fillStyle = 'rgba(255, 255, 255, 0.92)';
             ctx.fillRect(8, canvas.height - 42, 150, 34);
             ctx.fillStyle = currentTheme === 'night' ? '#FCD34D' : '#1E3A8A';
-            ctx.font = '14px Poppins';
-            ctx.fillText('This hole:', 14, canvas.height - 20);
-            ctx.font = 'bold 20px Poppins';
-            ctx.fillText(String(strokes), 110, canvas.height - 18);
+            ctx.font = '14px Poppins'; ctx.fillText('This hole:', 14, canvas.height - 20);
+            ctx.font = 'bold 20px Poppins'; ctx.fillText(String(strokes), 110, canvas.height - 18);
 
-            // Total: totalStrokes (bottom-right)
+            // Total (bottom-right)
             const totalText = `Total: ${totalStrokes}`;
             ctx.font = 'bold 16px Poppins';
             const totalWidth = ctx.measureText(totalText).width;
@@ -1733,375 +1233,234 @@ setActiveNav(sections[0]?.id || 'home');
             ctx.fillStyle = currentTheme === 'night' ? '#FCD34D' : '#1E3A8A';
             ctx.fillText(totalText, canvas.width - totalWidth - 15, canvas.height - 18);
 
-            // hazards
+            // Water hazards
             waterHazards.forEach(water => {
-                const waterGradient = ctx.createRadialGradient(water.x + water.width/2, water.y + water.height/2, 0, water.x + water.width/2, water.y + water.height/2, water.width/2);
-                waterGradient.addColorStop(0, '#4DA6FF');
-                waterGradient.addColorStop(1, '#1E90FF');
-                ctx.fillStyle = waterGradient;
-                ctx.fillRect(water.x, water.y, water.width, water.height);
-                ctx.strokeStyle = 'rgba(255, 255, 255, 0.3)';
-                ctx.lineWidth = 2;
-                ctx.beginPath();
-                ctx.arc(water.x + water.width/2, water.y + water.height/2, water.width/3, 0, Math.PI * 2);
-                ctx.stroke();
+                const wg = ctx.createRadialGradient(water.x+water.width/2, water.y+water.height/2, 0, water.x+water.width/2, water.y+water.height/2, water.width/2);
+                wg.addColorStop(0, '#4DA6FF'); wg.addColorStop(1, '#1E90FF');
+                ctx.fillStyle = wg; ctx.fillRect(water.x, water.y, water.width, water.height);
+                ctx.strokeStyle = 'rgba(255,255,255,0.3)'; ctx.lineWidth = 2;
+                ctx.beginPath(); ctx.arc(water.x+water.width/2, water.y+water.height/2, water.width/3, 0, Math.PI*2); ctx.stroke();
             });
 
+            // Sand traps
             sandTraps.forEach(trap => {
-                ctx.fillStyle = '#F4C430';
-                ctx.fillRect(trap.x, trap.y, trap.width, trap.height);
-                ctx.fillStyle = 'rgba(218, 165, 32, 0.3)';
-                for (let i = 0; i < 20; i++) {
-                    ctx.fillRect(trap.x + Math.random() * trap.width, trap.y + Math.random() * trap.height, 2, 2);
-                }
+                ctx.fillStyle = '#F4C430'; ctx.fillRect(trap.x, trap.y, trap.width, trap.height);
+                ctx.fillStyle = 'rgba(218,165,32,0.3)';
+                for (let i = 0; i < 20; i++) ctx.fillRect(trap.x+Math.random()*trap.width, trap.y+Math.random()*trap.height, 2, 2);
             });
 
-            // obstacles
+            // Static obstacles
             ctx.fillStyle = '#8B4513';
             obstacles.forEach(obs => ctx.fillRect(obs.x, obs.y, obs.width, obs.height));
 
-            // moving obstacles
+            // Moving obstacles
             movingObstacles.forEach(obs => {
-                if (obs.axis === 'vertical') {
-                    obs.y += obs.speed * obs.direction;
-                    if (obs.y <= obs.minY || obs.y >= obs.maxY) obs.direction *= -1;
-                } else {
-                    obs.x += obs.speed * obs.direction;
-                    if (obs.x <= obs.minX || obs.x >= obs.maxX) obs.direction *= -1;
-                }
-                const g = ctx.createLinearGradient(obs.x, obs.y, obs.x + obs.width, obs.y + obs.height);
-                g.addColorStop(0, '#D2691E');
-                g.addColorStop(1, '#8B4513');
-                ctx.fillStyle = g;
-                ctx.fillRect(obs.x, obs.y, obs.width, obs.height);
+                if (obs.axis === 'vertical') { obs.y += obs.speed * obs.direction; if (obs.y <= obs.minY || obs.y >= obs.maxY) obs.direction *= -1; }
+                else { obs.x += obs.speed * obs.direction; if (obs.x <= obs.minX || obs.x >= obs.maxX) obs.direction *= -1; }
+                const g = ctx.createLinearGradient(obs.x, obs.y, obs.x+obs.width, obs.y+obs.height);
+                g.addColorStop(0, '#D2691E'); g.addColorStop(1, '#8B4513');
+                ctx.fillStyle = g; ctx.fillRect(obs.x, obs.y, obs.width, obs.height);
             });
 
-            // bumpers
+            // Bumpers
             bumpers.forEach(bumper => {
-                const bumperGradient = ctx.createRadialGradient(bumper.x, bumper.y, bumper.radius * 0.3, bumper.x, bumper.y, bumper.radius);
-                bumperGradient.addColorStop(0, '#FF6B6B');
-                bumperGradient.addColorStop(1, '#C92A2A');
-                ctx.fillStyle = bumperGradient;
-                ctx.beginPath();
-                ctx.arc(bumper.x, bumper.y, bumper.radius, 0, Math.PI * 2);
-                ctx.fill();
-                ctx.fillStyle = 'rgba(255, 255, 255, 0.4)';
-                ctx.beginPath();
-                ctx.arc(bumper.x - 5, bumper.y - 5, bumper.radius * 0.4, 0, Math.PI * 2);
-                ctx.fill();
+                const bg = ctx.createRadialGradient(bumper.x, bumper.y, bumper.radius*0.3, bumper.x, bumper.y, bumper.radius);
+                bg.addColorStop(0, '#FF6B6B'); bg.addColorStop(1, '#C92A2A');
+                ctx.fillStyle = bg; ctx.beginPath(); ctx.arc(bumper.x, bumper.y, bumper.radius, 0, Math.PI*2); ctx.fill();
+                ctx.fillStyle = 'rgba(255,255,255,0.4)'; ctx.beginPath(); ctx.arc(bumper.x-5, bumper.y-5, bumper.radius*0.4, 0, Math.PI*2); ctx.fill();
             });
 
-            // windmills
+            // Windmills
             windmills.forEach(mill => {
                 mill.angle += mill.speed;
-                ctx.fillStyle = '#654321';
-                ctx.beginPath();
-                ctx.arc(mill.x, mill.y, 8, 0, Math.PI * 2);
-                ctx.fill();
-                ctx.save();
-                ctx.translate(mill.x, mill.y);
-                ctx.rotate(mill.angle);
+                ctx.fillStyle = '#654321'; ctx.beginPath(); ctx.arc(mill.x, mill.y, 8, 0, Math.PI*2); ctx.fill();
+                ctx.save(); ctx.translate(mill.x, mill.y); ctx.rotate(mill.angle);
                 for (let i = 0; i < mill.blades; i++) {
-                    ctx.rotate((Math.PI * 2) / mill.blades);
-                    ctx.fillStyle = '#8B4513';
-                    ctx.fillRect(-5, 0, 10, mill.radius);
-                    ctx.beginPath();
-                    ctx.arc(0, mill.radius, 8, 0, Math.PI * 2);
-                    ctx.fill();
+                    ctx.rotate((Math.PI*2)/mill.blades); ctx.fillStyle = '#8B4513';
+                    ctx.fillRect(-5, 0, 10, mill.radius); ctx.beginPath(); ctx.arc(0, mill.radius, 8, 0, Math.PI*2); ctx.fill();
                 }
                 ctx.restore();
             });
 
-            // hole
-            ctx.fillStyle = '#000';
-            ctx.beginPath();
-            ctx.arc(hole.x, hole.y, hole.radius, 0, Math.PI * 2);
-            ctx.fill();
-            ctx.fillStyle = '#333';
-            ctx.beginPath();
-            ctx.arc(hole.x, hole.y, hole.radius - 5, 0, Math.PI * 2);
-            ctx.fill();
+            // Hole
+            ctx.fillStyle = '#000'; ctx.beginPath(); ctx.arc(hole.x, hole.y, hole.radius, 0, Math.PI*2); ctx.fill();
+            ctx.fillStyle = '#333'; ctx.beginPath(); ctx.arc(hole.x, hole.y, hole.radius-5, 0, Math.PI*2); ctx.fill();
 
-            // flag
-            ctx.strokeStyle = currentTheme === 'night' ? '#FCD34D' : '#000';
-            ctx.lineWidth = 2;
-            ctx.beginPath();
-            ctx.moveTo(hole.x, hole.y);
-            ctx.lineTo(hole.x, hole.y - 40);
-            ctx.stroke();
-            ctx.fillStyle = '#FF0000';
-            ctx.beginPath();
-            ctx.moveTo(hole.x, hole.y - 40);
-            ctx.lineTo(hole.x + 15, hole.y - 30);
-            ctx.lineTo(hole.x, hole.y - 20);
-            ctx.fill();
+            // Flag
+            ctx.strokeStyle = currentTheme === 'night' ? '#FCD34D' : '#000'; ctx.lineWidth = 2;
+            ctx.beginPath(); ctx.moveTo(hole.x, hole.y); ctx.lineTo(hole.x, hole.y-40); ctx.stroke();
+            ctx.fillStyle = '#FF0000'; ctx.beginPath();
+            ctx.moveTo(hole.x, hole.y-40); ctx.lineTo(hole.x+15, hole.y-30); ctx.lineTo(hole.x, hole.y-20); ctx.fill();
 
-            // trail
+            // Trail
             ctx.globalAlpha = 0.3;
             ballTrail.forEach((pos, index) => {
-                const alpha = index / ballTrail.length * 0.5;
-                ctx.globalAlpha = alpha;
-                ctx.fillStyle = '#FFF';
-                ctx.beginPath();
-                ctx.arc(pos.x, pos.y, ball.radius * 0.7, 0, Math.PI * 2);
-                ctx.fill();
+                ctx.globalAlpha = index/ballTrail.length*0.5; ctx.fillStyle = '#FFF';
+                ctx.beginPath(); ctx.arc(pos.x, pos.y, ball.radius*0.7, 0, Math.PI*2); ctx.fill();
             });
             ctx.globalAlpha = 1.0;
 
-            // particles
+            // Particles
             particles = particles.filter(p => {
                 p.x += p.vx; p.y += p.vy; p.life--;
                 if (p.life > 0) {
-                    ctx.globalAlpha = p.life / 30;
-                    ctx.fillStyle = p.color;
-                    ctx.beginPath();
-                    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-                    ctx.fill();
-                    ctx.globalAlpha = 1.0;
-                    return true;
+                    ctx.globalAlpha = p.life/30; ctx.fillStyle = p.color;
+                    ctx.beginPath(); ctx.arc(p.x, p.y, p.size, 0, Math.PI*2); ctx.fill();
+                    ctx.globalAlpha = 1.0; return true;
                 }
                 return false;
             });
 
-            // ball
-            ctx.fillStyle = '#FFF';
-            ctx.strokeStyle = currentTheme === 'night' ? '#FCD34D' : '#000';
-            ctx.lineWidth = 2;
-            ctx.beginPath();
-            ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2);
-            ctx.fill();
-            ctx.stroke();
-            ctx.fillStyle = 'rgba(255, 255, 255, 0.5)';
-            ctx.beginPath();
-            ctx.arc(ball.x - 3, ball.y - 3, 3, 0, Math.PI * 2);
-            ctx.fill();
+            // Ball
+            ctx.fillStyle = '#FFF'; ctx.strokeStyle = currentTheme === 'night' ? '#FCD34D' : '#000'; ctx.lineWidth = 2;
+            ctx.beginPath(); ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI*2); ctx.fill(); ctx.stroke();
+            ctx.fillStyle = 'rgba(255,255,255,0.5)'; ctx.beginPath(); ctx.arc(ball.x-3, ball.y-3, 3, 0, Math.PI*2); ctx.fill();
         }
 
         function updateBall() {
             if (!ctx) return;
-            ball.x += ball.vx;
-            ball.y += ball.vy;
-
-            if (ball.vx !== 0 || ball.vy !== 0) {
-                ballTrail.push({ x: ball.x, y: ball.y });
-                if (ballTrail.length > 15) ballTrail.shift();
-            }
+            ball.x += ball.vx; ball.y += ball.vy;
+            if (ball.vx !== 0 || ball.vy !== 0) { ballTrail.push({x:ball.x, y:ball.y}); if (ballTrail.length > 15) ballTrail.shift(); }
 
             waterHazards.forEach(water => {
-                if (ball.x > water.x && ball.x < water.x + water.width && ball.y > water.y && ball.y < water.y + water.height) {
-                    createParticles(ball.x, ball.y, '#1E90FF', 12);
-                    showWaterSplash();
-                    ball.x = currentHoleData.ball.x;
-                    ball.y = currentHoleData.ball.y;
-                    ball.vx = 0; ball.vy = 0;
-                    strokes++;
-                    ballTrail = [];
-                    drawGame();
+                if (ball.x > water.x && ball.x < water.x+water.width && ball.y > water.y && ball.y < water.y+water.height) {
+                    createParticles(ball.x, ball.y, '#1E90FF', 12); showWaterSplash();
+                    ball.x = currentHoleData.ball.x; ball.y = currentHoleData.ball.y;
+                    ball.vx = 0; ball.vy = 0; strokes++; ballTrail = []; drawGame();
                 }
             });
 
             let inSand = false;
             sandTraps.forEach(trap => {
-                if (ball.x > trap.x && ball.x < trap.x + trap.width && ball.y > trap.y && ball.y < trap.y + trap.height) {
-                    inSand = true;
-                    if (Math.random() > 0.95) createParticles(ball.x, ball.y, '#F4C430', 2);
+                if (ball.x > trap.x && ball.x < trap.x+trap.width && ball.y > trap.y && ball.y < trap.y+trap.height) {
+                    inSand = true; if (Math.random() > 0.95) createParticles(ball.x, ball.y, '#F4C430', 2);
                 }
             });
 
             const friction = inSand ? 0.931 : 0.98;
-            ball.vx *= friction;
-            ball.vy *= friction;
+            ball.vx *= friction; ball.vy *= friction;
             if (Math.abs(ball.vx) < 0.1) ball.vx = 0;
             if (Math.abs(ball.vy) < 0.1) ball.vy = 0;
 
-            if (ball.x - ball.radius < 0 || ball.x + ball.radius > canvas.width) {
-                ball.vx *= -0.7;
-                ball.x = Math.max(ball.radius, Math.min(canvas.width - ball.radius, ball.x));
-                createParticles(ball.x, ball.y, '#FFD700', 5);
-                playSound('wall');
+            if (ball.x-ball.radius < 0 || ball.x+ball.radius > canvas.width) {
+                ball.vx *= -0.7; ball.x = Math.max(ball.radius, Math.min(canvas.width-ball.radius, ball.x));
+                createParticles(ball.x, ball.y, '#FFD700', 5); playSound('wall');
             }
-            if (ball.y - ball.radius < 0 || ball.y + ball.radius > canvas.height) {
-                ball.vy *= -0.7;
-                ball.y = Math.max(ball.radius, Math.min(canvas.height - ball.radius, ball.y));
-                createParticles(ball.x, ball.y, '#FFD700', 5);
-                playSound('wall');
+            if (ball.y-ball.radius < 0 || ball.y+ball.radius > canvas.height) {
+                ball.vy *= -0.7; ball.y = Math.max(ball.radius, Math.min(canvas.height-ball.radius, ball.y));
+                createParticles(ball.x, ball.y, '#FFD700', 5); playSound('wall');
             }
 
             bumpers.forEach(bumper => {
-                const dx = ball.x - bumper.x;
-                const dy = ball.y - bumper.y;
-                const distance = Math.sqrt(dx * dx + dy * dy);
-                if (distance < bumper.radius + ball.radius) {
-                    const nx = dx / distance;
-                    const ny = dy / distance;
-                    const dotProduct = ball.vx * nx + ball.vy * ny;
-                    ball.vx = (ball.vx - 2 * dotProduct * nx) * 1.2;
-                    ball.vy = (ball.vy - 2 * dotProduct * ny) * 1.2;
-                    ball.x = bumper.x + nx * (bumper.radius + ball.radius + 1);
-                    ball.y = bumper.y + ny * (bumper.radius + ball.radius + 1);
-                    createParticles(ball.x, ball.y, '#FF6B6B', 8);
-                    playSound('wall');
+                const dx = ball.x-bumper.x, dy = ball.y-bumper.y;
+                const distance = Math.sqrt(dx*dx+dy*dy);
+                if (distance < bumper.radius+ball.radius) {
+                    const nx = dx/distance, ny = dy/distance;
+                    const dot = ball.vx*nx+ball.vy*ny;
+                    ball.vx = (ball.vx-2*dot*nx)*1.2; ball.vy = (ball.vy-2*dot*ny)*1.2;
+                    ball.x = bumper.x+nx*(bumper.radius+ball.radius+1);
+                    ball.y = bumper.y+ny*(bumper.radius+ball.radius+1);
+                    createParticles(ball.x, ball.y, '#FF6B6B', 8); playSound('wall');
                 }
             });
 
             function resolveObstacleCollision(obs, particleColor) {
-                if (ball.x + ball.radius > obs.x && ball.x - ball.radius < obs.x + obs.width &&
-                    ball.y + ball.radius > obs.y && ball.y - ball.radius < obs.y + obs.height) {
-
-                    const overlapLeft = (ball.x + ball.radius) - obs.x;
-                    const overlapRight = (obs.x + obs.width) - (ball.x - ball.radius);
-                    const overlapTop = (ball.y + ball.radius) - obs.y;
-                    const overlapBottom = (obs.y + obs.height) - (ball.y - ball.radius);
-                    const minOverlap = Math.min(overlapLeft, overlapRight, overlapTop, overlapBottom);
-
-                    if (minOverlap === overlapLeft) { ball.vx = Math.abs(ball.vx) * -0.7; ball.x = obs.x - ball.radius - 1; }
-                    else if (minOverlap === overlapRight) { ball.vx = Math.abs(ball.vx) * 0.7; ball.x = obs.x + obs.width + ball.radius + 1; }
-                    else if (minOverlap === overlapTop) { ball.vy = Math.abs(ball.vy) * -0.7; ball.y = obs.y - ball.radius - 1; }
-                    else if (minOverlap === overlapBottom) { ball.vy = Math.abs(ball.vy) * 0.7; ball.y = obs.y + obs.height + ball.radius + 1; }
-
-                    createParticles(ball.x, ball.y, particleColor, 5);
-                    playSound('wall');
+                if (ball.x+ball.radius > obs.x && ball.x-ball.radius < obs.x+obs.width &&
+                    ball.y+ball.radius > obs.y && ball.y-ball.radius < obs.y+obs.height) {
+                    const oL = (ball.x+ball.radius)-obs.x, oR = (obs.x+obs.width)-(ball.x-ball.radius);
+                    const oT = (ball.y+ball.radius)-obs.y, oB = (obs.y+obs.height)-(ball.y-ball.radius);
+                    const min = Math.min(oL, oR, oT, oB);
+                    if (min===oL) { ball.vx = Math.abs(ball.vx)*-0.7; ball.x = obs.x-ball.radius-1; }
+                    else if (min===oR) { ball.vx = Math.abs(ball.vx)*0.7; ball.x = obs.x+obs.width+ball.radius+1; }
+                    else if (min===oT) { ball.vy = Math.abs(ball.vy)*-0.7; ball.y = obs.y-ball.radius-1; }
+                    else if (min===oB) { ball.vy = Math.abs(ball.vy)*0.7; ball.y = obs.y+obs.height+ball.radius+1; }
+                    createParticles(ball.x, ball.y, particleColor, 5); playSound('wall');
                 }
             }
-
             obstacles.forEach(obs => resolveObstacleCollision(obs, '#8B4513'));
             movingObstacles.forEach(obs => resolveObstacleCollision(obs, '#D2691E'));
 
             windmills.forEach(mill => {
-                const dx = ball.x - mill.x;
-                const dy = ball.y - mill.y;
-                const distance = Math.sqrt(dx * dx + dy * dy);
-                if (distance < mill.radius + ball.radius && distance > 10) {
-                    ball.vx *= -0.8;
-                    ball.vy *= -0.8;
-                    createParticles(ball.x, ball.y, '#8B4513', 6);
-                    playSound('wall');
+                const dx = ball.x-mill.x, dy = ball.y-mill.y;
+                const distance = Math.sqrt(dx*dx+dy*dy);
+                if (distance < mill.radius+ball.radius && distance > 10) {
+                    ball.vx *= -0.8; ball.vy *= -0.8;
+                    createParticles(ball.x, ball.y, '#8B4513', 6); playSound('wall');
                 }
             });
 
-            const dist = Math.sqrt((ball.x - hole.x) ** 2 + (ball.y - hole.y) ** 2);
-            if (dist < hole.radius - 7 && Math.abs(ball.vx) < 2 && Math.abs(ball.vy) < 2) {
+            const dist = Math.sqrt((ball.x-hole.x)**2+(ball.y-hole.y)**2);
+            if (dist < hole.radius-7 && Math.abs(ball.vx) < 2 && Math.abs(ball.vy) < 2) {
                 ball.vx = 0; ball.vy = 0;
-                totalStrokes += strokes;
-                holeScores[currentHole - 1] = strokes;
-                playSound('hole');
-                createParticles(hole.x, hole.y, '#FFD700', 15);
-                updateScorecard();
-                drawGame();
-
-                if (strokes === 1) {
-                    holesInOne++;
-                    localStorage.setItem('holesInOne', holesInOne);
-                    const hioEl = document.getElementById('holesInOneCount');
-                    if (hioEl) hioEl.textContent = holesInOne;
-                }
-
+                totalStrokes += strokes; holeScores[currentHole-1] = strokes;
+                playSound('hole'); createParticles(hole.x, hole.y, '#FFD700', 15);
+                updateScorecard(); drawGame();
+                if (strokes === 1) { holesInOne++; localStorage.setItem('holesInOne', holesInOne); const hioEl = document.getElementById('holesInOneCount'); if (hioEl) hioEl.textContent = holesInOne; }
                 setTimeout(() => {
-                    if (currentHole === 18) {
-                        showCelebration();
-                    } else {
-                        const currentPar = parValues[currentHole - 1];
+                    if (currentHole === 18) { showCelebration(); }
+                    else {
+                        const cp = parValues[currentHole-1];
                         let msg = `Hole in ${strokes}!`;
                         if (strokes === 1) msg = '🎉 HOLE IN ONE! 🎉';
-                        else if (strokes < currentPar) msg += ' ⭐ Under par!';
-                        else if (strokes === currentPar) msg += ' ✓ Par';
+                        else if (strokes < cp) msg += ' ⭐ Under par!';
+                        else if (strokes === cp) msg += ' ✓ Par';
                         else msg += ' Over par';
-                        alert(msg);
-
-                        currentHole++;
-                        loadHole(currentHole);
-                        drawGame();
+                        alert(msg); currentHole++; loadHole(currentHole); drawGame();
                     }
                 }, 100);
             }
-
             drawGame();
             if (ball.vx !== 0 || ball.vy !== 0) requestAnimationFrame(updateBall);
         }
 
         function showCelebration() {
-            const totalPar = parValues.reduce((a, b) => a + b, 0);
+            const totalPar = parValues.reduce((a,b) => a+b, 0);
             const overUnder = totalStrokes - totalPar;
-            const overUnderText = overUnder === 0 ? 'Even Par!' : overUnder > 0 ? `${overUnder} Over Par` : `${Math.abs(overUnder)} Under Par!`;
-
-            const finalScoreEl = document.getElementById('finalScore');
-            const msgEl = document.getElementById('celebrationMessage');
-            const overlay = document.getElementById('celebrationOverlay');
-
-            if (finalScoreEl) finalScoreEl.textContent = `Total: ${totalStrokes} strokes`;
-            if (msgEl) msgEl.textContent = overUnderText;
-            if (overlay) overlay.classList.add('active');
-
-            if (best === '--' || totalStrokes < parseInt(best)) {
-                best = totalStrokes;
-                localStorage.setItem('bestScore', best);
-                const bestEl = document.getElementById('best');
-                if (bestEl) bestEl.textContent = best;
-            }
+            const txt = overUnder === 0 ? 'Even Par!' : overUnder > 0 ? `${overUnder} Over Par` : `${Math.abs(overUnder)} Under Par!`;
+            const fse = document.getElementById('finalScore');
+            const mse = document.getElementById('celebrationMessage');
+            const ove = document.getElementById('celebrationOverlay');
+            if (fse) fse.textContent = `Total: ${totalStrokes} strokes`;
+            if (mse) mse.textContent = txt;
+            if (ove) ove.classList.add('active');
+            if (best === '--' || totalStrokes < parseInt(best)) { best = totalStrokes; localStorage.setItem('bestScore', best); const be = document.getElementById('best'); if (be) be.textContent = best; }
             for (let i = 0; i < 50; i++) createConfetti();
         }
 
         function closeCelebration() {
-            const overlay = document.getElementById('celebrationOverlay');
-            if (overlay) overlay.classList.remove('active');
-            currentHole = 1;
-            totalStrokes = 0;
-            holeScores = Array(18).fill(null);
-            loadHole(currentHole);
-            updateScorecard();
-            drawGame();
+            const ove = document.getElementById('celebrationOverlay');
+            if (ove) ove.classList.remove('active');
+            currentHole = 1; totalStrokes = 0; holeScores = Array(18).fill(null);
+            loadHole(currentHole); updateScorecard(); drawGame();
         }
 
         function createConfetti() {
-            const overlay = document.getElementById('celebrationOverlay');
-            if (!overlay) return;
-            const confetti = document.createElement('div');
-            confetti.className = 'confetti';
-            confetti.style.left = Math.random() * 100 + '%';
-            confetti.style.background = ['#FCD34D', '#FBBF24', '#1E3A8A', '#3B82F6'][Math.floor(Math.random() * 4)];
-            confetti.style.animationDelay = Math.random() * 2 + 's';
-            overlay.appendChild(confetti);
-            setTimeout(() => confetti.remove(), 3000);
+            const ove = document.getElementById('celebrationOverlay');
+            if (!ove) return;
+            const c = document.createElement('div'); c.className = 'confetti';
+            c.style.left = Math.random()*100+'%';
+            c.style.background = ['#FCD34D','#FBBF24','#1E3A8A','#3B82F6'][Math.floor(Math.random()*4)];
+            c.style.animationDelay = Math.random()*2+'s';
+            ove.appendChild(c); setTimeout(() => c.remove(), 3000);
         }
 
         function shareChallenge() {
-            if (totalStrokes === 0) {
-                alert('Complete at least one hole first!');
-                return;
-            }
-            const totalPar = parValues.slice(0, currentHole - 1).reduce((a, b) => a + b, 0);
-            const overUnder = totalStrokes - totalPar;
-            const scoreText = overUnder === 0 ? 'Even Par' : overUnder > 0 ? `+${overUnder}` : `${overUnder}`;
-            const challengeText = `🏌️ Can you beat my Glory On The Greens score?\n${totalStrokes} strokes (${scoreText}) through ${currentHole - 1} holes!\n\nPlay at: mickskylark.com`;
-
-            if (navigator.share) {
-                navigator.share({ title: 'Glory On The Greens Challenge', text: challengeText }).catch(()=>{});
-            } else if (navigator.clipboard && navigator.clipboard.writeText) {
-                navigator.clipboard.writeText(challengeText).then(() => {
-                    alert('Challenge copied to clipboard! Share it with friends!');
-                }).catch(() => {
-                    alert(challengeText);
-                });
-            } else {
-                alert(challengeText);
-            }
+            if (totalStrokes === 0) { alert('Complete at least one hole first!'); return; }
+            const tp = parValues.slice(0, currentHole-1).reduce((a,b) => a+b, 0);
+            const ou = totalStrokes - tp;
+            const st = ou === 0 ? 'Even Par' : ou > 0 ? `+${ou}` : `${ou}`;
+            const ct = `🏌️ Can you beat my Glory On The Greens score?\n${totalStrokes} strokes (${st}) through ${currentHole-1} holes!\n\nPlay at: mickskylark.com`;
+            if (navigator.share) { navigator.share({title:'Glory On The Greens Challenge', text:ct}).catch(()=>{}); }
+            else if (navigator.clipboard && navigator.clipboard.writeText) { navigator.clipboard.writeText(ct).then(() => { alert('Challenge copied to clipboard! Share it with friends!'); }).catch(() => { alert(ct); }); }
+            else { alert(ct); }
         }
 
         if (canvas) {
             function resizeCanvas() {
-                const container = canvas.parentElement;
-                if (!container) return;
-                const containerWidth = container.offsetWidth - 40;
-
-                // keep internal resolution stable; only scale via CSS
-                if (window.innerWidth <= 768 && containerWidth < 500) {
-                    const scale = containerWidth / 500;
-                    canvas.style.width = containerWidth + 'px';
-                    canvas.style.height = (400 * scale) + 'px';
-                } else {
-                    canvas.style.width = '500px';
-                    canvas.style.height = '400px';
-                }
+                const container = canvas.parentElement; if (!container) return;
+                const cw = container.offsetWidth - 40;
+                if (window.innerWidth <= 768 && cw < 500) { const s = cw/500; canvas.style.width = cw+'px'; canvas.style.height = (400*s)+'px'; }
+                else { canvas.style.width = '500px'; canvas.style.height = '400px'; }
             }
             resizeCanvas();
             window.addEventListener('resize', resizeCanvas, { passive: true });
@@ -2109,123 +1468,70 @@ setActiveNav(sections[0]?.id || 'home');
             function handleHit(e) {
                 if (ball.vx === 0 && ball.vy === 0) {
                     const rect = canvas.getBoundingClientRect();
-                    const scaleX = canvas.width / rect.width;
-                    const scaleY = canvas.height / rect.height;
-
+                    const scaleX = canvas.width/rect.width, scaleY = canvas.height/rect.height;
                     let clickX, clickY;
-                    if (e.type === 'touchstart') {
-                        clickX = (e.touches[0].clientX - rect.left) * scaleX;
-                        clickY = (e.touches[0].clientY - rect.top) * scaleY;
-                    } else {
-                        clickX = (e.clientX - rect.left) * scaleX;
-                        clickY = (e.clientY - rect.top) * scaleY;
-                    }
-
-                    const dx = clickX - ball.x;
-                    const dy = clickY - ball.y;
-                    const distance = Math.sqrt(dx * dx + dy * dy) || 1;
-                    const power = Math.min(distance / 20, 8);
-
-                    ball.vx = (dx / distance) * power;
-                    ball.vy = (dy / distance) * power;
-                    strokes++;
-                    currentPower = power;
-
-                    playSound('hit');
-                    drawGame();
+                    if (e.type === 'touchstart') { clickX = (e.touches[0].clientX-rect.left)*scaleX; clickY = (e.touches[0].clientY-rect.top)*scaleY; }
+                    else { clickX = (e.clientX-rect.left)*scaleX; clickY = (e.clientY-rect.top)*scaleY; }
+                    const dx = clickX-ball.x, dy = clickY-ball.y;
+                    const distance = Math.sqrt(dx*dx+dy*dy) || 1;
+                    const power = Math.min(distance/20, 8);
+                    ball.vx = (dx/distance)*power; ball.vy = (dy/distance)*power;
+                    strokes++; currentPower = power;
+                    playSound('hit'); drawGame();
                     setTimeout(() => { currentPower = 0; }, 800);
                     updateBall();
                 }
             }
-
             canvas.addEventListener('click', handleHit);
             canvas.addEventListener('touchstart', (e) => { e.preventDefault(); handleHit(e); }, { passive: false });
-
             const bestEl = document.getElementById('best');
             const hioEl = document.getElementById('holesInOneCount');
             if (bestEl) bestEl.textContent = best;
             if (hioEl) hioEl.textContent = holesInOne;
-
-            loadHole(1);
-            drawGame();
+            loadHole(1); drawGame();
         }
 
-        window.resetGame = function() {
-            currentHole = 1;
-            totalStrokes = 0;
-            holeScores = Array(18).fill(null);
-            loadHole(currentHole);
-            updateScorecard();
-            drawGame();
-        }
-
+        window.resetGame = function() { currentHole = 1; totalStrokes = 0; holeScores = Array(18).fill(null); loadHole(currentHole); updateScorecard(); drawGame(); }
         window.setTheme = setTheme;
         window.toggleSound = toggleSound;
         window.shareChallenge = shareChallenge;
         window.closeCelebration = closeCelebration;
 
-        // Auto-scroll for comparable films only
+        // Auto-scroll for comparable films
         const filmsWrapper = document.querySelector('.comparable-films-wrapper');
         if (filmsWrapper) {
             let filmsScrollAmount = 0;
-            const filmsScrollSpeed = 0.5;
-
             function autoScrollFilms() {
-                filmsScrollAmount += filmsScrollSpeed;
-                filmsWrapper.scrollLeft = filmsScrollAmount;
-
-                if (filmsScrollAmount >= filmsWrapper.scrollWidth - filmsWrapper.clientWidth - 50) {
-                    filmsScrollAmount = 0;
-                    filmsWrapper.scrollLeft = 0;
-                }
+                filmsScrollAmount += 0.5; filmsWrapper.scrollLeft = filmsScrollAmount;
+                if (filmsScrollAmount >= filmsWrapper.scrollWidth - filmsWrapper.clientWidth - 50) { filmsScrollAmount = 0; filmsWrapper.scrollLeft = 0; }
                 requestAnimationFrame(autoScrollFilms);
             }
             autoScrollFilms();
         }
+
         // Randomize BTS photos on page load
-(function() {
-    const container = document.querySelector('#bts-slideshow .slideshow-container');
-    if (!container) return;
-    
-    // Get all slide elements
-    const slides = Array.from(container.querySelectorAll('.slide'));
-    
-    // Fisher-Yates shuffle algorithm
-    for (let i = slides.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [slides[i], slides[j]] = [slides[j], slides[i]];
-    }
-    
-    // Clear container and re-append in random order
-    container.innerHTML = '';
-    slides.forEach(slide => container.appendChild(slide));
-})();
+        (function() {
+            const container = document.querySelector('#bts-slideshow .slideshow-container');
+            if (!container) return;
+            const slides = Array.from(container.querySelectorAll('.slide'));
+            for (let i = slides.length-1; i > 0; i--) { const j = Math.floor(Math.random()*(i+1)); [slides[i], slides[j]] = [slides[j], slides[i]]; }
+            container.innerHTML = '';
+            slides.forEach(slide => container.appendChild(slide));
+        })();
+
         // Sticky RSVP Button - Hide when in RSVP section
-(function() {
-    const stickyRsvp = document.querySelector('.sticky-rsvp');
-    const rsvpSection = document.getElementById('rsvp');
-    
-    if (!stickyRsvp || !rsvpSection) return;
-    
-    // Smooth scroll when clicked
-    stickyRsvp.addEventListener('click', function(e) {
-        e.preventDefault();
-        rsvpSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    });
-    
-    // Hide button when user is in RSVP section
-    window.addEventListener('scroll', function() {
-        const rsvpTop = rsvpSection.offsetTop - 100;
-        const rsvpBottom = rsvpTop + rsvpSection.offsetHeight;
-        const scrollPos = window.pageYOffset + window.innerHeight / 2;
-        
-        if (scrollPos >= rsvpTop && scrollPos <= rsvpBottom) {
-            stickyRsvp.classList.add('hidden');
-        } else {
-            stickyRsvp.classList.remove('hidden');
-        }
-    });
-})();
+        (function() {
+            const stickyRsvp = document.querySelector('.sticky-rsvp');
+            const rsvpSection = document.getElementById('rsvp');
+            if (!stickyRsvp || !rsvpSection) return;
+            stickyRsvp.addEventListener('click', function(e) { e.preventDefault(); rsvpSection.scrollIntoView({ behavior: 'smooth', block: 'start' }); });
+            window.addEventListener('scroll', function() {
+                const rsvpTop = rsvpSection.offsetTop - 100;
+                const rsvpBottom = rsvpTop + rsvpSection.offsetHeight;
+                const scrollPos = window.pageYOffset + window.innerHeight / 2;
+                stickyRsvp.classList.toggle('hidden', scrollPos >= rsvpTop && scrollPos <= rsvpBottom);
+            });
+        })();
     </script>
 </body>
 </html>
