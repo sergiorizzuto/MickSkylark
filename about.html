@@ -1,1 +1,707 @@
-//* About *//
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>About the Film - Mick Skylark: Mini Golf Prodigy</title>
+
+```
+<!-- SEO -->
+<meta name="description" content="Learn about Mick Skylark: Mini Golf Prodigy — a heartfelt comedy about a child mini golf prodigy, his mentor, and the road back to the sport he loves." />
+<meta name="keywords" content="Mick Skylark, about the film, mini golf comedy, family film, Potato Eater Productions" />
+<meta name="robots" content="index,follow" />
+<link rel="canonical" href="https://mickskylark.com/about.html" />
+<meta name="theme-color" content="#1E3A8A" />
+
+<!-- Open Graph -->
+<meta property="og:title" content="About the Film - Mick Skylark: Mini Golf Prodigy" />
+<meta property="og:description" content="A heartfelt comedy about a child mini golf prodigy, his mentor, and the road back to the sport he loves." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://mickskylark.com/about.html" />
+<meta property="og:image" content="https://mickskylark.com/og-image.jpg" />
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
+
+<link rel="icon" href="favicon.ico" />
+
+<style>
+    :root {
+        --primary: #1E3A8A;
+        --primary-dark: #1E40AF;
+        --secondary: #FCD34D;
+        --gold: #FBBF24;
+        --light: #FFFFFF;
+        --dark: #1F2937;
+        --accent-blue: #2563EB;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+        font-family: 'Poppins', sans-serif;
+        color: var(--dark);
+        overflow-x: hidden;
+        padding-top: 72px;
+        background: #fff;
+    }
+
+    /* ── Navigation ── */
+    .navbar {
+        position: fixed;
+        top: 0; left: 0; right: 0;
+        background: rgba(255,255,255,0.92);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+        z-index: 1000;
+        padding: 10px 0;
+    }
+
+    .nav-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        flex-wrap: wrap;
+        padding: 0 14px;
+    }
+
+    .nav-link {
+        color: var(--primary);
+        text-decoration: none;
+        font-weight: 600;
+        padding: 8px 14px;
+        border-radius: 999px;
+        transition: all 0.2s ease;
+        font-size: 0.9rem;
+        line-height: 1;
+        border: 1px solid transparent;
+        outline: none;
+    }
+
+    .nav-link:hover {
+        background: var(--primary);
+        color: white;
+    }
+
+    .nav-link.active {
+        background: var(--primary);
+        color: #fff;
+        box-shadow: 0 6px 18px rgba(30, 58, 138, 0.25);
+    }
+
+    .nav-link.nav-standout {
+        color: var(--accent-blue);
+        border-color: rgba(37, 99, 235, 0.25);
+        background: rgba(37, 99, 235, 0.06);
+        font-weight: 700;
+    }
+    .nav-link.nav-standout:hover {
+        background: var(--accent-blue);
+        color: #fff;
+        border-color: transparent;
+    }
+
+    @media (max-width: 768px) {
+        body { padding-top: 110px; }
+        .nav-container { gap: 8px; justify-content: flex-start; }
+        .nav-link { padding: 10px 14px; font-size: 0.95rem; }
+    }
+
+    /* ── Shared Section Styles ── */
+    .section-blue {
+        background: linear-gradient(135deg, #87CEEB 0%, #5DADE2 100%);
+        padding: 80px 20px;
+    }
+
+    .section-yellow {
+        background: linear-gradient(135deg, #FDE68A 0%, #FCD34D 100%);
+        padding: 80px 20px;
+    }
+
+    .section-white {
+        background: #fff;
+        padding: 80px 20px;
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .section-title {
+        font-size: 3rem;
+        font-weight: 700;
+        text-align: center;
+        margin-bottom: 50px;
+        color: var(--primary);
+    }
+
+    @media (max-width: 768px) {
+        .section-title { font-size: 2.2rem; margin-bottom: 30px; }
+    }
+
+    /* ── Hero ── */
+    .about-hero {
+        text-align: center;
+        padding: 60px 20px 80px;
+    }
+
+    .about-hero img {
+        width: 100%;
+        max-width: 500px;
+        margin: 0 auto 30px;
+        display: block;
+        border-radius: 20px;
+        opacity: 0;
+        animation: logoReveal 1.5s ease-out forwards;
+    }
+
+    @keyframes logoReveal {
+        0% { opacity: 0; transform: scale(0.8) translateY(-30px); }
+        60% { transform: scale(1.05) translateY(0); }
+        100% { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    .about-hero h1 {
+        font-size: 2.8rem;
+        font-weight: 700;
+        color: var(--primary);
+        margin-bottom: 15px;
+    }
+
+    .about-hero .subtitle {
+        font-size: 1.3rem;
+        color: var(--dark);
+        font-weight: 600;
+        opacity: 0.85;
+    }
+
+    @media (max-width: 768px) {
+        .about-hero h1 { font-size: 2rem; }
+        .about-hero .subtitle { font-size: 1.1rem; }
+        .about-hero { padding: 40px 20px 60px; }
+    }
+
+    /* ── Logline Card ── */
+    .logline-card {
+        font-size: 1.5rem;
+        line-height: 1.9;
+        max-width: 900px;
+        margin: 0 auto 60px;
+        text-align: center;
+        color: white;
+        font-weight: 600;
+        padding: 45px 50px;
+        background: linear-gradient(135deg, #1E3A8A 0%, #3B82F6 50%, #1E3A8A 100%);
+        background-size: 200% 200%;
+        animation: gradientShift 8s ease infinite;
+        border-radius: 25px;
+        box-shadow: 0 15px 50px rgba(30, 58, 138, 0.35),
+                    0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .logline-card::before {
+        content: '';
+        position: absolute;
+        top: -2px; left: -2px; right: -2px; bottom: -2px;
+        background: linear-gradient(45deg, #FCD34D, #FBBF24, #FCD34D);
+        border-radius: 25px;
+        z-index: -1;
+        opacity: 0.25;
+        animation: borderPulse 3s ease-in-out infinite;
+    }
+
+    .logline-card::after {
+        content: '🎬';
+        position: absolute;
+        font-size: 3rem;
+        top: 15px;
+        right: 20px;
+        opacity: 0.2;
+        animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes gradientShift {
+        0%, 100% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+    }
+    @keyframes borderPulse {
+        0%, 100% { transform: scale(1); opacity: 0.25; }
+        50% { transform: scale(1.02); opacity: 0.45; }
+    }
+    @keyframes float {
+        0%, 100% { transform: translateY(0px) rotate(0deg); }
+        50% { transform: translateY(-10px) rotate(5deg); }
+    }
+
+    @media (max-width: 768px) {
+        .logline-card { font-size: 1.15rem; padding: 30px 22px; }
+    }
+
+    /* ── Content Blocks ── */
+    .about-content {
+        max-width: 850px;
+        margin: 0 auto;
+    }
+
+    .about-content h2 {
+        font-size: 2rem;
+        font-weight: 700;
+        color: var(--primary);
+        margin-bottom: 20px;
+        position: relative;
+        display: inline-block;
+    }
+
+    .about-content h2::after {
+        content: '';
+        position: absolute;
+        bottom: -6px;
+        left: 0;
+        width: 60px;
+        height: 4px;
+        background: var(--secondary);
+        border-radius: 2px;
+    }
+
+    .about-content p {
+        font-size: 1.1rem;
+        line-height: 1.85;
+        color: var(--dark);
+        margin-bottom: 25px;
+    }
+
+    .about-content .highlight {
+        background: rgba(30, 58, 138, 0.06);
+        border-left: 4px solid var(--primary);
+        padding: 20px 25px;
+        border-radius: 0 12px 12px 0;
+        margin: 30px 0;
+        font-style: italic;
+        font-size: 1.05rem;
+        line-height: 1.75;
+        color: var(--dark);
+    }
+
+    @media (max-width: 768px) {
+        .about-content h2 { font-size: 1.6rem; }
+        .about-content p { font-size: 1rem; }
+    }
+
+    /* ── Genre Tags ── */
+    .genre-tags {
+        display: flex;
+        gap: 15px;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin: 40px 0;
+    }
+
+    .genre-tag {
+        background: white;
+        color: var(--primary);
+        padding: 12px 28px;
+        border-radius: 50px;
+        font-weight: 700;
+        font-size: 1rem;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        border: 2px solid var(--primary);
+        transition: all 0.3s ease;
+    }
+
+    .genre-tag:hover {
+        background: var(--primary);
+        color: white;
+        transform: translateY(-3px);
+        box-shadow: 0 6px 20px rgba(30, 58, 138, 0.3);
+    }
+
+    /* ── Info Cards Grid ── */
+    .info-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 30px;
+        margin: 50px 0;
+    }
+
+    .info-card {
+        background: white;
+        padding: 35px 30px;
+        border-radius: 20px;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        transition: transform 0.3s ease;
+    }
+
+    .info-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15);
+    }
+
+    .info-card .card-icon {
+        font-size: 3rem;
+        margin-bottom: 18px;
+    }
+
+    .info-card h3 {
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: var(--primary);
+        margin-bottom: 12px;
+    }
+
+    .info-card p {
+        font-size: 1rem;
+        line-height: 1.7;
+        color: #555;
+    }
+
+    /* ── Comparable Films ── */
+    .comp-films {
+        display: flex;
+        gap: 25px;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin: 40px 0;
+    }
+
+    .comp-film {
+        width: 180px;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+        transition: transform 0.3s ease;
+    }
+
+    .comp-film:hover {
+        transform: translateY(-8px) scale(1.03);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+    }
+
+    .comp-film img {
+        width: 100%;
+        height: auto;
+        display: block;
+    }
+
+    @media (max-width: 768px) {
+        .comp-film { width: 140px; }
+    }
+
+    /* ── CTA Section ── */
+    .cta-section {
+        text-align: center;
+        padding: 80px 20px;
+        background: linear-gradient(135deg, #1E3A8A 0%, #3B82F6 100%);
+    }
+
+    .cta-section h2 {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: white;
+        margin-bottom: 20px;
+    }
+
+    .cta-section p {
+        font-size: 1.2rem;
+        color: rgba(255, 255, 255, 0.9);
+        margin-bottom: 35px;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .cta-buttons {
+        display: flex;
+        gap: 20px;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .cta-btn {
+        padding: 16px 40px;
+        border-radius: 50px;
+        text-decoration: none;
+        font-weight: 700;
+        font-size: 1.1rem;
+        transition: all 0.3s ease;
+        display: inline-block;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .cta-btn.primary {
+        background: var(--secondary);
+        color: var(--dark);
+    }
+    .cta-btn.primary:hover {
+        background: var(--gold);
+        transform: translateY(-3px);
+        box-shadow: 0 6px 25px rgba(0, 0, 0, 0.3);
+    }
+
+    .cta-btn.outline {
+        background: transparent;
+        color: white;
+        border: 2px solid white;
+    }
+    .cta-btn.outline:hover {
+        background: white;
+        color: var(--primary);
+        transform: translateY(-3px);
+    }
+
+    @media (max-width: 768px) {
+        .cta-section h2 { font-size: 1.8rem; }
+        .cta-section p { font-size: 1.05rem; }
+    }
+
+    /* ── Footer ── */
+    footer {
+        background: var(--primary);
+        color: white;
+        text-align: center;
+        padding: 44px 20px;
+    }
+    footer a { color: var(--secondary); text-decoration: none; font-weight: 600; }
+    footer a:hover { text-decoration: underline; }
+
+    .footer-contact {
+        margin-top: 18px;
+        font-size: 1.05rem;
+        font-weight: 600;
+    }
+
+    /* ── Back to Top ── */
+    .back-to-top {
+        position: fixed;
+        right: 16px;
+        bottom: 18px;
+        z-index: 2000;
+        width: 48px;
+        height: 48px;
+        border-radius: 999px;
+        border: none;
+        background: rgba(255,255,255,0.9);
+        box-shadow: 0 10px 25px rgba(0,0,0,0.18);
+        cursor: pointer;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.4rem;
+        color: var(--primary);
+        transition: transform 0.15s ease, opacity 0.15s ease;
+    }
+    .back-to-top:hover { transform: translateY(-2px); }
+    .back-to-top.show { display: flex; }
+
+    /* ── Accessibility ── */
+    .nav-link:focus-visible,
+    .cta-btn:focus-visible,
+    .back-to-top:focus-visible {
+        outline: 3px solid rgba(252, 211, 77, 0.9);
+        outline-offset: 2px;
+    }
+</style>
+```
+
+</head>
+
+<body>
+
+```
+<!-- Navigation (Simplified) -->
+<nav class="navbar" aria-label="Primary navigation">
+    <div class="nav-container">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="about.html" class="nav-link active">About</a>
+        <a href="index.html#rsvp" class="nav-link nav-standout">RSVP</a>
+        <a href="index.html#cast" class="nav-link">Cast</a>
+        <a href="index.html#game" class="nav-link">Mini Golf</a>
+        <a href="merch.html" class="nav-link">Merch</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+    </div>
+</nav>
+
+<!-- Back to top -->
+<button class="back-to-top" id="backToTop" aria-label="Scroll to top" title="Back to top">↑</button>
+
+<!-- Hero -->
+<section class="section-yellow about-hero">
+    <div class="container">
+        <img src="logo-no-bg.png" alt="Mick Skylark: Mini Golf Prodigy" loading="eager" />
+        <h1>About the Film</h1>
+        <p class="subtitle">A comedy about second chances, unlikely mentors, and the world's most underrated sport.</p>
+    </div>
+</section>
+
+<!-- Logline -->
+<section class="section-white">
+    <div class="container">
+        <div class="logline-card">
+            Mick Skylark, coached by his mentor Jonsey, quickly rises to the top as a child mini golf prodigy.
+            When a tragedy strikes that he feels responsible for, he quits the sport for good.
+        </div>
+
+        <div class="genre-tags">
+            <span class="genre-tag">🎭 Comedy</span>
+            <span class="genre-tag">👨‍👩‍👧‍👦 Family Friendly</span>
+            <span class="genre-tag">⛳ Sports</span>
+            <span class="genre-tag">❤️ Heartfelt</span>
+        </div>
+    </div>
+</section>
+
+<!-- The Story -->
+<section class="section-blue">
+    <div class="container">
+        <div class="about-content">
+            <h2>The Story</h2>
+            <p>
+                Mick Skylark isn't your typical sports hero. He's a kid with a gift — an almost supernatural ability to read greens, 
+                judge angles, and sink impossible putts. Under the wing of his eccentric mentor Jonsey, Mick tears through the competitive 
+                mini golf circuit, becoming the youngest prodigy the sport has ever seen.
+            </p>
+            <p>
+                But when tragedy strikes — one that Mick believes is entirely his fault — he walks away from the game, 
+                his putter, and everything that once made him feel alive. Years pass. The trophies collect dust. 
+                The greens grow over without him.
+            </p>
+            <p>
+                Until life, as it tends to do, pulls him back in.
+            </p>
+
+            <div class="highlight">
+                "At its heart, Mick Skylark is a story about guilt, forgiveness, and learning that the people who 
+                believe in you never really stop — even when you stop believing in yourself."
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Why This Film -->
+<section class="section-white">
+    <div class="container">
+        <h2 class="section-title">Why This Film</h2>
+        <div class="info-grid">
+            <div class="info-card">
+                <div class="card-icon">🎯</div>
+                <h3>The Underdog Sport</h3>
+                <p>
+                    Everyone's played mini golf, but no one's made it the star of a movie — until now. 
+                    We wanted to celebrate the absurdity, the skill, and the pure joy of a sport that doesn't take itself too seriously.
+                </p>
+            </div>
+            <div class="info-card">
+                <div class="card-icon">😂</div>
+                <h3>Comedy with Heart</h3>
+                <p>
+                    In the spirit of films like <em>Happy Gilmore</em>, <em>Dodgeball</em>, and <em>Kingpin</em>, 
+                    Mick Skylark brings big laughs wrapped around a genuine emotional core that the whole family can enjoy.
+                </p>
+            </div>
+            <div class="info-card">
+                <div class="card-icon">⭐</div>
+                <h3>An Incredible Cast</h3>
+                <p>
+                    Featuring David Koechner, Patrick Warburton, Robert Knepper, Thomas Lennon, Elizabeth Mitchell, 
+                    Jorge Garcia, James Murray, and more — this cast brings every scene to life.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Tone & Inspiration -->
+<section class="section-yellow">
+    <div class="container">
+        <div class="about-content">
+            <h2>Tone & Inspiration</h2>
+            <p>
+                Mick Skylark lives in the sweet spot between laugh-out-loud comedy and genuine heart. 
+                If you've ever loved an underdog story — the kind where an oddball group of misfits bands together 
+                to prove everyone wrong — this film is for you.
+            </p>
+            <p>
+                The film draws inspiration from the golden age of sports comedies: the irreverence of <em>Dodgeball</em>, 
+                the wild energy of <em>Happy Gilmore</em>, the lovable weirdness of <em>Kingpin</em>, and the timeless 
+                silliness of <em>Young Frankenstein</em>. It's PG to PG-13, designed for the whole family to enjoy together.
+            </p>
+        </div>
+
+        <div class="comp-films">
+            <div class="comp-film"><img src="comparable-films/dodgeball.webp" alt="Dodgeball" loading="lazy"></div>
+            <div class="comp-film"><img src="comparable-films/happy-gilmore.webp" alt="Happy Gilmore" loading="lazy"></div>
+            <div class="comp-film"><img src="comparable-films/kingpin.webp" alt="Kingpin" loading="lazy"></div>
+            <div class="comp-film"><img src="comparable-films/young-frankenstein.webp" alt="Young Frankenstein" loading="lazy"></div>
+        </div>
+    </div>
+</section>
+
+<!-- Production -->
+<section class="section-blue">
+    <div class="container">
+        <div class="about-content">
+            <h2>The Production</h2>
+            <p>
+                Mick Skylark: Mini Golf Prodigy is written and directed by Sergio Rizzuto, co-written by Jett Miller, 
+                and produced by Sergio Rizzuto, Tyler Olson, and John Michaels. The film is a Potato Eater Productions project, 
+                brought to life by a team passionate about making people laugh — and maybe shed a tear or two.
+            </p>
+            <p>
+                As featured in <a href="https://deadline.com/2025/11/david-koechner-robert-knepper-thomas-lennon-mick-skylark-1236625639/" target="_blank" rel="noopener" style="color: var(--primary); font-weight: 700; text-decoration: underline;">Deadline</a>, 
+                the film has already generated buzz for its standout cast and fresh take on the sports comedy genre.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+    <h2>Be Part of the Story</h2>
+    <p>Reserve your seat for an exclusive test screening and be among the first to experience Mick Skylark.</p>
+    <div class="cta-buttons">
+        <a href="index.html#rsvp" class="cta-btn primary">🎟️ RSVP for the Screening</a>
+        <a href="https://www.instagram.com/mickskylark" target="_blank" rel="noopener" class="cta-btn outline">📸 Follow on Instagram</a>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer>
+    <p>&copy; 2025 Mick Skylark: Mini Golf Prodigy. All rights reserved.</p>
+    <p style="margin-top: 10px; opacity: 0.85;">A Potato Eater Productions Film</p>
+    <p style="margin-top: 15px;">
+        <a href="https://www.instagram.com/mickskylark" target="_blank" rel="noopener">Follow us on Instagram!</a>
+    </p>
+    <p style="margin-top: 10px;">
+        <a href="terms.html">Terms & Conditions</a>
+    </p>
+    <div class="footer-contact">
+        Reach out: <a href="mailto:Contact@PotatoEaterProductions.com">Contact@PotatoEaterProductions.com</a>
+    </div>
+</footer>
+
+<script>
+    // Back-to-top
+    const backToTopBtn = document.getElementById('backToTop');
+    if (backToTopBtn) {
+        window.addEventListener('scroll', () => {
+            backToTopBtn.classList.toggle('show', window.scrollY > 500);
+        }, { passive: true });
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    }
+</script>
+```
+
+</body>
+</html>
