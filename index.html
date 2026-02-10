@@ -91,6 +91,81 @@
     </noscript>
 
     <style>
+        /* Sticky RSVP Button */
+.sticky-rsvp {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 999;
+    background: linear-gradient(135deg, #1E3A8A 0%, #1E40AF 100%);
+    color: #fff;
+    padding: 16px 24px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 900;
+    font-size: 1.1rem;
+    box-shadow: 0 8px 25px rgba(30, 58, 138, 0.4);
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    animation: pulse 2s ease-in-out infinite;
+    cursor: pointer;
+}
+
+.sticky-rsvp:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 12px 35px rgba(30, 58, 138, 0.5);
+    background: linear-gradient(135deg, #1E40AF 0%, #2563EB 100%);
+}
+
+.rsvp-text {
+    font-size: 1.1rem;
+    line-height: 1;
+}
+
+.rsvp-subtext {
+    font-size: 0.75rem;
+    font-weight: 700;
+    opacity: 0.9;
+    color: #FCD34D;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        box-shadow: 0 8px 25px rgba(30, 58, 138, 0.4);
+    }
+    50% {
+        box-shadow: 0 8px 35px rgba(30, 58, 138, 0.6),
+                    0 0 0 8px rgba(30, 58, 138, 0.1);
+    }
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+    .sticky-rsvp {
+        bottom: 15px;
+        right: 15px;
+        padding: 14px 20px;
+        font-size: 1rem;
+    }
+    
+    .rsvp-text {
+        font-size: 1rem;
+    }
+    
+    .rsvp-subtext {
+        font-size: 0.7rem;
+    }
+}
+
+/* Hide on RSVP section (no need for button when already there) */
+.sticky-rsvp.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+        /* root */
         :root {
             --primary: #1E3A8A;
             --primary-dark: #1E40AF;
@@ -740,6 +815,12 @@
 </head>
 
 <body>
+      <!-- Sticky RSVP Button -->
+    <a href="#rsvp" class="sticky-rsvp" aria-label="RSVP for screening">
+        <span class="rsvp-text">🎟️ RSVP Now</span>
+        <span class="rsvp-subtext">Seats Filling Fast!</span>
+    </a>
+    
     <!-- Navigation -->
     <nav class="navbar" aria-label="Primary navigation">
         <div class="nav-container">
@@ -2102,6 +2183,32 @@ setActiveNav(sections[0]?.id || 'home');
     // Clear container and re-append in random order
     container.innerHTML = '';
     slides.forEach(slide => container.appendChild(slide));
+})();
+        // Sticky RSVP Button - Hide when in RSVP section
+(function() {
+    const stickyRsvp = document.querySelector('.sticky-rsvp');
+    const rsvpSection = document.getElementById('rsvp');
+    
+    if (!stickyRsvp || !rsvpSection) return;
+    
+    // Smooth scroll when clicked
+    stickyRsvp.addEventListener('click', function(e) {
+        e.preventDefault();
+        rsvpSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+    
+    // Hide button when user is in RSVP section
+    window.addEventListener('scroll', function() {
+        const rsvpTop = rsvpSection.offsetTop - 100;
+        const rsvpBottom = rsvpTop + rsvpSection.offsetHeight;
+        const scrollPos = window.pageYOffset + window.innerHeight / 2;
+        
+        if (scrollPos >= rsvpTop && scrollPos <= rsvpBottom) {
+            stickyRsvp.classList.add('hidden');
+        } else {
+            stickyRsvp.classList.remove('hidden');
+        }
+    });
 })();
     </script>
 </body>
