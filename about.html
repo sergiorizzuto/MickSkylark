@@ -26,7 +26,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
 
-<link rel="icon" href="favicon.ico" />
+<link rel="icon" href="https://mickskylark.com/favicon.ico" />
 
 <style>
     :root {
@@ -48,6 +48,58 @@
         overflow-x: hidden;
         padding-top: 72px;
         background: #fff;
+    }
+
+    /* ── Sticky RSVP Button ── */
+    .sticky-rsvp {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        z-index: 999;
+        background: linear-gradient(135deg, #1E3A8A 0%, #1E40AF 100%);
+        color: #fff;
+        padding: 16px 24px;
+        border-radius: 50px;
+        text-decoration: none;
+        font-weight: 900;
+        font-size: 1.1rem;
+        box-shadow: 0 8px 25px rgba(30, 58, 138, 0.4);
+        transition: all 0.3s ease;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 2px;
+        animation: pulse 2s ease-in-out infinite;
+        cursor: pointer;
+    }
+
+    .sticky-rsvp:hover {
+        transform: translateY(-3px) scale(1.05);
+        box-shadow: 0 12px 35px rgba(30, 58, 138, 0.5);
+        background: linear-gradient(135deg, #1E40AF 0%, #2563EB 100%);
+    }
+
+    .rsvp-text {
+        font-size: 1.1rem;
+        line-height: 1;
+    }
+
+    .rsvp-subtext {
+        font-size: 0.75rem;
+        font-weight: 700;
+        opacity: 0.9;
+        color: #FCD34D;
+    }
+
+    @keyframes pulse {
+        0%, 100% { box-shadow: 0 8px 25px rgba(30, 58, 138, 0.4); }
+        50% { box-shadow: 0 8px 35px rgba(30, 58, 138, 0.6), 0 0 0 8px rgba(30, 58, 138, 0.1); }
+    }
+
+    @media (max-width: 768px) {
+        .sticky-rsvp { bottom: 15px; right: 15px; padding: 14px 20px; font-size: 1rem; }
+        .rsvp-text { font-size: 1rem; }
+        .rsvp-subtext { font-size: 0.7rem; }
     }
 
     /* ── Navigation ── */
@@ -518,6 +570,12 @@
 <body>
 
 ```
+<!-- Sticky RSVP Button -->
+<a href="index.html#rsvp" class="sticky-rsvp" aria-label="RSVP for screening">
+    <span class="rsvp-text">🎟️ RSVP Now</span>
+    <span class="rsvp-subtext">Seats Filling Fast!</span>
+</a>
+
 <!-- Navigation (Simplified) -->
 <nav class="navbar" aria-label="Primary navigation">
     <div class="nav-container">
@@ -537,7 +595,7 @@
 <!-- Hero -->
 <section class="section-yellow about-hero">
     <div class="container">
-        <img src="logo-no-bg.png" alt="Mick Skylark: Mini Golf Prodigy" loading="eager" />
+        <img src="https://mickskylark.com/logo-no-bg.png" alt="Mick Skylark: Mini Golf Prodigy" loading="eager" />
         <h1>About the Film</h1>
         <p class="subtitle">A comedy about second chances, unlikely mentors, and the world's most underrated sport.</p>
     </div>
@@ -638,10 +696,10 @@
         </div>
 
         <div class="comp-films">
-            <div class="comp-film"><img src="comparable-films/dodgeball.webp" alt="Dodgeball" loading="lazy"></div>
-            <div class="comp-film"><img src="comparable-films/happy-gilmore.webp" alt="Happy Gilmore" loading="lazy"></div>
-            <div class="comp-film"><img src="comparable-films/kingpin.webp" alt="Kingpin" loading="lazy"></div>
-            <div class="comp-film"><img src="comparable-films/young-frankenstein.webp" alt="Young Frankenstein" loading="lazy"></div>
+            <div class="comp-film"><img src="https://mickskylark.com/comparable-films/dodgeball.webp" alt="Dodgeball" loading="lazy"></div>
+            <div class="comp-film"><img src="https://mickskylark.com/comparable-films/happy-gilmore.webp" alt="Happy Gilmore" loading="lazy"></div>
+            <div class="comp-film"><img src="https://mickskylark.com/comparable-films/kingpin.webp" alt="Kingpin" loading="lazy"></div>
+            <div class="comp-film"><img src="https://mickskylark.com/comparable-films/young-frankenstein.webp" alt="Young Frankenstein" loading="lazy"></div>
         </div>
     </div>
 </section>
@@ -685,23 +743,14 @@
         <a href="terms.html">Terms & Conditions</a>
     </p>
     <div class="footer-contact">
-        Reach out: <a href="mailto:Contact@PotatoEaterProductions.com">Contact@PotatoEaterProductions.com</a>
+        Reach out: <a href="/cdn-cgi/l/email-protection#0b4864657f6a687f4b5b647f6a7f644e6a7f6e795b79646f7e687f6264657825686466"><span class="__cf_email__" data-cfemail="edae8283998c8e99adbd82998c9982a88c99889fbd9f8289988e998482839ec38e8280">[email&#160;protected]</span></a>
     </div>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
     // Back-to-top
     const backToTopBtn = document.getElementById('backToTop');
     if (backToTopBtn) {
         window.addEventListener('scroll', () => {
-            backToTopBtn.classList.toggle('show', window.scrollY > 500);
-        }, { passive: true });
-        backToTopBtn.addEventListener('click', () => {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
-    }
-</script>
+            bac
 ```
-
-</body>
-</html>
