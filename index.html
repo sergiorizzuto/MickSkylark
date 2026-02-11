@@ -776,7 +776,7 @@
                     <div class="cast-info"><div class="actor-name">Elizabeth Mitchell</div><div class="character-name">as Clara</div></div>
                 </div>
                 
-                <div id="moreCast" style="display:none; contents:initial;">
+                <div id="moreCast" style="display:none;">
                     
                 <div class="cast-member">
                     <img src="cast-photos/thomas-lennon.jpg" alt="Thomas Lennon" class="cast-photo" loading="lazy">
@@ -1558,10 +1558,11 @@
                 stickyRsvp.classList.toggle('hidden', scrollPos >= rsvpTop && scrollPos <= rsvpBottom);
             });
         })();
-        function toggleCast() {
+function toggleCast() {
     const more = document.getElementById('moreCast');
     const btn = document.getElementById('expandCastBtn');
-    if (more.style.display === 'none') {
+    const isHidden = more.style.display === 'none' || more.style.display === '';
+    if (isHidden) {
         more.style.display = 'contents';
         btn.textContent = 'Show Less ▲';
     } else {
