@@ -775,6 +775,9 @@
                     <img src="cast-photos/elizabeth-mitchell.jpg" alt="Elizabeth Mitchell" class="cast-photo" loading="lazy">
                     <div class="cast-info"><div class="actor-name">Elizabeth Mitchell</div><div class="character-name">as Clara</div></div>
                 </div>
+                
+                <div id="moreCast" style="display:none; contents:initial;">
+                    
                 <div class="cast-member">
                     <img src="cast-photos/thomas-lennon.jpg" alt="Thomas Lennon" class="cast-photo" loading="lazy">
                     <div class="cast-info"><div class="actor-name">Thomas Lennon</div><div class="character-name">as Tom McDonald</div></div>
@@ -822,6 +825,22 @@
                 <div class="cast-member">
                     <img src="cast-photos/jett-miller.jpg" alt="Jett Miller" class="cast-photo" loading="lazy">
                     <div class="cast-info"><div class="actor-name">Jett Miller</div><div class="character-name">as Humphrey</div></div>
+                    </div>
+<div style="text-align:center; margin-top:30px;">
+    <button id="expandCastBtn" onclick="toggleCast()" style="
+        padding:14px 35px;
+        background:var(--primary);
+        color:#fff;
+        border:none;
+        border-radius:50px;
+        font-weight:700;
+        font-size:1rem;
+        font-family:'Poppins',sans-serif;
+        cursor:pointer;
+        box-shadow:0 4px 15px rgba(30,58,138,0.3);
+        transition:all 0.3s ease;
+    ">Show Full Cast ▼</button>
+</div>
                 </div>
             </div>
         </div>
@@ -1538,6 +1557,38 @@
                 stickyRsvp.classList.toggle('hidden', scrollPos >= rsvpTop && scrollPos <= rsvpBottom);
             });
         })();
+        function toggleCast() {
+    const more = document.getElementById('moreCast');
+    const btn = document.getElementById('expandCastBtn');
+    if (more.style.display === 'none') {
+        more.style.display = 'contents';
+        btn.textContent = 'Show Less ▲';
+    } else {
+        more.style.display = 'none';
+        btn.textContent = 'Show Full Cast ▼';
+        document.getElementById('cast').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+}
+```
+
+So the structure ends up like:
+```
+<div class="cast-grid">
+    <!-- 1. Brandon Engman -->
+    <!-- 2. David Koechner -->
+    <!-- 3. Patrick Warburton -->
+    <!-- 4. Robert Knepper -->
+    <!-- 5. CS Lee -->
+    <!-- 6. Elizabeth Mitchell -->
+    <div id="moreCast" style="display:none; contents:initial;">
+        <!-- 7. Thomas Lennon -->
+        <!-- ... rest ... -->
+        <!-- 18. Jett Miller -->
+    </div>
+</div>
+<div style="text-align:center; margin-top:30px;">
+    <button id="expandCastBtn" ...>Show Full Cast ▼</button>
+</div>
     </script>
 </body>
 </html>
