@@ -702,81 +702,6 @@
         </div>
     </section>
 
-    <!-- Mini Golf Game Section -->
-    <section id="game" class="section-yellow">
-        <div class="container">
-            <h2 class="section-title">Play Glory On The Greens!</h2>
-            <p style="text-align: center; margin-bottom: 30px; font-size: 1.1rem;">
-                Tap/click to hit the ball into the hole! Can you beat par on all 18 holes?
-            </p>
-
-            <div class="controls" aria-label="Game controls">
-                <button class="control-btn active" id="dayBtn" onclick="setTheme('day')" title="Day Mode" aria-label="Day mode">☀️</button>
-                <button class="control-btn" id="nightBtn" onclick="setTheme('night')" title="Night Mode" aria-label="Night mode">🌙</button>
-                <button class="control-btn active" id="soundBtn" onclick="toggleSound()" title="Toggle Sound" aria-label="Toggle sound">🔊</button>
-            </div>
-
-            <div class="game-container">
-                <canvas id="golfCanvas" class="game-canvas" width="500" height="400" aria-label="Mini golf game canvas"></canvas>
-
-                <div class="scorecard">
-                    <h3>📋 Scorecard</h3>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Hole</th>
-                                <th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>OUT</th>
-                                <th>10</th><th>11</th><th>12</th><th>13</th><th>14</th><th>15</th><th>16</th><th>17</th><th>18</th><th>IN</th><th>TOT</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr class="par-row">
-                                <td>Par</td>
-                                <td>3</td><td>3</td><td>4</td><td>3</td><td>3</td><td>4</td><td>3</td><td>4</td><td>3</td><td>30</td>
-                                <td>4</td><td>3</td><td>4</td><td>3</td><td>2</td><td>4</td><td>3</td><td>4</td><td>3</td><td>30</td><td>60</td>
-                            </tr>
-                            <tr class="score-row">
-                                <td>Score</td>
-                                <td id="score-1" class="pending">-</td><td id="score-2" class="pending">-</td>
-                                <td id="score-3" class="pending">-</td><td id="score-4" class="pending">-</td>
-                                <td id="score-5" class="pending">-</td><td id="score-6" class="pending">-</td>
-                                <td id="score-7" class="pending">-</td><td id="score-8" class="pending">-</td>
-                                <td id="score-9" class="pending">-</td><td id="score-out" class="pending">-</td>
-                                <td id="score-10" class="pending">-</td><td id="score-11" class="pending">-</td>
-                                <td id="score-12" class="pending">-</td><td id="score-13" class="pending">-</td>
-                                <td id="score-14" class="pending">-</td><td id="score-15" class="pending">-</td>
-                                <td id="score-16" class="pending">-</td><td id="score-17" class="pending">-</td>
-                                <td id="score-18" class="pending">-</td><td id="score-in" class="pending">-</td>
-                                <td id="score-total" class="pending">-</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <div style="text-align: center; margin-top: 15px; padding-top: 15px; border-top: 1px solid #e5e7eb; color: var(--primary); font-size: 0.9rem;">
-                        <span style="margin: 0 15px;">🏆 Best: <strong id="best">--</strong></span>
-                        <span style="margin: 0 15px;">⛳ Holes-in-One: <strong id="holesInOneCount">0</strong></span>
-                    </div>
-                </div>
-
-                <div style="display: flex; gap: 10px; justify-content: center; margin-top: 20px; flex-wrap: wrap;">
-                    <button class="game-btn" onclick="resetGame()">↻ Restart Course</button>
-                    <button class="game-btn secondary" onclick="shareChallenge()">👥 Challenge Friends</button>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Celebration Overlay -->
-    <div class="celebration-overlay" id="celebrationOverlay">
-        <div class="celebration-content">
-            <div class="celebration-emoji">🎉</div>
-            <div class="celebration-title">Course Complete!</div>
-            <div class="celebration-score" id="finalScore">Total: 0 strokes</div>
-            <div class="celebration-message" id="celebrationMessage">Great job!</div>
-            <button class="game-btn" onclick="closeCelebration()">Play Again</button>
-            <button class="game-btn secondary" onclick="shareChallenge()">Share Score</button>
-        </div>
-    </div>
-
     <!-- Cast Section -->
     <section id="cast" class="section-blue">
         <div class="container">
@@ -883,6 +808,83 @@
         </div>
     </section>
 
+
+    <!-- Mini Golf Game Section -->
+    <section id="game" class="section-yellow">
+        <div class="container">
+            <h2 class="section-title">Play Glory On The Greens!</h2>
+            <p style="text-align: center; margin-bottom: 30px; font-size: 1.1rem;">
+                Tap/click to hit the ball into the hole! Can you beat par on all 18 holes?
+            </p>
+
+            <div class="controls" aria-label="Game controls">
+                <button class="control-btn active" id="dayBtn" onclick="setTheme('day')" title="Day Mode" aria-label="Day mode">☀️</button>
+                <button class="control-btn" id="nightBtn" onclick="setTheme('night')" title="Night Mode" aria-label="Night mode">🌙</button>
+                <button class="control-btn active" id="soundBtn" onclick="toggleSound()" title="Toggle Sound" aria-label="Toggle sound">🔊</button>
+            </div>
+
+            <div class="game-container">
+                <canvas id="golfCanvas" class="game-canvas" width="500" height="400" aria-label="Mini golf game canvas"></canvas>
+
+                <div class="scorecard">
+                    <h3>📋 Scorecard</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Hole</th>
+                                <th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>OUT</th>
+                                <th>10</th><th>11</th><th>12</th><th>13</th><th>14</th><th>15</th><th>16</th><th>17</th><th>18</th><th>IN</th><th>TOT</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="par-row">
+                                <td>Par</td>
+                                <td>3</td><td>3</td><td>4</td><td>3</td><td>3</td><td>4</td><td>3</td><td>4</td><td>3</td><td>30</td>
+                                <td>4</td><td>3</td><td>4</td><td>3</td><td>2</td><td>4</td><td>3</td><td>4</td><td>3</td><td>30</td><td>60</td>
+                            </tr>
+                            <tr class="score-row">
+                                <td>Score</td>
+                                <td id="score-1" class="pending">-</td><td id="score-2" class="pending">-</td>
+                                <td id="score-3" class="pending">-</td><td id="score-4" class="pending">-</td>
+                                <td id="score-5" class="pending">-</td><td id="score-6" class="pending">-</td>
+                                <td id="score-7" class="pending">-</td><td id="score-8" class="pending">-</td>
+                                <td id="score-9" class="pending">-</td><td id="score-out" class="pending">-</td>
+                                <td id="score-10" class="pending">-</td><td id="score-11" class="pending">-</td>
+                                <td id="score-12" class="pending">-</td><td id="score-13" class="pending">-</td>
+                                <td id="score-14" class="pending">-</td><td id="score-15" class="pending">-</td>
+                                <td id="score-16" class="pending">-</td><td id="score-17" class="pending">-</td>
+                                <td id="score-18" class="pending">-</td><td id="score-in" class="pending">-</td>
+                                <td id="score-total" class="pending">-</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div style="text-align: center; margin-top: 15px; padding-top: 15px; border-top: 1px solid #e5e7eb; color: var(--primary); font-size: 0.9rem;">
+                        <span style="margin: 0 15px;">🏆 Best: <strong id="best">--</strong></span>
+                        <span style="margin: 0 15px;">⛳ Holes-in-One: <strong id="holesInOneCount">0</strong></span>
+                    </div>
+                </div>
+
+                <div style="display: flex; gap: 10px; justify-content: center; margin-top: 20px; flex-wrap: wrap;">
+                    <button class="game-btn" onclick="resetGame()">↻ Restart Course</button>
+                    <button class="game-btn secondary" onclick="shareChallenge()">👥 Challenge Friends</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Celebration Overlay -->
+    <div class="celebration-overlay" id="celebrationOverlay">
+        <div class="celebration-content">
+            <div class="celebration-emoji">🎉</div>
+            <div class="celebration-title">Course Complete!</div>
+            <div class="celebration-score" id="finalScore">Total: 0 strokes</div>
+            <div class="celebration-message" id="celebrationMessage">Great job!</div>
+            <button class="game-btn" onclick="closeCelebration()">Play Again</button>
+            <button class="game-btn secondary" onclick="shareChallenge()">Share Score</button>
+        </div>
+    </div>
+
+    
     <!-- FIX: Added id="instagram" so nav link data-section="instagram" connects properly -->
     <section id="instagram" style="background: linear-gradient(135deg, #E1306C 0%, #C13584 50%, #833AB4 100%); padding: 60px 20px; text-align: center;">
         <div style="max-width: 800px; margin: 0 auto;">
@@ -1029,7 +1031,7 @@
         // FIX: Scroll-spy sectionIds now only contains sections that have matching nav links
         // with data-section attributes. Removed 'comparable-films' and 'credits' which had
         // no corresponding nav link data-section.
-        const sectionIds = ['home','rsvp','game','cast','instagram','locations'];
+        const sectionIds = ['home','rsvp','cast','game','instagram','locations'];
         const navLinksBySection = new Map();
         document.querySelectorAll('.nav-link[data-section]').forEach(a => {
             navLinksBySection.set(a.getAttribute('data-section'), a);
