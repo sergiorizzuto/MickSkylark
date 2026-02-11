@@ -750,7 +750,7 @@
             </div>
 
             <h2 class="section-title">Starring</h2>
-            <div class="cast-grid">
+            <div class="cast-grid" id="castGrid">
                 <div class="cast-member">
                     <img src="cast-photos/brandon-engman.jpg" alt="Brandon Engman" class="cast-photo" loading="lazy">
                     <div class="cast-info"><div class="actor-name">Brandon Engman</div><div class="character-name">as Mick Skylark</div></div>
@@ -775,9 +775,9 @@
                     <img src="cast-photos/elizabeth-mitchell.jpg" alt="Elizabeth Mitchell" class="cast-photo" loading="lazy">
                     <div class="cast-info"><div class="actor-name">Elizabeth Mitchell</div><div class="character-name">as Clara</div></div>
                 </div>
-                
-                <div id="moreCast" style="display:none;">
-                    
+            </div>
+
+            <div class="cast-grid" id="moreCast" style="display:none; margin-top:30px;">
                 <div class="cast-member">
                     <img src="cast-photos/thomas-lennon.jpg" alt="Thomas Lennon" class="cast-photo" loading="lazy">
                     <div class="cast-info"><div class="actor-name">Thomas Lennon</div><div class="character-name">as Tom McDonald</div></div>
@@ -824,13 +824,12 @@
                 </div>
                 <div class="cast-member">
                     <img src="cast-photos/jett-miller.jpg" alt="Jett Miller" class="cast-photo" loading="lazy">
-                   <div class="cast-info"><div class="actor-name">Jett Miller</div><div class="character-name">as Humphrey</div></div>
+                    <div class="cast-info"><div class="actor-name">Jett Miller</div><div class="character-name">as Humphrey</div></div>
                 </div>
-            </div> <!-- closes #moreCast -->
-            </div> <!-- closes .cast-grid -->
+            </div>
 
             <div style="text-align:center; margin-top:30px;">
-                <button id="expandCastBtn" onclick="toggleCast()" style="
+                <button id="expandCastBtn" style="
                     padding:14px 35px;
                     background:var(--primary);
                     color:#fff;
@@ -844,7 +843,7 @@
                     transition:all 0.3s ease;
                 ">Show Full Cast ▼</button>
             </div>
-        </div> <!-- closes .container -->
+        </div>
     </section>
 
     <!-- FIX: Added id="instagram" so nav link data-section="instagram" connects properly -->
@@ -1522,7 +1521,6 @@
         window.toggleSound = toggleSound;
         window.shareChallenge = shareChallenge;
         window.closeCelebration = closeCelebration;
-        window.toggleCast = toggleCast;
 
         // Auto-scroll for comparable films
         const filmsWrapper = document.querySelector('.comparable-films-wrapper');
@@ -1559,38 +1557,19 @@
                 stickyRsvp.classList.toggle('hidden', scrollPos >= rsvpTop && scrollPos <= rsvpBottom);
             });
         })();
-function toggleCast() {
-    const more = document.getElementById('moreCast');
-    const btn = document.getElementById('expandCastBtn');
-    if (more.style.display === 'none') {
-        more.style.display = 'contents';
-        btn.textContent = 'Show Less ▲';
-    } else {
-        more.style.display = 'none';
-        btn.textContent = 'Show Full Cast ▼';
-        document.getElementById('cast').scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-}
-```
 
-So the structure ends up like:
-```
-<div class="cast-grid">
-    <!-- 1. Brandon Engman -->
-    <!-- 2. David Koechner -->
-    <!-- 3. Patrick Warburton -->
-    <!-- 4. Robert Knepper -->
-    <!-- 5. CS Lee -->
-    <!-- 6. Elizabeth Mitchell -->
-    <div id="moreCast" style="display:none;">
-        <!-- 7. Thomas Lennon -->
-        <!-- ... rest ... -->
-        <!-- 18. Jett Miller -->
-    </div>
-</div>
-<div style="text-align:center; margin-top:30px;">
-    <button id="expandCastBtn" ...>Show Full Cast ▼</button>
-</div>
+        document.getElementById('expandCastBtn').addEventListener('click', function() {
+            var more = document.getElementById('moreCast');
+            var btn = document.getElementById('expandCastBtn');
+            if (more.style.display === 'none') {
+                more.style.display = 'grid';
+                btn.textContent = 'Show Less ▲';
+            } else {
+                more.style.display = 'none';
+                btn.textContent = 'Show Full Cast ▼';
+                document.getElementById('cast').scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        });
     </script>
 </body>
 </html>
