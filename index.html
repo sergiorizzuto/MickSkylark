@@ -1561,8 +1561,7 @@
 function toggleCast() {
     const more = document.getElementById('moreCast');
     const btn = document.getElementById('expandCastBtn');
-    const isHidden = more.style.display === 'none' || more.style.display === '';
-    if (isHidden) {
+    if (more.style.display === 'none') {
         more.style.display = 'contents';
         btn.textContent = 'Show Less ▲';
     } else {
@@ -1582,7 +1581,7 @@ So the structure ends up like:
     <!-- 4. Robert Knepper -->
     <!-- 5. CS Lee -->
     <!-- 6. Elizabeth Mitchell -->
-    <div id="moreCast" style="display:none; contents:initial;">
+    <div id="moreCast" style="display:none;">
         <!-- 7. Thomas Lennon -->
         <!-- ... rest ... -->
         <!-- 18. Jett Miller -->
