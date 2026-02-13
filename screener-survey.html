@@ -85,11 +85,6 @@
       box-shadow:0 12px 40px rgba(30,58,138,.14),0 0 0 1px rgba(30,58,138,.04);
       overflow:hidden;position:relative;
     }
-    .survey-card::before{
-      content:'';position:absolute;top:0;left:0;right:0;height:5px;
-      background:linear-gradient(90deg,var(--primary),var(--accent-blue),var(--secondary));
-      border-radius:22px 22px 0 0;
-    }
     .survey-card iframe{
       width:100%;border:none;display:block;padding:10px 8px 0;
     }
@@ -151,26 +146,16 @@
     </p>
     <div class="footer-contact">
       Reach out:
-      <a href="mailto:Contact@PotatoEaterProductions.com" style="font-weight:700;text-decoration:none">
-        Contact@PotatoEaterProductions.com
+      <a href="/cdn-cgi/l/email-protection#8ccfe3e2f8edeff8ccdce3f8edf8e3c9edf8e9fedcfee3e8f9eff8e5e3e2ffa2efe3e1" style="font-weight:700;text-decoration:none">
+        <span class="__cf_email__" data-cfemail="fdbe9293899c9e89bdad92899c8992b89c89988fad8f9299889e899492938ed39e9290">[email&#160;protected]</span>
       </a>
     </div>
   </footer>
 
   <!-- Tally Embed -->
-  <script>
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
     (function(){
       var d=document,w="https://tally.so/widgets/embed.js";
       function v(){
         if(typeof Tally!=="undefined")Tally.loadEmbeds();
-        else d.querySelectorAll("iframe[data-tally-src]:not([src])").forEach(function(e){e.src=e.dataset.tallySrc});
-      }
-      if(typeof Tally!=="undefined")v();
-      else if(d.querySelector('script[src="'+w+'"]')==null){
-        var s=d.createElement("script");s.src=w;s.onload=v;s.onerror=v;d.body.appendChild(s);
-      }
-    })();
-  </script>
-
-</body>
-</html>
+        else d.querySelectorAll("iframe[data-tally-src]:not([src])").forEach(function(e){e.src=
