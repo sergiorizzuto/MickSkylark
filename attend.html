@@ -1,1 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>Screening Survey - Mick Skylark: Mini Golf Prodigy</title>
 
+    <!-- SEO -->
+    <meta name="description" content="Share your feedback after the Mick Skylark: Mini Golf Prodigy test screening. Your input helps shape the final film." />
+    <meta name="robots" content="noindex,nofollow" />
+    <link rel="canonical" href="https://mickskylark.com/attend.html" />
+    <meta name="theme-color" content="#1E3A8A" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Screening Survey - Mick Skylark: Mini Golf Prodigy" />
+    <meta property="og:description" content="Share your feedback after the test screening." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://mickskylark.com/attend.html" />
+    <meta property="og:image" content="https://mickskylark.com/og-image.jpg" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
+
+    <link rel="icon" href="https://mickskylark.com/favicon.ico" />
+
+    <style>
+        :root {
+            --primary: #1E3A8A;
+            --primary-dark: #1E40AF;
+            --secondary: #FCD34D;
+            --gold: #FBBF24;
+            --light: #FFFFFF;
+            --dark: #1F2937;
+            --accent-blue: #2563EB;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--dark);
+            overflow-x: hidden;
+            padding-top: 72px;
+            background: #fff;
+        }
+
+        /* ── Navigation ── */
+        .navbar {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            background: rgba(255,255,255,0.92);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+            z-index: 1000;
+            padding: 10px 0;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            padding: 0 14px;
+        }
+
+        .nav-link {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            padding: 8px 14px;
+            border-radius: 999px;
+            transition: all 0.2s ease;
+            font-size: 0.9rem;
+            line-height: 1;
+            border: 1px solid transparent;
+            outline: none;
+        }
+
+        .nav-link:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .nav-link.active {
+            background: var(--primary);
+            color: #fff;
+            box-shadow: 0 6px 18px rgba(30, 58, 138, 0.25);
+        }
+
+        @media (max-width: 768px) {
+            body { padding-top: 110px; }
+            .nav-container { gap: 8px; justify-content: flex-start; }
+            .nav-link { padding: 10px 14px; font-size: 0.95rem; }
+        }
+
+        /* ── Hero ── */
+        .survey-hero {
+            text-align: center;
+            padding: 50px 20px 30px;
+            background: linear-gradient(135deg, #FDE68A 0%, #FCD34D 100%);
+        }
+
+        .survey-hero img {
+            width: 100%;
+            max-width: 360px;
+            margin: 0 auto 25px;
+            display: block;
+            border-radius: 20px;
+            opacity: 0;
+            animation: logoReveal 1.5s ease-out forwards;
+        }
+
+        @keyframes logoReveal {
+            0% { opacity: 0; transform: scale(0.8) translateY(-30px); }
+            60% { transform: scale(1.05) translateY(0); }
+            100% { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        .survey-hero h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 12px;
+        }
+
+        .survey-hero .subtitle {
+            font-size: 1.15rem;
+            color: var(--dark);
+            font-weight: 600;
+            opacity: 0.85;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 768px) {
+            .survey-hero h1 { font-size: 1.8rem; }
+            .survey-hero .subtitle { font-size: 1.05rem; }
+            .survey-hero { padding: 35px 20px 25px; }
+        }
+
+        /* ── Survey Embed Section ── */
+        .survey-section {
+            background: linear-gradient(180deg, #FCD34D 0%, #ffffff 120px);
+            padding: 0 20px 80px;
+        }
+
+        .survey-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 25px;
+            box-shadow: 0 15px 50px rgba(30, 58, 138, 0.15),
+                        0 0 0 1px rgba(30, 58, 138, 0.05);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .survey-container::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 6px;
+            background: linear-gradient(90deg, var(--primary), var(--accent-blue), var(--secondary));
+            border-radius: 25px 25px 0 0;
+        }
+
+        .survey-container iframe {
+            width: 100%;
+            border: none;
+            display: block;
+        }
+
+        /* ── Thank You Note ── */
+        .thank-you {
+            text-align: center;
+            max-width: 700px;
+            margin: 50px auto 0;
+            padding: 35px 30px;
+            background: linear-gradient(135deg, #1E3A8A 0%, #3B82F6 50%, #1E3A8A 100%);
+            background-size: 200% 200%;
+            animation: gradientShift 8s ease infinite;
+            border-radius: 20px;
+            box-shadow: 0 10px 35px rgba(30, 58, 138, 0.3);
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .thank-you p {
+            color: white;
+            font-size: 1.1rem;
+            line-height: 1.7;
+            font-weight: 600;
+        }
+
+        .thank-you .emoji-accent {
+            font-size: 2rem;
+            display: block;
+            margin-bottom: 12px;
+        }
+
+        @media (max-width: 768px) {
+            .thank-you p { font-size: 1rem; }
+        }
+
+        /* ── Footer ── */
+        footer {
+            background: var(--primary);
+            color: white;
+            text-align: center;
+            padding: 44px 20px;
+        }
+        footer a { color: var(--secondary); text-decoration: none; font-weight: 600; }
+        footer a:hover { text-decoration: underline; }
+
+        .footer-contact {
+            margin-top: 18px;
+            font-size: 1.05rem;
+            font-weight: 600;
+        }
+
+        /* ── Back to Top ── */
+        .back-to-top {
+            position: fixed;
+            right: 16px;
+            bottom: 18px;
+            z-index: 2000;
+            width: 48px;
+            height: 48px;
+            border-radius: 999px;
+            border: none;
+            background: rgba(255,255,255,0.9);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.18);
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            color: var(--primary);
+            transition: transform 0.15s ease, opacity 0.15s ease;
+        }
+        .back-to-top:hover { transform: translateY(-2px); }
+        .back-to-top.show { display: flex; }
+
+        /* ── Accessibility ── */
+        .nav-link:focus-visible,
+        .back-to-top:focus-visible {
+            outline: 3px solid rgba(252, 211, 77, 0.9);
+            outline-offset: 2px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar" aria-label="Primary navigation">
+        <div class="nav-container">
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="about.html" class="nav-link">About</a>
+            <a href="contact.html" class="nav-link">Contact</a>
+            <a href="https://www.instagram.com/mickskylark" target="_blank" rel="noopener" class="nav-link">IG</a>
+            <a href="terms.html" class="nav-link">Terms &amp; Conditions</a>
+        </div>
+    </nav>
+
+    <!-- Back to top -->
+    <button class="back-to-top" id="backToTop" aria-label="Scroll to top" title="Back to top">&#8593;</button>
+
+    <!-- Hero -->
+    <section class="survey-hero">
+        <div>
+            <img src="https://mickskylark.com/logo-no-bg.png" alt="Mick Skylark: Mini Golf Prodigy" loading="eager" />
+            <h1>Screening Survey</h1>
+            <p class="subtitle">Thank you for attending the test screening! Your feedback is incredibly valuable and will directly shape the final cut of the film.</p>
+        </div>
+    </section>
+
+    <!-- Survey Embed -->
+    <section class="survey-section">
+        <div class="survey-container">
+            <iframe
+                data-tally-src="https://tally.so/embed/Pd5N7B?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"
+                loading="lazy"
+                width="100%"
+                height="500"
+                frameborder="0"
+                marginheight="0"
+                marginwidth="0"
+                title="Mick Skylark Screening Survey"
+            ></iframe>
+        </div>
+
+        <div class="thank-you">
+            <p>
+                <span class="emoji-accent">⛳</span>
+                Your honest feedback helps us make the best version of this film possible. There are no wrong answers — we want to hear exactly what you think!
+            </p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Mick Skylark: Mini Golf Prodigy. All rights reserved.</p>
+        <p style="margin-top: 10px; opacity: 0.85;">A Potato Eater Productions Film</p>
+        <p style="margin-top: 15px;">
+            <a href="https://www.instagram.com/mickskylark" target="_blank" rel="noopener">Follow us on Instagram!</a>
+        </p>
+        <p style="margin-top: 10px;">
+            <a href="terms.html">Terms &amp; Conditions</a>
+        </p>
+        <div class="footer-contact">
+            Reach out:
+            <a href="mailto:Contact@PotatoEaterProductions.com" style="font-weight:700; text-decoration:none;">
+                Contact@PotatoEaterProductions.com
+            </a>
+        </div>
+    </footer>
+
+    <!-- Tally Embed Script -->
+    <script src="https://tally.so/widgets/embed.js"></script>
+
+    <!-- Back-to-top -->
+    <script>
+        const backToTopBtn = document.getElementById('backToTop');
+        if (backToTopBtn) {
+            window.addEventListener('scroll', () => {
+                backToTopBtn.classList.toggle('show', window.scrollY > 400);
+            });
+            backToTopBtn.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        }
+    </script>
+
+</body>
+</html>
