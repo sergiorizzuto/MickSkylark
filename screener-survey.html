@@ -4,52 +4,132 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Screener Survey - Mick Skylark: Mini Golf Prodigy</title>
-
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet" />
-
+  <link rel="icon" href="https://mickskylark.com/favicon.ico" />
   <style>
-    :root{--primary:#1E3A8A;--primary-dark:#1E40AF;--secondary:#FCD34D;--gold:#FBBF24;--dark:#1F2937;}
+    :root{--primary:#1E3A8A;--primary-dark:#1E40AF;--secondary:#FCD34D;--gold:#FBBF24;--dark:#1F2937;--accent-blue:#2563EB;}
     *{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth}
     body{
       font-family:'Poppins',sans-serif;color:var(--dark);
-      background:linear-gradient(135deg,#87CEEB 0%,#5DADE2 100%);
-      min-height:100vh;padding:90px 20px 40px;
+      background:#fff;min-height:100vh;padding-top:64px;
     }
-    .topbar{
-      position:fixed;top:0;left:0;right:0;background:#fff;box-shadow:0 2px 10px rgba(0,0,0,.1);
-      z-index:1000;padding:12px 0;
+
+    /* ── Navigation ── */
+    .navbar{
+      position:fixed;top:0;left:0;right:0;
+      background:rgba(255,255,255,0.92);
+      backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+      box-shadow:0 2px 10px rgba(0,0,0,.08);
+      z-index:1000;padding:10px 0;
     }
-    .topbar .wrap{max-width:1100px;margin:0 auto;display:flex;justify-content:center;gap:12px;flex-wrap:wrap;padding:0 18px}
-    .link{
-      color:var(--primary);text-decoration:none;font-weight:900;padding:8px 16px;border-radius:25px;border:2px solid transparent;
-      transition:.25s ease;font-size:.95rem;
+    .nav-container{
+      max-width:1100px;margin:0 auto;display:flex;justify-content:center;
+      gap:10px;flex-wrap:wrap;padding:0 14px;
     }
-    .link:hover{background:var(--primary);color:#fff}
-    .container{max-width:1100px;margin:0 auto}
-    h1{ text-align:center;font-size:2.6rem;font-weight:900;color:var(--primary);margin-bottom:14px; }
-    p{ text-align:center;max-width:850px;margin:0 auto 22px;font-weight:800;color:#111827;line-height:1.5; }
-    .card{ background:#fff;border-radius:18px;box-shadow:0 10px 30px rgba(0,0,0,.12);padding:22px 18px; }
-    @media (max-width:768px){ h1{font-size:2rem} }
+    .nav-link{
+      color:var(--primary);text-decoration:none;font-weight:600;
+      padding:8px 14px;border-radius:999px;border:1px solid transparent;
+      transition:all .2s ease;font-size:.9rem;line-height:1;outline:none;
+    }
+    .nav-link:hover{background:var(--primary);color:#fff}
+    .nav-link:focus-visible{outline:3px solid rgba(252,211,77,.9);outline-offset:2px}
+
+    /* ── Hero ── */
+    .hero{
+      background:linear-gradient(135deg,#FDE68A 0%,#FCD34D 100%);
+      text-align:center;padding:45px 20px 50px;
+    }
+    .hero img{
+      width:100%;max-width:280px;margin:0 auto 22px;display:block;
+      border-radius:16px;
+      opacity:0;animation:logoReveal 1.2s ease-out forwards;
+    }
+    @keyframes logoReveal{
+      0%{opacity:0;transform:scale(.85) translateY(-20px)}
+      60%{transform:scale(1.03) translateY(0)}
+      100%{opacity:1;transform:scale(1) translateY(0)}
+    }
+    .hero h1{
+      font-size:2.4rem;font-weight:800;color:var(--primary);margin-bottom:12px;
+    }
+    .hero .subtitle{
+      font-size:1.05rem;color:var(--dark);font-weight:600;opacity:.85;
+      max-width:650px;margin:0 auto 18px;line-height:1.6;
+    }
+    .anon-badge{
+      display:inline-flex;align-items:center;gap:8px;
+      background:rgba(30,58,138,.08);border:1.5px solid rgba(30,58,138,.15);
+      border-radius:50px;padding:9px 22px;
+    }
+    .anon-badge .icon{font-size:1rem}
+    .anon-badge .text{font-size:.85rem;font-weight:700;color:var(--primary)}
+
+    @media(max-width:768px){
+      .hero h1{font-size:1.8rem}
+      .hero .subtitle{font-size:.95rem}
+      .hero img{max-width:200px}
+      .hero{padding:35px 20px 40px}
+    }
+
+    /* ── Survey Section ── */
+    .survey-section{
+      background:linear-gradient(180deg,#FCD34D 0%,#5DADE2 200px,#87CEEB 100%);
+      padding:0 20px 60px;
+    }
+    .survey-card{
+      max-width:860px;margin:0 auto;
+      background:#fff;border-radius:22px;
+      box-shadow:0 12px 40px rgba(30,58,138,.14),0 0 0 1px rgba(30,58,138,.04);
+      overflow:hidden;position:relative;
+    }
+    .survey-card::before{
+      content:'';position:absolute;top:0;left:0;right:0;height:5px;
+      background:linear-gradient(90deg,var(--primary),var(--accent-blue),var(--secondary));
+      border-radius:22px 22px 0 0;
+    }
+    .survey-card iframe{
+      width:100%;border:none;display:block;padding:10px 8px 0;
+    }
+
+    /* ── Footer ── */
+    footer{
+      background:var(--primary);color:#fff;text-align:center;padding:40px 20px;
+    }
+    footer a{color:var(--secondary);text-decoration:none;font-weight:600}
+    footer a:hover{text-decoration:underline}
+    .footer-contact{margin-top:16px;font-size:1.02rem;font-weight:600}
   </style>
 </head>
 <body>
-  <div class="topbar">
-    <div class="wrap">
-      <a class="link" href="./index.html#rsvp">RSVP</a>
-      <a class="link" href="./index.html#home">Home</a>
-      <a class="link" href="./index.html#updates">Email Updates</a>
-    </div>
-  </div>
 
-  <div class="container">
+  <!-- Navigation -->
+  <nav class="navbar" aria-label="Primary navigation">
+    <div class="nav-container">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="about.html" class="nav-link">About</a>
+      <a href="contact.html" class="nav-link">Contact</a>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <img src="https://mickskylark.com/logo-no-bg.png" alt="Mick Skylark: Mini Golf Prodigy" loading="eager" />
     <h1>Screener Survey</h1>
-    <p>
+    <p class="subtitle">
       If you watched the screener, please fill this out. It directly helps us improve the movie and pitch materials.
     </p>
+    <div class="anon-badge">
+      <span class="icon">🔒</span>
+      <span class="text">All feedback is completely anonymous</span>
+    </div>
+  </section>
 
-    <div class="card">
+  <!-- Survey -->
+  <section class="survey-section">
+    <div class="survey-card">
       <iframe
         data-tally-src="https://tally.so/embed/1AVZKg?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"
         loading="lazy"
@@ -60,20 +140,37 @@
         marginwidth="0"
         title="Mick Skylark Screener Survey"></iframe>
     </div>
-  </div>
+  </section>
 
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 Mick Skylark: Mini Golf Prodigy. All rights reserved.</p>
+    <p style="margin-top:10px;opacity:.85">A Potato Eater Productions Film</p>
+    <p style="margin-top:14px">
+      <a href="https://www.instagram.com/mickskylark" target="_blank" rel="noopener">Follow us on Instagram!</a>
+    </p>
+    <div class="footer-contact">
+      Reach out:
+      <a href="mailto:Contact@PotatoEaterProductions.com" style="font-weight:700;text-decoration:none">
+        Contact@PotatoEaterProductions.com
+      </a>
+    </div>
+  </footer>
+
+  <!-- Tally Embed -->
   <script>
     (function(){
       var d=document,w="https://tally.so/widgets/embed.js";
       function v(){
-        if (typeof Tally !== "undefined") Tally.loadEmbeds();
-        else d.querySelectorAll("iframe[data-tally-src]:not([src])").forEach(function(e){ e.src=e.dataset.tallySrc; });
+        if(typeof Tally!=="undefined")Tally.loadEmbeds();
+        else d.querySelectorAll("iframe[data-tally-src]:not([src])").forEach(function(e){e.src=e.dataset.tallySrc});
       }
-      if (typeof Tally !== "undefined") v();
-      else if (d.querySelector('script[src="'+w+'"]') == null) {
-        var s=d.createElement("script"); s.src=w; s.onload=v; s.onerror=v; d.body.appendChild(s);
+      if(typeof Tally!=="undefined")v();
+      else if(d.querySelector('script[src="'+w+'"]')==null){
+        var s=d.createElement("script");s.src=w;s.onload=v;s.onerror=v;d.body.appendChild(s);
       }
     })();
   </script>
+
 </body>
 </html>
