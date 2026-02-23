@@ -19,12 +19,11 @@ body{font-family:'Poppins',sans-serif;background:#F8FAFC;color:var(--text);line-
 @keyframes shake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-8px)}40%,80%{transform:translateX(8px)}}
 @keyframes gShift{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
 #mainContent{display:none}#mainContent.visible{display:block}
-.header{text-align:center;padding:40px 20px 28px;background:linear-gradient(135deg,#1E3A8A 0%,#3B82F6 50%,#1E3A8A 100%);background-size:200% 200%;animation:gShift 8s ease infinite;position:relative}
+.header{text-align:center;padding:40px 20px 28px;background:linear-gradient(135deg,#1E3A8A 0%,#3B82F6 50%,#1E3A8A 100%);background-size:200% 200%;animation:gShift 8s ease infinite}
 .header *{position:relative;z-index:1}.header h1{font-size:2rem;font-weight:800;color:#fff;margin-bottom:4px}.header .subtitle{color:var(--secondary);font-size:0.9rem;font-weight:600}.header .meta{color:rgba(255,255,255,0.7);font-size:0.8rem;margin-top:4px}
 .header .back-link{display:inline-block;margin-top:12px;padding:8px 20px;background:rgba(255,255,255,0.12);border:1.5px solid rgba(255,255,255,0.25);border-radius:50px;color:#fff;font-size:0.8rem;font-weight:600;text-decoration:none;transition:all 0.25s}.header .back-link:hover{background:var(--secondary);color:var(--dark);border-color:var(--secondary)}
 .nav-pills{background:#fff;padding:14px 20px;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,0.08);text-align:center;display:flex;justify-content:center;gap:8px;flex-wrap:wrap}
 .nav-pill{padding:8px 18px;border-radius:50px;font-size:0.78rem;font-weight:600;text-decoration:none;color:var(--text-dim);border:1.5px solid #E5E7EB;transition:all 0.2s}.nav-pill:hover,.nav-pill.active{background:var(--primary);color:#fff;border-color:var(--primary)}
-.wrap{max-width:1100px;margin:0 auto;padding:0 20px}
 .theme-section{padding:40px 0}
 .theme-header{max-width:1100px;margin:0 auto 24px;padding:0 20px 0 34px;border-left:5px solid var(--primary)}
 .theme-header h2{font-size:1.5rem;font-weight:700;color:var(--dark)}.theme-header p{font-size:0.85rem;color:var(--text-muted);margin-top:2px}
@@ -33,12 +32,9 @@ body{font-family:'Poppins',sans-serif;background:#F8FAFC;color:var(--text);line-
 .q-count{font-size:0.75rem;font-weight:500;color:var(--text-muted);margin-left:8px}
 .resp-columns{display:grid;grid-template-columns:1fr 1fr;gap:20px}
 .col-label{font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;padding:6px 12px;border-radius:8px;margin-bottom:8px;text-align:center}
-.col-label.boca-label{background:rgba(30,58,138,0.08);color:var(--primary)}
-.col-label.la-label{background:rgba(251,191,36,0.15);color:#92400E}
+.col-label.boca-label{background:rgba(30,58,138,0.08);color:var(--primary)}.col-label.la-label{background:rgba(251,191,36,0.15);color:#92400E}
 .resp-item{background:#fff;border-radius:10px;padding:10px 14px;margin-bottom:6px;font-size:0.82rem;color:var(--text-dim);line-height:1.55;border:1px solid #F3F4F6;transition:border-color 0.2s}
-.resp-item:hover{border-color:rgba(30,58,138,0.2)}
-.resp-item.boca{border-left:3px solid var(--primary)}
-.resp-item.la{border-left:3px solid var(--gold)}
+.resp-item:hover{border-color:rgba(30,58,138,0.2)}.resp-item.boca{border-left:3px solid var(--primary)}.resp-item.la{border-left:3px solid var(--gold)}
 .charts-section{background:#fff;padding:50px 20px;border-top:3px solid var(--secondary)}
 .charts-title{font-size:1.8rem;font-weight:700;text-align:center;margin-bottom:30px;color:var(--primary)}.charts-title::after{content:'';display:block;width:60px;height:4px;background:var(--secondary);margin:10px auto 0;border-radius:2px}
 .chart-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;max-width:1100px;margin:0 auto}
@@ -50,180 +46,686 @@ footer{background:var(--primary);color:white;text-align:center;padding:24px 20px
 </style>
 </head>
 <body>
-<div class="pw-overlay" id="pwOverlay"><div class="pw-box" id="pwBox"><div class="pw-emoji">💬</div><h2>All Comments</h2><div class="pw-sub">Mick Skylark: Mini Golf Prodigy</div><input type="password" id="pwInput" placeholder="Enter password" autocomplete="off" /><button onclick="checkPw()">Unlock</button><div class="pw-error" id="pwError"></div></div></div>
+<div class="pw-overlay" id="pwOverlay"><div class="pw-box" id="pwBox"><div class="pw-emoji">&#x1F4AC;</div><h2>All Comments</h2><div class="pw-sub">Mick Skylark: Mini Golf Prodigy</div><input type="password" id="pwInput" placeholder="Enter password" autocomplete="off" /><button onclick="checkPw()">Unlock</button><div class="pw-error" id="pwError"></div></div></div>
 <div id="mainContent">
 <div class="header">
-  <h1>All Audience Comments</h1>
-  <div class="subtitle">⛳ Mick Skylark: Mini Golf Prodigy</div>
-  <div class="meta">83 Respondents · Boca Raton (52) + Los Angeles (31) · February 2026</div>
-  <a href="skylark-feedback.html" class="back-link">← Back to Dashboard</a>
+<h1>All Audience Comments</h1>
+<div class="subtitle">&#x26F3; Mick Skylark: Mini Golf Prodigy</div>
+<div class="meta">83 Respondents &middot; Boca Raton (52) + Los Angeles (31) &middot; February 2026</div>
+<a href="skylark-feedback.html" class="back-link">&larr; Back to Dashboard</a>
 </div>
 <div class="nav-pills">
-  <a href="#worked" class="nav-pill active">🎬 What Worked</a>
-  <a href="#needs-work" class="nav-pill">🔧 Needs Work</a>
-  <a href="#ending" class="nav-pill">🎬 Ending</a>
-  <a href="#final" class="nav-pill">💬 Final Thoughts</a>
-  <a href="#charts" class="nav-pill">📊 Charts</a>
+<a href="#worked" class="nav-pill active">&#x1F3AC; What Worked</a>
+<a href="#needs-work" class="nav-pill">&#x1F527; Needs Work</a>
+<a href="#ending" class="nav-pill">&#x1F3AC; Ending</a>
+<a href="#final" class="nav-pill">&#x1F4AC; Final Thoughts</a>
+<a href="#charts" class="nav-pill">&#x1F4CA; Charts</a>
 </div>
-
-
-    <div class="theme-section" id="worked">
-      <div class="theme-header" style="border-left-color:#16A34A">
-        <h2>🎬 What Worked</h2>
-        <p>The laughs, favorite scenes, and characters that connected</p>
-      </div>
-      <div class="q-group">
-        <h3>Moment You Laughed the Hardest <span class="q-count">83 responses</span></h3>
-        <div class="resp-columns">
-          <div class="resp-col">
-            <div class="col-label boca-label">Boca Raton (52)</div><div class="resp-item boca">Humphrey</div><div class="resp-item boca">The third time the guy got shot</div><div class="resp-item boca">The part when the doctor and the mom where in Micks room when he got sick the first time!</div><div class="resp-item boca">Any time with Humphrey and Dr Phil</div><div class="resp-item boca">When Eagle saw Mick on the course practicing.</div><div class="resp-item boca">Dr phil</div><div class="resp-item boca">Hazard crew in office</div><div class="resp-item boca">The car scene</div><div class="resp-item boca">The bedroom scene when he got the iv from walburton and he finds out his mom and him are hooking up</div><div class="resp-item boca">When Sergio was in the car lol</div><div class="resp-item boca">Humphrey on the hamster wheel treadmill</div><div class="resp-item boca">Fat guy getting shot for the 2nd time</div><div class="resp-item boca">The doctor phil trying to be dad over and over</div><div class="resp-item boca">The mini golf commentators</div><div class="resp-item boca">Turkey getting shot</div><div class="resp-item boca">When the mom and doctor came down in the morning</div><div class="resp-item boca">When the fat guy keeps getting shot</div><div class="resp-item boca">Mr. Bawlls and the guy with hump every time</div><div class="resp-item boca">Anytime Dr. Phil was on screen!</div><div class="resp-item boca">When Humphrey was eating the turkey leg.</div><div class="resp-item boca">Murr on screen</div><div class="resp-item boca">Jonesie name is Mr balls</div><div class="resp-item boca">The moment when the parachute guy fell out of the sky</div><div class="resp-item boca">humphrey and dr phil</div><div class="resp-item boca">When they said “this isn’t regular golf, this is the real thing”</div><div class="resp-item boca">When Dr.Phil started staying at Micks house.</div><div class="resp-item boca">When the mom invited the doctor to stay for the night</div><div class="resp-item boca">David koechner knocking on the door</div><div class="resp-item boca">When Micks mother slept with Dr Phil</div><div class="resp-item boca">When the doctor came out wearing frog-print underwear</div><div class="resp-item boca">3rd time the fat guy got shot.</div><div class="resp-item boca">Fart in the car scene</div><div class="resp-item boca">Dr Phil moments Jonesy moments. Humphrey moments</div><div class="resp-item boca">The Doctor’s stuff….reminded me of SNL</div><div class="resp-item boca">Dr Phil petting Mick</div><div class="resp-item boca">The Dr office</div><div class="resp-item boca">Front desk women when mentioning the guy who wets himself is back</div><div class="resp-item boca">When mick met Dr Phil and gave him the bladder prescription</div><div class="resp-item boca">, Dr Phil and the mom, wet pants, turkey</div><div class="resp-item boca">Little being arrested</div><div class="resp-item boca">With jonesy and when Dr frog touched micky</div><div class="resp-item boca">When you went to fight over the bird trash can</div><div class="resp-item boca">Credit/ bloopers. Commentator, jonesy, doctors lines are all great, his wallpaper and the frog references.</div><div class="resp-item boca">When the coach was telling the kids about his wife and his brother.</div><div class="resp-item boca">Loved the music, biggest laugh might be when the kid was defecating on course at birthday party.</div><div class="resp-item boca">The Wetting himself scene and the mom + Dr. getting together.</div><div class="resp-item boca">When Dr Phil first came to the Micks House and acted like his dad</div><div class="resp-item boca">The scene where eagle uses the sweaty towel</div><div class="resp-item boca">Dr. Phil scenes</div><div class="resp-item boca">When the nurse look 👀 at Mick wet pants… assuming he wet himself 😂😂😂😭</div><div class="resp-item boca">During the reenactment of when mini golf was invented</div><div class="resp-item boca">Dr Phil’s frog boxers.<br>Milk references</div>
-          </div>
-          <div class="resp-col">
-            <div class="col-label la-label">Los Angeles (31)</div><div class="resp-item la">Humphrey</div><div class="resp-item la">when humphrey would eat the turkey legs</div><div class="resp-item la">Dr. Interaction every time</div><div class="resp-item la">The doctors lines and the holy water line</div><div class="resp-item la">When the doctor mentioned doing a heist</div><div class="resp-item la">Dr Phil all scenes, Jonesy’s beginning scenes</div><div class="resp-item la">Don’t recall specific moments but there was good play off the different characters.</div><div class="resp-item la">Dr Phil’s frogs</div><div class="resp-item la">The eagle’s scenes were fantastic. And the holy water joke really landed.</div><div class="resp-item la">Humphrey with the turkey leg &amp; the vendor</div><div class="resp-item la">Can’t remember.</div><div class="resp-item la">Patrick scenes got me every time.</div><div class="resp-item la">Dr. Phil and the two sports announcers were the best consistent laughs</div><div class="resp-item la">When he farted in the car.</div><div class="resp-item la">Mostly the parts with Dr phill</div><div class="resp-item la">I’m not employed</div><div class="resp-item la">When David koechner was speaking anytime… his timing is perfect!</div><div class="resp-item la">Doctor’s scenes were all fun. <br>Overall, consistent levels of entertainment, story and jokes.</div><div class="resp-item la">Frog doctor calling mick his son</div><div class="resp-item la">Dr Phil parts</div><div class="resp-item la">When grandma Pam came on because it was a surprise.</div><div class="resp-item la">I can&#x27;t think of just one. In honest fashion this is one of the greatest comedies I&#x27;ve seen in a theater setting in years and years.</div><div class="resp-item la">Dr. Phil</div><div class="resp-item la">Patrick with The father son mentions<br>David keochner’s speech<br>Murray’s wetting pants<br>Also loved the guy falling asleep on mick and picking the seat next to him instead of a thousand others</div><div class="resp-item la">I really liked the part with Humphrey and the turkey leg vendor. The shooting of the fat man was funny too. I think my favorite joke was when Mick kept spilling stuff on his pants at the hospital.</div><div class="resp-item la">Jonesy carrying the poop bag after yelling at the kid to stop defecating on the green.</div><div class="resp-item la">I like the jokes when the Dr asks him about doing a heist, the under us breath is like huh? No, huh? Also more jokes like the kidney one would be good in there too maybe 3x jokes on that Dr skit. I think he could also cont with him like he’s always Propositioning him for something. Then be like no.</div><div class="resp-item la">Tiny being 14 yo, Dr Phil becoming more aggressively touchy, the commentators, Eagle.</div><div class="resp-item la">I liked a lot the first part with little Mick and Jonsey</div><div class="resp-item la">When young Mick and Jonsey shoot puggy man, and young Micks first tournament.</div><div class="resp-item la">Jonsey scenes, especially at the beginning with young Mick.</div>
-          </div>
-        </div>
-      </div>
-      <div class="q-group">
-        <h3>Favorite Scene(s) <span class="q-count">82 responses</span></h3>
-        <div class="resp-columns">
-          <div class="resp-col">
-            <div class="col-label boca-label">Boca Raton (51)</div><div class="resp-item boca">Humphrey</div><div class="resp-item boca">The moment he found out Vanessa wired him the money</div><div class="resp-item boca">The skydiver falling scene</div><div class="resp-item boca">When the eagle found out mick was playing again</div><div class="resp-item boca">mick’s mom and the doctor, morning after</div><div class="resp-item boca">Mick and Jonesy in the truck</div><div class="resp-item boca">Meeting Dr phil</div><div class="resp-item boca">Dr Phil</div><div class="resp-item boca">Bedroom iv scene honestly any scene with walburton</div><div class="resp-item boca">All scenes with Vanessa all scenes with young Mick<br>Jonesy’s birthday party introduction to mini golf</div><div class="resp-item boca">All</div><div class="resp-item boca">The moments where funny or wacky things would happen without much acknowledgement from characters</div><div class="resp-item boca">With the mom and Dr Phil when she asks him to spend the night</div><div class="resp-item boca">Creating vanessas golf club</div><div class="resp-item boca">Doctor calling Mickey son</div><div class="resp-item boca">Montage of mick training.<br>Humphrey <br>Dr Phil scenes</div><div class="resp-item boca">the guy with the hump</div><div class="resp-item boca">All of Dr Phil’s scenes</div><div class="resp-item boca">When Humphrey was eating the turkey leg</div><div class="resp-item boca">Hamster wheel Humphrey</div><div class="resp-item boca">The gardener getting shot</div><div class="resp-item boca">My favorite scenes are all scenes with Humphrey and the prison scene</div><div class="resp-item boca">dr phil scenes</div><div class="resp-item boca">Everything with the announcers</div><div class="resp-item boca">Anything with Dr.Phil</div><div class="resp-item boca">Vanessa’s reunion with Mick</div><div class="resp-item boca">Dr Phil the first time<br>News anchoe</div><div class="resp-item boca">When he heard they wire the money.</div><div class="resp-item boca">Vanessa give big hug in Mike</div><div class="resp-item boca">The ending was great.</div><div class="resp-item boca">At the end when Vanessa visits him at his home</div><div class="resp-item boca">Jonesy in the begginning</div><div class="resp-item boca">The tournament/ Vanessa hitting her father’s nuts</div><div class="resp-item boca">Not sure</div><div class="resp-item boca">the scene between mick and Vanessa bonding</div><div class="resp-item boca">Both scenes where the musket is pointed at the crowd</div><div class="resp-item boca">Meeting with Dr Phil</div><div class="resp-item boca">Mick winning</div><div class="resp-item boca">First meeting dr Phil</div><div class="resp-item boca">Mother a doctor were in honey bedroom</div><div class="resp-item boca">Vanessa gave the money to the hospital</div><div class="resp-item boca">Vanessa coming to his bedroom at the end of the movie. The hospital waiting room. And doctors office.</div><div class="resp-item boca">When the coac is talking to Mick&#x27;s mom through the door.</div><div class="resp-item boca">When jonesy farted in truck, beginning when they were at birthday party and with Dr Phil</div><div class="resp-item boca">Mom and dad getting together</div><div class="resp-item boca">Dr phil spending the night,<br>Humphrey with the turkey legs.<br>Mick training.</div><div class="resp-item boca">Vanessa when she acknowledge she gave 110,000<br>Dr. Phil multiple scenes<br>Joey multiple scenes</div><div class="resp-item boca">All of the Dr. Phil scenes</div><div class="resp-item boca">When the nurse look 👀 at Mick wet pants… assuming he wet himself 😂😂😂😭</div><div class="resp-item boca">Jonesy talking to Micks mom to sway her into letting him play mini golf. Jonesy and Mick in the truck with the fart. Really all Jonesy scenes were good.</div><div class="resp-item boca">Training montage</div>
-          </div>
-          <div class="resp-col">
-            <div class="col-label la-label">Los Angeles (31)</div><div class="resp-item la">Humphrey turkey legs</div><div class="resp-item la">any moment with humphrey</div><div class="resp-item la">Getting shot by muskets</div><div class="resp-item la">Scenes when the doctor comes into micks house and is interacting with his mom. LOVED the music.</div><div class="resp-item la">The bloopers</div><div class="resp-item la">Dr Phil in his office</div><div class="resp-item la">The competition scenes</div><div class="resp-item la">I really liked the car scene with mick and jonsey</div><div class="resp-item la">I loved the scenes with the Eagle. I think the Mick Vanesa chemistry was strong.</div><div class="resp-item la">Employee getting shot with the musket</div><div class="resp-item la">Too many golf scenes.</div><div class="resp-item la">Anything with Patrick. Loved the soundtrack Brandon was great and grounded throughout.</div><div class="resp-item la">All of the montage scenes were great! I also loved the era of the music</div><div class="resp-item la">When they were showing all the trophies he won at the beginning with Jonesy</div><div class="resp-item la">I didn’t really have a favorite scene</div><div class="resp-item la">When Mick child get gun</div><div class="resp-item la">The interaction between the young kid actor and David</div><div class="resp-item la">Doctor establishing himself as a “family member”.</div><div class="resp-item la">Frog doctor talking about money laundering</div><div class="resp-item la">Announcers and dr Phil and loved the music</div><div class="resp-item la">The doctor the next morning with micks mom. It was funny</div><div class="resp-item la">David Koechner&#x27;s character all. <br>Patrick Warburg on all scenes. <br>Humphrey. <br>This movie is phenomenal I couldn&#x27;t stop laughing.</div><div class="resp-item la">Origin of mini golf, Mick talks to Eagle, Meet Dr. Phil, Jonsey talks to Mom</div><div class="resp-item la">Keochner fart scene<br>Patrick’s office scene <br>The frog underwear was such a great addition</div><div class="resp-item la">I liked the scene where Mick kept getting wet pants, and the secretary at the hospital told the doctor it was the kid who kept wetting his pants.</div><div class="resp-item la">Dr. Phil office scenes were hilarious!</div><div class="resp-item la">The Dr scenes, he was funny, him after the mom, him being slightly shady</div><div class="resp-item la">Great intro to the characters, and the transitions to passing years. Loved David Koechner, he’s great in everything, he and Patrick Walburton stole the movie, Humphrey felt forced sometimes but the “Usual Suspects” ending completely made up for it. Also blown away by the fact Mick ended up with Vanessa - that was a nice change. Thought for sure he would end up with Lily, which her turn as a traitor surprised me. Also, as someone born with one hand, the TWO characters with missing hands made me laugh.</div><div class="resp-item la">First scenes: beautiful colors, musics, harmony, comedy.<br>Tournament scenes<br>Jonsay</div><div class="resp-item la">All of Jonsey and Young Micks scenes were all good</div><div class="resp-item la">Jonsey and young mick. I really enjoyed the core story, the relationships between young Mick and Jonsey. I’d like to see more about the two main characters. I love Jonsey.</div>
-          </div>
-        </div>
-      </div>
-      <div class="q-group">
-        <h3>Favorite Character(s) <span class="q-count">83 responses</span></h3>
-        <div class="resp-columns">
-          <div class="resp-col">
-            <div class="col-label boca-label">Boca Raton (52)</div><div class="resp-item boca">Humphrey</div><div class="resp-item boca">Micky</div><div class="resp-item boca">Humphrey</div><div class="resp-item boca">Humphrey / Dr Phil</div><div class="resp-item boca">Eagle</div><div class="resp-item boca">Dr Phil</div><div class="resp-item boca">Dr phil</div><div class="resp-item boca">Mick, Phil</div><div class="resp-item boca">Dr Phil walburton character,humphrey</div><div class="resp-item boca">Humphrey</div><div class="resp-item boca">The sports announcers, Humphrey Vanessa, Young Mick Jacob</div><div class="resp-item boca">Humfry</div><div class="resp-item boca">Dr. Phil and humphrey</div><div class="resp-item boca">Vanessa, Humphrey, Dr Phil</div><div class="resp-item boca">Humphrey</div><div class="resp-item boca">Mickey</div><div class="resp-item boca">Humphrey and doctor phillip</div><div class="resp-item boca">the guy with the hump and venessa</div><div class="resp-item boca">Dr. Phil and Humphrey</div><div class="resp-item boca">Humphrey</div><div class="resp-item boca">Mick</div><div class="resp-item boca">Leonard</div><div class="resp-item boca">Humphrey and Atlantis guy</div><div class="resp-item boca">humphrey and dr phil</div><div class="resp-item boca">Lily and Jonsey</div><div class="resp-item boca">Dr.Phil, Mick Skylark, C.S. Lewis</div><div class="resp-item boca">Vanessa</div><div class="resp-item boca">Enrique</div><div class="resp-item boca">Dr Phil</div><div class="resp-item boca">Doctor</div><div class="resp-item boca">Coach</div><div class="resp-item boca">All of them</div><div class="resp-item boca">Dr Phil. Eagle Humphrey</div><div class="resp-item boca">Friends at bowling alley</div><div class="resp-item boca">Mick, Dr Phil</div><div class="resp-item boca">Mick</div><div class="resp-item boca">Dr Phil</div><div class="resp-item boca">Mickey, Lilly</div><div class="resp-item boca">Mick, Vanessa, Announcers</div><div class="resp-item boca">Humphrey</div><div class="resp-item boca">Micky</div><div class="resp-item boca">The concept comedy</div><div class="resp-item boca">Doctor, commentators micks bowling buddies</div><div class="resp-item boca">Mick&#x27;s girlfriend</div><div class="resp-item boca">Dr Phil, Mick, and his buddy with glasses</div><div class="resp-item boca">Humfrey</div><div class="resp-item boca">Dr Phil, Humphrey, mick, Mr bawls</div><div class="resp-item boca">Jonesy Vanessa Mr. Phil Micks mom</div><div class="resp-item boca">Dr. Phil, Humphrey, henchman in the car</div><div class="resp-item boca">Mick Coach</div><div class="resp-item boca">Jonesy, Humphrey.</div><div class="resp-item boca">Dr Phil</div>
-          </div>
-          <div class="resp-col">
-            <div class="col-label la-label">Los Angeles (31)</div><div class="resp-item la">Humphrey, eagle</div><div class="resp-item la">humphrey!!!!</div><div class="resp-item la">Dr. Phil</div><div class="resp-item la">Doctor, Mick, Mom</div><div class="resp-item la">Mick, Doctor, Jonesy</div><div class="resp-item la">Dr Phil, Jonesy</div><div class="resp-item la">Mick</div><div class="resp-item la">mick, jonsey, guy that stole micks gf</div><div class="resp-item la">Eagle. The announcers.</div><div class="resp-item la">Humphrey</div><div class="resp-item la">Mick</div><div class="resp-item la">Jesse, mick, Humphrey, eagle, guy who stole micks girl</div><div class="resp-item la">Mick was so loveable (both ages), Sports casters, and Dr. Phil</div><div class="resp-item la">Mick</div><div class="resp-item la">Dr phill</div><div class="resp-item la">Mick child</div><div class="resp-item la">Bawls</div><div class="resp-item la">Doctor</div><div class="resp-item la">Humphrey</div><div class="resp-item la">Dr Phil, Humphrey</div><div class="resp-item la">The doctor</div><div class="resp-item la">Young mick, Mr. Bahlls, Dr. Phil, Humphrey, mick,</div><div class="resp-item la">Jonsey and Dr. Phil</div><div class="resp-item la">Mick Thomas Lennon Eagle Mr. balls and doctor</div><div class="resp-item la">Dr Phil</div><div class="resp-item la">Jonesy, Dr. Phil</div><div class="resp-item la">The slimey Dr and the golf announcers</div><div class="resp-item la">Jonesy, Humphrey, Dr Phil,</div><div class="resp-item la">Jonsey and little Mick</div><div class="resp-item la">Young Mick and Jonsey</div><div class="resp-item la">Jonsey and Young Mick</div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="theme-section" id="needs-work">
-      <div class="theme-header" style="border-left-color:#EA580C">
-        <h2>🔧 What Needs Work</h2>
-        <p>Pain points, pacing issues, and scenes to reconsider</p>
-      </div>
-      <div class="q-group">
-        <h3>Least Favorite Scene <span class="q-count">76 responses</span></h3>
-        <div class="resp-columns">
-          <div class="resp-col">
-            <div class="col-label boca-label">Boca Raton (45)</div><div class="resp-item boca">The bird getting shot!</div><div class="resp-item boca">The lighting strike scene. Cloud looked really fake, but maybe that was the trick.</div><div class="resp-item boca">The lightning scene could be better</div><div class="resp-item boca">His random girlfriend cheating</div><div class="resp-item boca">Bitcoin scene</div><div class="resp-item boca">I think overall too much prayer</div><div class="resp-item boca">Only critique I can give is intro it better with the title it felt to long if an intro to throw the title there</div><div class="resp-item boca">Crystal everything about Crystal</div><div class="resp-item boca">The tournament ran a bit long pacing wise</div><div class="resp-item boca">Bowling scenes</div><div class="resp-item boca">Micks girlfriend</div><div class="resp-item boca">Bowling scene</div><div class="resp-item boca">Bowling scenes</div><div class="resp-item boca">the lab</div><div class="resp-item boca">Bowling scenes</div><div class="resp-item boca">The lab scene when they were making the golf club.</div><div class="resp-item boca">I don’t have one</div><div class="resp-item boca">When coach first comes to the house to recruit mick only because it drags a bit.</div><div class="resp-item boca">cant think of one</div><div class="resp-item boca">Turkey dumpster</div><div class="resp-item boca">Breakup scene</div><div class="resp-item boca">the whole thing with the man falling out of the sky. It just seemed random and unnecessary</div><div class="resp-item boca">Anything with Humphrey</div><div class="resp-item boca">Honestly they were all good scenes.</div><div class="resp-item boca">Doctor getting involved with Mike mom</div><div class="resp-item boca">When the coach was struck by lightning it was unrealistic.</div><div class="resp-item boca">Don’t have one</div><div class="resp-item boca">The shooting of the parachutist</div><div class="resp-item boca">The skydiver</div><div class="resp-item boca">Humpfrey eating the turkey lega</div><div class="resp-item boca">TV prompt for opening the tournament</div><div class="resp-item boca">In the golf lab</div><div class="resp-item boca">Treadmill</div><div class="resp-item boca">The girlfriend felt unnecessary thought she was a roommate at first and then all the sudden he got cheated on</div><div class="resp-item boca">Bowling</div><div class="resp-item boca">Mom love the doctor</div><div class="resp-item boca">Lab and dumpster scenes</div><div class="resp-item boca">The turkey leg scences.</div><div class="resp-item boca">Some of scenes with Jonesy and Mick might be better slightly shorter but not much would be needed</div><div class="resp-item boca">Bowling</div><div class="resp-item boca">First meeting micks girlfriend with the beans. It just felt tooo awkward</div><div class="resp-item boca">Idk <br>-Zen</div><div class="resp-item boca">Have no least favorite</div><div class="resp-item boca">The scenes with gin reoccurred way too much. 3 or less is good.</div><div class="resp-item boca">Mick in jonsey’s hospital room. The guy who tells him something about blue skies. Who was that dude?</div>
-          </div>
-          <div class="resp-col">
-            <div class="col-label la-label">Los Angeles (31)</div><div class="resp-item la">Unsure</div><div class="resp-item la">i’m not sure</div><div class="resp-item la">Lab scene</div><div class="resp-item la">Guy shot out of sky</div><div class="resp-item la">With the Igor type character</div><div class="resp-item la">The montages felt a little long</div><div class="resp-item la">The science lab scenes</div><div class="resp-item la">none!</div><div class="resp-item la">The lab scene where the putter was made.</div><div class="resp-item la">The ending felt a little rushed with the poisoning. As quick as it came, it was over &amp; then bawll was awake</div><div class="resp-item la">Don’t have any.</div><div class="resp-item la">There were some sections that weren’t explained like it it was cut out for editing sake</div><div class="resp-item la">Parachute scene when the friend with the glasses breaks the 4th wall - also didn’t like the rifle loading scene with the referee.</div><div class="resp-item la">They were all really good.</div><div class="resp-item la">I didn’t really have a least favorite scene</div><div class="resp-item la">Nothing</div><div class="resp-item la">The bowling scenes weren’t as good</div><div class="resp-item la">Prison scene felt a bit unnecessary but it got resolved by not pressing charges. Still a detour that didn’t add much.</div><div class="resp-item la">The intro scene between kid and mom before they got the golf course</div><div class="resp-item la">Some of the beginning seemed slow —</div><div class="resp-item la">When the skydiver got shot in the sky</div><div class="resp-item la">I can&#x27;t think of one they&#x27;re all necessary to story and stacked with humor.</div><div class="resp-item la">Skydiver</div><div class="resp-item la">the fight scene was confusing but I think it’ll be so funny with the finished music</div><div class="resp-item la">I can’t say that I have a least favorite scene. The whole thing was funny</div><div class="resp-item la">Not sure</div><div class="resp-item la">All the scenes in the lab with the guys in the lab scenes. Those were a little boring and felt too much like a Nickelodeon skit that wasn’t working.</div><div class="resp-item la">The big competition at the end felt kinda cookie cutter to these kinds of sports-comedy films, which is why I get the wild off-the-rails scene of the guy falling from the sky. Comes out of nowhere, but needs tweaking but could be the weirdest funniest scene in the whole thing.</div><div class="resp-item la">To much Humphrey, and the scenes with the hot turckey legs are useless for the main story of the movie.<br>Also the scenes with Vanessa papa, too much…they are not part of the main story. There are so many characters and scenes, but you risk to loose the focus of the story, instead I would go deeper worh the relashionship with Jonsey and Mick or with Vanessa</div><div class="resp-item la">All of the bowling, all of Vannessa’s laboratory</div><div class="resp-item la">There is too much of Humphrey, there are too many scenes with secondary characters. They’re funny, but I want to see the main story, understand why Mick is wearing that uniform, more about Jonsey and Mick.</div>
-          </div>
-        </div>
-      </div>
-      <div class="q-group">
-        <h3>Jokes That Fell Flat — Details <span class="q-count">32 responses</span></h3>
-        <div class="resp-columns">
-          <div class="resp-col">
-            <div class="col-label boca-label">Boca Raton (15)</div><div class="resp-item boca">A few</div><div class="resp-item boca">Too much diarrhea</div><div class="resp-item boca">The fart in the car</div><div class="resp-item boca">Hard to say.</div><div class="resp-item boca">The dumpster turkey scene<br>The sky diver scene</div><div class="resp-item boca">Murr from impractical jokers peeing his pants felt repetitive from when mick did it</div><div class="resp-item boca">Humphrey</div><div class="resp-item boca">When Dr Phil told Mick to unplug.</div><div class="resp-item boca">There were a few. Maybe the referring to the fat guy</div><div class="resp-item boca">I found Humphrey to fall flat on most of hi lines</div><div class="resp-item boca">The awkward moment at the beginning with jonesy being first introduced</div><div class="resp-item boca">Too many musket casualties, the turkey is funny when humpry has it though. and the sky diver, and the dumpster scene</div><div class="resp-item boca">I can’t remember <br>- Zen</div><div class="resp-item boca">The Russian practicing English. The pant wetting. Wasn&#x27;t feeling the frog I session much.</div><div class="resp-item boca">A lot of the small talk could be cut. The awkward silences dragged the pacing</div>
-          </div>
-          <div class="resp-col">
-            <div class="col-label la-label">Los Angeles (17)</div><div class="resp-item la">The guy falling out of the sky</div><div class="resp-item la">The office scenes with Vanessa’s dad, could’ve maybe been edited a little tighter</div><div class="resp-item la">The scientist/ science lab</div><div class="resp-item la">Can’t remember.</div><div class="resp-item la">Some of the jokes didn’t time out with the editing but overall really good</div><div class="resp-item la">Some of the jokes at the beginning felt a little forced or as if there was too much space for it to hang there</div><div class="resp-item la">When the guy was shot and landed <br><br>You should have been showed shot immediately, and that should’ve been a couple of jokes after that instead of it being so dead pan</div><div class="resp-item la">Some of eagles in the first half of the movie</div><div class="resp-item la">The friend at bowling alley with glasses sometimes</div><div class="resp-item la">I don’t remember but some of them were just not as funny.</div><div class="resp-item la">The skydiver</div><div class="resp-item la">Some of the bits went on a bit too long, and the timing kind of killed the moment. Also didn’t understand why Eagle vomited at the bird randomly.</div><div class="resp-item la">I think the egore bits were too long. The editing needs to be a little tighter on the jokes.</div><div class="resp-item la">The guy falling out of the sky scene - scene has potential, but I totally see what they are trying to do, but needs clarity.</div><div class="resp-item la">A lot in the middle of the movie, some gags/sketchs were slow, out of comic time.</div><div class="resp-item la">In the middle of the film wheb the bowling is happening nothing funny happens its all serious and sad</div><div class="resp-item la">It was a little flat in the middle of the film, the chicken scene, the man from the sky falling, Vanessa’s office. Many ripetitions.</div>
-          </div>
-        </div>
-      </div>
-      <div class="q-group">
-        <h3>Parts That Felt Slow or Unnecessary <span class="q-count">12 responses</span></h3>
-        <div class="resp-columns">
-          <div class="resp-col">
-            <div class="col-label boca-label">Boca Raton (6)</div><div class="resp-item boca">Continuity error early at the birthday party. Jonsey is drinking a pina colada and has 3 or 4 empties next to him, next scene everything is gone from next to the chair. Also the hat over bed frame in Micks childhood room when he comes back is a sorority not fraternity.</div><div class="resp-item boca">Dr phil</div><div class="resp-item boca">The laboratory building the golf putter</div><div class="resp-item boca">It was just too long.</div><div class="resp-item boca">The training up to the championship and the championship itself felt pretty long. There were multiple transitions that just didn&#x27;t feel natural. More forced and stayed to long to get the laugh.</div><div class="resp-item boca">A lot of the filler scenes felt redundant. Like ones that showed how Mick ended up at a location. They don’t establish much else besides that. Also mick’s girlfriend felt unnecessary. And the Vanessa’s putter doesn’t come back at all</div>
-          </div>
-          <div class="resp-col">
-            <div class="col-label la-label">Los Angeles (6)</div><div class="resp-item la">Some mini golf montages</div><div class="resp-item la">The lab putter scene.</div><div class="resp-item la">At points I felt like the events would start to build towards the end, and then we’d go follow something Humphrey or other little thing that wasn’t as important, and it would kill the momentum of the events.</div><div class="resp-item la">All bowling part. Vanessa papa office and laboratory, hot turckey leg vendor. Hospital waiting room</div><div class="resp-item la">All of the bowling parts and Vannessa laboratory</div><div class="resp-item la">In the middle of the film. Too much of Vanessa’s office, too much Vanessa’s dad office. I want to see more golf and preparation for the tournament. I want to see more about Jonsey and Mock relationship. I’d like to understand better why Mick is wearing the uniform. I think that it’s pretty funny.</div>
-          </div>
-        </div>
-      </div>
-      <div class="q-group">
-        <h3>Character(s) That Didn't Work <span class="q-count">49 responses</span></h3>
-        <div class="resp-columns">
-          <div class="resp-col">
-            <div class="col-label boca-label">Boca Raton (29)</div><div class="resp-item boca">Girlfriend</div><div class="resp-item boca">Not sure</div><div class="resp-item boca">Crystal</div><div class="resp-item boca">None of them worked for me. I’m an independent contractor.</div><div class="resp-item boca">lily and the bald scientist</div><div class="resp-item boca">Lily and the bald scientist</div><div class="resp-item boca">None really all where pretty written pretty good</div><div class="resp-item boca">At times frog guy was a bit much. Very funny but some jokes are too drawn out</div><div class="resp-item boca">the odd friend who bowled with them who didnt know the clock joke</div><div class="resp-item boca">The guy holding the boxing gloves</div><div class="resp-item boca">The ex girlfriend</div><div class="resp-item boca">Humphrey, Lily</div><div class="resp-item boca">Humphrey x1000</div><div class="resp-item boca">Vanessa’s father.</div><div class="resp-item boca">They all worked. Maybe the second mini golf owner</div><div class="resp-item boca">Humpback</div><div class="resp-item boca">Jonesy</div><div class="resp-item boca">Humphrey</div><div class="resp-item boca">No not really</div><div class="resp-item boca">Eagle</div><div class="resp-item boca">Mike</div><div class="resp-item boca">Some of the lab people</div><div class="resp-item boca">The huntchback</div><div class="resp-item boca">The turkey leg vendor I thought was going to be more pertinent and would have played some kind of role</div><div class="resp-item boca">Father</div><div class="resp-item boca">I don’t think I have one</div><div class="resp-item boca">Not really</div><div class="resp-item boca">Eagle</div><div class="resp-item boca">Jonsey</div>
-          </div>
-          <div class="resp-col">
-            <div class="col-label la-label">Los Angeles (20)</div><div class="resp-item la">nope!</div><div class="resp-item la">The Igor looking dude</div><div class="resp-item la">Humphrey had potential but fell flat at times</div><div class="resp-item la">Hunch</div><div class="resp-item la">more frogs!</div><div class="resp-item la">They all played a necessary roll.</div><div class="resp-item la">All of them worked. Some of the other putters needed some more backstory.</div><div class="resp-item la">The first girlfriend</div><div class="resp-item la">Probably lily because her character feels like a one and done</div><div class="resp-item la">None particular</div><div class="resp-item la">The blonde girl didn’t feel fully fleshed out. When she had her backstab reveal moment it didn’t impact me as much</div><div class="resp-item la">Friend at bowling alley (glasses) and maybe too much of crowd shots at matches</div><div class="resp-item la">No I liked them all</div><div class="resp-item la">Lily had no character or chemistry with Mick</div><div class="resp-item la">The bowling guy with the glasses was doing way too much in my opinion.</div><div class="resp-item la">The whole Dr scenes in the lab. Cut those.</div><div class="resp-item la">Mick could be a little more likable, he got better in the third act. Vanessa’s dad and head lab guy were a bit much,</div><div class="resp-item la">To mich Dr phil and the story with Mick’s mom. The hot turchey legs vendor. Laboratory cleaners (green). To much Humprey and vanessa’s papa asian scientist</div><div class="resp-item la">Too much Humphery, Turkey leg dealer, all of the laboratory Cleaners</div><div class="resp-item la">Too many secondary characters. I want to see more Jonsey, and young Mick and Mick.</div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="theme-section" id="ending">
-      <div class="theme-header" style="border-left-color:#7C3AED">
-        <h2>🎬 Ending & Emotions</h2>
-        <p>How the ending landed and what audiences felt</p>
-      </div>
-      <div class="q-group">
-        <h3>How the Ending Made You Feel <span class="q-count">70 responses</span></h3>
-        <div class="resp-columns">
-          <div class="resp-col">
-            <div class="col-label boca-label">Boca Raton (42)</div><div class="resp-item boca">Happy and emotional</div><div class="resp-item boca">Happy Mr. Bawls was in good health</div><div class="resp-item boca">Happy</div><div class="resp-item boca">Satisfied</div><div class="resp-item boca">Good</div><div class="resp-item boca">Happy</div><div class="resp-item boca">Happy n exstatic</div><div class="resp-item boca">Happy</div><div class="resp-item boca">Great ‼️</div><div class="resp-item boca">Happy</div><div class="resp-item boca">satisfied</div><div class="resp-item boca">Content</div><div class="resp-item boca">Happened a little too fast. (That’s what she said)</div><div class="resp-item boca">plot twisting and happy because i thought the main character would be with lilly</div><div class="resp-item boca">Happy</div><div class="resp-item boca">I liked it a lot it was very nice.</div><div class="resp-item boca">Good cause Mr balls came back</div><div class="resp-item boca">Heart warmed</div><div class="resp-item boca">good</div><div class="resp-item boca">It was a nice surprise he ended up with Vanessa and not lily</div><div class="resp-item boca">Bittersweet. Wholesome ending but almost feels a little undeserved</div><div class="resp-item boca">Confused, we didn’t get much resolution from Lily</div><div class="resp-item boca">Amazed by Vanessa generosity.</div><div class="resp-item boca">Happy</div><div class="resp-item boca">Happy</div><div class="resp-item boca">Inspired. Goosebumps</div><div class="resp-item boca">Quick change / Vanessa was a good one not a villain</div><div class="resp-item boca">That it ended in a positive way.</div><div class="resp-item boca">Loved that Mick ended up with Vanessa and not Lilly</div><div class="resp-item boca">Happy</div><div class="resp-item boca">Satisfied</div><div class="resp-item boca">It felt a little rushed</div><div class="resp-item boca">Real good emotional and gratifying to see competitors come together</div><div class="resp-item boca">Happy</div><div class="resp-item boca">Happy</div><div class="resp-item boca">Happy</div><div class="resp-item boca">Was good, thought it might of tied up a subplot. Like his mom and Dr Phil getting married and he’s the dad that he never had referenced from begining</div><div class="resp-item boca">It made me feel good and happy</div><div class="resp-item boca">Very good</div><div class="resp-item boca">Heartwarming</div><div class="resp-item boca">Good</div><div class="resp-item boca">Happy for mick</div>
-          </div>
-          <div class="resp-col">
-            <div class="col-label la-label">Los Angeles (28)</div><div class="resp-item la">happy, relieved</div><div class="resp-item la">Good</div><div class="resp-item la">Happy, nice ending.</div><div class="resp-item la">Good, nice moment with Jonesy</div><div class="resp-item la">I like that he didn’t win but it was still resolved.</div><div class="resp-item la">good!!!</div><div class="resp-item la">It was a warm ending but not surprising.</div><div class="resp-item la">Rushed.</div><div class="resp-item la">Good.</div><div class="resp-item la">Bitcoin thing seemed a little weird but I get it.</div><div class="resp-item la">Happy and content</div><div class="resp-item la">Good.</div><div class="resp-item la">Pretty good</div><div class="resp-item la">Happy</div><div class="resp-item la">Content!</div><div class="resp-item la">Good. Not super surprising but for a movie like this, it was kind of expected.</div><div class="resp-item la">Wholesome ending</div><div class="resp-item la">Really great</div><div class="resp-item la">It felt nice because it ended in a funny but important way.</div><div class="resp-item la">So happy. I would absolutely love to see a sequel though I think the Bitcoin wraps into that well as a lead off.</div><div class="resp-item la">I think it was perfect bringing it back to silly like reminding you it’s literally mini golf I loved it</div><div class="resp-item la">It felt a slight bit forced, because Lily seemed like Mick’s girl for most of the movie, until Vanessa swoops in at the end.</div><div class="resp-item la">It was nice, I just felt kinda weird that Mick and Vanessa didn’t win.</div><div class="resp-item la">Good.</div><div class="resp-item la">Uplifted, amused.</div><div class="resp-item la">Happy</div><div class="resp-item la">Happy</div><div class="resp-item la">Good</div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="theme-section" id="final">
-      <div class="theme-header" style="border-left-color:#1E3A8A">
-        <h2>💬 Final Thoughts</h2>
-        <p>Additional comments, suggestions, and overall reactions</p>
-      </div>
-      <div class="q-group">
-        <h3>Additional Thoughts & Comments <span class="q-count">40 responses</span></h3>
-        <div class="resp-columns">
-          <div class="resp-col">
-            <div class="col-label boca-label">Boca Raton (21)</div><div class="resp-item boca">Well done!!!</div><div class="resp-item boca">Lightning scene needs to be better</div><div class="resp-item boca">I’m still smiling after watching and that&#x27;s a great thing!</div><div class="resp-item boca">Overall positive</div><div class="resp-item boca">Intro it sooner if possible honestly over all great great jokes evrrything</div><div class="resp-item boca">I would’ve liked to see Mick Russell, the turkey and I also feel that mix practicing could’ve been a little shorter</div><div class="resp-item boca">Very good movie</div><div class="resp-item boca">Too many fade to black between scenes</div><div class="resp-item boca">Fuck the guy telling us to vote. I believe that dickheads name was Dylan. Also fuck Dylan.</div><div class="resp-item boca">Great casting</div><div class="resp-item boca">You need to add more suspenseful music because it just felt like normal scenes.</div><div class="resp-item boca">- mini golf rules scene dragged a little<br>- Lightning strike needs something like charred clothes and burn marks<br>- Some transitions feel weird, like mick closing the alley to the lab. <br>- I feel like the girlfriend/breakup scenes don’t add much at all (only seen post bowling and breakup)<br>- Blue bird scenes AI? It looks AI, newer models would suit this a lot better<br>- 1 hour in, training montage, one of the swings clips through the mask for the split comp. <br>- Tracking on the TV in the tournament opening speech was off<br>- Earlier it seemed the live logo is attached to the top, later in the movie there’s a gap.<br>- Subtle flicker on micks closeup during mick and Vanessa heart to heart.</div><div class="resp-item boca">I wish we saw more when characters hit the ball in the hole. It was mostly just their reactions. Also Lily didn’t get a scene with Mick after the betrayal.</div><div class="resp-item boca">When he’s struck by lightning, he should’ve been holding a golf club as a conductor, therefore it’s more tangibly mick’s fault and him blaming golf</div><div class="resp-item boca">In the beginning when there were words on the screen to desecrate of the mini golfers, you should change that to keep the words on the screen longer to allow viewers more time to read the words. I couldn’t read them all due to the short time.</div><div class="resp-item boca">It’s me Josh Miller. The second viewing made me like the movie even more. I enjoyed it even more the second time</div><div class="resp-item boca">Great songs!!! Loved the audio and the announcers were funny</div><div class="resp-item boca">Can be Cut a a handful moments down. some of the timing drags out</div><div class="resp-item boca">Was very entertaining,</div><div class="resp-item boca">Honestly, I thought it was a pretty good movie, it felt like how older movies in the golden age were being made.</div><div class="resp-item boca">I think the scenes hold out a little too long to land the joke, and there were scenes that didn&#x27;t have a joke and still had excess fluff. I can definitely see this being a kids movie, pre-teens and a little before that age. I think it&#x27;s gotta be quicker and grab more attention with the dialogues and transitions since kids are force fed constant entertainment/stimulation.</div>
-          </div>
-          <div class="resp-col">
-            <div class="col-label la-label">Los Angeles (19)</div><div class="resp-item la">So many great laughs! Loved the broadcast hosts too. Mick is a truly like able character you root for. Loved the parents chosen for him. Loved the sign saying free tiny.</div><div class="resp-item la">I couldn&#x27;t tell what Mick&#x27;s relationship was with the woman that was living with him until it was revealed that he was cheating</div><div class="resp-item la">Great music choices</div><div class="resp-item la">I think the movie is little too long and the pacing was a little slower than I think was necessary.</div><div class="resp-item la">I think there was a bit of an issue with pacing. There were moments that felt like they dragged &amp; others where it felt rushed. I don’t necessarily think it was an issue but I think the final edit will play a big part</div><div class="resp-item la">Really loved the overall tone. Some of the scenes needed a little more explanation, mostly when Venessa came up and said they had talked about something before.</div><div class="resp-item la">I feel like some of the timing can be tightened up especially at the beginning - Johnny’s comedic timing in the beginning can be tightened - not so much space.</div><div class="resp-item la">A lot of the banter that was done in terms of the jokes were super. I like that they were stupid done on purpose.</div><div class="resp-item la">Silly fun movie with quirks and wholesome content.</div><div class="resp-item la">Maybe the scenes with the evil dad and bald guy were a little long</div><div class="resp-item la">I thought the music should be balenced with the characters audio.</div><div class="resp-item la">This was by far my favorite comedy I&#x27;ve caught in years. It never went too gory disgusting or graphic and it&#x27;s something I want everyone to see. I think it blows the sequel to happy Gilmore out of the water. This is an incredible film. I hope to work on a project like this someday on an acting standpoint. Material like this is hard to find these days.</div><div class="resp-item la">loved the little details and quick side jokes</div><div class="resp-item la">This movie was stupid but in a good way</div><div class="resp-item la">I think the cuts need to be edited tighter, I’d remove all the lab scenes, they distract from the story. Maybe tiny bits but it’s too cheesy. I like the beginning scenes when he’s in his bike, those work but maybe put a different color or filters so we know it’s the past and not current. Kinda wonder years vibes. I’d also love some narration or voice over the cuts so the audio goes over the shots a little bit to introduce the cuts. Also joke on the end with Bitcoin, you should have him say he bought 300 of them when they were just a quarter. As if he’s just giving a little kid a quarter. You could even put fore shadowing in that with a shot of a quarter or him giving him quarters idk, or just adding that line in, in ADR. Then you realize that he’s got like 300 bitcoins but doesn’t know he’s rich. Just an idea but could be funny. But over all editing the shots needs to be about 2-3 secs cut shorter because it will make the jokes hit, similar to how the office is edited. They got to be tighter or they are too predictable. That’s about it. I also think more time laps shots with him training, the Rocky scene needs more, more time laso, stressing out like the character really wants this.</div><div class="resp-item la">If this came out between 1995-1999 this movie would’ve made $150 million. My first impressions were very Happy Madison/Adam Sandler vibe with a few little touches of Naked Gun slap-stick. The potential this has is pretty big - especially with everyone craving comedy again. Definitely had some good laughs, really funny scenes, a little silly at times for silly sake, but fun</div><div class="resp-item la">Focus on the main story. <br>Don’t get lost too much with single characters or funny gags.<br>Some scenes, could be more funny, but they are slow with not comic timing</div><div class="resp-item la">I think that there should be more Young Mick flashbacks and more jonsey and young mick scenes</div><div class="resp-item la">More Jonsey and Mick. More mini prodigy scenes.</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
+<div class="theme-section" id="worked">
+<div class="theme-header" style="border-left-color:#16A34A"><h2>🎬 What Worked</h2><p>The laughs, favorite scenes, and characters that connected</p></div>
+<div class="q-group"><h3>Moment You Laughed the Hardest <span class="q-count">83 responses</span></h3>
+<div class="resp-columns"><div class="resp-col">
+<div class="col-label boca-label">Boca Raton (52)</div>
+<div class="resp-item boca">Humphrey</div>
+<div class="resp-item boca">The third time the guy got shot</div>
+<div class="resp-item boca">The part when the doctor and the mom where in Micks room when he got sick the first time!</div>
+<div class="resp-item boca">Any time with Humphrey and Dr Phil</div>
+<div class="resp-item boca">When Eagle saw Mick on the course practicing.</div>
+<div class="resp-item boca">Dr phil</div>
+<div class="resp-item boca">Hazard crew in office</div>
+<div class="resp-item boca">The car scene</div>
+<div class="resp-item boca">The bedroom scene when he got the iv from walburton and he finds out his mom and him are hooking up</div>
+<div class="resp-item boca">When Sergio was in the car lol</div>
+<div class="resp-item boca">Humphrey on the hamster wheel treadmill</div>
+<div class="resp-item boca">Fat guy getting shot for the 2nd time</div>
+<div class="resp-item boca">The doctor phil trying to be dad over and over</div>
+<div class="resp-item boca">The mini golf commentators</div>
+<div class="resp-item boca">Turkey getting shot</div>
+<div class="resp-item boca">When the mom and doctor came down in the morning</div>
+<div class="resp-item boca">When the fat guy keeps getting shot</div>
+<div class="resp-item boca">Mr. Bawlls and the guy with hump every time</div>
+<div class="resp-item boca">Anytime Dr. Phil was on screen!</div>
+<div class="resp-item boca">When Humphrey was eating the turkey leg.</div>
+<div class="resp-item boca">Murr on screen</div>
+<div class="resp-item boca">Jonesie name is Mr balls</div>
+<div class="resp-item boca">The moment when the parachute guy fell out of the sky</div>
+<div class="resp-item boca">humphrey and dr phil</div>
+<div class="resp-item boca">When they said “this isn’t regular golf, this is the real thing”</div>
+<div class="resp-item boca">When Dr.Phil started staying at Micks house.</div>
+<div class="resp-item boca">When the mom invited the doctor to stay for the night</div>
+<div class="resp-item boca">David koechner knocking on the door</div>
+<div class="resp-item boca">When Micks mother slept with Dr Phil</div>
+<div class="resp-item boca">When the doctor came out wearing frog-print underwear</div>
+<div class="resp-item boca">3rd time the fat guy got shot.</div>
+<div class="resp-item boca">Fart in the car scene</div>
+<div class="resp-item boca">Dr Phil moments Jonesy moments. Humphrey moments</div>
+<div class="resp-item boca">The Doctor’s stuff….reminded me of SNL</div>
+<div class="resp-item boca">Dr Phil petting Mick</div>
+<div class="resp-item boca">The Dr office</div>
+<div class="resp-item boca">Front desk women when mentioning the guy who wets himself is back</div>
+<div class="resp-item boca">When mick met Dr Phil and gave him the bladder prescription</div>
+<div class="resp-item boca">, Dr Phil and the mom, wet pants, turkey</div>
+<div class="resp-item boca">Little being arrested</div>
+<div class="resp-item boca">With jonesy and when Dr frog touched micky</div>
+<div class="resp-item boca">When you went to fight over the bird trash can</div>
+<div class="resp-item boca">Credit/ bloopers. Commentator, jonesy, doctors lines are all great, his wallpaper and the frog references.</div>
+<div class="resp-item boca">When the coach was telling the kids about his wife and his brother.</div>
+<div class="resp-item boca">Loved the music, biggest laugh might be when the kid was defecating on course at birthday party.</div>
+<div class="resp-item boca">The Wetting himself scene and the mom + Dr. getting together.</div>
+<div class="resp-item boca">When Dr Phil first came to the Micks House and acted like his dad</div>
+<div class="resp-item boca">The scene where eagle uses the sweaty towel</div>
+<div class="resp-item boca">Dr. Phil scenes</div>
+<div class="resp-item boca">When the nurse look 👀 at Mick wet pants… assuming he wet himself 😂😂😂😭</div>
+<div class="resp-item boca">During the reenactment of when mini golf was invented</div>
+<div class="resp-item boca">Dr Phil’s frog boxers.<br>Milk references</div>
+</div><div class="resp-col">
+<div class="col-label la-label">Los Angeles (31)</div>
+<div class="resp-item la">Humphrey</div>
+<div class="resp-item la">when humphrey would eat the turkey legs</div>
+<div class="resp-item la">Dr. Interaction every time</div>
+<div class="resp-item la">The doctors lines and the holy water line</div>
+<div class="resp-item la">When the doctor mentioned doing a heist</div>
+<div class="resp-item la">Dr Phil all scenes, Jonesy’s beginning scenes</div>
+<div class="resp-item la">Don’t recall specific moments but there was good play off the different characters.</div>
+<div class="resp-item la">Dr Phil’s frogs</div>
+<div class="resp-item la">The eagle’s scenes were fantastic. And the holy water joke really landed.</div>
+<div class="resp-item la">Humphrey with the turkey leg &amp; the vendor</div>
+<div class="resp-item la">Can’t remember.</div>
+<div class="resp-item la">Patrick scenes got me every time.</div>
+<div class="resp-item la">Dr. Phil and the two sports announcers were the best consistent laughs</div>
+<div class="resp-item la">When he farted in the car.</div>
+<div class="resp-item la">Mostly the parts with Dr phill</div>
+<div class="resp-item la">I’m not employed</div>
+<div class="resp-item la">When David koechner was speaking anytime… his timing is perfect!</div>
+<div class="resp-item la">Doctor’s scenes were all fun. <br>Overall, consistent levels of entertainment, story and jokes.</div>
+<div class="resp-item la">Frog doctor calling mick his son</div>
+<div class="resp-item la">Dr Phil parts</div>
+<div class="resp-item la">When grandma Pam came on because it was a surprise.</div>
+<div class="resp-item la">I can&#x27;t think of just one. In honest fashion this is one of the greatest comedies I&#x27;ve seen in a theater setting in years and years.</div>
+<div class="resp-item la">Dr. Phil</div>
+<div class="resp-item la">Patrick with The father son mentions<br>David keochner’s speech<br>Murray’s wetting pants<br>Also loved the guy falling asleep on mick and picking the seat next to him instead of a thousand others</div>
+<div class="resp-item la">I really liked the part with Humphrey and the turkey leg vendor. The shooting of the fat man was funny too. I think my favorite joke was when Mick kept spilling stuff on his pants at the hospital.</div>
+<div class="resp-item la">Jonesy carrying the poop bag after yelling at the kid to stop defecating on the green.</div>
+<div class="resp-item la">I like the jokes when the Dr asks him about doing a heist, the under us breath is like huh? No, huh? Also more jokes like the kidney one would be good in there too maybe 3x jokes on that Dr skit. I think he could also cont with him like he’s always Propositioning him for something. Then be like no.</div>
+<div class="resp-item la">Tiny being 14 yo, Dr Phil becoming more aggressively touchy, the commentators, Eagle.</div>
+<div class="resp-item la">I liked a lot the first part with little Mick and Jonsey</div>
+<div class="resp-item la">When young Mick and Jonsey shoot puggy man, and young Micks first tournament.</div>
+<div class="resp-item la">Jonsey scenes, especially at the beginning with young Mick.</div>
+</div></div></div>
+<div class="q-group"><h3>Favorite Scene(s) <span class="q-count">82 responses</span></h3>
+<div class="resp-columns"><div class="resp-col">
+<div class="col-label boca-label">Boca Raton (51)</div>
+<div class="resp-item boca">Humphrey</div>
+<div class="resp-item boca">The moment he found out Vanessa wired him the money</div>
+<div class="resp-item boca">The skydiver falling scene</div>
+<div class="resp-item boca">When the eagle found out mick was playing again</div>
+<div class="resp-item boca">mick’s mom and the doctor, morning after</div>
+<div class="resp-item boca">Mick and Jonesy in the truck</div>
+<div class="resp-item boca">Meeting Dr phil</div>
+<div class="resp-item boca">Dr Phil</div>
+<div class="resp-item boca">Bedroom iv scene honestly any scene with walburton</div>
+<div class="resp-item boca">All scenes with Vanessa all scenes with young Mick<br>Jonesy’s birthday party introduction to mini golf</div>
+<div class="resp-item boca">All</div>
+<div class="resp-item boca">The moments where funny or wacky things would happen without much acknowledgement from characters</div>
+<div class="resp-item boca">With the mom and Dr Phil when she asks him to spend the night</div>
+<div class="resp-item boca">Creating vanessas golf club</div>
+<div class="resp-item boca">Doctor calling Mickey son</div>
+<div class="resp-item boca">Montage of mick training.<br>Humphrey <br>Dr Phil scenes</div>
+<div class="resp-item boca">the guy with the hump</div>
+<div class="resp-item boca">All of Dr Phil’s scenes</div>
+<div class="resp-item boca">When Humphrey was eating the turkey leg</div>
+<div class="resp-item boca">Hamster wheel Humphrey</div>
+<div class="resp-item boca">The gardener getting shot</div>
+<div class="resp-item boca">My favorite scenes are all scenes with Humphrey and the prison scene</div>
+<div class="resp-item boca">dr phil scenes</div>
+<div class="resp-item boca">Everything with the announcers</div>
+<div class="resp-item boca">Anything with Dr.Phil</div>
+<div class="resp-item boca">Vanessa’s reunion with Mick</div>
+<div class="resp-item boca">Dr Phil the first time<br>News anchoe</div>
+<div class="resp-item boca">When he heard they wire the money.</div>
+<div class="resp-item boca">Vanessa give big hug in Mike</div>
+<div class="resp-item boca">The ending was great.</div>
+<div class="resp-item boca">At the end when Vanessa visits him at his home</div>
+<div class="resp-item boca">Jonesy in the begginning</div>
+<div class="resp-item boca">The tournament/ Vanessa hitting her father’s nuts</div>
+<div class="resp-item boca">Not sure</div>
+<div class="resp-item boca">the scene between mick and Vanessa bonding</div>
+<div class="resp-item boca">Both scenes where the musket is pointed at the crowd</div>
+<div class="resp-item boca">Meeting with Dr Phil</div>
+<div class="resp-item boca">Mick winning</div>
+<div class="resp-item boca">First meeting dr Phil</div>
+<div class="resp-item boca">Mother a doctor were in honey bedroom</div>
+<div class="resp-item boca">Vanessa gave the money to the hospital</div>
+<div class="resp-item boca">Vanessa coming to his bedroom at the end of the movie. The hospital waiting room. And doctors office.</div>
+<div class="resp-item boca">When the coac is talking to Mick&#x27;s mom through the door.</div>
+<div class="resp-item boca">When jonesy farted in truck, beginning when they were at birthday party and with Dr Phil</div>
+<div class="resp-item boca">Mom and dad getting together</div>
+<div class="resp-item boca">Dr phil spending the night,<br>Humphrey with the turkey legs.<br>Mick training.</div>
+<div class="resp-item boca">Vanessa when she acknowledge she gave 110,000<br>Dr. Phil multiple scenes<br>Joey multiple scenes</div>
+<div class="resp-item boca">All of the Dr. Phil scenes</div>
+<div class="resp-item boca">When the nurse look 👀 at Mick wet pants… assuming he wet himself 😂😂😂😭</div>
+<div class="resp-item boca">Jonesy talking to Micks mom to sway her into letting him play mini golf. Jonesy and Mick in the truck with the fart. Really all Jonesy scenes were good.</div>
+<div class="resp-item boca">Training montage</div>
+</div><div class="resp-col">
+<div class="col-label la-label">Los Angeles (31)</div>
+<div class="resp-item la">Humphrey turkey legs</div>
+<div class="resp-item la">any moment with humphrey</div>
+<div class="resp-item la">Getting shot by muskets</div>
+<div class="resp-item la">Scenes when the doctor comes into micks house and is interacting with his mom. LOVED the music.</div>
+<div class="resp-item la">The bloopers</div>
+<div class="resp-item la">Dr Phil in his office</div>
+<div class="resp-item la">The competition scenes</div>
+<div class="resp-item la">I really liked the car scene with mick and jonsey</div>
+<div class="resp-item la">I loved the scenes with the Eagle. I think the Mick Vanesa chemistry was strong.</div>
+<div class="resp-item la">Employee getting shot with the musket</div>
+<div class="resp-item la">Too many golf scenes.</div>
+<div class="resp-item la">Anything with Patrick. Loved the soundtrack Brandon was great and grounded throughout.</div>
+<div class="resp-item la">All of the montage scenes were great! I also loved the era of the music</div>
+<div class="resp-item la">When they were showing all the trophies he won at the beginning with Jonesy</div>
+<div class="resp-item la">I didn’t really have a favorite scene</div>
+<div class="resp-item la">When Mick child get gun</div>
+<div class="resp-item la">The interaction between the young kid actor and David</div>
+<div class="resp-item la">Doctor establishing himself as a “family member”.</div>
+<div class="resp-item la">Frog doctor talking about money laundering</div>
+<div class="resp-item la">Announcers and dr Phil and loved the music</div>
+<div class="resp-item la">The doctor the next morning with micks mom. It was funny</div>
+<div class="resp-item la">David Koechner&#x27;s character all. <br>Patrick Warburg on all scenes. <br>Humphrey. <br>This movie is phenomenal I couldn&#x27;t stop laughing.</div>
+<div class="resp-item la">Origin of mini golf, Mick talks to Eagle, Meet Dr. Phil, Jonsey talks to Mom</div>
+<div class="resp-item la">Keochner fart scene<br>Patrick’s office scene <br>The frog underwear was such a great addition</div>
+<div class="resp-item la">I liked the scene where Mick kept getting wet pants, and the secretary at the hospital told the doctor it was the kid who kept wetting his pants.</div>
+<div class="resp-item la">Dr. Phil office scenes were hilarious!</div>
+<div class="resp-item la">The Dr scenes, he was funny, him after the mom, him being slightly shady</div>
+<div class="resp-item la">Great intro to the characters, and the transitions to passing years. Loved David Koechner, he’s great in everything, he and Patrick Walburton stole the movie, Humphrey felt forced sometimes but the “Usual Suspects” ending completely made up for it. Also blown away by the fact Mick ended up with Vanessa - that was a nice change. Thought for sure he would end up with Lily, which her turn as a traitor surprised me. Also, as someone born with one hand, the TWO characters with missing hands made me laugh.</div>
+<div class="resp-item la">First scenes: beautiful colors, musics, harmony, comedy.<br>Tournament scenes<br>Jonsay</div>
+<div class="resp-item la">All of Jonsey and Young Micks scenes were all good</div>
+<div class="resp-item la">Jonsey and young mick. I really enjoyed the core story, the relationships between young Mick and Jonsey. I’d like to see more about the two main characters. I love Jonsey.</div>
+</div></div></div>
+<div class="q-group"><h3>Favorite Character(s) <span class="q-count">83 responses</span></h3>
+<div class="resp-columns"><div class="resp-col">
+<div class="col-label boca-label">Boca Raton (52)</div>
+<div class="resp-item boca">Humphrey</div>
+<div class="resp-item boca">Micky</div>
+<div class="resp-item boca">Humphrey</div>
+<div class="resp-item boca">Humphrey / Dr Phil</div>
+<div class="resp-item boca">Eagle</div>
+<div class="resp-item boca">Dr Phil</div>
+<div class="resp-item boca">Dr phil</div>
+<div class="resp-item boca">Mick, Phil</div>
+<div class="resp-item boca">Dr Phil walburton character,humphrey</div>
+<div class="resp-item boca">Humphrey</div>
+<div class="resp-item boca">The sports announcers, Humphrey Vanessa, Young Mick Jacob</div>
+<div class="resp-item boca">Humfry</div>
+<div class="resp-item boca">Dr. Phil and humphrey</div>
+<div class="resp-item boca">Vanessa, Humphrey, Dr Phil</div>
+<div class="resp-item boca">Humphrey</div>
+<div class="resp-item boca">Mickey</div>
+<div class="resp-item boca">Humphrey and doctor phillip</div>
+<div class="resp-item boca">the guy with the hump and venessa</div>
+<div class="resp-item boca">Dr. Phil and Humphrey</div>
+<div class="resp-item boca">Humphrey</div>
+<div class="resp-item boca">Mick</div>
+<div class="resp-item boca">Leonard</div>
+<div class="resp-item boca">Humphrey and Atlantis guy</div>
+<div class="resp-item boca">humphrey and dr phil</div>
+<div class="resp-item boca">Lily and Jonsey</div>
+<div class="resp-item boca">Dr.Phil, Mick Skylark, C.S. Lewis</div>
+<div class="resp-item boca">Vanessa</div>
+<div class="resp-item boca">Enrique</div>
+<div class="resp-item boca">Dr Phil</div>
+<div class="resp-item boca">Doctor</div>
+<div class="resp-item boca">Coach</div>
+<div class="resp-item boca">All of them</div>
+<div class="resp-item boca">Dr Phil. Eagle Humphrey</div>
+<div class="resp-item boca">Friends at bowling alley</div>
+<div class="resp-item boca">Mick, Dr Phil</div>
+<div class="resp-item boca">Mick</div>
+<div class="resp-item boca">Dr Phil</div>
+<div class="resp-item boca">Mickey, Lilly</div>
+<div class="resp-item boca">Mick, Vanessa, Announcers</div>
+<div class="resp-item boca">Humphrey</div>
+<div class="resp-item boca">Micky</div>
+<div class="resp-item boca">The concept comedy</div>
+<div class="resp-item boca">Doctor, commentators micks bowling buddies</div>
+<div class="resp-item boca">Mick&#x27;s girlfriend</div>
+<div class="resp-item boca">Dr Phil, Mick, and his buddy with glasses</div>
+<div class="resp-item boca">Humfrey</div>
+<div class="resp-item boca">Dr Phil, Humphrey, mick, Mr bawls</div>
+<div class="resp-item boca">Jonesy Vanessa Mr. Phil Micks mom</div>
+<div class="resp-item boca">Dr. Phil, Humphrey, henchman in the car</div>
+<div class="resp-item boca">Mick Coach</div>
+<div class="resp-item boca">Jonesy, Humphrey.</div>
+<div class="resp-item boca">Dr Phil</div>
+</div><div class="resp-col">
+<div class="col-label la-label">Los Angeles (31)</div>
+<div class="resp-item la">Humphrey, eagle</div>
+<div class="resp-item la">humphrey!!!!</div>
+<div class="resp-item la">Dr. Phil</div>
+<div class="resp-item la">Doctor, Mick, Mom</div>
+<div class="resp-item la">Mick, Doctor, Jonesy</div>
+<div class="resp-item la">Dr Phil, Jonesy</div>
+<div class="resp-item la">Mick</div>
+<div class="resp-item la">mick, jonsey, guy that stole micks gf</div>
+<div class="resp-item la">Eagle. The announcers.</div>
+<div class="resp-item la">Humphrey</div>
+<div class="resp-item la">Mick</div>
+<div class="resp-item la">Jesse, mick, Humphrey, eagle, guy who stole micks girl</div>
+<div class="resp-item la">Mick was so loveable (both ages), Sports casters, and Dr. Phil</div>
+<div class="resp-item la">Mick</div>
+<div class="resp-item la">Dr phill</div>
+<div class="resp-item la">Mick child</div>
+<div class="resp-item la">Bawls</div>
+<div class="resp-item la">Doctor</div>
+<div class="resp-item la">Humphrey</div>
+<div class="resp-item la">Dr Phil, Humphrey</div>
+<div class="resp-item la">The doctor</div>
+<div class="resp-item la">Young mick, Mr. Bahlls, Dr. Phil, Humphrey, mick,</div>
+<div class="resp-item la">Jonsey and Dr. Phil</div>
+<div class="resp-item la">Mick Thomas Lennon Eagle Mr. balls and doctor</div>
+<div class="resp-item la">Dr Phil</div>
+<div class="resp-item la">Jonesy, Dr. Phil</div>
+<div class="resp-item la">The slimey Dr and the golf announcers</div>
+<div class="resp-item la">Jonesy, Humphrey, Dr Phil,</div>
+<div class="resp-item la">Jonsey and little Mick</div>
+<div class="resp-item la">Young Mick and Jonsey</div>
+<div class="resp-item la">Jonsey and Young Mick</div>
+</div></div></div>
+</div>
+<div class="theme-section" id="needs-work">
+<div class="theme-header" style="border-left-color:#EA580C"><h2>🔧 What Needs Work</h2><p>Pain points, pacing issues, and scenes to reconsider</p></div>
+<div class="q-group"><h3>Least Favorite Scene <span class="q-count">76 responses</span></h3>
+<div class="resp-columns"><div class="resp-col">
+<div class="col-label boca-label">Boca Raton (45)</div>
+<div class="resp-item boca">The bird getting shot!</div>
+<div class="resp-item boca">The lighting strike scene. Cloud looked really fake, but maybe that was the trick.</div>
+<div class="resp-item boca">The lightning scene could be better</div>
+<div class="resp-item boca">His random girlfriend cheating</div>
+<div class="resp-item boca">Bitcoin scene</div>
+<div class="resp-item boca">I think overall too much prayer</div>
+<div class="resp-item boca">Only critique I can give is intro it better with the title it felt to long if an intro to throw the title there</div>
+<div class="resp-item boca">Crystal everything about Crystal</div>
+<div class="resp-item boca">The tournament ran a bit long pacing wise</div>
+<div class="resp-item boca">Bowling scenes</div>
+<div class="resp-item boca">Micks girlfriend</div>
+<div class="resp-item boca">Bowling scene</div>
+<div class="resp-item boca">Bowling scenes</div>
+<div class="resp-item boca">the lab</div>
+<div class="resp-item boca">Bowling scenes</div>
+<div class="resp-item boca">The lab scene when they were making the golf club.</div>
+<div class="resp-item boca">I don’t have one</div>
+<div class="resp-item boca">When coach first comes to the house to recruit mick only because it drags a bit.</div>
+<div class="resp-item boca">cant think of one</div>
+<div class="resp-item boca">Turkey dumpster</div>
+<div class="resp-item boca">Breakup scene</div>
+<div class="resp-item boca">the whole thing with the man falling out of the sky. It just seemed random and unnecessary</div>
+<div class="resp-item boca">Anything with Humphrey</div>
+<div class="resp-item boca">Honestly they were all good scenes.</div>
+<div class="resp-item boca">Doctor getting involved with Mike mom</div>
+<div class="resp-item boca">When the coach was struck by lightning it was unrealistic.</div>
+<div class="resp-item boca">Don’t have one</div>
+<div class="resp-item boca">The shooting of the parachutist</div>
+<div class="resp-item boca">The skydiver</div>
+<div class="resp-item boca">Humpfrey eating the turkey lega</div>
+<div class="resp-item boca">TV prompt for opening the tournament</div>
+<div class="resp-item boca">In the golf lab</div>
+<div class="resp-item boca">Treadmill</div>
+<div class="resp-item boca">The girlfriend felt unnecessary thought she was a roommate at first and then all the sudden he got cheated on</div>
+<div class="resp-item boca">Bowling</div>
+<div class="resp-item boca">Mom love the doctor</div>
+<div class="resp-item boca">Lab and dumpster scenes</div>
+<div class="resp-item boca">The turkey leg scences.</div>
+<div class="resp-item boca">Some of scenes with Jonesy and Mick might be better slightly shorter but not much would be needed</div>
+<div class="resp-item boca">Bowling</div>
+<div class="resp-item boca">First meeting micks girlfriend with the beans. It just felt tooo awkward</div>
+<div class="resp-item boca">Idk <br>-Zen</div>
+<div class="resp-item boca">Have no least favorite</div>
+<div class="resp-item boca">The scenes with gin reoccurred way too much. 3 or less is good.</div>
+<div class="resp-item boca">Mick in jonsey’s hospital room. The guy who tells him something about blue skies. Who was that dude?</div>
+</div><div class="resp-col">
+<div class="col-label la-label">Los Angeles (31)</div>
+<div class="resp-item la">Unsure</div>
+<div class="resp-item la">i’m not sure</div>
+<div class="resp-item la">Lab scene</div>
+<div class="resp-item la">Guy shot out of sky</div>
+<div class="resp-item la">With the Igor type character</div>
+<div class="resp-item la">The montages felt a little long</div>
+<div class="resp-item la">The science lab scenes</div>
+<div class="resp-item la">none!</div>
+<div class="resp-item la">The lab scene where the putter was made.</div>
+<div class="resp-item la">The ending felt a little rushed with the poisoning. As quick as it came, it was over &amp; then bawll was awake</div>
+<div class="resp-item la">Don’t have any.</div>
+<div class="resp-item la">There were some sections that weren’t explained like it it was cut out for editing sake</div>
+<div class="resp-item la">Parachute scene when the friend with the glasses breaks the 4th wall - also didn’t like the rifle loading scene with the referee.</div>
+<div class="resp-item la">They were all really good.</div>
+<div class="resp-item la">I didn’t really have a least favorite scene</div>
+<div class="resp-item la">Nothing</div>
+<div class="resp-item la">The bowling scenes weren’t as good</div>
+<div class="resp-item la">Prison scene felt a bit unnecessary but it got resolved by not pressing charges. Still a detour that didn’t add much.</div>
+<div class="resp-item la">The intro scene between kid and mom before they got the golf course</div>
+<div class="resp-item la">Some of the beginning seemed slow —</div>
+<div class="resp-item la">When the skydiver got shot in the sky</div>
+<div class="resp-item la">I can&#x27;t think of one they&#x27;re all necessary to story and stacked with humor.</div>
+<div class="resp-item la">Skydiver</div>
+<div class="resp-item la">the fight scene was confusing but I think it’ll be so funny with the finished music</div>
+<div class="resp-item la">I can’t say that I have a least favorite scene. The whole thing was funny</div>
+<div class="resp-item la">Not sure</div>
+<div class="resp-item la">All the scenes in the lab with the guys in the lab scenes. Those were a little boring and felt too much like a Nickelodeon skit that wasn’t working.</div>
+<div class="resp-item la">The big competition at the end felt kinda cookie cutter to these kinds of sports-comedy films, which is why I get the wild off-the-rails scene of the guy falling from the sky. Comes out of nowhere, but needs tweaking but could be the weirdest funniest scene in the whole thing.</div>
+<div class="resp-item la">To much Humphrey, and the scenes with the hot turckey legs are useless for the main story of the movie.<br>Also the scenes with Vanessa papa, too much…they are not part of the main story. There are so many characters and scenes, but you risk to loose the focus of the story, instead I would go deeper worh the relashionship with Jonsey and Mick or with Vanessa</div>
+<div class="resp-item la">All of the bowling, all of Vannessa’s laboratory</div>
+<div class="resp-item la">There is too much of Humphrey, there are too many scenes with secondary characters. They’re funny, but I want to see the main story, understand why Mick is wearing that uniform, more about Jonsey and Mick.</div>
+</div></div></div>
+<div class="q-group"><h3>Jokes That Fell Flat — Details <span class="q-count">32 responses</span></h3>
+<div class="resp-columns"><div class="resp-col">
+<div class="col-label boca-label">Boca Raton (15)</div>
+<div class="resp-item boca">A few</div>
+<div class="resp-item boca">Too much diarrhea</div>
+<div class="resp-item boca">The fart in the car</div>
+<div class="resp-item boca">Hard to say.</div>
+<div class="resp-item boca">The dumpster turkey scene<br>The sky diver scene</div>
+<div class="resp-item boca">Murr from impractical jokers peeing his pants felt repetitive from when mick did it</div>
+<div class="resp-item boca">Humphrey</div>
+<div class="resp-item boca">When Dr Phil told Mick to unplug.</div>
+<div class="resp-item boca">There were a few. Maybe the referring to the fat guy</div>
+<div class="resp-item boca">I found Humphrey to fall flat on most of hi lines</div>
+<div class="resp-item boca">The awkward moment at the beginning with jonesy being first introduced</div>
+<div class="resp-item boca">Too many musket casualties, the turkey is funny when humpry has it though. and the sky diver, and the dumpster scene</div>
+<div class="resp-item boca">I can’t remember <br>- Zen</div>
+<div class="resp-item boca">The Russian practicing English. The pant wetting. Wasn&#x27;t feeling the frog I session much.</div>
+<div class="resp-item boca">A lot of the small talk could be cut. The awkward silences dragged the pacing</div>
+</div><div class="resp-col">
+<div class="col-label la-label">Los Angeles (17)</div>
+<div class="resp-item la">The guy falling out of the sky</div>
+<div class="resp-item la">The office scenes with Vanessa’s dad, could’ve maybe been edited a little tighter</div>
+<div class="resp-item la">The scientist/ science lab</div>
+<div class="resp-item la">Can’t remember.</div>
+<div class="resp-item la">Some of the jokes didn’t time out with the editing but overall really good</div>
+<div class="resp-item la">Some of the jokes at the beginning felt a little forced or as if there was too much space for it to hang there</div>
+<div class="resp-item la">When the guy was shot and landed <br><br>You should have been showed shot immediately, and that should’ve been a couple of jokes after that instead of it being so dead pan</div>
+<div class="resp-item la">Some of eagles in the first half of the movie</div>
+<div class="resp-item la">The friend at bowling alley with glasses sometimes</div>
+<div class="resp-item la">I don’t remember but some of them were just not as funny.</div>
+<div class="resp-item la">The skydiver</div>
+<div class="resp-item la">Some of the bits went on a bit too long, and the timing kind of killed the moment. Also didn’t understand why Eagle vomited at the bird randomly.</div>
+<div class="resp-item la">I think the egore bits were too long. The editing needs to be a little tighter on the jokes.</div>
+<div class="resp-item la">The guy falling out of the sky scene - scene has potential, but I totally see what they are trying to do, but needs clarity.</div>
+<div class="resp-item la">A lot in the middle of the movie, some gags/sketchs were slow, out of comic time.</div>
+<div class="resp-item la">In the middle of the film wheb the bowling is happening nothing funny happens its all serious and sad</div>
+<div class="resp-item la">It was a little flat in the middle of the film, the chicken scene, the man from the sky falling, Vanessa’s office. Many ripetitions.</div>
+</div></div></div>
+<div class="q-group"><h3>Parts That Felt Slow or Unnecessary <span class="q-count">12 responses</span></h3>
+<div class="resp-columns"><div class="resp-col">
+<div class="col-label boca-label">Boca Raton (6)</div>
+<div class="resp-item boca">Continuity error early at the birthday party. Jonsey is drinking a pina colada and has 3 or 4 empties next to him, next scene everything is gone from next to the chair. Also the hat over bed frame in Micks childhood room when he comes back is a sorority not fraternity.</div>
+<div class="resp-item boca">Dr phil</div>
+<div class="resp-item boca">The laboratory building the golf putter</div>
+<div class="resp-item boca">It was just too long.</div>
+<div class="resp-item boca">The training up to the championship and the championship itself felt pretty long. There were multiple transitions that just didn&#x27;t feel natural. More forced and stayed to long to get the laugh.</div>
+<div class="resp-item boca">A lot of the filler scenes felt redundant. Like ones that showed how Mick ended up at a location. They don’t establish much else besides that. Also mick’s girlfriend felt unnecessary. And the Vanessa’s putter doesn’t come back at all</div>
+</div><div class="resp-col">
+<div class="col-label la-label">Los Angeles (6)</div>
+<div class="resp-item la">Some mini golf montages</div>
+<div class="resp-item la">The lab putter scene.</div>
+<div class="resp-item la">At points I felt like the events would start to build towards the end, and then we’d go follow something Humphrey or other little thing that wasn’t as important, and it would kill the momentum of the events.</div>
+<div class="resp-item la">All bowling part. Vanessa papa office and laboratory, hot turckey leg vendor. Hospital waiting room</div>
+<div class="resp-item la">All of the bowling parts and Vannessa laboratory</div>
+<div class="resp-item la">In the middle of the film. Too much of Vanessa’s office, too much Vanessa’s dad office. I want to see more golf and preparation for the tournament. I want to see more about Jonsey and Mock relationship. I’d like to understand better why Mick is wearing the uniform. I think that it’s pretty funny.</div>
+</div></div></div>
+<div class="q-group"><h3>Character(s) That Didn't Work <span class="q-count">49 responses</span></h3>
+<div class="resp-columns"><div class="resp-col">
+<div class="col-label boca-label">Boca Raton (29)</div>
+<div class="resp-item boca">Girlfriend</div>
+<div class="resp-item boca">Not sure</div>
+<div class="resp-item boca">Crystal</div>
+<div class="resp-item boca">None of them worked for me. I’m an independent contractor.</div>
+<div class="resp-item boca">lily and the bald scientist</div>
+<div class="resp-item boca">Lily and the bald scientist</div>
+<div class="resp-item boca">None really all where pretty written pretty good</div>
+<div class="resp-item boca">At times frog guy was a bit much. Very funny but some jokes are too drawn out</div>
+<div class="resp-item boca">the odd friend who bowled with them who didnt know the clock joke</div>
+<div class="resp-item boca">The guy holding the boxing gloves</div>
+<div class="resp-item boca">The ex girlfriend</div>
+<div class="resp-item boca">Humphrey, Lily</div>
+<div class="resp-item boca">Humphrey x1000</div>
+<div class="resp-item boca">Vanessa’s father.</div>
+<div class="resp-item boca">They all worked. Maybe the second mini golf owner</div>
+<div class="resp-item boca">Humpback</div>
+<div class="resp-item boca">Jonesy</div>
+<div class="resp-item boca">Humphrey</div>
+<div class="resp-item boca">No not really</div>
+<div class="resp-item boca">Eagle</div>
+<div class="resp-item boca">Mike</div>
+<div class="resp-item boca">Some of the lab people</div>
+<div class="resp-item boca">The huntchback</div>
+<div class="resp-item boca">The turkey leg vendor I thought was going to be more pertinent and would have played some kind of role</div>
+<div class="resp-item boca">Father</div>
+<div class="resp-item boca">I don’t think I have one</div>
+<div class="resp-item boca">Not really</div>
+<div class="resp-item boca">Eagle</div>
+<div class="resp-item boca">Jonsey</div>
+</div><div class="resp-col">
+<div class="col-label la-label">Los Angeles (20)</div>
+<div class="resp-item la">nope!</div>
+<div class="resp-item la">The Igor looking dude</div>
+<div class="resp-item la">Humphrey had potential but fell flat at times</div>
+<div class="resp-item la">Hunch</div>
+<div class="resp-item la">more frogs!</div>
+<div class="resp-item la">They all played a necessary roll.</div>
+<div class="resp-item la">All of them worked. Some of the other putters needed some more backstory.</div>
+<div class="resp-item la">The first girlfriend</div>
+<div class="resp-item la">Probably lily because her character feels like a one and done</div>
+<div class="resp-item la">None particular</div>
+<div class="resp-item la">The blonde girl didn’t feel fully fleshed out. When she had her backstab reveal moment it didn’t impact me as much</div>
+<div class="resp-item la">Friend at bowling alley (glasses) and maybe too much of crowd shots at matches</div>
+<div class="resp-item la">No I liked them all</div>
+<div class="resp-item la">Lily had no character or chemistry with Mick</div>
+<div class="resp-item la">The bowling guy with the glasses was doing way too much in my opinion.</div>
+<div class="resp-item la">The whole Dr scenes in the lab. Cut those.</div>
+<div class="resp-item la">Mick could be a little more likable, he got better in the third act. Vanessa’s dad and head lab guy were a bit much,</div>
+<div class="resp-item la">To mich Dr phil and the story with Mick’s mom. The hot turchey legs vendor. Laboratory cleaners (green). To much Humprey and vanessa’s papa asian scientist</div>
+<div class="resp-item la">Too much Humphery, Turkey leg dealer, all of the laboratory Cleaners</div>
+<div class="resp-item la">Too many secondary characters. I want to see more Jonsey, and young Mick and Mick.</div>
+</div></div></div>
+</div>
+<div class="theme-section" id="ending">
+<div class="theme-header" style="border-left-color:#7C3AED"><h2>🎬 Ending & Emotions</h2><p>How the ending landed and what audiences felt</p></div>
+<div class="q-group"><h3>How the Ending Made You Feel <span class="q-count">70 responses</span></h3>
+<div class="resp-columns"><div class="resp-col">
+<div class="col-label boca-label">Boca Raton (42)</div>
+<div class="resp-item boca">Happy and emotional</div>
+<div class="resp-item boca">Happy Mr. Bawls was in good health</div>
+<div class="resp-item boca">Happy</div>
+<div class="resp-item boca">Satisfied</div>
+<div class="resp-item boca">Good</div>
+<div class="resp-item boca">Happy</div>
+<div class="resp-item boca">Happy n exstatic</div>
+<div class="resp-item boca">Happy</div>
+<div class="resp-item boca">Great ‼️</div>
+<div class="resp-item boca">Happy</div>
+<div class="resp-item boca">satisfied</div>
+<div class="resp-item boca">Content</div>
+<div class="resp-item boca">Happened a little too fast. (That’s what she said)</div>
+<div class="resp-item boca">plot twisting and happy because i thought the main character would be with lilly</div>
+<div class="resp-item boca">Happy</div>
+<div class="resp-item boca">I liked it a lot it was very nice.</div>
+<div class="resp-item boca">Good cause Mr balls came back</div>
+<div class="resp-item boca">Heart warmed</div>
+<div class="resp-item boca">good</div>
+<div class="resp-item boca">It was a nice surprise he ended up with Vanessa and not lily</div>
+<div class="resp-item boca">Bittersweet. Wholesome ending but almost feels a little undeserved</div>
+<div class="resp-item boca">Confused, we didn’t get much resolution from Lily</div>
+<div class="resp-item boca">Amazed by Vanessa generosity.</div>
+<div class="resp-item boca">Happy</div>
+<div class="resp-item boca">Happy</div>
+<div class="resp-item boca">Inspired. Goosebumps</div>
+<div class="resp-item boca">Quick change / Vanessa was a good one not a villain</div>
+<div class="resp-item boca">That it ended in a positive way.</div>
+<div class="resp-item boca">Loved that Mick ended up with Vanessa and not Lilly</div>
+<div class="resp-item boca">Happy</div>
+<div class="resp-item boca">Satisfied</div>
+<div class="resp-item boca">It felt a little rushed</div>
+<div class="resp-item boca">Real good emotional and gratifying to see competitors come together</div>
+<div class="resp-item boca">Happy</div>
+<div class="resp-item boca">Happy</div>
+<div class="resp-item boca">Happy</div>
+<div class="resp-item boca">Was good, thought it might of tied up a subplot. Like his mom and Dr Phil getting married and he’s the dad that he never had referenced from begining</div>
+<div class="resp-item boca">It made me feel good and happy</div>
+<div class="resp-item boca">Very good</div>
+<div class="resp-item boca">Heartwarming</div>
+<div class="resp-item boca">Good</div>
+<div class="resp-item boca">Happy for mick</div>
+</div><div class="resp-col">
+<div class="col-label la-label">Los Angeles (28)</div>
+<div class="resp-item la">happy, relieved</div>
+<div class="resp-item la">Good</div>
+<div class="resp-item la">Happy, nice ending.</div>
+<div class="resp-item la">Good, nice moment with Jonesy</div>
+<div class="resp-item la">I like that he didn’t win but it was still resolved.</div>
+<div class="resp-item la">good!!!</div>
+<div class="resp-item la">It was a warm ending but not surprising.</div>
+<div class="resp-item la">Rushed.</div>
+<div class="resp-item la">Good.</div>
+<div class="resp-item la">Bitcoin thing seemed a little weird but I get it.</div>
+<div class="resp-item la">Happy and content</div>
+<div class="resp-item la">Good.</div>
+<div class="resp-item la">Pretty good</div>
+<div class="resp-item la">Happy</div>
+<div class="resp-item la">Content!</div>
+<div class="resp-item la">Good. Not super surprising but for a movie like this, it was kind of expected.</div>
+<div class="resp-item la">Wholesome ending</div>
+<div class="resp-item la">Really great</div>
+<div class="resp-item la">It felt nice because it ended in a funny but important way.</div>
+<div class="resp-item la">So happy. I would absolutely love to see a sequel though I think the Bitcoin wraps into that well as a lead off.</div>
+<div class="resp-item la">I think it was perfect bringing it back to silly like reminding you it’s literally mini golf I loved it</div>
+<div class="resp-item la">It felt a slight bit forced, because Lily seemed like Mick’s girl for most of the movie, until Vanessa swoops in at the end.</div>
+<div class="resp-item la">It was nice, I just felt kinda weird that Mick and Vanessa didn’t win.</div>
+<div class="resp-item la">Good.</div>
+<div class="resp-item la">Uplifted, amused.</div>
+<div class="resp-item la">Happy</div>
+<div class="resp-item la">Happy</div>
+<div class="resp-item la">Good</div>
+</div></div></div>
+</div>
+<div class="theme-section" id="final">
+<div class="theme-header" style="border-left-color:#1E3A8A"><h2>💬 Final Thoughts</h2><p>Additional comments, suggestions, and overall reactions</p></div>
+<div class="q-group"><h3>Additional Thoughts & Comments <span class="q-count">40 responses</span></h3>
+<div class="resp-columns"><div class="resp-col">
+<div class="col-label boca-label">Boca Raton (21)</div>
+<div class="resp-item boca">Well done!!!</div>
+<div class="resp-item boca">Lightning scene needs to be better</div>
+<div class="resp-item boca">I’m still smiling after watching and that&#x27;s a great thing!</div>
+<div class="resp-item boca">Overall positive</div>
+<div class="resp-item boca">Intro it sooner if possible honestly over all great great jokes evrrything</div>
+<div class="resp-item boca">I would’ve liked to see Mick Russell, the turkey and I also feel that mix practicing could’ve been a little shorter</div>
+<div class="resp-item boca">Very good movie</div>
+<div class="resp-item boca">Too many fade to black between scenes</div>
+<div class="resp-item boca">Fuck the guy telling us to vote. I believe that dickheads name was Dylan. Also fuck Dylan.</div>
+<div class="resp-item boca">Great casting</div>
+<div class="resp-item boca">You need to add more suspenseful music because it just felt like normal scenes.</div>
+<div class="resp-item boca">- mini golf rules scene dragged a little<br>- Lightning strike needs something like charred clothes and burn marks<br>- Some transitions feel weird, like mick closing the alley to the lab. <br>- I feel like the girlfriend/breakup scenes don’t add much at all (only seen post bowling and breakup)<br>- Blue bird scenes AI? It looks AI, newer models would suit this a lot better<br>- 1 hour in, training montage, one of the swings clips through the mask for the split comp. <br>- Tracking on the TV in the tournament opening speech was off<br>- Earlier it seemed the live logo is attached to the top, later in the movie there’s a gap.<br>- Subtle flicker on micks closeup during mick and Vanessa heart to heart.</div>
+<div class="resp-item boca">I wish we saw more when characters hit the ball in the hole. It was mostly just their reactions. Also Lily didn’t get a scene with Mick after the betrayal.</div>
+<div class="resp-item boca">When he’s struck by lightning, he should’ve been holding a golf club as a conductor, therefore it’s more tangibly mick’s fault and him blaming golf</div>
+<div class="resp-item boca">In the beginning when there were words on the screen to desecrate of the mini golfers, you should change that to keep the words on the screen longer to allow viewers more time to read the words. I couldn’t read them all due to the short time.</div>
+<div class="resp-item boca">It’s me Josh Miller. The second viewing made me like the movie even more. I enjoyed it even more the second time</div>
+<div class="resp-item boca">Great songs!!! Loved the audio and the announcers were funny</div>
+<div class="resp-item boca">Can be Cut a a handful moments down. some of the timing drags out</div>
+<div class="resp-item boca">Was very entertaining,</div>
+<div class="resp-item boca">Honestly, I thought it was a pretty good movie, it felt like how older movies in the golden age were being made.</div>
+<div class="resp-item boca">I think the scenes hold out a little too long to land the joke, and there were scenes that didn&#x27;t have a joke and still had excess fluff. I can definitely see this being a kids movie, pre-teens and a little before that age. I think it&#x27;s gotta be quicker and grab more attention with the dialogues and transitions since kids are force fed constant entertainment/stimulation.</div>
+</div><div class="resp-col">
+<div class="col-label la-label">Los Angeles (19)</div>
+<div class="resp-item la">So many great laughs! Loved the broadcast hosts too. Mick is a truly like able character you root for. Loved the parents chosen for him. Loved the sign saying free tiny.</div>
+<div class="resp-item la">I couldn&#x27;t tell what Mick&#x27;s relationship was with the woman that was living with him until it was revealed that he was cheating</div>
+<div class="resp-item la">Great music choices</div>
+<div class="resp-item la">I think the movie is little too long and the pacing was a little slower than I think was necessary.</div>
+<div class="resp-item la">I think there was a bit of an issue with pacing. There were moments that felt like they dragged &amp; others where it felt rushed. I don’t necessarily think it was an issue but I think the final edit will play a big part</div>
+<div class="resp-item la">Really loved the overall tone. Some of the scenes needed a little more explanation, mostly when Venessa came up and said they had talked about something before.</div>
+<div class="resp-item la">I feel like some of the timing can be tightened up especially at the beginning - Johnny’s comedic timing in the beginning can be tightened - not so much space.</div>
+<div class="resp-item la">A lot of the banter that was done in terms of the jokes were super. I like that they were stupid done on purpose.</div>
+<div class="resp-item la">Silly fun movie with quirks and wholesome content.</div>
+<div class="resp-item la">Maybe the scenes with the evil dad and bald guy were a little long</div>
+<div class="resp-item la">I thought the music should be balenced with the characters audio.</div>
+<div class="resp-item la">This was by far my favorite comedy I&#x27;ve caught in years. It never went too gory disgusting or graphic and it&#x27;s something I want everyone to see. I think it blows the sequel to happy Gilmore out of the water. This is an incredible film. I hope to work on a project like this someday on an acting standpoint. Material like this is hard to find these days.</div>
+<div class="resp-item la">loved the little details and quick side jokes</div>
+<div class="resp-item la">This movie was stupid but in a good way</div>
+<div class="resp-item la">I think the cuts need to be edited tighter, I’d remove all the lab scenes, they distract from the story. Maybe tiny bits but it’s too cheesy. I like the beginning scenes when he’s in his bike, those work but maybe put a different color or filters so we know it’s the past and not current. Kinda wonder years vibes. I’d also love some narration or voice over the cuts so the audio goes over the shots a little bit to introduce the cuts. Also joke on the end with Bitcoin, you should have him say he bought 300 of them when they were just a quarter. As if he’s just giving a little kid a quarter. You could even put fore shadowing in that with a shot of a quarter or him giving him quarters idk, or just adding that line in, in ADR. Then you realize that he’s got like 300 bitcoins but doesn’t know he’s rich. Just an idea but could be funny. But over all editing the shots needs to be about 2-3 secs cut shorter because it will make the jokes hit, similar to how the office is edited. They got to be tighter or they are too predictable. That’s about it. I also think more time laps shots with him training, the Rocky scene needs more, more time laso, stressing out like the character really wants this.</div>
+<div class="resp-item la">If this came out between 1995-1999 this movie would’ve made $150 million. My first impressions were very Happy Madison/Adam Sandler vibe with a few little touches of Naked Gun slap-stick. The potential this has is pretty big - especially with everyone craving comedy again. Definitely had some good laughs, really funny scenes, a little silly at times for silly sake, but fun</div>
+<div class="resp-item la">Focus on the main story. <br>Don’t get lost too much with single characters or funny gags.<br>Some scenes, could be more funny, but they are slow with not comic timing</div>
+<div class="resp-item la">I think that there should be more Young Mick flashbacks and more jonsey and young mick scenes</div>
+<div class="resp-item la">More Jonsey and Mick. More mini prodigy scenes.</div>
+</div></div></div>
+</div>
 <div class="charts-section" id="charts">
-  <div class="wrap">
-    <div class="charts-title">Supporting Data</div>
-    <div class="chart-grid">
-      <div class="chart-card"><h4>Overall Movie Rating</h4><canvas id="c1"></canvas></div>
-      <div class="chart-card"><h4>How Funny Was the Movie?</h4><canvas id="c2"></canvas></div>
-      <div class="chart-card"><h4>Likelihood to Recommend</h4><canvas id="c3"></canvas></div>
-      <div class="chart-card"><h4>How Often Did You Laugh?</h4><canvas id="c4"></canvas></div>
-      <div class="chart-card"><h4>Pacing</h4><canvas id="c5"></canvas></div>
-      <div class="chart-card"><h4>Ending Reception</h4><canvas id="c6"></canvas></div>
-      <div class="chart-card"><h4>Emotions Felt</h4><canvas id="c7"></canvas></div>
-      <div class="chart-card"><h4>Attention Drifted?</h4><canvas id="c8"></canvas></div>
-    </div>
-  </div>
+<div style="max-width:1100px;margin:0 auto;padding:0 20px">
+<div class="charts-title">Supporting Data</div>
+<div class="chart-grid">
+<div class="chart-card"><h4>Overall Movie Rating</h4><canvas id="c1"></canvas></div>
+<div class="chart-card"><h4>How Funny Was the Movie?</h4><canvas id="c2"></canvas></div>
+<div class="chart-card"><h4>Likelihood to Recommend</h4><canvas id="c3"></canvas></div>
+<div class="chart-card"><h4>How Often Did You Laugh?</h4><canvas id="c4"></canvas></div>
+<div class="chart-card"><h4>Pacing</h4><canvas id="c5"></canvas></div>
+<div class="chart-card"><h4>Ending Reception</h4><canvas id="c6"></canvas></div>
+<div class="chart-card"><h4>Emotions Felt</h4><canvas id="c7"></canvas></div>
+<div class="chart-card"><h4>Attention Drifted?</h4><canvas id="c8"></canvas></div>
 </div>
-
-<footer><p>© 2026 <span>Mick Skylark: Mini Golf Prodigy</span> — All Audience Comments</p><p style="opacity:0.7;margin-top:4px">A <span>Potato Eater Productions</span> Film · <a href="skylark-feedback.html">Back to Dashboard</a></p></footer>
 </div>
-
+</div>
+<footer><p>&copy; 2026 <span>Mick Skylark: Mini Golf Prodigy</span> &mdash; All Audience Comments</p><p style="opacity:0.7;margin-top:4px">A <span>Potato Eater Productions</span> Film &middot; <a href="skylark-feedback.html">Back to Dashboard</a></p></footer>
+</div>
 <script>
-function checkPw(){const i=document.getElementById('pwInput'),o=document.getElementById('pwOverlay'),m=document.getElementById('mainContent'),e=document.getElementById('pwError'),b=document.getElementById('pwBox');if(i.value==='noMilk??'){o.classList.add('hidden');m.classList.add('visible');sessionStorage.setItem('ms_auth','1')}else{e.textContent='Incorrect password.';b.classList.add('pw-shake');i.value='';i.focus();setTimeout(()=>b.classList.remove('pw-shake'),400)}}
-document.getElementById('pwInput').addEventListener('keydown',e=>{if(e.key==='Enter')checkPw()});
+
+function checkPw(){
+  var i=document.getElementById('pwInput');
+  var o=document.getElementById('pwOverlay');
+  var m=document.getElementById('mainContent');
+  var e=document.getElementById('pwError');
+  var b=document.getElementById('pwBox');
+  if(i.value==='noMilk??'){
+    o.classList.add('hidden');
+    m.classList.add('visible');
+    sessionStorage.setItem('ms_auth','1');
+  }else{
+    e.textContent='Incorrect password. Try again.';
+    b.classList.add('pw-shake');
+    i.value='';
+    i.focus();
+    setTimeout(function(){b.classList.remove('pw-shake')},400);
+  }
+}
+document.getElementById('pwInput').addEventListener('keydown',function(e){if(e.key==='Enter')checkPw()});
 if(sessionStorage.getItem('ms_auth')==='1'){document.getElementById('pwOverlay').classList.add('hidden');document.getElementById('mainContent').classList.add('visible')}
-window.addEventListener('DOMContentLoaded',()=>document.getElementById('pwInput').focus());
+window.addEventListener('DOMContentLoaded',function(){document.getElementById('pwInput').focus()});
 
-// Nav pill active state
-document.querySelectorAll('.nav-pill').forEach(p=>{p.addEventListener('click',()=>{document.querySelectorAll('.nav-pill').forEach(x=>x.classList.remove('active'));p.classList.add('active')});});
+document.querySelectorAll('.nav-pill').forEach(function(p){
+  p.addEventListener('click',function(){
+    document.querySelectorAll('.nav-pill').forEach(function(x){x.classList.remove('active')});
+    p.classList.add('active');
+  });
+});
 
-// Charts
-Chart.defaults.color='#4B5563';Chart.defaults.font.family='Poppins';Chart.defaults.font.size=11;Chart.defaults.plugins.legend.display=false;
-const P='#1E3A8A',A='#2563EB',G='#FBBF24',Gn='#16A34A',R='#DC2626',O='#EA580C',Pu='#7C3AED',Gr='#9CA3AF',Pk='#DB2777',T='#0D9488';
-function mb(id,l,d,c,h=false){new Chart(document.getElementById(id),{type:'bar',data:{labels:l,datasets:[{data:d,backgroundColor:c,borderRadius:6,barPercentage:0.7}]},options:{indexAxis:h?'y':'x',responsive:true,maintainAspectRatio:true,scales:{x:{grid:{color:'rgba(0,0,0,0.05)'}},y:{grid:{color:'rgba(0,0,0,0.05)'}}}}})};
-function md(id,l,d,c){new Chart(document.getElementById(id),{type:'doughnut',data:{labels:l,datasets:[{data:d,backgroundColor:c,borderWidth:2,borderColor:'#fff',hoverOffset:8}]},options:{responsive:true,maintainAspectRatio:true,cutout:'55%',plugins:{legend:{display:true,position:'bottom',labels:{padding:12,usePointStyle:true,font:{size:10}}}}}}};
+Chart.defaults.color='#4B5563';
+Chart.defaults.font.family='Poppins';
+Chart.defaults.font.size=11;
+Chart.defaults.plugins.legend.display=false;
+
+var P='#1E3A8A',A='#2563EB',G='#FBBF24',Gn='#16A34A',R='#DC2626',O='#EA580C',Pu='#7C3AED',Gr='#9CA3AF',Pk='#DB2777',T='#0D9488';
+
+function mb(id,labels,data,colors,horiz){
+  new Chart(document.getElementById(id),{
+    type:'bar',
+    data:{labels:labels,datasets:[{data:data,backgroundColor:colors,borderRadius:6,barPercentage:0.7}]},
+    options:{indexAxis:horiz?'y':'x',responsive:true,maintainAspectRatio:true,
+      scales:{x:{grid:{color:'rgba(0,0,0,0.05)'}},y:{grid:{color:'rgba(0,0,0,0.05)'}}}}
+  });
+}
+
+function md(id,labels,data,colors){
+  new Chart(document.getElementById(id),{
+    type:'doughnut',
+    data:{labels:labels,datasets:[{data:data,backgroundColor:colors,borderWidth:2,borderColor:'#fff',hoverOffset:8}]},
+    options:{responsive:true,maintainAspectRatio:true,cutout:'55%',
+      plugins:{legend:{display:true,position:'bottom',labels:{padding:12,usePointStyle:true,font:{size:10}}}}}
+  });
+}
 
 mb('c1',['4','5','6','7','8','9','10'],[2,3,12,20,24,6,16],[O,O,O,G,P,A,Gn]);
 mb('c2',['2','5','6','7','8','9','10'],[1,2,13,17,23,13,13],[R,O,O,G,P,A,Gn]);
@@ -233,6 +735,7 @@ md('c5',['Just right','Slightly long','Too long','Slightly short'],[33,44,5,1],[
 md('c6',['Loved it','Liked it','Neutral',"Didn't like it"],[36,39,6,2],[Gn,P,G,R]);
 mb('c7',['Happy','Amused','Moved','Excited','Inspired','Bored','Tense','Indifferent','Confused','Sad'],[60,56,26,24,10,6,4,4,3,1],[Gn,P,Pu,G,T,R,R,Gr,O,Pk],true);
 md('c8',['No','Not really','Yes, but not bad','Yes'],[7,29,34,13],[Gn,P,G,O]);
+
 </script>
 </body>
 </html>
