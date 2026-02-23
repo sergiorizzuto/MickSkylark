@@ -46,7 +46,61 @@ footer{background:var(--primary);color:white;text-align:center;padding:24px 20px
 </style>
 </head>
 <body>
-<div class="pw-overlay" id="pwOverlay"><div class="pw-box" id="pwBox"><div class="pw-emoji">&#x1F4AC;</div><h2>All Comments</h2><div class="pw-sub">Mick Skylark: Mini Golf Prodigy</div><input type="password" id="pwInput" placeholder="Enter password" autocomplete="off" /><button onclick="checkPw()">Unlock</button><div class="pw-error" id="pwError"></div></div></div>
+<div class="pw-overlay" id="pwOverlay">
+<div class="pw-box" id="pwBox">
+<div class="pw-emoji">&#x1F4AC;</div>
+<h2>All Comments</h2>
+<div class="pw-sub">Mick Skylark: Mini Golf Prodigy</div>
+<input type="password" id="pwInput" placeholder="Enter password" autocomplete="off">
+<button id="pwBtn">Unlock</button>
+<div class="pw-error" id="pwError"></div>
+</div>
+</div>
+<script>
+(function(){
+  var pw = 'noMilk??';
+  function unlock(){
+    var inp = document.getElementById('pwInput');
+    var overlay = document.getElementById('pwOverlay');
+    var main = document.getElementById('mainContent');
+    var err = document.getElementById('pwError');
+    var box = document.getElementById('pwBox');
+    if(inp.value === pw){
+      overlay.style.display = 'none';
+      if(main) main.style.display = 'block';
+      try{ sessionStorage.setItem('ms_auth2','1'); }catch(e){}
+    } else {
+      err.textContent = 'Incorrect password. Try again.';
+      box.classList.add('pw-shake');
+      inp.value = '';
+      inp.focus();
+      setTimeout(function(){ box.classList.remove('pw-shake'); }, 400);
+    }
+  }
+  document.getElementById('pwBtn').addEventListener('click', unlock);
+  document.getElementById('pwInput').addEventListener('keydown', function(e){
+    if(e.key === 'Enter') unlock();
+  });
+  // Auto-unlock from session - wait for DOM since mainContent is below
+  function autoUnlock(){
+    try{
+      if(sessionStorage.getItem('ms_auth2') === '1'){
+        var o = document.getElementById('pwOverlay');
+        var m = document.getElementById('mainContent');
+        if(o) o.style.display = 'none';
+        if(m) m.style.display = 'block';
+      }
+    }catch(e){}
+    var inp = document.getElementById('pwInput');
+    if(inp) inp.focus();
+  }
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', autoUnlock);
+  } else {
+    autoUnlock();
+  }
+})();
+</script>
 <div id="mainContent">
 <div class="header">
 <h1>All Audience Comments</h1>
@@ -62,7 +116,7 @@ footer{background:var(--primary);color:white;text-align:center;padding:24px 20px
 <a href="#charts" class="nav-pill">&#x1F4CA; Charts</a>
 </div>
 <div class="theme-section" id="worked">
-<div class="theme-header" style="border-left-color:#16A34A"><h2>🎬 What Worked</h2><p>The laughs, favorite scenes, and characters that connected</p></div>
+<div class="theme-header" style="border-left-color:#16A34A"><h2>&#x1F3AC; What Worked</h2><p>The laughs, favorite scenes, and characters that connected</p></div>
 <div class="q-group"><h3>Moment You Laughed the Hardest <span class="q-count">83 responses</span></h3>
 <div class="resp-columns"><div class="resp-col">
 <div class="col-label boca-label">Boca Raton (52)</div>
@@ -331,7 +385,7 @@ footer{background:var(--primary);color:white;text-align:center;padding:24px 20px
 </div></div></div>
 </div>
 <div class="theme-section" id="needs-work">
-<div class="theme-header" style="border-left-color:#EA580C"><h2>🔧 What Needs Work</h2><p>Pain points, pacing issues, and scenes to reconsider</p></div>
+<div class="theme-header" style="border-left-color:#EA580C"><h2>&#x1F527; What Needs Work</h2><p>Pain points, pacing issues, and scenes to reconsider</p></div>
 <div class="q-group"><h3>Least Favorite Scene <span class="q-count">76 responses</span></h3>
 <div class="resp-columns"><div class="resp-col">
 <div class="col-label boca-label">Boca Raton (45)</div>
@@ -414,7 +468,7 @@ footer{background:var(--primary);color:white;text-align:center;padding:24px 20px
 <div class="resp-item la">All of the bowling, all of Vannessa’s laboratory</div>
 <div class="resp-item la">There is too much of Humphrey, there are too many scenes with secondary characters. They’re funny, but I want to see the main story, understand why Mick is wearing that uniform, more about Jonsey and Mick.</div>
 </div></div></div>
-<div class="q-group"><h3>Jokes That Fell Flat — Details <span class="q-count">32 responses</span></h3>
+<div class="q-group"><h3>Jokes That Fell Flat &mdash; Details <span class="q-count">32 responses</span></h3>
 <div class="resp-columns"><div class="resp-col">
 <div class="col-label boca-label">Boca Raton (15)</div>
 <div class="resp-item boca">A few</div>
@@ -470,7 +524,7 @@ footer{background:var(--primary);color:white;text-align:center;padding:24px 20px
 <div class="resp-item la">All of the bowling parts and Vannessa laboratory</div>
 <div class="resp-item la">In the middle of the film. Too much of Vanessa’s office, too much Vanessa’s dad office. I want to see more golf and preparation for the tournament. I want to see more about Jonsey and Mock relationship. I’d like to understand better why Mick is wearing the uniform. I think that it’s pretty funny.</div>
 </div></div></div>
-<div class="q-group"><h3>Character(s) That Didn't Work <span class="q-count">49 responses</span></h3>
+<div class="q-group"><h3>Character(s) That Didn&#39;t Work <span class="q-count">49 responses</span></h3>
 <div class="resp-columns"><div class="resp-col">
 <div class="col-label boca-label">Boca Raton (29)</div>
 <div class="resp-item boca">Girlfriend</div>
@@ -527,7 +581,7 @@ footer{background:var(--primary);color:white;text-align:center;padding:24px 20px
 </div></div></div>
 </div>
 <div class="theme-section" id="ending">
-<div class="theme-header" style="border-left-color:#7C3AED"><h2>🎬 Ending & Emotions</h2><p>How the ending landed and what audiences felt</p></div>
+<div class="theme-header" style="border-left-color:#7C3AED"><h2>&#x1F3AC; Ending &amp; Emotions</h2><p>How the ending landed and what audiences felt</p></div>
 <div class="q-group"><h3>How the Ending Made You Feel <span class="q-count">70 responses</span></h3>
 <div class="resp-columns"><div class="resp-col">
 <div class="col-label boca-label">Boca Raton (42)</div>
@@ -606,8 +660,8 @@ footer{background:var(--primary);color:white;text-align:center;padding:24px 20px
 </div></div></div>
 </div>
 <div class="theme-section" id="final">
-<div class="theme-header" style="border-left-color:#1E3A8A"><h2>💬 Final Thoughts</h2><p>Additional comments, suggestions, and overall reactions</p></div>
-<div class="q-group"><h3>Additional Thoughts & Comments <span class="q-count">40 responses</span></h3>
+<div class="theme-header" style="border-left-color:#1E3A8A"><h2>&#x1F4AC; Final Thoughts</h2><p>Additional comments, suggestions, and overall reactions</p></div>
+<div class="q-group"><h3>Additional Thoughts &amp; Comments <span class="q-count">40 responses</span></h3>
 <div class="resp-columns"><div class="resp-col">
 <div class="col-label boca-label">Boca Raton (21)</div>
 <div class="resp-item boca">Well done!!!</div>
@@ -653,8 +707,7 @@ footer{background:var(--primary);color:white;text-align:center;padding:24px 20px
 <div class="resp-item la">I think that there should be more Young Mick flashbacks and more jonsey and young mick scenes</div>
 <div class="resp-item la">More Jonsey and Mick. More mini prodigy scenes.</div>
 </div></div></div>
-</div>
-<div class="charts-section" id="charts">
+</div><div class="charts-section" id="charts">
 <div style="max-width:1100px;margin:0 auto;padding:0 20px">
 <div class="charts-title">Supporting Data</div>
 <div class="chart-grid">
@@ -672,61 +725,15 @@ footer{background:var(--primary);color:white;text-align:center;padding:24px 20px
 <footer><p>&copy; 2026 <span>Mick Skylark: Mini Golf Prodigy</span> &mdash; All Audience Comments</p><p style="opacity:0.7;margin-top:4px">A <span>Potato Eater Productions</span> Film &middot; <a href="skylark-feedback.html">Back to Dashboard</a></p></footer>
 </div>
 <script>
-
-function checkPw(){
-  var i=document.getElementById('pwInput');
-  var o=document.getElementById('pwOverlay');
-  var m=document.getElementById('mainContent');
-  var e=document.getElementById('pwError');
-  var b=document.getElementById('pwBox');
-  if(i.value==='noMilk??'){
-    o.classList.add('hidden');
-    m.classList.add('visible');
-    sessionStorage.setItem('ms_auth','1');
-  }else{
-    e.textContent='Incorrect password. Try again.';
-    b.classList.add('pw-shake');
-    i.value='';
-    i.focus();
-    setTimeout(function(){b.classList.remove('pw-shake')},400);
-  }
-}
-document.getElementById('pwInput').addEventListener('keydown',function(e){if(e.key==='Enter')checkPw()});
-if(sessionStorage.getItem('ms_auth')==='1'){document.getElementById('pwOverlay').classList.add('hidden');document.getElementById('mainContent').classList.add('visible')}
-window.addEventListener('DOMContentLoaded',function(){document.getElementById('pwInput').focus()});
-
-document.querySelectorAll('.nav-pill').forEach(function(p){
-  p.addEventListener('click',function(){
-    document.querySelectorAll('.nav-pill').forEach(function(x){x.classList.remove('active')});
-    p.classList.add('active');
-  });
-});
-
-Chart.defaults.color='#4B5563';
-Chart.defaults.font.family='Poppins';
-Chart.defaults.font.size=11;
-Chart.defaults.plugins.legend.display=false;
-
+Chart.defaults.color='#4B5563';Chart.defaults.font.family='Poppins';Chart.defaults.font.size=11;Chart.defaults.plugins.legend.display=false;
 var P='#1E3A8A',A='#2563EB',G='#FBBF24',Gn='#16A34A',R='#DC2626',O='#EA580C',Pu='#7C3AED',Gr='#9CA3AF',Pk='#DB2777',T='#0D9488';
-
 function mb(id,labels,data,colors,horiz){
-  new Chart(document.getElementById(id),{
-    type:'bar',
-    data:{labels:labels,datasets:[{data:data,backgroundColor:colors,borderRadius:6,barPercentage:0.7}]},
-    options:{indexAxis:horiz?'y':'x',responsive:true,maintainAspectRatio:true,
-      scales:{x:{grid:{color:'rgba(0,0,0,0.05)'}},y:{grid:{color:'rgba(0,0,0,0.05)'}}}}
-  });
+  new Chart(document.getElementById(id),{type:'bar',data:{labels:labels,datasets:[{data:data,backgroundColor:colors,borderRadius:6,barPercentage:0.7}]},options:{indexAxis:horiz?'y':'x',responsive:true,maintainAspectRatio:true,scales:{x:{grid:{color:'rgba(0,0,0,0.05)'}},y:{grid:{color:'rgba(0,0,0,0.05)'}}}}});
 }
-
 function md(id,labels,data,colors){
-  new Chart(document.getElementById(id),{
-    type:'doughnut',
-    data:{labels:labels,datasets:[{data:data,backgroundColor:colors,borderWidth:2,borderColor:'#fff',hoverOffset:8}]},
-    options:{responsive:true,maintainAspectRatio:true,cutout:'55%',
-      plugins:{legend:{display:true,position:'bottom',labels:{padding:12,usePointStyle:true,font:{size:10}}}}}
-  });
+  new Chart(document.getElementById(id),{type:'doughnut',data:{labels:labels,datasets:[{data:data,backgroundColor:colors,borderWidth:2,borderColor:'#fff',hoverOffset:8}]},options:{responsive:true,maintainAspectRatio:true,cutout:'55%',plugins:{legend:{display:true,position:'bottom',labels:{padding:12,usePointStyle:true,font:{size:10}}}}}});
 }
-
+document.querySelectorAll('.nav-pill').forEach(function(p){p.addEventListener('click',function(){document.querySelectorAll('.nav-pill').forEach(function(x){x.classList.remove('active')});p.classList.add('active');});});
 mb('c1',['4','5','6','7','8','9','10'],[2,3,12,20,24,6,16],[O,O,O,G,P,A,Gn]);
 mb('c2',['2','5','6','7','8','9','10'],[1,2,13,17,23,13,13],[R,O,O,G,P,A,Gn]);
 mb('c3',['1','2','3','4','5'],[1,4,16,20,41],[R,O,O,G,Gn]);
@@ -735,7 +742,6 @@ md('c5',['Just right','Slightly long','Too long','Slightly short'],[33,44,5,1],[
 md('c6',['Loved it','Liked it','Neutral',"Didn't like it"],[36,39,6,2],[Gn,P,G,R]);
 mb('c7',['Happy','Amused','Moved','Excited','Inspired','Bored','Tense','Indifferent','Confused','Sad'],[60,56,26,24,10,6,4,4,3,1],[Gn,P,Pu,G,T,R,R,Gr,O,Pk],true);
 md('c8',['No','Not really','Yes, but not bad','Yes'],[7,29,34,13],[Gn,P,G,O]);
-
 </script>
 </body>
 </html>
