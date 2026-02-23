@@ -42,10 +42,10 @@ body{font-family:'Poppins',sans-serif;background:#fff;color:var(--text);line-hei
 .header .meta{color:rgba(255,255,255,0.75);font-size:0.85rem;margin-top:4px}
 
 /* Dropdown */
-.dropdown-bar{background:var(--dark);padding:14px 20px;text-align:center;position:sticky;top:0;z-index:100;box-shadow:0 4px 20px rgba(0,0,0,0.15)}
+.dropdown-bar{background:rgba(255,255,255,0.95);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);padding:14px 20px;text-align:center;position:sticky;top:0;z-index:100;box-shadow:0 2px 15px rgba(30,58,138,0.12);border-bottom:2px solid rgba(30,58,138,0.08)}
 .dropdown-bar select{font-family:'Poppins',sans-serif;font-size:0.95rem;font-weight:600;padding:10px 40px 10px 18px;border:2px solid var(--secondary);border-radius:10px;background:#fff;color:var(--primary);cursor:pointer;outline:none;appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%231E3A8A' stroke-width='2' fill='none'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center}
 .dropdown-bar select:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(37,99,235,0.15)}
-.dropdown-bar .resp-count{display:inline-block;margin-left:12px;color:var(--secondary);font-size:0.82rem;font-weight:600}
+.dropdown-bar .resp-count{display:inline-block;margin-left:12px;color:var(--primary);font-size:0.82rem;font-weight:600;opacity:0.7}
 
 /* Layout */
 .wrap{max-width:1200px;margin:0 auto;padding:0 20px}
@@ -120,12 +120,32 @@ body{font-family:'Poppins',sans-serif;background:#fff;color:var(--text);line-hei
 .list-card ul li strong{color:#fff}
 
 .sub-title{font-size:1.3rem;font-weight:700;color:var(--primary);margin-bottom:16px;max-width:1200px;margin-left:auto;margin-right:auto;padding-left:14px;border-left:4px solid var(--secondary)}
+
+/* Industry Analysis */
+.analysis-section{background:#F8FAFC;padding:55px 20px;border-top:3px solid var(--secondary)}
+.analysis-section .section-title::after{background:var(--primary)}
+.analysis-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;max-width:1200px;margin:0 auto 28px}
+.analysis-card{background:#fff;border-radius:16px;padding:28px;box-shadow:0 4px 18px rgba(0,0,0,0.06);border:1px solid rgba(30,58,138,0.08);position:relative;overflow:hidden}
+.analysis-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px}
+.analysis-card.blue::before{background:linear-gradient(90deg,var(--primary),var(--accent))}
+.analysis-card.gold::before{background:linear-gradient(90deg,var(--gold),var(--secondary))}
+.analysis-card.green::before{background:linear-gradient(90deg,#16A34A,#22C55E)}
+.analysis-card.purple::before{background:linear-gradient(90deg,#7C3AED,#A78BFA)}
+.analysis-card h4{font-size:0.95rem;font-weight:700;color:var(--primary);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.analysis-card h4 .icon{font-size:1.2rem}
+.analysis-card p{font-size:0.86rem;color:var(--text-dim);line-height:1.75;margin-bottom:10px}
+.analysis-card p strong{color:var(--text)}
+.analysis-card .stat-row{display:flex;gap:20px;margin:14px 0 6px;flex-wrap:wrap}
+.stat-pill{background:rgba(30,58,138,0.06);border-radius:10px;padding:10px 16px;text-align:center;flex:1;min-width:100px}
+.stat-pill .stat-val{font-size:1.4rem;font-weight:800;color:var(--primary);line-height:1}
+.stat-pill .stat-label{font-size:0.65rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.4px;font-weight:600;margin-top:3px}
+.analysis-full{max-width:1200px;margin:0 auto}
 .spacer{height:20px}
 
 footer{background:var(--primary);color:white;text-align:center;padding:28px 20px;font-size:0.82rem}
 footer span{color:var(--secondary);font-weight:600}
 
-@media(max-width:900px){.grid-2,.grid-3,.quote-grid,.two-col-list{grid-template-columns:1fr}.header h1{font-size:1.8rem}.section-title{font-size:1.5rem}.kpi-row{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:900px){.grid-2,.grid-3,.quote-grid,.two-col-list,.analysis-grid{grid-template-columns:1fr}.header h1{font-size:1.8rem}.section-title{font-size:1.5rem}.kpi-row{grid-template-columns:repeat(3,1fr)}}
 @media(max-width:500px){.kpi-row{grid-template-columns:repeat(2,1fr)}}
 </style>
 </head>
@@ -254,6 +274,14 @@ footer span{color:var(--secondary);font-weight:600}
   </div>
 </div>
 
+<!-- Industry Analysis -->
+<div class="analysis-section">
+  <div class="wrap">
+    <div class="section-title">Industry Analysis</div>
+    <div id="analysisContent"></div>
+  </div>
+</div>
+
 <!-- Executive Summary -->
 <div class="summary-section">
   <div class="summary-inner" id="execSummary"></div>
@@ -326,7 +354,18 @@ boca: {
   summaryP1:'<strong>52 respondents</strong> from the Boca Raton screening provided overwhelmingly positive feedback. The film averages an <strong>8.0/10 overall rating</strong>, <strong>8.0/10 humor</strong>, and an exceptional <strong>9.4/10 "glad I saw it"</strong>. 81% would recommend to a friend. Emotions: <strong>Happy (67%), Amused (62%), Moved (35%)</strong>. Only 4% reported boredom.',
   summaryP2:'Songs averaged <strong>9.1/10</strong>. 88% loved or liked the ending. <strong>Dr. Phil (Warburton)</strong> and <strong>Humphrey</strong> are clear audience favorites, with Vanessa\'s emotional arc resonating strongly in the third act.',
   strengths:['Dr. Phil / Warburton universally beloved','Humphrey is a comedy engine — hamster wheel & turkey leg','Vanessa\'s arc and the money reveal deeply satisfying','Songs rated 9.1/10 average','Mini golf commentators consistently funny','88% said "Yes" to uplifting message','82% found very easy to follow','Musket gag and physical comedy land well'],
-  improvements:['<strong>Bowling scenes</strong> — mentioned 6+ times as least favorite','<strong>Lightning/cloud VFX</strong> — needs visual improvement','<strong>Crystal / girlfriend subplot</strong> — feels unnecessary','<strong>Pacing in middle act</strong> — tournament and lab scenes drag','<strong>Musket gag repetition</strong> — funny once, overdone after','<strong>Dumpster turkey / skydiver</strong> — polarizing','<strong>Fade-to-black transitions</strong> — too many, breaks flow','<strong>Lily resolution</strong> — needs better closure']
+  improvements:['<strong>Bowling scenes</strong> — mentioned 6+ times as least favorite','<strong>Lightning/cloud VFX</strong> — needs visual improvement','<strong>Crystal / girlfriend subplot</strong> — feels unnecessary','<strong>Pacing in middle act</strong> — tournament and lab scenes drag','<strong>Musket gag repetition</strong> — funny once, overdone after','<strong>Dumpster turkey / skydiver</strong> — polarizing','<strong>Fade-to-black transitions</strong> — too many, breaks flow','<strong>Lily resolution</strong> — needs better closure'],
+  analysis:{
+    meanRating:'8.0', medianRating:'8.0', recScore:'4.4', recScale:'1–5',
+    topEmo1:'Happy (35)', topEmo2:'Amused (32)', emo3:'Moved / Emotional (18)', emo4:'Excited (13)',
+    lowEmo:'Bored (2), Confused (2), Sad (1)',
+    driftPct:'52%', driftNote:'52% of respondents indicated some attention drift (though most said "not bad"), suggesting tightening specific sequences — common in early cuts — will strengthen the momentum that\'s already working.',
+    comedyNote:'The high counts for Amused (32) and Happy (35) confirm the comedy is landing well. Targeted review of the "fell flat" feedback (28% said yes) can guide surgical adjustments without overhauling what works.',
+    audienceMain:'Broad all-ages appeal confirmed. Respondents lean slightly toward "Everyone, more for adults" (24) over "Everyone, more for kids" (19). Only 7 classified it as kids-only.',
+    audienceMarketing:'Marketing can confidently position this as a family comedy with adult crossover appeal — similar to the <em>Happy Gilmore</em> and <em>Dodgeball</em> quadrant.',
+    ageCore:'25–34 and 35–44 make up 52% of Boca respondents (27 of 52), representing the core theatrical-going parent demographic.',
+    ageSpread:'Full representation from Under 18 (4) to 55+ (9) ensures the findings reflect true cross-generational appeal.'
+  }
 },
 la: {
   n:26, location:'Los Angeles', avgRating:'7.3', avgHumor:'7.3', recPct:'65%', endPct:'92%', upliftPct:'92%', avgGlad:'8.9', avgSongs:'8.7', avgStory:'7.5',
@@ -355,7 +394,18 @@ la: {
   summaryP1:'<strong>26 respondents</strong> from the Los Angeles screening gave strong feedback. The film averages <strong>7.3/10 overall</strong>, <strong>7.3/10 humor</strong>, and <strong>8.9/10 "glad I saw it."</strong> 65% would recommend. The LA audience skewed younger (50% under 35). Emotions: <strong>Amused (85%), Happy (81%), Excited (31%)</strong>.',
   summaryP2:'Songs averaged <strong>8.7/10</strong>. 92% loved or liked the ending — the highest of any screener. <strong>Dr. Phil (Warburton)</strong> dominated as the favorite, with <strong>Mick</strong> and <strong>Humphrey</strong> close behind. LA was more critical on pacing and joke timing but very positive on heart and message.',
   strengths:['Dr. Phil / Warburton — the runaway MVP in LA','Eagle\'s scenes praised as "fantastic"','Songs rated 8.7/10 — strong even in a tougher crowd','92% loved or liked the ending — highest across screeners','92% confirmed uplifting message','Sports casters / announcers consistently praised','Koechner\'s delivery universally loved','Strong emotional core landed with younger demo'],
-  improvements:['<strong>Lab / putter scene</strong> — #1 criticism in LA, mentioned 5+ times','<strong>Skydiver / parachute gag</strong> — 4 mentions as least favorite','<strong>Pacing and joke timing</strong> — editing can tighten multiple scenes','<strong>Montages</strong> — felt too long for some','<strong>Igor / hunch character</strong> — didn\'t land for several','<strong>Lily / first girlfriend</strong> — "no character or chemistry with Mick"','<strong>Bowling scenes</strong> — less flagged than Boca but still noted','<strong>Music balance</strong> — too loud over comedy at points']
+  improvements:['<strong>Lab / putter scene</strong> — #1 criticism in LA, mentioned 5+ times','<strong>Skydiver / parachute gag</strong> — 4 mentions as least favorite','<strong>Pacing and joke timing</strong> — editing can tighten multiple scenes','<strong>Montages</strong> — felt too long for some','<strong>Igor / hunch character</strong> — didn\'t land for several','<strong>Lily / first girlfriend</strong> — "no character or chemistry with Mick"','<strong>Bowling scenes</strong> — less flagged than Boca but still noted','<strong>Music balance</strong> — too loud over comedy at points'],
+  analysis:{
+    meanRating:'7.3', medianRating:'7.0', recScore:'3.9', recScale:'1–5',
+    topEmo1:'Amused (22)', topEmo2:'Happy (21)', emo3:'Excited (8)', emo4:'Moved / Emotional (6)',
+    lowEmo:'Bored (2), Confused (1), Sad (0)',
+    driftPct:'58%', driftNote:'58% of LA respondents reported some attention drift. This industry-savvy audience is quicker to flag pacing issues, making their feedback especially valuable for editorial tightening.',
+    comedyNote:'Amused (22 of 26 = 85%) was the top emotion — confirming the comedy fundamentals are strong even with a tougher crowd. The higher "jokes fell flat" rate (46%) largely reflects timing and editing notes rather than material issues.',
+    audienceMain:'LA audience leaned toward "Everyone, more for kids" (15) over "Everyone, more for adults" (9). This younger, industry-adjacent crowd sees the family market potential clearly.',
+    audienceMarketing:'The LA perception reinforces that festival and family-platform positioning (streaming, etc.) could be a strong distribution angle alongside theatrical.',
+    ageCore:'25–34 and 35–44 make up 62% of LA respondents (16 of 26) — an industry-relevant demographic whose tastes align with theatrical decision-makers.',
+    ageSpread:'Skews younger overall than Boca, with 65% under 35. This younger cohort\'s enthusiasm for the heart and message bodes well for digital/streaming audiences.'
+  }
 },
 combined: {
   n:78, location:'Combined (Boca Raton + Los Angeles)', avgRating:'7.8', avgHumor:'7.8', recPct:'76%', endPct:'90%', upliftPct:'91%', avgGlad:'9.2', avgSongs:'9.0', avgStory:'8.0',
@@ -384,7 +434,18 @@ combined: {
   summaryP1:'<strong>78 respondents</strong> across Boca Raton (52) and Los Angeles (26) provided strong feedback. Combined averages: <strong>7.8/10 overall</strong>, <strong>7.8/10 humor</strong>, <strong>9.2/10 "glad I saw it."</strong> 76% would recommend. Emotions: <strong>Happy (72%), Amused (69%), Moved (31%)</strong>. Only 5% reported boredom.',
   summaryP2:'Songs averaged <strong>9.0/10</strong> across both audiences. 90% loved or liked the ending. <strong>Dr. Phil (Warburton)</strong> is the #1 character across both screeners, followed by <strong>Humphrey</strong> and <strong>Mick</strong>. Boca was more enthusiastic overall; LA was more critical on pacing but equally moved by the heart and message.',
   strengths:['Dr. Phil / Warburton — #1 character across both screeners','Humphrey — comedy engine, hamster wheel & turkey leg are standouts','Vanessa\'s arc and the money reveal — emotional peak','Songs rated 9.0/10 combined average','91% confirmed uplifting message','Sports casters / announcers consistently praised','Film is easy to follow (78% yes, 21% mostly)','Ending lands — 90% loved or liked it'],
-  improvements:['<strong>Lab / putter scene</strong> — #1 criticism combined (9 mentions)','<strong>Bowling scenes</strong> — 7 mentions, Boca\'s top issue','<strong>Crystal / Lily / girlfriend subplot</strong> — 7 mentions across both','<strong>Skydiver / parachute gag</strong> — 7 mentions, consistently polarizing','<strong>Pacing in middle act</strong> — both audiences flagged this','<strong>Lightning / cloud VFX</strong> — needs visual improvement','<strong>Joke timing / editing</strong> — LA flagged this especially','<strong>Fade-to-black transitions</strong> — too many, breaks flow']
+  improvements:['<strong>Lab / putter scene</strong> — #1 criticism combined (9 mentions)','<strong>Bowling scenes</strong> — 7 mentions, Boca\'s top issue','<strong>Crystal / Lily / girlfriend subplot</strong> — 7 mentions across both','<strong>Skydiver / parachute gag</strong> — 7 mentions, consistently polarizing','<strong>Pacing in middle act</strong> — both audiences flagged this','<strong>Lightning / cloud VFX</strong> — needs visual improvement','<strong>Joke timing / editing</strong> — LA flagged this especially','<strong>Fade-to-black transitions</strong> — too many, breaks flow'],
+  analysis:{
+    meanRating:'7.8', medianRating:'8.0', recScore:'4.2', recScale:'1–5',
+    topEmo1:'Happy (56)', topEmo2:'Amused (54)', emo3:'Moved / Emotional (24)', emo4:'Excited (21)',
+    lowEmo:'Bored (4), Confused (3), Sad (1)',
+    driftPct:'54%', driftNote:'54% of combined respondents indicated some attention drift (though the majority qualified it as "not bad"). This is a normal signal at the rough-cut stage and points to specific sequences that can be tightened rather than structural issues.',
+    comedyNote:'The overwhelming dominance of Amused (54) and Happy (56) confirms the comedy and emotional core are working. The 35% "jokes fell flat" rate is addressable through targeted editing — the material itself is strong.',
+    audienceMain:'Broad all-ages appeal confirmed across both markets. "Everyone, more for kids" (34) and "Everyone, more for adults" (33) are virtually tied, indicating true four-quadrant potential.',
+    audienceMarketing:'This even split is ideal for theatrical positioning: family-friendly enough for matinee audiences while edgy and funny enough for adult evening showings. Comparable to the <em>Dodgeball</em> / <em>Happy Gilmore</em> audience profile.',
+    ageCore:'25–34 and 35–44 account for 55% of all respondents (43 of 78) — the core theatrical and streaming demographic that drives opening weekend and word-of-mouth.',
+    ageSpread:'Full spectrum from Under 18 (7) to 55+ (10) with no demographic gap, validating genuine cross-generational appeal across two very different markets.'
+  }
 }
 };
 
@@ -447,6 +508,51 @@ function switchView(key){
 
   // Ending insight
   document.getElementById('endingInsight').innerHTML=d.endingInsight;
+
+  // Industry Analysis
+  const a=d.analysis;
+  document.getElementById('analysisContent').innerHTML=`
+    <div class="analysis-grid">
+      <div class="analysis-card blue">
+        <h4><span class="icon">📊</span> A-Score Trajectory</h4>
+        <div class="stat-row">
+          <div class="stat-pill"><div class="stat-val">${a.meanRating}</div><div class="stat-label">Mean Rating</div></div>
+          <div class="stat-pill"><div class="stat-val">${a.medianRating}</div><div class="stat-label">Median Rating</div></div>
+          <div class="stat-pill"><div class="stat-val">${a.recScore}</div><div class="stat-label">Recommend (${a.recScale})</div></div>
+        </div>
+        <p>A mean rating of <strong>${a.meanRating}/10</strong> with a median of <strong>${a.medianRating}</strong> positions this film well for strong audience scores and potential long-tail theatrical success. The recommendation score of <strong>${a.recScore}</strong> confirms that personal enjoyment is strong enough to motivate viewers to become active advocates.</p>
+      </div>
+      <div class="analysis-card gold">
+        <h4><span class="icon">🎭</span> Emotional & Creative Profile</h4>
+        <div class="stat-row">
+          <div class="stat-pill"><div class="stat-val">${a.topEmo1.split('(')[0].trim()}</div><div class="stat-label">${a.topEmo1.match(/\((.+)\)/)[1]}</div></div>
+          <div class="stat-pill"><div class="stat-val">${a.topEmo2.split('(')[0].trim()}</div><div class="stat-label">${a.topEmo2.match(/\((.+)\)/)[1]}</div></div>
+        </div>
+        <p>The emotional profile is strongly skewed toward positive and uplifting feelings. <strong>${a.topEmo1}</strong> and <strong>${a.topEmo2}</strong> confirm success as an entertaining and joyful experience. Deeper engagement is confirmed by <strong>${a.emo3}</strong> and <strong>${a.emo4}</strong>. Minimal fatigue: ${a.lowEmo}.</p>
+      </div>
+    </div>
+    <div class="analysis-grid">
+      <div class="analysis-card green">
+        <h4><span class="icon">⏱️</span> Pacing & Comedy</h4>
+        <div class="stat-row">
+          <div class="stat-pill"><div class="stat-val">${a.driftPct}</div><div class="stat-label">Attention Drift</div></div>
+        </div>
+        <p>${a.driftNote}</p>
+        <p>${a.comedyNote}</p>
+      </div>
+      <div class="analysis-card purple">
+        <h4><span class="icon">🎯</span> Target Audience & Marketing</h4>
+        <p>${a.audienceMain}</p>
+        <p>${a.audienceMarketing}</p>
+      </div>
+    </div>
+    <div class="analysis-full">
+      <div class="analysis-card blue" style="margin-bottom:0">
+        <h4><span class="icon">👥</span> Demographic Validation</h4>
+        <p><strong>Core Cohort:</strong> ${a.ageCore}</p>
+        <p><strong>Full Spectrum:</strong> ${a.ageSpread}</p>
+      </div>
+    </div>`;
 
   // Executive summary
   document.getElementById('execSummary').innerHTML=`
