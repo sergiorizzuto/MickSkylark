@@ -6,8 +6,8 @@
     <title>Mick Skylark: Mini Golf Prodigy - Official Website</title>
 
     <!-- SEO -->
-    <meta name="description" content="Official site for Mick Skylark: Mini Golf Prodigy — RSVP for the screener, play the mini golf game, explore cast, locations, and updates." />
-    <meta name="keywords" content="Mick Skylark, Mini Golf Prodigy, comedy film, family friendly, screener RSVP, mini golf game" />
+    <meta name="description" content="Official site for Mick Skylark: Mini Golf Prodigy — meet the cast, play the mini golf game, and follow the film." />
+    <meta name="keywords" content="Mick Skylark, Mini Golf Prodigy, comedy film, family friendly, mini golf game" />
     <meta name="robots" content="index,follow" />
     <link rel="canonical" href="https://mickskylark.com/" />
     <meta name="theme-color" content="#1E3A8A" />
@@ -17,7 +17,7 @@
 
     <!-- Open Graph -->
     <meta property="og:title" content="Mick Skylark: Mini Golf Prodigy - Official Website" />
-    <meta property="og:description" content="RSVP for the screener, get updates, and play Glory On The Greens." />
+    <meta property="og:description" content="Meet the cast, play Glory On The Greens, and follow the film." />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://mickskylark.com/" />
     <meta property="og:image" content="https://mickskylark.com/og-image.jpg" />
@@ -25,7 +25,7 @@
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Mick Skylark: Mini Golf Prodigy - Official Website" />
-    <meta name="twitter:description" content="RSVP for the screener, get updates, and play Glory On The Greens." />
+    <meta name="twitter:description" content="Meet the cast, play Glory On The Greens, and follow the film." />
     <meta name="twitter:image" content="https://mickskylark.com/og-image.jpg" />
 
     <!-- Structured Data -->
@@ -66,9 +66,7 @@
       })();
     </script>
 
-    <!-- Meta Pixel -->
-<!-- Meta Pixel Code -->
-<!-- Meta Pixel Code -->
+    <!-- Meta Pixel Code -->
 <script>
 !function(f,b,e,v,n,t,s)
 {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -85,49 +83,8 @@ fbq('track', 'PageView');
 src="https://www.facebook.com/tr?id=2748835775453218&ev=PageView&noscript=1"
 /></noscript>
 <!-- End Meta Pixel Code -->
-<!-- End Meta Pixel Code -->
 
     <style>
-        /* Sticky RSVP Button */
-        .sticky-rsvp {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            z-index: 999;
-            background: linear-gradient(135deg, #1E3A8A 0%, #1E40AF 100%);
-            color: #fff;
-            padding: 16px 24px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 900;
-            font-size: 1.1rem;
-            box-shadow: 0 8px 25px rgba(30, 58, 138, 0.4);
-            transition: all 0.3s ease;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 2px;
-            animation: pulse 2s ease-in-out infinite;
-            cursor: pointer;
-        }
-        .sticky-rsvp:hover {
-            transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 12px 35px rgba(30, 58, 138, 0.5);
-            background: linear-gradient(135deg, #1E40AF 0%, #2563EB 100%);
-        }
-        .rsvp-text { font-size: 1.1rem; line-height: 1; }
-        .rsvp-subtext { font-size: 0.75rem; font-weight: 700; opacity: 0.9; color: #FCD34D; }
-        @keyframes pulse {
-            0%, 100% { box-shadow: 0 8px 25px rgba(30, 58, 138, 0.4); }
-            50% { box-shadow: 0 8px 35px rgba(30, 58, 138, 0.6), 0 0 0 8px rgba(30, 58, 138, 0.1); }
-        }
-        @media (max-width: 768px) {
-            .sticky-rsvp { bottom: 15px; right: 15px; padding: 14px 20px; font-size: 1rem; }
-            .rsvp-text { font-size: 1rem; }
-            .rsvp-subtext { font-size: 0.7rem; }
-        }
-        .sticky-rsvp.hidden { opacity: 0; pointer-events: none; }
-
         /* Root */
         :root {
             --primary: #1E3A8A;
@@ -204,15 +161,18 @@ src="https://www.facebook.com/tr?id=2748835775453218&ev=PageView&noscript=1"
             60% { transform: scale(1.05) translateY(0); }
             100% { opacity: 1; transform: scale(1) translateY(0); }
         }
-        .scroll-cta {
-            font-size: 1.2rem; font-weight: 700; color: var(--primary);
-            margin: 8px 0 30px 0; animation: bounce 2s infinite;
-            text-transform: uppercase; letter-spacing: 1px;
+
+        /* Festival laurel — sits directly under the hero logo */
+        .hero .hero-laurel {
+            max-width: 340px;
+            border-radius: 0;
+            margin: 6px auto 34px;
+            animation-delay: 0.35s;
+            /* If this ever sits on a DARK background, remove the slashes and stars below. */
+            /* filter: invert(1); */
         }
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-            40% { transform: translateY(-10px); }
-            60% { transform: translateY(-5px); }
+        @media (max-width: 768px) {
+            .hero .hero-laurel { max-width: 250px; margin: 4px auto 26px; }
         }
 
         /* Slideshow */
@@ -234,7 +194,6 @@ src="https://www.facebook.com/tr?id=2748835775453218&ev=PageView&noscript=1"
         .slide img { width: 100%; height: 100%; object-fit: cover; display: block; }
         @media (max-width: 768px) {
             .slide { width: 300px; height: 225px; }
-            .scroll-cta { font-size: 1.05rem; }
         }
 
         .section-title {
@@ -310,18 +269,6 @@ src="https://www.facebook.com/tr?id=2748835775453218&ev=PageView&noscript=1"
         }
         .film-poster:hover { transform: translateY(-10px) scale(1.05); box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25); }
         .film-poster img { width: 100%; height: auto; display: block; }
-
-        /* RSVP */
-        .screener-info { text-align: center; margin-bottom: 40px; }
-        .screener-date { font-size: 2rem; font-weight: 700; color: var(--primary); margin-bottom: 15px; }
-        .screener-note { font-size: 1.2rem; color: var(--dark); }
-        .countdown-timer { display: flex; justify-content: center; gap: 20px; margin: 30px 0; flex-wrap: wrap; }
-        .countdown-box {
-            background: white; padding: 20px 25px; border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); min-width: 100px;
-        }
-        .countdown-number { font-size: 2.5rem; font-weight: 700; color: var(--primary); display: block; }
-        .countdown-label { font-size: 0.9rem; color: #666; text-transform: uppercase; letter-spacing: 1px; }
 
         /* Social */
         .social-share { text-align: center; margin-top: 30px; }
@@ -431,18 +378,6 @@ src="https://www.facebook.com/tr?id=2748835775453218&ev=PageView&noscript=1"
             .scorecard th, .scorecard td { padding: 6px 4px; }
         }
 
-        /* Locations */
-        .map-grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px; margin-bottom: 30px;
-        }
-        .location-card {
-            background: white; padding: 25px; border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-        }
-        .location-card h3 { color: var(--primary); margin-bottom: 15px; font-size: 1.3rem; }
-        .location-card p { margin: 8px 0; color: var(--dark); }
-
         /* Cast */
         .cast-grid {
             display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -489,7 +424,7 @@ src="https://www.facebook.com/tr?id=2748835775453218&ev=PageView&noscript=1"
         .footer-contact { margin-top: 18px; font-size: 1.05rem; font-weight: 600; }
         .footer-contact a { color: var(--secondary); }
 
-        /* FIX: Back-to-top on LEFT side to avoid overlap with sticky RSVP (right side) */
+        /* Back-to-top */
         .back-to-top {
             position: fixed;
             left: 16px;
@@ -516,12 +451,6 @@ src="https://www.facebook.com/tr?id=2748835775453218&ev=PageView&noscript=1"
 </head>
 
 <body>
-    <!-- Sticky RSVP Button -->
-    <a href="#rsvp" class="sticky-rsvp" aria-label="RSVP for screening">
-        <span class="rsvp-text">🎟️ RSVP Now</span>
-        <span class="rsvp-subtext">Seats Filling Fast!</span>
-    </a>
-
     <!-- Navigation -->
     <nav class="navbar" aria-label="Primary navigation">
         <div class="nav-container">
@@ -530,7 +459,6 @@ src="https://www.facebook.com/tr?id=2748835775453218&ev=PageView&noscript=1"
             <a href="index.html#cast" class="nav-link" data-section="cast">Cast</a>
             <a href="merch.html" class="nav-link nav-link-external">Merch</a>
             <a href="contact.html" class="nav-link nav-link-external">Contact</a>
-            <a href="index.html#locations" class="nav-link" data-section="locations">Locations</a>
             <a href="rapid-fire.html" class="nav-link nav-link-external">Rapid Fire</a>
             <a href="mad-lib.html" class="nav-link nav-link-external">Mad Libs</a>
             <a href="terms.html" class="nav-link nav-link-external">Terms &amp; Conditions</a>
@@ -538,14 +466,14 @@ src="https://www.facebook.com/tr?id=2748835775453218&ev=PageView&noscript=1"
         </div>
     </nav>
 
-    <!-- Back to top (LEFT side — avoids sticky RSVP on right) -->
+    <!-- Back to top -->
     <button class="back-to-top" id="backToTop" aria-label="Scroll to top" title="Back to top">↑</button>
 
     <!-- Hero Section -->
     <section id="home" class="section-yellow hero">
         <div class="container">
             <img src="logo-no-bg.png" alt="Mick Skylark: Mini Golf Prodigy" loading="eager" />
-            <div class="scroll-cta">↓ Scroll Down To RSVP ↓</div>
+            <img class="hero-laurel" src="HFF35_Laurel_OfficialSelection_Black.png" alt="Heartland Film Festival — 2026 Official Selection" loading="eager" />
 
             <!-- Horizontal Slideshow -->
             <div class="slideshow-wrapper" id="bts-slideshow" aria-label="Behind the scenes photos">
@@ -606,99 +534,6 @@ src="https://www.facebook.com/tr?id=2748835775453218&ev=PageView&noscript=1"
                     <div class="film-poster"><img src="comparable-films/young-frankenstein.webp" alt="Young Frankenstein" loading="lazy"></div>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <!-- RSVP Section -->
-    <section id="rsvp" class="section-yellow">
-        <div class="container">
-            <h2 class="section-title">Test Screener RSVP</h2>
-
-            <!-- Countdown Timer -->
-            <div class="countdown-timer" aria-label="Countdown to screening">
-                <div class="countdown-box">
-                    <span class="countdown-number" id="days">--</span>
-                    <span class="countdown-label">Days</span>
-                </div>
-                <div class="countdown-box">
-                    <span class="countdown-number" id="hours">--</span>
-                    <span class="countdown-label">Hours</span>
-                </div>
-                <div class="countdown-box">
-                    <span class="countdown-number" id="minutes">--</span>
-                    <span class="countdown-label">Minutes</span>
-                </div>
-                <div class="countdown-box">
-                    <span class="countdown-number" id="seconds">--</span>
-                    <span class="countdown-label">Seconds</span>
-                </div>
-            </div>
-
-            <div class="screener-info">
-                <div class="screener-date">Sunday, February 22 @ 3:00 PM</div>
-                <p class="screener-note">Reserve now!</p>
-                <!-- FIX: Was a <p> nested inside another <p> — now separate elements -->
-                <div style="display:inline-block; margin-top: 10px; padding: 10px 16px; border-radius: 999px;
-                            background: #1E3A8A; color: #fff; font-weight: 800; letter-spacing: 0.4px;
-                            text-transform: uppercase; box-shadow: 0 10px 25px rgba(30, 58, 138, 0.25);">
-                    Seats are First Come, First Served!
-                </div>
-                <p style="text-align:center; font-size:0.9rem; margin-top:15px; color:rgba(31,41,55,0.8);">
-                    By RSVPing, you agree to our <a href="terms.html" style="color:#1E3A8A; font-weight:700; text-decoration:underline;">Terms &amp; Conditions</a> and Privacy Policy.
-                </p>
-            </div>
-            
-            <!-- Attendance Bars -->
-            <div style="max-width:500px; margin:20px auto 30px; text-align:center;">
-                <!-- Boca Raton -->
-                <div style="margin-bottom:18px;">
-                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
-                        <span style="font-size:0.95rem; color:var(--primary);">
-                            <strong>🌴 Boca Raton</strong>
-                            <span style="font-weight:500; font-size:0.85rem; opacity:0.65;"> (<b>Screen 1:</b> FULL) <b>Screen 2:</b> FULL</span>
-                        </span>
-                        <span style="font-weight:900; font-size:1.1rem; color:var(--primary);" id="bocaPct">100%</span>
-                    </div>
-                    <div style="width:100%; height:22px; background:rgba(30,58,138,0.12); border-radius:999px; overflow:hidden; box-shadow:inset 0 2px 4px rgba(0,0,0,0.1);">
-                        <div id="bocaBar" style="width:100%; height:100%; border-radius:999px; background:linear-gradient(90deg, #1E3A8A, #2563EB, #3B82F6); transition:width 0.6s ease; box-shadow:0 0 12px rgba(37,99,235,0.4);"></div>
-                    </div>
-                </div>
-                <!-- Los Angeles -->
-                <div style="margin-bottom:10px;">
-                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
-                        <span style="font-size:0.95rem; color:var(--primary);">
-                            <strong>🎬 Los Angeles</strong>
-                            <span style="font-weight:500; font-size:0.85rem; opacity:0.65;"> (165 Seats)</span>
-                        </span>
-                        <span style="font-weight:900; font-size:1.1rem; color:var(--primary);" id="laPct">95%</span>
-                    </div>
-                    <div style="width:100%; height:22px; background:rgba(30,58,138,0.12); border-radius:999px; overflow:hidden; box-shadow:inset 0 2px 4px rgba(0,0,0,0.1);">
-                        <div id="laBar" style="width:95%; height:100%; border-radius:999px; background:linear-gradient(90deg, #1E3A8A, #2563EB, #3B82F6); transition:width 0.6s ease; box-shadow:0 0 12px rgba(37,99,235,0.4);"></div>
-                    </div>
-                </div>
-
-                <div style="display:flex; justify-content:space-between; align-items:center; margin-top:6px;">
-                    <p style="font-size:0.8rem; color:rgba(31,41,55,0.6); font-weight:600; margin:0;">Limited capacity — reserve your spot!</p>
-                    <p style="font-size:0.75rem; color:rgba(31,41,55,0.45); font-weight:600; margin:0; white-space:nowrap;">Updated: Feb 20 @ 10:33pm EST</p>
-                </div>
-            </div>
-
-            <div style="max-width: 700px; margin: 0 auto;">
-                <iframe
-                    data-tally-src="https://tally.so/embed/81xXe5?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"
-                    loading="lazy" width="100%" height="981" frameborder="0"
-                    marginheight="0" marginwidth="0"
-                    title="RSVP for 'Mick Skylark: Mini Golf Prodigy' Screener"></iframe>
-            </div>
-        </div>
-    </section>
-
-    <!-- Terms Notice Section -->
-    <section style="background: linear-gradient(135deg, #FDE68A 0%, #FCD34D 100%); padding: 30px 20px; text-align: center;">
-        <div style="max-width: 800px; margin: 0 auto;">
-            <p style="font-size: 0.95rem; color: rgba(31,41,55,0.85); line-height: 1.6;">
-                By RSVPing or attending the screening, you agree to our <a href="terms.html" style="color:#1E3A8A; font-weight:700; text-decoration:underline;">Terms &amp; Conditions</a>, including our <strong style="color:#1E3A8A;">NO RECORDING policy</strong> and our Privacy Policy.
-            </p>
         </div>
     </section>
 
@@ -885,7 +720,6 @@ src="https://www.facebook.com/tr?id=2748835775453218&ev=PageView&noscript=1"
     </div>
 
     
-    <!-- FIX: Added id="instagram" so nav link data-section="instagram" connects properly -->
     <section id="instagram" style="background: linear-gradient(135deg, #E1306C 0%, #C13584 50%, #833AB4 100%); padding: 60px 20px; text-align: center;">
         <div style="max-width: 800px; margin: 0 auto;">
             <h2 style="color: #fff; font-size: 2.5rem; font-weight: 900; margin-bottom: 15px; text-shadow: 0 4px 10px rgba(0,0,0,0.3);">
@@ -936,30 +770,6 @@ src="https://www.facebook.com/tr?id=2748835775453218&ev=PageView&noscript=1"
         </div>
     </section>
 
-    <!-- Screening Locations -->
-    <section id="locations" class="section-yellow">
-        <div class="container">
-            <h2 class="section-title">Screening Locations</h2>
-            <div class="map-grid">
-                <div class="location-card">
-                    <h3>🌴 Boca Raton, Florida</h3>
-                    <!-- FIX: Was "Cinemark Palace 20 & XD &amp; XD" (double XD) -->
-                    <p><strong>Venue:</strong> Cinemark Palace 20 &amp; XD</p>
-                    <p><strong>Address:</strong><br>3200 Airport Rd<br>Boca Raton, FL 33431</p>
-                    <p><strong>Date:</strong> Sunday, February 22, 2026</p>
-                    <p><strong>Time:</strong> 3:00 PM</p>
-                </div>
-                <div class="location-card">
-                    <h3>🎬 Los Angeles, California</h3>
-                    <p><strong>Venue:</strong> Cinemark Playa Vista &amp; XD</p>
-                    <p><strong>Address:</strong><br>12746 W Jefferson Blvd, Suite 3190<br>Playa Vista, CA 90094</p>
-                    <p><strong>Date:</strong> Sunday, February 22, 2026</p>
-                    <p><strong>Time:</strong> 3:00 PM</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- Footer -->
     <footer id="footer">
         <div class="footer-updates">
@@ -994,7 +804,7 @@ src="https://www.facebook.com/tr?id=2748835775453218&ev=PageView&noscript=1"
             s.src="https://w.behold.so/widget.js";d.head.append(s);
         })();
 
-        // Tally embed script
+        // Tally embed script (still used by the footer email-updates form)
         var d=document,w="https://tally.so/widgets/embed.js",v=function(){"undefined"!=typeof Tally?Tally.loadEmbeds():d.querySelectorAll("iframe[data-tally-src]:not([src])").forEach((function(e){e.src=e.dataset.tallySrc}))};if("undefined"!=typeof Tally)v();else if(d.querySelector('script[src="'+w+'"]')==null){var s=d.createElement("script");s.src=w,s.onload=v,s.onerror=v,d.body.appendChild(s);}
 
         // Smooth scroll for nav (only for in-page anchors)
@@ -1029,10 +839,7 @@ src="https://www.facebook.com/tr?id=2748835775453218&ev=PageView&noscript=1"
             updateBackToTopVisibility();
         }
 
-        // FIX: Scroll-spy sectionIds now only contains sections that have matching nav links
-        // with data-section attributes. Removed 'comparable-films' and 'credits' which had
-        // no corresponding nav link data-section.
-        const sectionIds = ['home','rsvp','cast','game','instagram','locations'];
+        const sectionIds = ['home','cast','game','instagram'];
         const navLinksBySection = new Map();
         document.querySelectorAll('.nav-link[data-section]').forEach(a => {
             navLinksBySection.set(a.getAttribute('data-section'), a);
@@ -1080,29 +887,6 @@ src="https://www.facebook.com/tr?id=2748835775453218&ev=PageView&noscript=1"
 
         sections.forEach(sec => observer.observe(sec));
         setActiveNav(sections[0]?.id || 'home');
-
-        // Countdown Timer to February 22, 2026 at 3:00 PM
-        function updateCountdown() {
-            const screeningDate = new Date('February 22, 2026 15:00:00').getTime();
-            const now = new Date().getTime();
-            const distance = screeningDate - now;
-            const dEl = document.getElementById('days');
-            const hEl = document.getElementById('hours');
-            const mEl = document.getElementById('minutes');
-            const sEl = document.getElementById('seconds');
-            if (!dEl || !hEl || !mEl || !sEl) return;
-            if (distance < 0) {
-                dEl.textContent = '0'; hEl.textContent = '0';
-                mEl.textContent = '0'; sEl.textContent = '0';
-                return;
-            }
-            dEl.textContent = Math.floor(distance / (1000 * 60 * 60 * 24));
-            hEl.textContent = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            mEl.textContent = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            sEl.textContent = Math.floor((distance % (1000 * 60)) / 1000);
-        }
-        setInterval(updateCountdown, 1000);
-        updateCountdown();
 
         // ===== 18-Hole Mini Golf Game =====
         const canvas = document.getElementById('golfCanvas');
@@ -1582,20 +1366,6 @@ src="https://www.facebook.com/tr?id=2748835775453218&ev=PageView&noscript=1"
             for (let i = slides.length-1; i > 0; i--) { const j = Math.floor(Math.random()*(i+1)); [slides[i], slides[j]] = [slides[j], slides[i]]; }
             container.innerHTML = '';
             slides.forEach(slide => container.appendChild(slide));
-        })();
-
-        // Sticky RSVP Button - Hide when in RSVP section
-        (function() {
-            const stickyRsvp = document.querySelector('.sticky-rsvp');
-            const rsvpSection = document.getElementById('rsvp');
-            if (!stickyRsvp || !rsvpSection) return;
-            stickyRsvp.addEventListener('click', function(e) { e.preventDefault(); rsvpSection.scrollIntoView({ behavior: 'smooth', block: 'start' }); });
-            window.addEventListener('scroll', function() {
-                const rsvpTop = rsvpSection.offsetTop - 100;
-                const rsvpBottom = rsvpTop + rsvpSection.offsetHeight;
-                const scrollPos = window.pageYOffset + window.innerHeight / 2;
-                stickyRsvp.classList.toggle('hidden', scrollPos >= rsvpTop && scrollPos <= rsvpBottom);
-            });
         })();
 
         document.getElementById('expandCastBtn').addEventListener('click', function() {
