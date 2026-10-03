@@ -3,6 +3,22 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+
+    <!-- Always open at the top of the page, even if a shared link ends in #tickets -->
+    <script>
+      (function () {
+        if (!location.hash) return;
+        history.replaceState(null, '', location.pathname + location.search);
+        function toTop() {
+          var root = document.documentElement, prev = root.style.scrollBehavior;
+          root.style.scrollBehavior = 'auto';
+          window.scrollTo(0, 0);
+          root.style.scrollBehavior = prev;
+        }
+        document.addEventListener('DOMContentLoaded', toTop);
+        window.addEventListener('load', toTop);
+      })();
+    </script>
     <title>Mick Skylark at the Heartland Film Festival | Tickets</title>
 
     <!-- SEO -->
@@ -504,10 +520,13 @@
     <nav class="navbar" aria-label="Primary navigation">
         <div class="nav-container">
             <a href="index.html#home" class="nav-link">Home</a>
-            <a href="Heartland.html" class="nav-link active" aria-current="page">Heartland Film Fest</a>
+            <a href="Heartland.html" class="nav-link active" aria-current="page">Heartland</a>
             <a href="about.html" class="nav-link">About</a>
             <a href="index.html#cast" class="nav-link">Cast</a>
+            <a href="merch.html" class="nav-link">Merch</a>
             <a href="contact.html" class="nav-link">Contact</a>
+            <a href="rapid-fire.html" class="nav-link">Rapid Fire</a>
+            <a href="mad-lib.html" class="nav-link">Mad Libs</a>
             <a href="terms.html" class="nav-link">Terms &amp; Conditions</a>
             <a href="pp.html" class="nav-link">Privacy Policy</a>
         </div>
@@ -528,7 +547,7 @@
                         <h2 class="qa-title">Stay for the Q&amp;A</h2>
                         <p>Join the filmmakers after the in-person screenings, with guest appearances from some of the cast.</p>
                     </div>
-                    <a class="qa-btn" href="#tickets">Get Tickets</a>
+                    <a class="qa-btn" href="#tickets" onclick="document.getElementById('tickets').scrollIntoView({ behavior: 'smooth' }); return false;">Get Tickets</a>
                 </div>
             </div>
         </section>
@@ -757,23 +776,71 @@
         // Tally embed (footer email-updates form, same as index.html)
         var d=document,w="https://tally.so/widgets/embed.js",v=function(){"undefined"!=typeof Tally?Tally.loadEmbeds():d.querySelectorAll("iframe[data-tally-src]:not([src])").forEach((function(e){e.src=e.dataset.tallySrc}))};if("undefined"!=typeof Tally)v();else if(d.querySelector('script[src="'+w+'"]')==null){var s=d.createElement("script");s.src=w,s.onload=v,s.onerror=v,d.body.appendChild(s);}
 
-        // Track ticket clicks in GA4 and Meta so you can see which dates drive sales
-        document.querySelectorAll('.ticket-link').forEach(function(link){
-            link.addEventListener('click', function(){
-                var label = link.getAttribute('data-ticket') || 'unknown';
+        // ===== Link click tracking (Google Analytics 4 + Meta Pixel) =====
+        // Every link click on this page sends a GA4 event named "link_click" with:
+        //   link_text    - the words on the link (e.g. "Oct 14", "Patrick Warburton as Dr. Phil")
+        //   link_url     - where it goes
+        //   link_domain  - the site it goes to
+        //   link_section - where on the page it was: nav, hero_qa, tickets, cast, credits, footer
+        //   outbound     - true if it leaves mickskylark.com
+        // Ticket links also send "heartland_ticket_click" (with ticket_option) and Meta's InitiateCheckout.
+        (function () {
+            function cleanText(str) {
+                return (str || '').replace(/\s+/g, ' ').trim().slice(0, 100);
+            }
+            function sectionOf(a) {
+                if (a.closest('nav')) return 'nav';
+                if (a.closest('footer')) return 'footer';
+                if (a.closest('.qa-callout')) return 'hero_qa';
+                if (a.closest('.tickets')) return 'tickets';
+                if (a.closest('.cast-grid')) return 'cast';
+                if (a.closest('.credits')) return 'credits';
+                return 'other';
+            }
+            function trackLink(a) {
                 try {
+                    var url = new URL(a.getAttribute('href'), location.href);
+                    var isMail = url.protocol === 'mailto:' || url.protocol === 'tel:';
+                    var domain = isMail ? url.protocol.replace(':', '') : url.hostname;
+                    var outbound = isMail || url.hostname !== location.hostname;
+                    var ticket = a.getAttribute('data-ticket');
+                    var actor = a.querySelector('.actor-name');
+                    var text = cleanText(ticket || (actor && actor.textContent) || a.innerText || a.textContent || a.getAttribute('aria-label'));
+
                     if (typeof window.gtag === 'function') {
-                        window.gtag('event', 'heartland_ticket_click', {
-                            ticket_option: label,
-                            link_url: link.href
+                        window.gtag('event', 'link_click', {
+                            link_text: text,
+                            link_url: url.href.slice(0, 100),
+                            link_domain: domain,
+                            link_section: sectionOf(a),
+                            outbound: outbound,
+                            transport_type: 'beacon'
                         });
+                        if (ticket) {
+                            window.gtag('event', 'heartland_ticket_click', {
+                                ticket_option: ticket,
+                                link_url: url.href.slice(0, 100),
+                                transport_type: 'beacon'
+                            });
+                        }
                     }
-                    if (typeof window.fbq === 'function') {
-                        window.fbq('track', 'InitiateCheckout', { content_name: 'Heartland ' + label });
+                    if (ticket && typeof window.fbq === 'function') {
+                        window.fbq('track', 'InitiateCheckout', { content_name: 'Heartland ' + ticket });
                     }
-                } catch (e) { /* analytics should never block the click */ }
-            });
-        });
+                } catch (e) { /* analytics should never block a click */ }
+            }
+            // Capture phase so it runs before any link's own onclick
+            document.addEventListener('click', function (e) {
+                var a = e.target.closest && e.target.closest('a[href]');
+                if (a) trackLink(a);
+            }, true);
+            // Middle-click (open in new tab) doesn't fire "click", so catch it here
+            document.addEventListener('auxclick', function (e) {
+                if (e.button !== 1) return;
+                var a = e.target.closest && e.target.closest('a[href]');
+                if (a) trackLink(a);
+            }, true);
+        })();
     </script>
 </body>
 </html>
