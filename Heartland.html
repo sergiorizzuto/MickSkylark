@@ -169,6 +169,63 @@
             .hero-laurel { max-width: 240px; margin-bottom: 22px; }
         }
 
+
+        /* ---------- Q&A callout (hero) ---------- */
+        .qa-callout {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            max-width: 720px;
+            margin: 34px auto 0;
+            padding: 22px 26px;
+            background: var(--primary);
+            border-radius: 20px;
+            text-align: left;
+            box-shadow: 0 14px 34px rgba(30, 58, 138, 0.3);
+        }
+        .qa-icon {
+            flex-shrink: 0;
+            width: 58px; height: 58px;
+            border-radius: 50%;
+            background: var(--secondary);
+            display: grid; place-items: center;
+            font-size: 1.7rem;
+        }
+        .qa-title {
+            font-size: 1.45rem;
+            font-weight: 800;
+            line-height: 1.2;
+            color: var(--secondary);
+            margin-bottom: 4px;
+        }
+        .qa-text p {
+            color: rgba(255, 255, 255, 0.92);
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+        .qa-btn {
+            flex-shrink: 0;
+            margin-left: auto;
+            background: var(--secondary);
+            color: var(--primary);
+            font-weight: 700;
+            padding: 12px 22px;
+            border-radius: 999px;
+            text-decoration: none;
+            white-space: nowrap;
+            transition: background 0.2s ease;
+        }
+        .qa-btn:hover { background: #fff; }
+        .qa-btn:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
+        .tickets-section { scroll-margin-top: 72px; }
+        @media (max-width: 768px) {
+            .tickets-section { scroll-margin-top: 130px; }
+        }
+        @media (max-width: 640px) {
+            .qa-callout { flex-direction: column; text-align: center; padding: 24px 20px; gap: 14px; }
+            .qa-btn { margin-left: 0; }
+        }
+
         /* ---------- Tickets ---------- */
         .tickets-section {
             background: var(--primary);
@@ -467,8 +524,15 @@
                 <img class="hero-laurel" src="HFF35_Laurel_OfficialSelection_Black.png" alt="Heartland Film Festival 2026 Official Selection" loading="eager" />
                 <h1 id="hero-title">Screening at the 35th Heartland Film Festival</h1>
                 <p class="hero-sub">In theaters in Indianapolis on October 14, 15, 16 and 18, or stream it at home from anywhere in the U.S.</p>
-                <br><br>
-                <h3 style="color: #fff;">Join the filmmakers for a Q&amp;A after the screenings with guest appearances from some of the cast.</h3>
+
+                <div class="qa-callout">
+                    <span class="qa-icon" aria-hidden="true">🎤</span>
+                    <div class="qa-text">
+                        <h2 class="qa-title">Stay for the Q&amp;A</h2>
+                        <p>Join the filmmakers after the in-person screenings, with guest appearances from some of the cast.</p>
+                    </div>
+                    <a class="qa-btn" href="#tickets">Get Tickets</a>
+                </div>
             </div>
         </section>
 
