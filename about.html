@@ -157,7 +157,7 @@
 
         /* ── Festival laurel ── */
         .about-hero .hero-laurel {
-            max-width: 300px;
+            max-width: 169px;
             border-radius: 0;
             margin: -10px auto 30px;
             animation-delay: 0.35s;
@@ -166,7 +166,7 @@
         }
 
         @media (max-width: 768px) {
-            .about-hero .hero-laurel { max-width: 230px; margin: -6px auto 24px; }
+            .about-hero .hero-laurel { max-width: 129px; margin: -6px auto 24px; }
         }
 
         .about-hero h1 {
@@ -520,6 +520,7 @@
         <div class="nav-container">
             <a href="index.html" class="nav-link">Home</a>
             <a href="about.html" class="nav-link active">About</a>
+            <a href="Heartland.html" class="nav-link">Heartland Film Fest</a>
             <a href="index.html#cast" class="nav-link">Cast</a>
             <a href="index.html#game" class="nav-link">Mini Golf</a>
             <a href="merch.html" class="nav-link">Merch</a>
@@ -533,7 +534,7 @@
     <!-- Hero -->
     <section class="section-yellow about-hero">
         <div class="container">
-            <img src="https://mickskylark.com/logo-no-bg.png" alt="Mick Skylark: Mini Golf Prodigy" loading="eager" />
+            <img src="logo-no-bg.png" alt="Mick Skylark: Mini Golf Prodigy" loading="eager" />
             <img class="hero-laurel" src="HFF35_Laurel_OfficialSelection_Black.png" alt="Heartland Film Festival — 2026 Official Selection" loading="eager" />
             <h1>About the Film</h1>
             <p class="subtitle">A comedy about second chances, unlikely mentors, and the world's most underrated sport.</p>
@@ -694,6 +695,74 @@
             window.addEventListener('scroll', updateBackToTopVisibility, { passive: true });
             updateBackToTopVisibility();
         }
+
+        // ===== Tighten the space between the logo and the Heartland laurel =====
+        // Both PNGs have see-through padding built into the image file, which shows up as
+        // extra empty space. This measures that padding and pulls the laurel up so the
+        // visible gap is a consistent 10px. If the images can't be measured, spacing stays as-is.
+        (function () {
+            var laurel = document.querySelector('.hero-laurel');
+            var logo = laurel && laurel.previousElementSibling;
+            if (!laurel || !logo || logo.tagName !== 'IMG') return;
+            var GAP = 10, logoPad = null, laurelPad = null;
+
+            function emptyRows(img, fromBottom) {
+                var w = img.naturalWidth, h = img.naturalHeight;
+                if (!w || !h) return null;
+                var scale = Math.min(1, 400 / w);
+                var c = document.createElement('canvas');
+                c.width = Math.max(1, Math.round(w * scale));
+                c.height = Math.max(1, Math.round(h * scale));
+                var cx = c.getContext('2d');
+                cx.drawImage(img, 0, 0, c.width, c.height);
+                var px = cx.getImageData(0, 0, c.width, c.height).data;
+                function empty(y) {
+                    for (var x = 0; x < c.width; x++) { if (px[(y * c.width + x) * 4 + 3] > 12) return false; }
+                    return true;
+                }
+                var n = 0;
+                if (fromBottom) { for (var y = c.height - 1; y >= 0 && empty(y); y--) n++; }
+                else { for (var y2 = 0; y2 < c.height && empty(y2); y2++) n++; }
+                return n / c.height;
+            }
+            function apply() {
+                if (logoPad === null || laurelPad === null) return;
+                var hidden = logoPad * logo.offsetHeight + laurelPad * laurel.offsetHeight;
+                logo.style.marginBottom = '0px';
+                laurel.style.marginTop = Math.round(GAP - hidden) + 'px';
+            }
+            function measure() {
+                if (!logo.complete || !laurel.complete) return;
+                try {
+                    logoPad = emptyRows(logo, true);
+                    laurelPad = emptyRows(laurel, false);
+                    apply();
+                } catch (e) { /* image couldn't be read; keep the normal spacing */ }
+            }
+            [logo, laurel].forEach(function (img) { if (!img.complete) img.addEventListener('load', measure); });
+            measure();
+            window.addEventListener('resize', apply, { passive: true });
+        })();
+
+        // ===== Keep the top of the page clear of the fixed menu bar =====
+        // On phones the menu wraps onto extra rows and was covering the top of the logo.
+        // This measures the menu and adds just enough room below it (and makes in-page
+        // jumps, like "Get Tickets", stop below the menu instead of underneath it).
+        (function () {
+            var nav = document.querySelector('.navbar');
+            if (!nav) return;
+            function fit() {
+                document.body.style.paddingTop = '';
+                var reserved = parseFloat(getComputedStyle(document.body).paddingTop) || 0;
+                var needed = Math.ceil(nav.getBoundingClientRect().height);
+                if (needed > reserved) document.body.style.paddingTop = needed + 'px';
+                document.documentElement.style.scrollPaddingTop = needed + 'px';
+            }
+            fit();
+            window.addEventListener('resize', fit, { passive: true });
+            window.addEventListener('load', fit);
+            if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
+        })();
     </script>
 </body>
 </html>
