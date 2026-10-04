@@ -249,20 +249,18 @@
             bottom: calc(16px + env(safe-area-inset-bottom, 0px));
             transform: translateY(0);
             z-index: 1500;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
+            display: inline-block;
             background: var(--primary);
             color: #fff;
             font-weight: 700;
-            font-size: 1.05rem;
+            font-size: 0.95rem;
             line-height: 1;
-            padding: 15px 30px;
-            border: 3px solid var(--secondary);
+            padding: 11px 20px;
+            border: 2px solid var(--secondary);
             border-radius: 999px;
             text-decoration: none;
             white-space: nowrap;
-            box-shadow: 0 10px 28px rgba(15, 30, 80, 0.35);
+            box-shadow: 0 6px 18px rgba(15, 30, 80, 0.3);
             transition: transform 0.25s ease, opacity 0.25s ease, background 0.2s ease, visibility 0s linear 0s;
         }
         .sticky-cta:hover { background: var(--accent-blue); }
@@ -277,9 +275,8 @@
             .sticky-cta {
                 right: calc(12px + env(safe-area-inset-right, 0px));
                 bottom: calc(12px + env(safe-area-inset-bottom, 0px));
-                font-size: 0.95rem;
-                padding: 12px 20px;
-                gap: 8px;
+                font-size: 0.88rem;
+                padding: 9px 16px;
             }
         }
         @media (prefers-reduced-motion: reduce) {
@@ -795,7 +792,7 @@
     </main>
 
     <!-- Sticky Get Tickets button (hides itself while the tickets or footer are on screen) -->
-    <a class="sticky-cta" href="#tickets" data-link-text="Get Tickets"><span aria-hidden="true">🎟️</span> Get Tickets</a>
+    <a class="sticky-cta" href="#tickets" data-link-text="Get Tickets">Get Tickets</a>
 
     <!-- Footer -->
     <footer id="footer">
