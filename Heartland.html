@@ -434,8 +434,6 @@
         }
 
         /* ---------- Behind the scenes + If You Liked ---------- */
-        .gallery-section { padding: 72px 0 80px; }
-        .gallery-section.comps { background: linear-gradient(135deg, #87CEEB 0%, #5DADE2 100%); }
         .gallery-head { text-align: center; padding: 0 20px; margin-bottom: 22px; }
         .gallery-head h2 {
             font-size: clamp(2rem, 4.5vw, 2.8rem);
@@ -459,6 +457,9 @@
         .scroll-row::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 10px; }
         .scroll-track { display: inline-flex; gap: 20px; padding: 0 20px; text-align: left; }
         .hero .bts-row { margin: 26px 0 0; }
+        .hero .comps-block { margin-top: 34px; }
+        .hero .comps-block .gallery-head { margin-bottom: 4px; }
+        .hero .comps-block .gallery-head h2 { font-size: clamp(1.6rem, 3.6vw, 2.2rem); }
         .slide {
             flex-shrink: 0; width: 400px; height: 300px;
             border-radius: 15px; overflow: hidden;
@@ -476,7 +477,6 @@
         .film-poster:hover { transform: translateY(-8px) scale(1.04); box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25); }
         .film-poster img { width: 100%; height: auto; display: block; }
         @media (max-width: 768px) {
-            .gallery-section { padding: 56px 0 64px; }
             .slide { width: 300px; height: 225px; }
             .film-poster { width: 190px; }
         }
@@ -650,6 +650,22 @@
                     </div>
                 </div>
 
+        <!-- If You Liked... -->
+        <div class="comps-block">
+            <div class="gallery-head">
+                <h2 id="comps-title">If You Liked...</h2>
+                <p>Fans of these comedy classics will love Mick Skylark!</p>
+            </div>
+            <div class="scroll-row" id="films-slideshow" tabindex="0" aria-label="Comparable films">
+                <div class="scroll-track">
+                    <div class="film-poster"><img src="comparable-films/dodgeball.webp" alt="Dodgeball" loading="lazy" draggable="false"></div>
+                    <div class="film-poster"><img src="comparable-films/happy-gilmore.webp" alt="Happy Gilmore" loading="lazy" draggable="false"></div>
+                    <div class="film-poster"><img src="comparable-films/kingpin.webp" alt="Kingpin" loading="lazy" draggable="false"></div>
+                    <div class="film-poster"><img src="comparable-films/young-frankenstein.webp" alt="Young Frankenstein" loading="lazy" draggable="false"></div>
+                </div>
+            </div>
+        </div>
+
         <div class="qa-callout">
                     <span class="qa-icon" aria-hidden="true">🎤</span>
                     <div class="qa-text">
@@ -751,22 +767,6 @@
                         <span class="ticket-stub" aria-hidden="true"><span>Admit One</span></span>
                     </span>
                 </a>
-            </div>
-        </section>
-
-        <!-- If You Liked... -->
-        <section class="gallery-section comps" aria-labelledby="comps-title">
-            <div class="gallery-head">
-                <h2 id="comps-title">If You Liked...</h2>
-                <p>Fans of these comedy classics will love Mick Skylark!</p>
-            </div>
-            <div class="scroll-row" id="films-slideshow" tabindex="0" aria-label="Comparable films">
-                <div class="scroll-track">
-                    <div class="film-poster"><img src="comparable-films/dodgeball.webp" alt="Dodgeball" loading="lazy" draggable="false"></div>
-                    <div class="film-poster"><img src="comparable-films/happy-gilmore.webp" alt="Happy Gilmore" loading="lazy" draggable="false"></div>
-                    <div class="film-poster"><img src="comparable-films/kingpin.webp" alt="Kingpin" loading="lazy" draggable="false"></div>
-                    <div class="film-poster"><img src="comparable-films/young-frankenstein.webp" alt="Young Frankenstein" loading="lazy" draggable="false"></div>
-                </div>
             </div>
         </section>
 
