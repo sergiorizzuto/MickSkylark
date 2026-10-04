@@ -242,6 +242,41 @@
             .qa-btn { margin-left: 0; }
         }
 
+        /* ---------- Sticky "Get Tickets" button ---------- */
+        .sticky-cta {
+            position: fixed;
+            left: 50%;
+            bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+            transform: translate(-50%, 0);
+            z-index: 1500;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--primary);
+            color: #fff;
+            font-weight: 700;
+            font-size: 1.05rem;
+            line-height: 1;
+            padding: 15px 30px;
+            border: 3px solid var(--secondary);
+            border-radius: 999px;
+            text-decoration: none;
+            white-space: nowrap;
+            box-shadow: 0 10px 28px rgba(15, 30, 80, 0.35);
+            transition: transform 0.25s ease, opacity 0.25s ease, background 0.2s ease, visibility 0s linear 0s;
+        }
+        .sticky-cta:hover { background: var(--accent-blue); }
+        .sticky-cta:focus-visible { outline: 3px solid var(--secondary); outline-offset: 4px; }
+        .sticky-cta.is-hidden {
+            opacity: 0;
+            visibility: hidden;
+            transform: translate(-50%, 140%);
+            transition: transform 0.25s ease, opacity 0.25s ease, visibility 0s linear 0.25s;
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .sticky-cta, .sticky-cta.is-hidden { transition: none; }
+        }
+
         /* ---------- Tickets ---------- */
         .tickets-section {
             background: var(--primary);
@@ -750,6 +785,9 @@
         </section>
     </main>
 
+    <!-- Sticky Get Tickets button (hides itself while the tickets or footer are on screen) -->
+    <a class="sticky-cta" href="#tickets" data-link-text="Get Tickets"><span aria-hidden="true">🎟️</span> Get Tickets</a>
+
     <!-- Footer -->
     <footer id="footer">
         <div class="footer-updates">
@@ -781,7 +819,7 @@
         //   link_text    - the words on the link (e.g. "Oct 14", "Patrick Warburton as Dr. Phil")
         //   link_url     - where it goes
         //   link_domain  - the site it goes to
-        //   link_section - where on the page it was: nav, hero_qa, tickets, cast, credits, footer
+        //   link_section - where on the page it was: nav, hero_qa, sticky_button, tickets, cast, credits, footer
         //   outbound     - true if it leaves mickskylark.com
         // Ticket links also send "heartland_ticket_click" (with ticket_option) and Meta's InitiateCheckout.
         (function () {
@@ -789,6 +827,7 @@
                 return (str || '').replace(/\s+/g, ' ').trim().slice(0, 100);
             }
             function sectionOf(a) {
+                if (a.closest('.sticky-cta')) return 'sticky_button';
                 if (a.closest('nav')) return 'nav';
                 if (a.closest('footer')) return 'footer';
                 if (a.closest('.qa-callout')) return 'hero_qa';
@@ -805,7 +844,7 @@
                     var outbound = isMail || url.hostname !== location.hostname;
                     var ticket = a.getAttribute('data-ticket');
                     var actor = a.querySelector('.actor-name');
-                    var text = cleanText(ticket || (actor && actor.textContent) || a.innerText || a.textContent || a.getAttribute('aria-label'));
+                    var text = cleanText(a.getAttribute('data-link-text') || ticket || (actor && actor.textContent) || a.innerText || a.textContent || a.getAttribute('aria-label'));
 
                     if (typeof window.gtag === 'function') {
                         window.gtag('event', 'link_click', {
@@ -840,6 +879,43 @@
                 var a = e.target.closest && e.target.closest('a[href]');
                 if (a) trackLink(a);
             }, true);
+        })();
+
+        // ===== Sticky Get Tickets button =====
+        // Smooth-scrolls to the tickets without adding #tickets to the URL,
+        // and tucks itself away while the ticket section or footer is on screen.
+        (function () {
+            var btn = document.querySelector('.sticky-cta');
+            var tickets = document.getElementById('tickets');
+            if (!btn || !tickets) return;
+
+            btn.addEventListener('click', function (e) {
+                e.preventDefault();
+                tickets.scrollIntoView({ behavior: 'smooth' });
+            });
+
+            if (!('IntersectionObserver' in window)) return;
+            var ticketsInMiddle = false, footerShowing = false;
+            function update() {
+                var hide = ticketsInMiddle || footerShowing;
+                btn.classList.toggle('is-hidden', hide);
+                btn.setAttribute('aria-hidden', hide ? 'true' : 'false');
+                btn.tabIndex = hide ? -1 : 0;
+            }
+            // Hide once the ticket section reaches the middle of the screen
+            // (a heading peeking in at the bottom doesn't count)
+            new IntersectionObserver(function (entries) {
+                ticketsInMiddle = entries[0].isIntersecting;
+                update();
+            }, { rootMargin: '-45% 0px -45% 0px' }).observe(tickets);
+            // Hide over the footer so it never covers the email signup or contact link
+            var footer = document.querySelector('footer');
+            if (footer) {
+                new IntersectionObserver(function (entries) {
+                    footerShowing = entries[0].isIntersecting;
+                    update();
+                }, { threshold: 0.05 }).observe(footer);
+            }
         })();
     </script>
 </body>
