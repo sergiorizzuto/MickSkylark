@@ -175,6 +175,31 @@ src="https://www.facebook.com/tr?id=2748835775453218&ev=PageView&noscript=1"
             .hero .hero-laurel { max-width: 250px; margin: 4px auto 26px; }
         }
 
+        /* Join Us at Heartland — sits directly under the laurel */
+        .heartland-cta {
+            display: flex; align-items: center; gap: 22px;
+            max-width: 720px; margin: 0 auto 34px; padding: 22px 26px;
+            background: var(--primary); border-radius: 20px; text-align: left;
+            box-shadow: 0 14px 34px rgba(30, 58, 138, 0.3);
+        }
+        .heartland-cta-title {
+            font-size: 1.4rem; font-weight: 700; line-height: 1.25;
+            color: var(--secondary); margin-bottom: 6px;
+        }
+        .heartland-cta-text p { color: rgba(255, 255, 255, 0.92); font-size: 1rem; line-height: 1.5; }
+        .heartland-cta-btn {
+            flex-shrink: 0; margin-left: auto;
+            background: var(--secondary); color: var(--primary);
+            font-weight: 700; padding: 12px 24px; border-radius: 999px;
+            text-decoration: none; white-space: nowrap; transition: background 0.2s ease;
+        }
+        .heartland-cta-btn:hover { background: #fff; }
+        .heartland-cta-btn:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
+        @media (max-width: 640px) {
+            .heartland-cta { flex-direction: column; text-align: center; padding: 24px 20px; gap: 14px; }
+            .heartland-cta-btn { margin-left: 0; }
+        }
+
         /* Slideshow */
         .slideshow-wrapper {
             overflow-x: scroll; overflow-y: hidden; white-space: nowrap;
@@ -475,6 +500,16 @@ src="https://www.facebook.com/tr?id=2748835775453218&ev=PageView&noscript=1"
         <div class="container">
             <img src="logo-no-bg.png" alt="Mick Skylark: Mini Golf Prodigy" loading="eager" />
             <img class="hero-laurel" src="HFF35_Laurel_OfficialSelection_Black.png" alt="Heartland Film Festival — 2026 Official Selection" loading="eager" />
+
+            <!-- Join Us at Heartland -->
+            <div class="heartland-cta">
+                <div class="heartland-cta-text">
+                    <h2 class="heartland-cta-title">Join Us at the Heartland Film Festival</h2>
+                    <p>In theaters in Indianapolis on October 14, 15, 16 and 18, or stream it at home anywhere in the U.S.</p>
+                </div>
+                <a class="heartland-cta-btn" href="Heartland.html"
+                   onclick="if (window.gtag) gtag('event', 'link_click', { link_text: 'Get Tickets', link_url: this.href, link_section: 'home_heartland', outbound: false, transport_type: 'beacon' });">Get Tickets</a>
+            </div>
 
             <!-- Horizontal Slideshow -->
             <div class="slideshow-wrapper" id="bts-slideshow" aria-label="Behind the scenes photos">
