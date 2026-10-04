@@ -245,9 +245,9 @@
         /* ---------- Sticky "Get Tickets" button ---------- */
         .sticky-cta {
             position: fixed;
-            left: 50%;
+            right: calc(16px + env(safe-area-inset-right, 0px));
             bottom: calc(16px + env(safe-area-inset-bottom, 0px));
-            transform: translate(-50%, 0);
+            transform: translateY(0);
             z-index: 1500;
             display: inline-flex;
             align-items: center;
@@ -270,8 +270,17 @@
         .sticky-cta.is-hidden {
             opacity: 0;
             visibility: hidden;
-            transform: translate(-50%, 140%);
+            transform: translateY(140%);
             transition: transform 0.25s ease, opacity 0.25s ease, visibility 0s linear 0.25s;
+        }
+        @media (max-width: 768px) {
+            .sticky-cta {
+                right: calc(12px + env(safe-area-inset-right, 0px));
+                bottom: calc(12px + env(safe-area-inset-bottom, 0px));
+                font-size: 0.95rem;
+                padding: 12px 20px;
+                gap: 8px;
+            }
         }
         @media (prefers-reduced-motion: reduce) {
             .sticky-cta, .sticky-cta.is-hidden { transition: none; }
