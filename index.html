@@ -191,9 +191,11 @@ src="https://www.facebook.com/tr?id=2748835775453218&ev=PageView&noscript=1"
             flex-shrink: 0; margin-left: auto;
             background: var(--secondary); color: var(--primary);
             font-weight: 700; padding: 12px 24px; border-radius: 999px;
-            text-decoration: none; white-space: nowrap; transition: background 0.2s ease;
+            text-decoration: none; white-space: nowrap; transition: background 0.2s ease, transform 0.1s ease;
+            -webkit-tap-highlight-color: transparent;
         }
-        .heartland-cta-btn:hover { background: #fff; }
+        @media (hover: hover) { .heartland-cta-btn:hover { background: #fff; } }
+        .heartland-cta-btn:active { background: #fff; transform: scale(0.97); }
         .heartland-cta-btn:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
         @media (max-width: 640px) {
             .heartland-cta { flex-direction: column; text-align: center; padding: 24px 20px; gap: 14px; }
@@ -508,7 +510,7 @@ src="https://www.facebook.com/tr?id=2748835775453218&ev=PageView&noscript=1"
                     <p>In theaters in Indianapolis on October 14, 15, 16 and 18, or stream it at home anywhere in the U.S.</p>
                 </div>
                 <a class="heartland-cta-btn" href="Heartland.html"
-                   onclick="if (window.gtag) gtag('event', 'link_click', { link_text: 'Get Tickets', link_url: this.href, link_section: 'home_heartland', outbound: false, transport_type: 'beacon' });">Get Tickets</a>
+                   onclick="try { sessionStorage.setItem('mk_go_tickets', String(Date.now())); } catch (e) {} if (window.gtag) gtag('event', 'link_click', { link_text: 'Get Tickets', link_url: this.href, link_section: 'home_heartland', outbound: false, transport_type: 'beacon' });">Get Tickets</a>
             </div>
 
             <!-- Horizontal Slideshow -->
@@ -1463,6 +1465,26 @@ src="https://www.facebook.com/tr?id=2748835775453218&ev=PageView&noscript=1"
             [logo, laurel].forEach(function (img) { if (!img.complete) img.addEventListener('load', measure); });
             measure();
             window.addEventListener('resize', apply, { passive: true });
+        })();
+
+        // ===== Keep the top of the page clear of the fixed menu bar =====
+        // On phones the menu wraps onto extra rows and was covering the top of the logo.
+        // This measures the menu and adds just enough room below it (and makes in-page
+        // jumps, like "Get Tickets", stop below the menu instead of underneath it).
+        (function () {
+            var nav = document.querySelector('.navbar');
+            if (!nav) return;
+            function fit() {
+                document.body.style.paddingTop = '';
+                var reserved = parseFloat(getComputedStyle(document.body).paddingTop) || 0;
+                var needed = Math.ceil(nav.getBoundingClientRect().height);
+                if (needed > reserved) document.body.style.paddingTop = needed + 'px';
+                document.documentElement.style.scrollPaddingTop = needed + 'px';
+            }
+            fit();
+            window.addEventListener('resize', fit, { passive: true });
+            window.addEventListener('load', fit);
+            if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
         })();
     </script>
 </body>
