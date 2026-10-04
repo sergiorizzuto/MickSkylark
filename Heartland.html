@@ -433,6 +433,57 @@
             .ticket-main { padding: 22px 22px 20px; }
         }
 
+        /* ---------- Behind the scenes + If You Liked ---------- */
+        .gallery-section { padding: 72px 0 80px; }
+        .gallery-section.comps { background: linear-gradient(135deg, #87CEEB 0%, #5DADE2 100%); }
+        .gallery-head { text-align: center; padding: 0 20px; margin-bottom: 22px; }
+        .gallery-head h2 {
+            font-size: clamp(2rem, 4.5vw, 2.8rem);
+            font-weight: 800;
+            line-height: 1.15;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+        .gallery-head p { font-size: 1.05rem; color: var(--dark); }
+        .scroll-row {
+            overflow-x: auto; overflow-y: hidden; white-space: nowrap;
+            padding: 16px 0 22px; text-align: center;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: thin; scrollbar-color: var(--primary) transparent;
+            cursor: grab;
+        }
+        .scroll-row.dragging { cursor: grabbing; user-select: none; }
+        .scroll-row:focus-visible { outline: 3px solid var(--primary); outline-offset: -3px; }
+        .scroll-row::-webkit-scrollbar { height: 8px; }
+        .scroll-row::-webkit-scrollbar-track { background: rgba(0,0,0,0.1); border-radius: 10px; }
+        .scroll-row::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 10px; }
+        .scroll-track { display: inline-flex; gap: 20px; padding: 0 20px; text-align: left; }
+        .hero .bts-row { margin: 26px 0 0; }
+        .slide {
+            flex-shrink: 0; width: 400px; height: 300px;
+            border-radius: 15px; overflow: hidden;
+            background: rgba(255,255,255,0.35);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+        .slide img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .film-poster {
+            flex-shrink: 0; width: 250px;
+            border-radius: 10px; overflow: hidden;
+            background: rgba(255,255,255,0.35);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .film-poster:hover { transform: translateY(-8px) scale(1.04); box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25); }
+        .film-poster img { width: 100%; height: auto; display: block; }
+        @media (max-width: 768px) {
+            .gallery-section { padding: 56px 0 64px; }
+            .slide { width: 300px; height: 225px; }
+            .film-poster { width: 190px; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .film-poster, .film-poster:hover { transition: none; transform: none; }
+        }
+
         /* ---------- About ---------- */
         .about-section { padding: 80px 20px 88px; background: #fff; }
         .about-inner { max-width: 1000px; margin: 0 auto; }
@@ -582,7 +633,24 @@
                 <h1 id="hero-title">Screening at the 35th Heartland Film Festival</h1>
                 <p class="hero-sub">In theaters in Indianapolis on October 14, 15, 16 and 18, or stream it at home from anywhere in the U.S.</p>
 
-                <div class="qa-callout">
+                <!-- Behind the scenes photos -->
+        <div class="scroll-row bts-row" id="bts-slideshow" tabindex="0" aria-label="Behind the scenes photos">
+                    <div class="scroll-track">
+                        <div class="slide"><img src="bts-photos/bts1.jpg" alt="Behind the scenes photo 1" loading="lazy" draggable="false"></div>
+                        <div class="slide"><img src="bts-photos/bts2.jpg" alt="Behind the scenes photo 2" loading="lazy" draggable="false"></div>
+                        <div class="slide"><img src="bts-photos/bts3.jpg" alt="Behind the scenes photo 3" loading="lazy" draggable="false"></div>
+                        <div class="slide"><img src="bts-photos/bts4.jpg" alt="Behind the scenes photo 4" loading="lazy" draggable="false"></div>
+                        <div class="slide"><img src="bts-photos/bts5.jpg" alt="Behind the scenes photo 5" loading="lazy" draggable="false"></div>
+                        <div class="slide"><img src="bts-photos/bts6.jpg" alt="Behind the scenes photo 6" loading="lazy" draggable="false"></div>
+                        <div class="slide"><img src="bts-photos/bts7.jpg" alt="Behind the scenes photo 7" loading="lazy" draggable="false"></div>
+                        <div class="slide"><img src="bts-photos/bts8.jpg" alt="Behind the scenes photo 8" loading="lazy" draggable="false"></div>
+                        <div class="slide"><img src="bts-photos/bts9.jpg" alt="Behind the scenes photo 9" loading="lazy" draggable="false"></div>
+                        <div class="slide"><img src="bts-photos/bts10.jpg" alt="Behind the scenes photo 10" loading="lazy" draggable="false"></div>
+                        <div class="slide"><img src="bts-photos/bts11.jpg" alt="Behind the scenes photo 11" loading="lazy" draggable="false"></div>
+                    </div>
+                </div>
+
+        <div class="qa-callout">
                     <span class="qa-icon" aria-hidden="true">🎤</span>
                     <div class="qa-text">
                         <h2 class="qa-title">Stay for the Q&amp;A</h2>
@@ -683,6 +751,22 @@
                         <span class="ticket-stub" aria-hidden="true"><span>Admit One</span></span>
                     </span>
                 </a>
+            </div>
+        </section>
+
+        <!-- If You Liked... -->
+        <section class="gallery-section comps" aria-labelledby="comps-title">
+            <div class="gallery-head">
+                <h2 id="comps-title">If You Liked...</h2>
+                <p>Fans of these comedy classics will love Mick Skylark!</p>
+            </div>
+            <div class="scroll-row" id="films-slideshow" tabindex="0" aria-label="Comparable films">
+                <div class="scroll-track">
+                    <div class="film-poster"><img src="comparable-films/dodgeball.webp" alt="Dodgeball" loading="lazy" draggable="false"></div>
+                    <div class="film-poster"><img src="comparable-films/happy-gilmore.webp" alt="Happy Gilmore" loading="lazy" draggable="false"></div>
+                    <div class="film-poster"><img src="comparable-films/kingpin.webp" alt="Kingpin" loading="lazy" draggable="false"></div>
+                    <div class="film-poster"><img src="comparable-films/young-frankenstein.webp" alt="Young Frankenstein" loading="lazy" draggable="false"></div>
+                </div>
             </div>
         </section>
 
@@ -921,6 +1005,61 @@
                     footerShowing = entries[0].isIntersecting;
                     update();
                 }, { threshold: 0.05 }).observe(footer);
+            }
+        })();
+
+        // ===== Photo rows =====
+        // Shuffles the behind-the-scenes photos (like the homepage), lets mouse users
+        // click-and-drag the rows, and gently auto-scrolls the film comps.
+        (function () {
+            var btsTrack = document.querySelector('#bts-slideshow .scroll-track');
+            if (btsTrack) {
+                var slides = Array.prototype.slice.call(btsTrack.children);
+                for (var i = slides.length - 1; i > 0; i--) {
+                    var j = Math.floor(Math.random() * (i + 1));
+                    var t = slides[i]; slides[i] = slides[j]; slides[j] = t;
+                }
+                slides.forEach(function (slide) { btsTrack.appendChild(slide); });
+            }
+
+            // Click-and-drag for mouse users (phones already swipe natively)
+            document.querySelectorAll('.scroll-row').forEach(function (row) {
+                var down = false, startX = 0, startLeft = 0;
+                row.addEventListener('pointerdown', function (e) {
+                    if (e.pointerType !== 'mouse') return;
+                    down = true; startX = e.clientX; startLeft = row.scrollLeft;
+                    row.classList.add('dragging');
+                    if (row.setPointerCapture) row.setPointerCapture(e.pointerId);
+                });
+                row.addEventListener('pointermove', function (e) {
+                    if (down) row.scrollLeft = startLeft - (e.clientX - startX);
+                });
+                function stop() { down = false; row.classList.remove('dragging'); }
+                row.addEventListener('pointerup', stop);
+                row.addEventListener('pointercancel', stop);
+            });
+
+            // Auto-scroll the film comps; pauses while someone hovers, touches or tabs into it
+            var films = document.getElementById('films-slideshow');
+            var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            if (films && !reduceMotion) {
+                var paused = false, pos = 0, resumeTimer = null;
+                function pause() { paused = true; clearTimeout(resumeTimer); }
+                function resume() {
+                    clearTimeout(resumeTimer);
+                    resumeTimer = setTimeout(function () { pos = films.scrollLeft; paused = false; }, 1500);
+                }
+                ['pointerenter', 'touchstart', 'focusin'].forEach(function (ev) { films.addEventListener(ev, pause, { passive: true }); });
+                ['pointerleave', 'touchend', 'focusout'].forEach(function (ev) { films.addEventListener(ev, resume, { passive: true }); });
+                (function step() {
+                    var max = films.scrollWidth - films.clientWidth;
+                    if (!paused && max > 4) {
+                        pos += 0.5;
+                        if (pos >= max) pos = 0;
+                        films.scrollLeft = pos;
+                    }
+                    requestAnimationFrame(step);
+                })();
             }
         })();
     </script>
