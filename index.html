@@ -281,6 +281,9 @@ src="https://www.facebook.com/tr?id=2748835775453218&ev=PageView&noscript=1"
         }
         .link-btn:hover { background: var(--primary-dark); transform: translateY(-3px); box-shadow: 0 6px 20px rgba(30, 58, 138, 0.4); }
         .link-btn.secondary { background: var(--secondary); color: var(--dark); }
+        /* IMDb button under the Deadline button in the hero */
+        .hero-imdb { margin-top: 30px; text-align: center; }
+        .hero-imdb .link-btn { display: inline-block; }
         .link-btn.secondary:hover { background: var(--gold); }
 
         /* Comparable Films */
@@ -557,6 +560,13 @@ src="https://www.facebook.com/tr?id=2748835775453218&ev=PageView&noscript=1"
                    target="_blank" rel="noopener noreferrer" class="link-btn secondary"
                    aria-label="Open Deadline Article">
                     📰 Deadline Article
+                </a>
+            </div>
+            <div class="hero-imdb">
+                <a href="https://www.imdb.com/title/tt12115818/?ref_=ttfc_ov_bk"
+                   target="_blank" rel="noopener noreferrer" class="link-btn"
+                   onclick="if (window.gtag) gtag('event', 'link_click', { link_text: 'View on IMDb', link_url: this.href, link_section: 'home_imdb', outbound: true, transport_type: 'beacon' });">
+                    📽️ View on IMDb
                 </a>
             </div>
         </div>
