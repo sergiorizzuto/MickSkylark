@@ -591,6 +591,23 @@
             text-align: center;
             margin-bottom: 26px;
         }
+        .imdb-cta { text-align: center; margin-bottom: 22px; }
+        .imdb-btn {
+            display: inline-block;
+            background: var(--primary);
+            color: #fff;
+            font-weight: 700;
+            font-size: 1rem;
+            line-height: 1;
+            padding: 13px 28px;
+            border-radius: 999px;
+            text-decoration: none;
+            box-shadow: 0 6px 18px rgba(30, 58, 138, 0.25);
+            transition: background 0.2s ease;
+        }
+        @media (hover: hover) { .imdb-btn:hover { background: var(--accent-blue); } }
+        .imdb-btn:active { background: var(--accent-blue); }
+        .imdb-btn:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
         .logline {
             font-size: clamp(1.08rem, 2.2vw, 1.28rem);
             line-height: 1.75;
@@ -890,6 +907,9 @@
         <!-- About -->
         <section class="about-section" id="about-film" aria-labelledby="about-title">
             <div class="about-inner">
+                <div class="imdb-cta">
+                    <a class="imdb-btn" href="https://www.imdb.com/title/tt12115818/fullcredits/?ref_=tt_cst_sm" target="_blank" rel="noopener noreferrer">View on IMDb</a>
+                </div>
                 <h2 id="about-title">About the film</h2>
                 <p class="logline">
                     Mick Skylark (Brandon Engman), coached by his mentor Jonsey (David Koechner), quickly rises to the top as a child mini golf prodigy. When a tragedy strikes and he feels responsible, he quits the sport for good. Also featuring Patrick Warburton, Elizabeth Mitchell, Thomas Lennon, Robert Knepper, and Jorge Garcia.
@@ -1040,6 +1060,7 @@
                 if (a.closest('.qa-callout')) return 'hero_qa';
                 if (a.closest('.locations')) return 'locations';
                 if (a.closest('.tickets')) return 'tickets';
+                if (a.closest('.imdb-cta')) return 'about_imdb';
                 if (a.closest('.cast-grid')) return 'cast';
                 if (a.closest('.credits')) return 'credits';
                 return 'other';
