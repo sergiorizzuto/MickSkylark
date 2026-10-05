@@ -169,7 +169,37 @@
         /* The logo and laurel PNGs have big see-through margins. These lines stop that
            invisible area from sitting on top of buttons and blocking clicks. */
         .hero-logo, .hero-laurel { pointer-events: none; }
-        .hero .bts-row, .hero .comps-block, .qa-callout, .hero-links { position: relative; z-index: 1; }
+        .hero .bts-row, .hero .comps-block, .qa-callout, .hero-links, .hero .about-block { position: relative; z-index: 1; }
+
+        /* About the film, inside the yellow top section */
+        .hero .about-block { margin-top: 34px; }
+        .hero .about-block h2 {
+            font-size: clamp(1.6rem, 3.6vw, 2.2rem);
+            font-weight: 800;
+            line-height: 1.15;
+            color: var(--primary);
+            margin-bottom: 12px;
+        }
+        .hero .about-block .logline { margin-bottom: 20px; color: var(--dark); }
+        .genre-tags {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin: 0 auto;
+        }
+        .genre-tag {
+            background: #fff;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+            border-radius: 999px;
+            padding: 8px 18px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            line-height: 1.2;
+            white-space: nowrap;
+        }
+
 
         /* Deadline + IMDb buttons under the hero subtitle */
         .hero-links {
@@ -652,24 +682,6 @@
             text-align: center;
             text-wrap: pretty;
         }
-        .film-facts {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 12px;
-            margin: 0 auto 64px;
-        }
-        .film-facts div {
-            background: rgba(252, 211, 77, 0.35);
-            border: 1px solid rgba(251, 191, 36, 0.7);
-            border-radius: 999px;
-            padding: 7px 18px;
-            font-size: 0.95rem;
-            display: flex;
-            gap: 6px;
-        }
-        .film-facts dt { font-weight: 600; color: var(--primary); }
-        .film-facts dd { color: var(--dark); }
 
         .about-section h3 {
             font-size: 1.6rem;
@@ -802,6 +814,19 @@
                         <div class="slide"><img src="bts-photos/bts11.jpg" alt="Behind the scenes photo 11" loading="lazy" draggable="false"></div>
                     </div>
                 </div>
+
+        <!-- About the film -->
+        <div class="about-block" id="about-film" aria-labelledby="about-title">
+            <h2 id="about-title">About the film</h2>
+            <p class="logline">
+                Mick Skylark (Brandon Engman), coached by his mentor Jonsey (David Koechner), quickly rises to the top as a child mini golf prodigy. When a tragedy strikes and he feels responsible, he quits the sport for good. Also featuring Patrick Warburton, Elizabeth Mitchell, Thomas Lennon, Robert Knepper, and Jorge Garcia.
+            </p>
+            <div class="genre-tags">
+                <span class="genre-tag">🎭 Comedy</span>
+                <span class="genre-tag">👨‍👩‍👧‍👦 Family Friendly</span>
+                <span class="genre-tag">❤️ Heartfelt</span>
+            </div>
+        </div>
 
         <!-- If You Liked... -->
         <div class="comps-block">
@@ -944,23 +969,12 @@
             </div>
         </section>
 
-        <!-- About -->
-        <section class="about-section" id="about-film" aria-labelledby="about-title">
+        <!-- Cast & credits -->
+        <section class="about-section" id="cast-credits" aria-labelledby="cast">
             <div class="about-inner">
                 <div class="imdb-cta">
                     <a class="imdb-btn" href="https://www.imdb.com/title/tt12115818/fullcredits/?ref_=tt_cst_sm" target="_blank" rel="noopener noreferrer">View on IMDb</a>
                 </div>
-                <h2 id="about-title">About the film</h2>
-                <p class="logline">
-                    Mick Skylark (Brandon Engman), coached by his mentor Jonsey (David Koechner), quickly rises to the top as a child mini golf prodigy. When a tragedy strikes and he feels responsible, he quits the sport for good. Also featuring Patrick Warburton, Elizabeth Mitchell, Thomas Lennon, Robert Knepper, and Jorge Garcia.
-                </p>
-
-                <dl class="film-facts">
-                    <div><dt>Genre</dt><dd>Comedy</dd></div>
-                    <div><dt>Runtime</dt><dd>118 minutes</dd></div>
-                    <div><dt>Premiere</dt><dd>World premiere</dd></div>
-                </dl>
-
                 <h3 id="cast">Cast</h3>
                 <div class="cast-grid">
                     <a class="cast-card" href="https://www.imdb.com/name/nm0911320/" target="_blank" rel="noopener noreferrer">
@@ -1379,14 +1393,14 @@
 
         // ===== Highlight the menu link for the section being viewed =====
         // Top of the page -> Heartland, ticket picker -> Tickets, theater cards -> Locations,
-        // About the film / cast / credits -> Cast. Updates as people scroll.
+        // cast and credits -> Cast. Updates as people scroll.
         (function () {
             var nav = document.querySelector('.navbar');
             var sections = [
                 { id: null,         link: document.querySelector('.nav-link[data-scroll-to="top"]') },
                 { id: 'tickets',    link: document.querySelector('.nav-link[data-scroll-to="tickets"]') },
                 { id: 'locations',  link: document.querySelector('.nav-link[data-scroll-to="locations"]') },
-                { id: 'about-film', link: document.querySelector('.nav-link[data-scroll-to="cast"]') }
+                { id: 'cast-credits', link: document.querySelector('.nav-link[data-scroll-to="cast"]') }
             ].filter(function (s) { return s.link && (s.id === null || document.getElementById(s.id)); });
             if (!sections.length) return;
             var current = null, queued = false;
