@@ -172,15 +172,51 @@
         .hero .bts-row, .hero .comps-block, .qa-callout, .hero-links, .hero .about-block { position: relative; z-index: 1; }
 
         /* About the film, inside the yellow top section */
-        .hero .about-block { margin-top: 34px; }
+        .hero .about-block {
+            max-width: 760px;
+            margin: 34px auto 0;
+            padding: 30px 36px 32px;
+            background: linear-gradient(135deg, #E0F2FE 0%, #BAE6FD 100%);
+            border: 1px solid rgba(30, 58, 138, 0.10);
+            border-radius: 22px;
+            box-shadow: 0 16px 36px rgba(30, 58, 138, 0.14);
+        }
         .hero .about-block h2 {
-            font-size: clamp(1.6rem, 3.6vw, 2.2rem);
+            font-size: clamp(1.6rem, 3.6vw, 2.1rem);
             font-weight: 800;
             line-height: 1.15;
             color: var(--primary);
-            margin-bottom: 12px;
+            margin-bottom: 18px;
         }
-        .hero .about-block .logline { margin-bottom: 20px; color: var(--dark); }
+        .hero .about-block h2::after {
+            content: '';
+            display: block;
+            width: 56px;
+            height: 4px;
+            margin: 10px auto 0;
+            border-radius: 2px;
+            background: var(--secondary);
+        }
+        .hero .about-block .logline {
+            font-size: clamp(1.02rem, 2vw, 1.15rem);
+            line-height: 1.75;
+            max-width: 58ch;
+            margin: 0 auto 22px;
+            color: var(--dark);
+        }
+        .logline-twist { display: block; margin-top: 8px; font-weight: 700; color: var(--primary); }
+        .hero .about-block .logline a {
+            color: var(--primary);
+            font-weight: 600;
+            text-decoration: underline;
+            text-decoration-color: rgba(30, 58, 138, 0.35);
+            text-underline-offset: 3px;
+        }
+        @media (hover: hover) { .hero .about-block .logline a:hover { text-decoration-color: var(--primary); } }
+        .hero .about-block .logline a:focus-visible { outline: 3px solid var(--primary); outline-offset: 2px; border-radius: 3px; }
+        @media (max-width: 640px) {
+            .hero .about-block { padding: 24px 18px 26px; border-radius: 18px; }
+        }
         .genre-tags {
             display: flex;
             flex-wrap: wrap;
@@ -191,7 +227,7 @@
         .genre-tag {
             background: #fff;
             color: var(--primary);
-            border: 2px solid var(--primary);
+            border: 1.5px solid rgba(30, 58, 138, 0.18);
             border-radius: 999px;
             padding: 8px 18px;
             font-weight: 700;
@@ -243,11 +279,59 @@
             margin: 0 auto 14px;
             text-wrap: balance;
         }
-        .hero-sub {
-            font-size: clamp(1rem, 2.2vw, 1.2rem);
-            color: var(--dark);
-            max-width: 46ch;
+        /* Festival box: navy panel sitting on the yellow background, like the tickets */
+        .hero-festival {
+            position: relative;
+            z-index: 1;
+            max-width: 760px;
             margin: 0 auto;
+            padding: 28px 32px 24px;
+            background: var(--primary);
+            border-radius: 22px;
+            box-shadow: 0 14px 34px rgba(30, 58, 138, 0.3);
+        }
+        .hero h1.hero-title { max-width: none; margin: 0 auto 18px; }
+        .hero-title-pre {
+            display: block;
+            font-size: clamp(1rem, 2.4vw, 1.2rem);
+            font-weight: 600;
+            line-height: 1.3;
+            letter-spacing: 0;
+            color: var(--secondary);
+            margin-bottom: 4px;
+        }
+        .hero-title-main {
+            display: block;
+            font-size: clamp(1.8rem, 4.6vw, 2.7rem);
+            font-weight: 800;
+            line-height: 1.1;
+            letter-spacing: -0.015em;
+            color: #fff;
+            text-wrap: balance;
+        }
+        .hero-showings {
+            display: flex;
+            justify-content: center;
+            padding-top: 16px;
+            border-top: 1px solid rgba(255, 255, 255, 0.16);
+        }
+        .hero-showing {
+            flex: 1 1 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 2px;
+            padding: 4px 20px;
+            text-align: center;
+        }
+        .hero-showing + .hero-showing { border-left: 2px dashed rgba(252, 211, 77, 0.55); }
+        .hero-showing-where { font-size: 0.92rem; font-weight: 600; color: rgba(255, 255, 255, 0.85); line-height: 1.3; }
+        .hero-showing-when { font-size: 1.22rem; font-weight: 800; color: var(--secondary); line-height: 1.25; }
+        @media (max-width: 560px) {
+            .hero-festival { padding: 22px 18px 18px; border-radius: 18px; }
+            .hero-showings { flex-direction: column; }
+            .hero-showing { padding: 10px 4px; }
+            .hero-showing + .hero-showing { border-left: 0; border-top: 2px dashed rgba(252, 211, 77, 0.55); }
         }
         @media (max-width: 768px) {
             .hero { padding: 28px 18px 48px; }
@@ -791,8 +875,22 @@
             <div class="container">
                 <img class="hero-logo" src="logo-no-bg.png" alt="Mick Skylark: Mini Golf Prodigy" loading="eager" />
                 <img class="hero-laurel" src="HFF35_Laurel_OfficialSelection_Black.png" alt="Heartland Film Festival 2026 Official Selection" loading="eager" />
-                <h1 id="hero-title">Screening at the 35th Heartland Film Festival</h1>
-                <p class="hero-sub">In theaters in Indianapolis on October 14, 15, 16 and 18, or stream it at home from anywhere in the U.S.</p>
+                <div class="hero-festival">
+                <h1 id="hero-title" class="hero-title">
+                    <span class="hero-title-pre">Screening at the</span>
+                    <span class="hero-title-main">35th Heartland Film Festival</span>
+                </h1>
+                <div class="hero-showings">
+                    <p class="hero-showing">
+                        <span class="hero-showing-where">In theaters in Indianapolis</span>
+                        <span class="hero-showing-when">Oct 14, 15, 16 &amp; 18</span>
+                    </p>
+                    <p class="hero-showing">
+                        <span class="hero-showing-where">Stream anywhere in the U.S.</span>
+                        <span class="hero-showing-when">Oct 8 to 18</span>
+                    </p>
+                </div>
+                </div>
                 <div class="hero-links">
                     <a class="hero-link hero-link--deadline" href="https://deadline.com/2025/11/david-koechner-robert-knepper-thomas-lennon-mick-skylark-1236625639/" target="_blank" rel="noopener noreferrer">Deadline Article</a>
                     <a class="hero-link hero-link--imdb" href="https://www.imdb.com/title/tt12115818/?ref_=ttfc_ov_bk" target="_blank" rel="noopener noreferrer">View on IMDb</a>
@@ -819,7 +917,9 @@
         <div class="about-block" id="about-film" aria-labelledby="about-title">
             <h2 id="about-title">About the film</h2>
             <p class="logline">
-                Mick Skylark (Brandon Engman), coached by his mentor Jonsey (David Koechner), quickly rises to the top as a child mini golf prodigy. When a tragedy strikes and he feels responsible, he quits the sport for good.</p>
+                Mick Skylark (<a href="https://www.imdb.com/name/nm6185816/" target="_blank" rel="noopener noreferrer">Brandon Engman</a>), coached by his mentor Jonsey (<a href="https://www.imdb.com/name/nm0462712/" target="_blank" rel="noopener noreferrer">David Koechner</a>), quickly rises to the top as a child mini golf prodigy. When a tragedy strikes and he feels responsible, he quits the sport for good.
+                <span class="logline-twist">Or so he thought.</span>
+            </p>
             <div class="genre-tags">
                 <span class="genre-tag">🎭 Comedy</span>
                 <span class="genre-tag">👨‍👩‍👧‍👦 Family Friendly</span>
@@ -1111,6 +1211,7 @@
                 if (a.closest('nav')) return 'nav';
                 if (a.closest('footer')) return 'footer';
                 if (a.closest('.hero-links')) return 'hero_links';
+                if (a.closest('#about-film')) return 'about_film';
                 if (a.closest('.qa-callout')) return 'hero_qa';
                 if (a.closest('.locations')) return 'locations';
                 if (a.closest('.tickets')) return 'tickets';
