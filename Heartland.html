@@ -128,7 +128,9 @@
             transition: background 0.2s ease, color 0.2s ease; font-size: 0.9rem;
             line-height: 1; border: 1px solid transparent; outline: none;
         }
-        .nav-link:hover { background: var(--primary); color: #fff; }
+        /* Hover color only on devices with a real mouse, so a tapped link on a phone
+           doesn't stay lit and look like a second highlighted section */
+        @media (hover: hover) { .nav-link:hover { background: var(--primary); color: #fff; } }
         .nav-link.active {
             background: var(--primary); color: #fff;
             box-shadow: 0 6px 18px rgba(30, 58, 138, 0.25);
@@ -167,7 +169,39 @@
         /* The logo and laurel PNGs have big see-through margins. These lines stop that
            invisible area from sitting on top of buttons and blocking clicks. */
         .hero-logo, .hero-laurel { pointer-events: none; }
-        .hero .bts-row, .hero .comps-block, .qa-callout { position: relative; z-index: 1; }
+        .hero .bts-row, .hero .comps-block, .qa-callout, .hero-links { position: relative; z-index: 1; }
+
+        /* Deadline + IMDb buttons under the hero subtitle */
+        .hero-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 20px;
+        }
+        .hero-link {
+            display: inline-block;
+            font-weight: 700;
+            font-size: 0.95rem;
+            line-height: 1;
+            padding: 12px 22px;
+            border-radius: 999px;
+            text-decoration: none;
+            box-shadow: 0 6px 16px rgba(30, 58, 138, 0.18);
+            transition: background 0.2s ease, color 0.2s ease;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .hero-link--deadline { background: var(--primary); color: #fff; }
+        .hero-link--imdb { background: var(--secondary); color: var(--dark); box-shadow: 0 4px 15px rgba(30, 58, 138, 0.3); }
+        @media (hover: hover) {
+            .hero-link--deadline:hover { background: var(--accent-blue); }
+            .hero-link--imdb:hover { background: var(--gold); }
+        }
+        .hero-link:focus-visible { outline: 3px solid var(--primary); outline-offset: 3px; }
+        @media (max-width: 380px) {
+            .hero-links { gap: 10px; }
+            .hero-link { font-size: 0.88rem; padding: 11px 16px; }
+        }
 
         .hero h1 {
             font-size: clamp(1.7rem, 4.2vw, 2.6rem);
@@ -727,7 +761,8 @@
     <nav class="navbar" aria-label="Primary navigation">
         <div class="nav-container">
             <a href="index.html#home" class="nav-link">Home</a>
-            <a href="Heartland.html" class="nav-link active" aria-current="page">Heartland</a>
+            <a href="Heartland.html" class="nav-link active" aria-current="page" data-scroll-to="top">Heartland</a>
+            <a href="#tickets" class="nav-link" data-scroll-to="tickets">Tickets</a>
             <a href="#locations" class="nav-link" data-scroll-to="locations">Locations</a>
             <a href="#cast" class="nav-link" data-scroll-to="cast">Cast</a>
             <a href="about.html" class="nav-link">About</a>
@@ -746,6 +781,10 @@
                 <img class="hero-laurel" src="HFF35_Laurel_OfficialSelection_Black.png" alt="Heartland Film Festival 2026 Official Selection" loading="eager" />
                 <h1 id="hero-title">Screening at the 35th Heartland Film Festival</h1>
                 <p class="hero-sub">In theaters in Indianapolis on October 14, 15, 16 and 18, or stream it at home from anywhere in the U.S.</p>
+                <div class="hero-links">
+                    <a class="hero-link hero-link--deadline" href="https://deadline.com/2025/11/david-koechner-robert-knepper-thomas-lennon-mick-skylark-1236625639/" target="_blank" rel="noopener noreferrer">Deadline Article</a>
+                    <a class="hero-link hero-link--imdb" href="https://www.imdb.com/title/tt12115818/?ref_=ttfc_ov_bk" target="_blank" rel="noopener noreferrer">View on IMDb</a>
+                </div>
 
                 <!-- Behind the scenes photos -->
         <div class="scroll-row bts-row" id="bts-slideshow" tabindex="0" aria-label="Behind the scenes photos">
@@ -1058,6 +1097,7 @@
                 if (a.closest('.sticky-cta')) return 'sticky_button';
                 if (a.closest('nav')) return 'nav';
                 if (a.closest('footer')) return 'footer';
+                if (a.closest('.hero-links')) return 'hero_links';
                 if (a.closest('.qa-callout')) return 'hero_qa';
                 if (a.closest('.locations')) return 'locations';
                 if (a.closest('.tickets')) return 'tickets';
@@ -1323,17 +1363,51 @@
             hold();
         })();
 
-        // ===== Menu links that jump to sections on this page (Locations, Cast) =====
+        // ===== Menu links that jump to sections on this page (Heartland/top, Tickets, Locations, Cast) =====
         // Smooth-scrolls to the section and stops just below the menu, without adding
         // #locations or #cast to the address bar, so shared links stay clean.
         document.querySelectorAll('a[data-scroll-to]').forEach(function (link) {
             link.addEventListener('click', function (e) {
-                var target = document.getElementById(link.getAttribute('data-scroll-to'));
+                var where = link.getAttribute('data-scroll-to');
+                if (where === 'top') { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); return; }
+                var target = document.getElementById(where);
                 if (!target) return;
                 e.preventDefault();
                 target.scrollIntoView({ behavior: 'smooth', block: 'start' });
             });
         });
+
+        // ===== Highlight the menu link for the section being viewed =====
+        // Top of the page -> Heartland, ticket picker -> Tickets, theater cards -> Locations,
+        // About the film / cast / credits -> Cast. Updates as people scroll.
+        (function () {
+            var nav = document.querySelector('.navbar');
+            var sections = [
+                { id: null,         link: document.querySelector('.nav-link[data-scroll-to="top"]') },
+                { id: 'tickets',    link: document.querySelector('.nav-link[data-scroll-to="tickets"]') },
+                { id: 'locations',  link: document.querySelector('.nav-link[data-scroll-to="locations"]') },
+                { id: 'about-film', link: document.querySelector('.nav-link[data-scroll-to="cast"]') }
+            ].filter(function (s) { return s.link && (s.id === null || document.getElementById(s.id)); });
+            if (!sections.length) return;
+            var current = null, queued = false;
+            function update() {
+                queued = false;
+                var navBottom = nav ? nav.getBoundingClientRect().bottom : 0;
+                var line = navBottom + (window.innerHeight - navBottom) * 0.3;
+                var pick = sections[0];
+                for (var i = 1; i < sections.length; i++) {
+                    if (document.getElementById(sections[i].id).getBoundingClientRect().top <= line) pick = sections[i];
+                }
+                if (pick.link === current) return;
+                sections.forEach(function (s) { s.link.classList.toggle('active', s === pick); });
+                current = pick.link;
+            }
+            function queue() { if (!queued) { queued = true; requestAnimationFrame(update); } }
+            window.addEventListener('scroll', queue, { passive: true });
+            window.addEventListener('resize', queue, { passive: true });
+            window.addEventListener('load', queue);
+            update();
+        })();
     </script>
 </body>
 </html>
