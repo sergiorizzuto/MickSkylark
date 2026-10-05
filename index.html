@@ -1427,14 +1427,17 @@ src="https://www.facebook.com/tr?id=2748835775453218&ev=PageView&noscript=1"
         // ===== Tighten the space between the logo and the Heartland laurel =====
         // Both PNGs have see-through padding built into the image file, which shows up as
         // extra empty space. This measures that padding and pulls the laurel up so the
-        // visible gap is a consistent 10px. If the images can't be measured, spacing stays as-is.
+        // visible gap is a consistent 10px.
+        // Safety checks: it waits until the pictures are fully drawn, and if a picture reads
+        // as blank or mostly empty (which phones can do when you come back to an old tab),
+        // it does nothing and keeps the normal spacing instead of guessing.
         (function () {
             var laurel = document.querySelector('.hero-laurel');
             var logo = laurel && laurel.previousElementSibling;
             if (!laurel || !logo || logo.tagName !== 'IMG') return;
-            var GAP = 10, logoPad = null, laurelPad = null;
+            var GAP = 10, MAX_EMPTY = 0.45, pads = null, run = 0;
 
-            function emptyRows(img, fromBottom) {
+            function emptyFraction(img, fromBottom) {
                 var w = img.naturalWidth, h = img.naturalHeight;
                 if (!w || !h) return null;
                 var scale = Math.min(1, 400 / w);
@@ -1451,25 +1454,43 @@ src="https://www.facebook.com/tr?id=2748835775453218&ev=PageView&noscript=1"
                 var n = 0;
                 if (fromBottom) { for (var y = c.height - 1; y >= 0 && empty(y); y--) n++; }
                 else { for (var y2 = 0; y2 < c.height && empty(y2); y2++) n++; }
+                if (n >= c.height) return null;   // reads as completely blank: not trustworthy
                 return n / c.height;
             }
+            function reset() { logo.style.marginBottom = ''; laurel.style.marginTop = ''; }
             function apply() {
-                if (logoPad === null || laurelPad === null) return;
-                var hidden = logoPad * logo.offsetHeight + laurelPad * laurel.offsetHeight;
+                if (!pads) { reset(); return; }
+                var lh = logo.offsetHeight, rh = laurel.offsetHeight;
+                if (!lh || !rh) return;
                 logo.style.marginBottom = '0px';
-                laurel.style.marginTop = Math.round(GAP - hidden) + 'px';
+                laurel.style.marginTop = Math.round(GAP - (pads.logo * lh + pads.laurel * rh)) + 'px';
+            }
+            function ready(img) {
+                if (img.decode) return img.decode().catch(function () {});
+                return new Promise(function (done) {
+                    if (img.complete) done(); else img.addEventListener('load', done, { once: true });
+                });
             }
             function measure() {
-                if (!logo.complete || !laurel.complete) return;
-                try {
-                    logoPad = emptyRows(logo, true);
-                    laurelPad = emptyRows(laurel, false);
+                var mine = ++run;
+                Promise.all([ready(logo), ready(laurel)]).then(function () {
+                    if (mine !== run) return;
+                    var next = null;
+                    try {
+                        var a = emptyFraction(logo, true), b = emptyFraction(laurel, false);
+                        if (a !== null && b !== null && a <= MAX_EMPTY && b <= MAX_EMPTY) next = { logo: a, laurel: b };
+                    } catch (e) { next = null; }
+                    // A failed re-check never undoes a good earlier measurement
+                    if (next || !pads) pads = next;
                     apply();
-                } catch (e) { /* image couldn't be read; keep the normal spacing */ }
+                });
             }
-            [logo, laurel].forEach(function (img) { if (!img.complete) img.addEventListener('load', measure); });
             measure();
             window.addEventListener('resize', apply, { passive: true });
+            window.addEventListener('pageshow', function (e) { if (e.persisted) measure(); });
+            document.addEventListener('visibilitychange', function () {
+                if (document.visibilityState === 'visible') measure();
+            });
         })();
 
         // ===== Keep the top of the page clear of the fixed menu bar =====
