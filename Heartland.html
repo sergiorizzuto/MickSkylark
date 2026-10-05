@@ -591,6 +591,8 @@
             text-align: center;
             margin-bottom: 26px;
         }
+        /* Breathing room when the menu jumps to these sections */
+        #locations, #cast { scroll-margin-top: 20px; }
         .imdb-cta { text-align: center; margin-bottom: 22px; }
         .imdb-btn {
             display: inline-block;
@@ -726,12 +728,10 @@
         <div class="nav-container">
             <a href="index.html#home" class="nav-link">Home</a>
             <a href="Heartland.html" class="nav-link active" aria-current="page">Heartland</a>
+            <a href="#locations" class="nav-link" data-scroll-to="locations">Locations</a>
+            <a href="#cast" class="nav-link" data-scroll-to="cast">Cast</a>
             <a href="about.html" class="nav-link">About</a>
-            <a href="index.html#cast" class="nav-link">Cast</a>
-            <a href="merch.html" class="nav-link">Merch</a>
             <a href="contact.html" class="nav-link">Contact</a>
-            <a href="rapid-fire.html" class="nav-link">Rapid Fire</a>
-            <a href="mad-lib.html" class="nav-link">Mad Libs</a>
             <a href="terms.html" class="nav-link">Terms &amp; Conditions</a>
             <a href="pp.html" class="nav-link">Privacy Policy</a>
         </div>
@@ -883,7 +883,7 @@
             </div>
 
             <!-- Theater locations -->
-            <div class="locations" aria-labelledby="locations-title">
+            <div class="locations" id="locations" aria-labelledby="locations-title">
                 <h3 id="locations-title">Theater Locations</h3>
                 <div class="locations-grid">
                     <div class="location-card">
@@ -908,7 +908,7 @@
         <section class="about-section" id="about-film" aria-labelledby="about-title">
             <div class="about-inner">
                 <div class="imdb-cta">
-                    <a class="imdb-btn" href="https://www.imdb.com/title/tt12115818/?ref_=ttfc_ov_bk" target="_blank" rel="noopener noreferrer">View on IMDb</a>
+                    <a class="imdb-btn" href="https://www.imdb.com/title/tt12115818/fullcredits/?ref_=tt_cst_sm" target="_blank" rel="noopener noreferrer">View on IMDb</a>
                 </div>
                 <h2 id="about-title">About the film</h2>
                 <p class="logline">
@@ -921,7 +921,7 @@
                     <div><dt>Premiere</dt><dd>World premiere</dd></div>
                 </dl>
 
-                <h3>Cast</h3>
+                <h3 id="cast">Cast</h3>
                 <div class="cast-grid">
                     <a class="cast-card" href="https://www.imdb.com/name/nm0911320/" target="_blank" rel="noopener noreferrer">
                         <img src="cast-photos/patrick-warburton.jpg" alt="" class="cast-photo" loading="lazy">
@@ -1321,6 +1321,18 @@
             }
             hold();
         })();
+
+        // ===== Menu links that jump to sections on this page (Locations, Cast) =====
+        // Smooth-scrolls to the section and stops just below the menu, without adding
+        // #locations or #cast to the address bar, so shared links stay clean.
+        document.querySelectorAll('a[data-scroll-to]').forEach(function (link) {
+            link.addEventListener('click', function (e) {
+                var target = document.getElementById(link.getAttribute('data-scroll-to'));
+                if (!target) return;
+                e.preventDefault();
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
     </script>
 </body>
 </html>
