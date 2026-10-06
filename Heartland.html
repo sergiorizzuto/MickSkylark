@@ -333,10 +333,11 @@
             .hero-showing { padding: 10px 4px; }
             .hero-showing + .hero-showing { border-left: 0; border-top: 2px dashed rgba(252, 211, 77, 0.55); }
         }
-        /* Q&A row at the bottom of the festival box */
+        /* Q&A row at the bottom of the festival box: mic + text, centered as a pair */
         .fest-qa {
             display: flex;
             align-items: center;
+            justify-content: center;
             gap: 14px;
             margin-top: 16px;
             padding-top: 16px;
@@ -350,30 +351,13 @@
             background: var(--secondary);
             display: grid; place-items: center;
             font-size: 1.1rem;
-        }
-        .fest-qa-text { flex: 1; margin: 0; color: rgba(255, 255, 255, 0.88); font-size: 0.92rem; line-height: 1.45; }
-        .fest-qa-text strong { display: block; color: var(--secondary); font-size: 1.05rem; font-weight: 800; line-height: 1.3; }
-        .fest-qa-btn {
-            flex-shrink: 0;
-            background: var(--secondary);
-            color: var(--primary);
-            font-weight: 700;
-            font-size: 0.92rem;
             line-height: 1;
-            padding: 11px 18px;
-            border-radius: 999px;
-            text-decoration: none;
-            white-space: nowrap;
-            transition: background 0.2s ease;
-            -webkit-tap-highlight-color: transparent;
         }
-        @media (hover: hover) { .fest-qa-btn:hover { background: #fff; } }
-        .fest-qa-btn:active { background: #fff; }
-        .fest-qa-btn:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
+        .fest-qa-text { flex: 0 1 auto; margin: 0; color: rgba(255, 255, 255, 0.88); font-size: 0.92rem; line-height: 1.45; }
+        .fest-qa-text strong { display: block; color: var(--secondary); font-size: 1.05rem; font-weight: 800; line-height: 1.3; }
         @media (max-width: 560px) {
-            .fest-qa { flex-wrap: wrap; justify-content: center; text-align: center; gap: 10px; margin-top: 12px; padding-top: 14px; }
-            .fest-qa-icon { display: none; }
-            .fest-qa-text { flex-basis: 100%; }
+            .fest-qa { gap: 12px; margin-top: 12px; padding-top: 14px; }
+            .fest-qa-icon { width: 34px; height: 34px; font-size: 1rem; }
         }
         @media (max-width: 768px) {
             .hero { padding: 28px 18px 48px; }
@@ -882,8 +866,7 @@
                 </div>
                 <div class="fest-qa">
                     <span class="fest-qa-icon" aria-hidden="true">🎤</span>
-                    <p class="fest-qa-text"><strong>Stay for the Q&amp;A</strong> With the filmmakers and select cast, after in-person screenings.</p>
-                    <a class="fest-qa-btn" href="#tickets" onclick="document.getElementById('tickets').scrollIntoView({ behavior: 'smooth' }); return false;">Get Tickets</a>
+                    <p class="fest-qa-text"><strong>Stay after for the Q&amp;A</strong> With the filmmakers and select cast at in-person screenings.</p>
                 </div>
                 </div>
                 <div class="hero-links">
@@ -1199,7 +1182,6 @@
                 if (a.closest('footer')) return 'footer';
                 if (a.closest('.hero-links')) return 'hero_links';
                 if (a.closest('#about-film')) return 'about_film';
-                if (a.closest('.fest-qa')) return 'hero_qa';
                 if (a.closest('.locations')) return 'locations';
                 if (a.closest('.tickets')) return 'tickets';
                 if (a.closest('.imdb-cta')) return 'about_imdb';
