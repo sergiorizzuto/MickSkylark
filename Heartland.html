@@ -1025,14 +1025,14 @@
                         <h4>Alamo Drafthouse Cinema at The Square</h4>
                         <p class="location-screen">Theater 3</p>
                         <address>3898 Lafayette Road<br>Indianapolis, IN 46254</address>
-                        <a class="location-map" href="https://www.google.com/maps/search/?api=1&amp;query=Alamo+Drafthouse+Cinema+3898+Lafayette+Road+Indianapolis+IN+46254" target="_blank" rel="noopener noreferrer">Get Directions</a>
+                        <a class="location-map" href="https://www.google.com/maps/search/?api=1&amp;query=Alamo+Drafthouse+Cinema+3898+Lafayette+Road+Indianapolis+IN+46254" target="_blank" rel="noopener noreferrer" data-link-text="Get Directions: Alamo Drafthouse">Get Directions</a>
                     </div>
                     <div class="location-card">
                         <p class="location-dates">Oct 16</p>
                         <h4>Living Room Theaters</h4>
                         <p class="location-screen">Theater 3</p>
                         <address>745 E. 9th Street, Suite 810<br>Indianapolis, IN 46202</address>
-                        <a class="location-map" href="https://www.google.com/maps/search/?api=1&amp;query=Living+Room+Theaters+745+E+9th+Street+Suite+810+Indianapolis+IN+46202" target="_blank" rel="noopener noreferrer">Get Directions</a>
+                        <a class="location-map" href="https://www.google.com/maps/search/?api=1&amp;query=Living+Room+Theaters+745+E+9th+Street+Suite+810+Indianapolis+IN+46202" target="_blank" rel="noopener noreferrer" data-link-text="Get Directions: Living Room Theaters">Get Directions</a>
                     </div>
                 </div>
             </div>
@@ -1169,7 +1169,8 @@
         //   link_text    - the words on the link (e.g. "Oct 14", "Patrick Warburton as Dr. Phil")
         //   link_url     - where it goes
         //   link_domain  - the site it goes to
-        //   link_section - where on the page it was: nav, hero_qa, sticky_button, tickets, locations, cast, credits, footer
+        //   link_section - where on the page it was: nav, hero_links, about_film, sticky_button, tickets,
+        //                  locations, about_imdb, cast, credits, footer
         //   outbound     - true if it leaves mickskylark.com
         // Ticket links also send "heartland_ticket_click" (with ticket_option) and Meta's InitiateCheckout.
         (function () {
@@ -1491,6 +1492,26 @@
             window.addEventListener('load', queue);
             update();
         })();
+
+        // ===== Email sign-ups (the Tally form in the footer) =====
+        // The form lives inside an embedded Tally frame, so clicks inside it can't be seen
+        // by the link tracking above. Tally announces a finished sign-up to this page; we
+        // record it as GA4's standard "sign_up" event and Meta's "Lead".
+        // Nothing the person typed (like their email) is sent to Google or Meta.
+        window.addEventListener('message', function (e) {
+            if (e.origin !== 'https://tally.so') return;
+            var data = e.data;
+            try { if (typeof data === 'string') data = JSON.parse(data); } catch (err) { return; }
+            if (!data || data.event !== 'Tally.FormSubmitted') return;
+            try {
+                if (typeof window.gtag === 'function') {
+                    window.gtag('event', 'sign_up', { method: 'Email updates form', link_section: 'footer' });
+                }
+                if (typeof window.fbq === 'function') {
+                    window.fbq('track', 'Lead', { content_name: 'Email updates (Heartland page)' });
+                }
+            } catch (err) { /* analytics should never break the page */ }
+        });
     </script>
 </body>
 </html>
