@@ -136,9 +136,10 @@
             box-shadow: 0 6px 18px rgba(30, 58, 138, 0.25);
         }
         @media (max-width: 768px) {
-            body { padding-top: 130px; }
-            .nav-container { gap: 8px; justify-content: flex-start; }
-            .nav-link { padding: 10px 14px; font-size: 0.95rem; }
+            body { padding-top: 96px; }
+            .navbar { padding: 8px 0; }
+            .nav-container { gap: 5px; justify-content: center; padding: 0 10px; }
+            .nav-link { padding: 7px 10px; font-size: 0.85rem; }
         }
 
         .container { max-width: 1200px; margin: 0 auto; }
@@ -151,6 +152,9 @@
         }
         .hero-logo {
             width: 100%; max-width: 520px;
+            aspect-ratio: 1563 / 750;          /* just the artwork band of the square PNG */
+            object-fit: cover;
+            object-position: 50% 38.1%;        /* rows ~310-1060 of 1563 */
             display: block; margin: 0 auto 6px;
             opacity: 0;
             animation: logoReveal 1.3s ease-out forwards;
@@ -169,7 +173,7 @@
         /* The logo and laurel PNGs have big see-through margins. These lines stop that
            invisible area from sitting on top of buttons and blocking clicks. */
         .hero-logo, .hero-laurel { pointer-events: none; }
-        .hero .bts-row, .hero .comps-block, .hero-links, .hero .about-block { position: relative; z-index: 1; }
+        .hero .bts-row, .hero .comps-block, .hero .about-block { position: relative; z-index: 1; }
 
         /* About the film, inside the yellow top section */
         .hero .about-block {
@@ -237,13 +241,13 @@
         }
 
 
-        /* Deadline + IMDb buttons under the hero subtitle */
-        .hero-links {
+        /* Deadline + IMDb buttons (above the cast list) */
+        .press-links {
             display: flex;
             justify-content: center;
             flex-wrap: wrap;
             gap: 12px;
-            margin-top: 20px;
+            margin-bottom: 26px;
         }
         .hero-link {
             display: inline-block;
@@ -265,7 +269,7 @@
         }
         .hero-link:focus-visible { outline: 3px solid var(--primary); outline-offset: 3px; }
         @media (max-width: 380px) {
-            .hero-links { gap: 10px; }
+            .press-links { gap: 10px; }
             .hero-link { font-size: 0.88rem; padding: 11px 16px; }
         }
 
@@ -333,6 +337,27 @@
             .hero-showing { padding: 10px 4px; }
             .hero-showing + .hero-showing { border-left: 0; border-top: 2px dashed rgba(252, 211, 77, 0.55); }
         }
+        /* Get Tickets button inside the festival box */
+        .fest-cta { display: flex; justify-content: center; margin-top: 18px; }
+        .fest-cta-btn {
+            display: inline-block;
+            background: var(--secondary);
+            color: var(--primary);
+            font-weight: 800;
+            font-size: 1.05rem;
+            line-height: 1;
+            padding: 14px 36px;
+            border-radius: 999px;
+            text-decoration: none;
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.22);
+            transition: background 0.2s ease, transform 0.15s ease;
+            -webkit-tap-highlight-color: transparent;
+        }
+        @media (hover: hover) { .fest-cta-btn:hover { background: #fff; } }
+        .fest-cta-btn:active { background: #fff; }
+        .fest-cta-btn:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
+        @media (max-width: 560px) { .fest-cta { margin-top: 14px; } .fest-cta-btn { width: 100%; max-width: 280px; text-align: center; } }
+
         /* Q&A row at the bottom of the festival box: mic + text, centered as a pair */
         .fest-qa {
             display: flex;
@@ -636,7 +661,7 @@
         }
         .slide img { width: 100%; height: 100%; object-fit: cover; display: block; }
         .film-poster {
-            flex-shrink: 0; width: 250px;
+            flex-shrink: 0; width: 200px;      /* 20% smaller than before (250px) */
             border-radius: 10px; overflow: hidden;
             background: rgba(255,255,255,0.35);
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
@@ -646,7 +671,7 @@
         .film-poster img { width: 100%; height: auto; display: block; }
         @media (max-width: 768px) {
             .slide { width: 300px; height: 225px; }
-            .film-poster { width: 190px; }
+            .film-poster { width: 152px; }   /* 20% smaller than before (190px) */
         }
         @media (prefers-reduced-motion: reduce) {
             .film-poster, .film-poster:hover { transition: none; transform: none; }
@@ -715,23 +740,6 @@
         }
         /* Breathing room when the menu jumps to these sections */
         #locations, #cast { scroll-margin-top: 20px; }
-        .imdb-cta { text-align: center; margin-bottom: 22px; }
-        .imdb-btn {
-            display: inline-block;
-            background: var(--primary);
-            color: #fff;
-            font-weight: 700;
-            font-size: 1rem;
-            line-height: 1;
-            padding: 13px 28px;
-            border-radius: 999px;
-            text-decoration: none;
-            box-shadow: 0 6px 18px rgba(30, 58, 138, 0.25);
-            transition: background 0.2s ease;
-        }
-        @media (hover: hover) { .imdb-btn:hover { background: var(--accent-blue); } }
-        .imdb-btn:active { background: var(--accent-blue); }
-        .imdb-btn:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
         .logline {
             font-size: clamp(1.08rem, 2.2vw, 1.28rem);
             line-height: 1.75;
@@ -837,8 +845,6 @@
             <a href="#cast" class="nav-link" data-scroll-to="cast">Cast</a>
             <a href="about.html" class="nav-link">About</a>
             <a href="contact.html" class="nav-link">Contact</a>
-            <a href="terms.html" class="nav-link">Terms &amp; Conditions</a>
-            <a href="pp.html" class="nav-link">Privacy</a>
             <a href="https://www.imdb.com/title/tt12115818/?ref_=ttfc_ov_bk" class="nav-link" target="_blank" rel="noopener noreferrer">IMDb</a>
         </div>
     </nav>
@@ -864,14 +870,13 @@
                         <span class="hero-showing-when">Oct 8 to 18</span>
                     </p>
                 </div>
+                <div class="fest-cta">
+                    <a class="fest-cta-btn" href="#tickets" data-scroll-to="tickets" data-link-text="Get Tickets">Get Tickets</a>
+                </div>
                 <div class="fest-qa">
                     <span class="fest-qa-icon" aria-hidden="true">🎤</span>
-                    <p class="fest-qa-text"><strong>Stay after for the Q&amp;A</strong> With the filmmakers and select cast at in-person screenings.</p>
+                    <p class="fest-qa-text"><strong>Stay after for the Q&amp;A</strong> With the filmmakers and select cast</p>
                 </div>
-                </div>
-                <div class="hero-links">
-                    <a class="hero-link hero-link--deadline" href="https://deadline.com/2025/11/david-koechner-robert-knepper-thomas-lennon-mick-skylark-1236625639/" target="_blank" rel="noopener noreferrer">Deadline Article</a>
-                    <a class="hero-link hero-link--imdb" href="https://www.imdb.com/title/tt12115818/?ref_=ttfc_ov_bk" target="_blank" rel="noopener noreferrer">View on IMDb</a>
                 </div>
 
                 <!-- Behind the scenes photos -->
@@ -1041,8 +1046,9 @@
         <!-- Cast & credits -->
         <section class="about-section" id="cast-credits" aria-labelledby="cast">
             <div class="about-inner">
-                <div class="imdb-cta">
-                    <a class="imdb-btn" href="https://www.imdb.com/title/tt12115818/fullcredits/?ref_=tt_cst_sm" target="_blank" rel="noopener noreferrer">View on IMDb</a>
+                <div class="press-links">
+                    <a class="hero-link hero-link--deadline" href="https://deadline.com/2025/11/david-koechner-robert-knepper-thomas-lennon-mick-skylark-1236625639/" target="_blank" rel="noopener noreferrer">Deadline Article</a>
+                    <a class="hero-link hero-link--imdb" href="https://www.imdb.com/title/tt12115818/fullcredits/?ref_=tt_cst_sm" target="_blank" rel="noopener noreferrer">View on IMDb</a>
                 </div>
                 <h3 id="cast">Cast</h3>
                 <div class="cast-grid">
@@ -1169,8 +1175,8 @@
         //   link_text    - the words on the link (e.g. "Oct 14", "Patrick Warburton as Dr. Phil")
         //   link_url     - where it goes
         //   link_domain  - the site it goes to
-        //   link_section - where on the page it was: nav, hero_links, about_film, sticky_button, tickets,
-        //                  locations, about_imdb, cast, credits, footer
+        //   link_section - where on the page it was: nav, festival_box, about_film, sticky_button, tickets,
+        //                  locations, press_links, cast, credits, footer
         //   outbound     - true if it leaves mickskylark.com
         // Ticket links also send "heartland_ticket_click" (with ticket_option) and Meta's InitiateCheckout.
         (function () {
@@ -1180,12 +1186,12 @@
             function sectionOf(a) {
                 if (a.closest('.sticky-cta')) return 'sticky_button';
                 if (a.closest('nav')) return 'nav';
+                if (a.closest('.fest-cta')) return 'festival_box';
                 if (a.closest('footer')) return 'footer';
-                if (a.closest('.hero-links')) return 'hero_links';
                 if (a.closest('#about-film')) return 'about_film';
                 if (a.closest('.locations')) return 'locations';
                 if (a.closest('.tickets')) return 'tickets';
-                if (a.closest('.imdb-cta')) return 'about_imdb';
+                if (a.closest('.press-links')) return 'press_links';
                 if (a.closest('.cast-grid')) return 'cast';
                 if (a.closest('.credits')) return 'credits';
                 return 'other';
@@ -1249,9 +1255,9 @@
             });
 
             if (!('IntersectionObserver' in window)) return;
-            var ticketsInMiddle = false, footerShowing = false;
+            var ticketsInMiddle = false, footerShowing = false, boxButtonShowing = false;
             function update() {
-                var hide = ticketsInMiddle || footerShowing;
+                var hide = ticketsInMiddle || footerShowing || boxButtonShowing;
                 btn.classList.toggle('is-hidden', hide);
                 btn.setAttribute('aria-hidden', hide ? 'true' : 'false');
                 btn.tabIndex = hide ? -1 : 0;
@@ -1262,6 +1268,14 @@
                 ticketsInMiddle = entries[0].isIntersecting;
                 update();
             }, { rootMargin: '-45% 0px -45% 0px' }).observe(tickets);
+            // Hide while the big Get Tickets button in the festival box is on screen (no doubling up)
+            var boxBtn = document.querySelector('.fest-cta-btn');
+            if (boxBtn) {
+                new IntersectionObserver(function (entries) {
+                    boxButtonShowing = entries[0].isIntersecting;
+                    update();
+                }).observe(boxBtn);
+            }
             // Hide over the footer so it never covers the email signup or contact link
             var footer = document.querySelector('footer');
             if (footer) {
@@ -1380,7 +1394,7 @@
                     if (mine !== run) return;
                     var next = null;
                     try {
-                        var a = emptyFraction(logo, true), b = emptyFraction(laurel, false);
+                        var a = 0, b = emptyFraction(laurel, false);   // logo is already trimmed by CSS
                         if (a !== null && b !== null && a <= MAX_EMPTY && b <= MAX_EMPTY) next = { logo: a, laurel: b };
                     } catch (e) { next = null; }
                     // A failed re-check never undoes a good earlier measurement
@@ -1512,6 +1526,24 @@
                 }
             } catch (err) { /* analytics should never break the page */ }
         });
+
+        // ===== "Tickets seen": did the visitor actually reach the ticket picker? =====
+        // Fires once per visit, when at least a quarter of the ticket grid is on screen.
+        // Compare it with page views and ticket clicks to see where people drop off:
+        // few "tickets_seen" = they never get that far; many seen but few clicks = the offer.
+        (function () {
+            var grid = document.querySelector('.tickets');
+            if (!grid || !('IntersectionObserver' in window)) return;
+            var obs = new IntersectionObserver(function (entries) {
+                if (!entries[0].isIntersecting) return;
+                obs.disconnect();
+                try {
+                    if (typeof window.gtag === 'function') window.gtag('event', 'tickets_seen', { link_section: 'tickets' });
+                    if (typeof window.fbq === 'function') window.fbq('track', 'ViewContent', { content_name: 'Heartland ticket picker' });
+                } catch (e) { /* analytics should never break the page */ }
+            }, { threshold: 0.25 });
+            obs.observe(grid);
+        })();
     </script>
 </body>
 </html>
