@@ -22,7 +22,7 @@
     <title>Mick Skylark at the Heartland Film Festival | Tickets</title>
 
     <!-- SEO -->
-    <meta name="description" content="Get tickets to Mick Skylark: Mini Golf Prodigy at the 35th Heartland Film Festival in Indianapolis, October 14, 15, 16 and 18, or stream the virtual screener anywhere in the U.S." />
+    <meta name="description" content="Get free tickets to Mick Skylark: Mini Golf Prodigy at the 35th Heartland Film Festival in Indianapolis, October 14, 15, 16 and 18, or stream the virtual screener anywhere in the U.S." />
     <meta name="robots" content="index,follow" />
     <link rel="canonical" href="https://mickskylark.com/Heartland.html" />
     <meta name="theme-color" content="#1E3A8A" />
@@ -477,6 +477,21 @@
             outline: 3px solid var(--secondary);
             outline-offset: 6px;
         }
+        /* Get Tickets buttons land on a ticket with a little room above it */
+        .tickets .ticket-link { scroll-margin-top: 20px; }
+
+        /* Sold-out screenings: greyed out, not clickable */
+        .ticket-link--soldout {
+            cursor: default;
+            opacity: 0.55;
+            filter: grayscale(1) drop-shadow(0 8px 14px rgba(6, 16, 52, 0.25));
+        }
+        .ticket-link--soldout:hover {
+            transform: none;
+            filter: grayscale(1) drop-shadow(0 8px 14px rgba(6, 16, 52, 0.25));
+        }
+        .ticket-link--soldout .ticket-cta,
+        .ticket-link--soldout:hover .ticket-cta { background: #4B5563; }
         .ticket-link--virtual {
             grid-column: 1 / -1;
             justify-self: center;
@@ -871,7 +886,7 @@
                     </p>
                 </div>
                 <div class="fest-cta">
-                    <a class="fest-cta-btn" href="#tickets" data-scroll-to="tickets" data-link-text="Get Tickets"><span aria-hidden="true">🎟️</span> Get Tickets</a>
+                    <a class="fest-cta-btn" href="#tickets" data-scroll-to="first-open-ticket" data-link-text="Get Tickets"><span aria-hidden="true">🎟️</span> Get Free Tickets</a>
                 </div>
                 <div class="fest-qa">
                     <span class="fest-qa-icon" aria-hidden="true">🎤</span>
@@ -938,50 +953,44 @@
 
             <div class="tickets">
                 <!-- Row 1 -->
-                <a class="ticket-link"
-                   href="https://tickets.heartlandfilmfestival.org/Festival_Schedule/6a9044b0c9f39a537d113ba9"
-                   target="_blank" rel="noopener noreferrer"
-                   data-ticket="Oct 14"
-                   aria-label="Purchase tickets for Wednesday, October 14 at 4:45 PM, Alamo Drafthouse Cinema at The Square, Indianapolis (opens in a new tab)">
+                <div class="ticket-link ticket-link--soldout" role="group"
+                   aria-label="Wednesday, October 14 at 4:45 PM, Alamo Drafthouse Cinema at The Square, Indianapolis: sold out">
                     <span class="ticket">
                         <span class="ticket-main">
                             <span class="ticket-day">Wednesday</span>
                             <span class="ticket-when"><span class="ticket-date">Oct 14</span><span class="ticket-time">4:45 PM</span></span>
                             <span class="ticket-where ticket-venue"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg><span>Alamo Drafthouse Cinema at The Square</span></span>
-                            <span class="ticket-cta">Purchase Tickets</span>
+                            <span class="ticket-cta">Sold Out</span>
                         </span>
                         <span class="ticket-stub" aria-hidden="true"><span>Admit One</span></span>
                     </span>
-                </a>
+                </div>
 
-                <a class="ticket-link"
-                   href="https://tickets.heartlandfilmfestival.org/Festival_Schedule/6a9044b4c9f39a537d113c07"
-                   target="_blank" rel="noopener noreferrer"
-                   data-ticket="Oct 15"
-                   aria-label="Purchase tickets for Thursday, October 15 at 12:00 PM, Alamo Drafthouse Cinema at The Square, Indianapolis (opens in a new tab)">
+                <div class="ticket-link ticket-link--soldout" role="group"
+                   aria-label="Thursday, October 15 at 12:00 PM, Alamo Drafthouse Cinema at The Square, Indianapolis: sold out">
                     <span class="ticket">
                         <span class="ticket-main">
                             <span class="ticket-day">Thursday</span>
                             <span class="ticket-when"><span class="ticket-date">Oct 15</span><span class="ticket-time">12:00 PM</span></span>
                             <span class="ticket-where ticket-venue"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg><span>Alamo Drafthouse Cinema at The Square</span></span>
-                            <span class="ticket-cta">Purchase Tickets</span>
+                            <span class="ticket-cta">Sold Out</span>
                         </span>
                         <span class="ticket-stub" aria-hidden="true"><span>Admit One</span></span>
                     </span>
-                </a>
+                </div>
 
                 <!-- Row 2 -->
                 <a class="ticket-link"
                    href="https://tickets.heartlandfilmfestival.org/Festival_Schedule/6a9044bbc9f39a537d113d91"
                    target="_blank" rel="noopener noreferrer"
                    data-ticket="Oct 16"
-                   aria-label="Purchase tickets for Friday, October 16 at 7:30 PM, Living Room Theaters, Indianapolis (opens in a new tab)">
+                   aria-label="Get free tickets for Friday, October 16 at 7:30 PM, Living Room Theaters, Indianapolis (opens in a new tab)">
                     <span class="ticket">
                         <span class="ticket-main">
                             <span class="ticket-day">Friday</span>
                             <span class="ticket-when"><span class="ticket-date">Oct 16</span><span class="ticket-time">7:30 PM</span></span>
                             <span class="ticket-where ticket-venue"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg><span>Living Room Theaters</span></span>
-                            <span class="ticket-cta">Purchase Tickets</span>
+                            <span class="ticket-cta">Get Free Tickets</span>
                         </span>
                         <span class="ticket-stub" aria-hidden="true"><span>Admit One</span></span>
                     </span>
@@ -991,13 +1000,13 @@
                    href="https://tickets.heartlandfilmfestival.org/Festival_Schedule/6a9044cbc9f39a537d113f52"
                    target="_blank" rel="noopener noreferrer"
                    data-ticket="Oct 18"
-                   aria-label="Purchase tickets for Sunday, October 18 at 5:00 PM, Alamo Drafthouse Cinema at The Square, Indianapolis (opens in a new tab)">
+                   aria-label="Get free tickets for Sunday, October 18 at 5:00 PM, Alamo Drafthouse Cinema at The Square, Indianapolis (opens in a new tab)">
                     <span class="ticket">
                         <span class="ticket-main">
                             <span class="ticket-day">Sunday</span>
                             <span class="ticket-when"><span class="ticket-date">Oct 18</span><span class="ticket-time">5:00 PM</span></span>
                             <span class="ticket-where ticket-venue"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg><span>Alamo Drafthouse Cinema at The Square</span></span>
-                            <span class="ticket-cta">Purchase Tickets</span>
+                            <span class="ticket-cta">Get Free Tickets</span>
                         </span>
                         <span class="ticket-stub" aria-hidden="true"><span>Admit One</span></span>
                     </span>
@@ -1142,7 +1151,7 @@
     </main>
 
     <!-- Sticky Get Tickets button (hides itself while the tickets or footer are on screen) -->
-    <a class="sticky-cta" href="#tickets" data-link-text="Get Tickets">Get Tickets</a>
+    <a class="sticky-cta" href="#tickets" data-link-text="Get Tickets">Get Free Tickets</a>
 
     <!-- Footer -->
     <footer id="footer">
@@ -1169,6 +1178,13 @@
     <script>
         // Tally embed (footer email-updates form, same as index.html)
         var d=document,w="https://tally.so/widgets/embed.js",v=function(){"undefined"!=typeof Tally?Tally.loadEmbeds():d.querySelectorAll("iframe[data-tally-src]:not([src])").forEach((function(e){e.src=e.dataset.tallySrc}))};if("undefined"!=typeof Tally)v();else if(d.querySelector('script[src="'+w+'"]')==null){var s=d.createElement("script");s.src=w,s.onload=v,s.onerror=v,d.body.appendChild(s);}
+
+        // ===== Where "Get Tickets" buttons land: the first ticket that isn't sold out =====
+        // Right now that's Oct 16 (Oct 14 and 15 are sold out). If Oct 16 sells out too,
+        // the buttons automatically move on to the next open screening.
+        window.mkFirstOpenTicket = function () {
+            return document.querySelector('.tickets .ticket-link:not(.ticket-link--soldout)') || document.getElementById('tickets');
+        };
 
         // ===== Link click tracking (Google Analytics 4 + Meta Pixel) =====
         // Every link click on this page sends a GA4 event named "link_click" with:
@@ -1251,7 +1267,7 @@
 
             btn.addEventListener('click', function (e) {
                 e.preventDefault();
-                tickets.scrollIntoView({ behavior: 'smooth' });
+                window.mkFirstOpenTicket().scrollIntoView({ behavior: 'smooth', block: 'start' });
             });
 
             if (!('IntersectionObserver' in window)) return;
@@ -1449,7 +1465,9 @@
             function hold() {
                 if (stopped || Date.now() - started > 3000) return;
                 var navHeight = nav ? nav.getBoundingClientRect().height : 0;
-                var target = Math.round(tickets.getBoundingClientRect().top + window.scrollY - navHeight);
+                var spot = window.mkFirstOpenTicket();
+                var gap = spot === tickets ? 0 : 20;
+                var target = Math.round(spot.getBoundingClientRect().top + window.scrollY - navHeight - gap);
                 if (Math.abs(window.scrollY - target) > 2) {
                     var prev = root.style.scrollBehavior;
                     root.style.scrollBehavior = 'auto';
@@ -1468,7 +1486,7 @@
             link.addEventListener('click', function (e) {
                 var where = link.getAttribute('data-scroll-to');
                 if (where === 'top') { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); return; }
-                var target = document.getElementById(where);
+                var target = where === 'first-open-ticket' ? window.mkFirstOpenTicket() : document.getElementById(where);
                 if (!target) return;
                 e.preventDefault();
                 target.scrollIntoView({ behavior: 'smooth', block: 'start' });
