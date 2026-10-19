@@ -22,14 +22,14 @@
     <title>Mick Skylark at the Heartland Film Festival | Tickets</title>
 
     <!-- SEO -->
-    <meta name="description" content="Get free tickets to Mick Skylark: Mini Golf Prodigy at the 35th Heartland Film Festival in Indianapolis, October 14, 15, 16 and 18, or stream the virtual screener anywhere in the U.S." />
+    <meta name="description" content="Mick Skylark: Mini Golf Prodigy, an Official Selection of the 35th Heartland Film Festival in Indianapolis. All screenings on October 14, 15, 16 and 18 sold out." />
     <meta name="robots" content="index,follow" />
     <link rel="canonical" href="https://mickskylark.com/Heartland.html" />
     <meta name="theme-color" content="#1E3A8A" />
 
     <!-- Open Graph -->
     <meta property="og:title" content="Mick Skylark at the Heartland Film Festival" />
-    <meta property="og:description" content="Screening at the 35th Heartland Film Festival. Pick a screening in Indianapolis or stream it at home." />
+    <meta property="og:description" content="Official Selection at the 35th Heartland Film Festival. All screenings in Indianapolis sold out." />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://mickskylark.com/Heartland.html" />
     <meta property="og:image" content="https://mickskylark.com/og-image.jpg" />
@@ -37,7 +37,7 @@
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Mick Skylark at the Heartland Film Festival" />
-    <meta name="twitter:description" content="Screening at the 35th Heartland Film Festival. Pick a screening in Indianapolis or stream it at home." />
+    <meta name="twitter:description" content="Official Selection at the 35th Heartland Film Festival. All screenings in Indianapolis sold out." />
     <meta name="twitter:image" content="https://mickskylark.com/og-image.jpg" />
 
     <!-- Fonts -->
@@ -356,6 +356,9 @@
         @media (hover: hover) { .fest-cta-btn:hover { background: #fff; } }
         .fest-cta-btn:active { background: #fff; }
         .fest-cta-btn:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
+        .fest-cta-btn--soldout,
+        .fest-cta-btn--soldout:hover,
+        .fest-cta-btn--soldout:active { background: #6B7280; color: #fff; box-shadow: none; cursor: default; }
         @media (max-width: 560px) { .fest-cta { margin-top: 14px; } .fest-cta-btn { width: 100%; max-width: 280px; text-align: center; } }
 
         /* Q&A row at the bottom of the festival box: mic + text, centered as a pair */
@@ -880,13 +883,9 @@
                         <span class="hero-showing-where">In theaters in Indianapolis</span>
                         <span class="hero-showing-when">Oct 14, 15, 16 &amp; 18</span>
                     </p>
-                    <p class="hero-showing">
-                        <span class="hero-showing-where">Stream anywhere in the U.S.</span>
-                        <span class="hero-showing-when">Oct 8 to 18</span>
-                    </p>
                 </div>
                 <div class="fest-cta">
-                    <a class="fest-cta-btn" href="#tickets" data-scroll-to="first-open-ticket" data-link-text="Get Tickets"><span aria-hidden="true">🎟️</span> Get Free Tickets</a>
+                    <span class="fest-cta-btn fest-cta-btn--soldout" role="status">All Screenings Sold Out</span>
                 </div>
                 <div class="fest-qa">
                     <span class="fest-qa-icon" aria-hidden="true">🎤</span>
@@ -980,54 +979,32 @@
                 </div>
 
                 <!-- Row 2 -->
-                <a class="ticket-link"
-                   href="https://tickets.heartlandfilmfestival.org/Festival_Schedule/6a9044bbc9f39a537d113d91"
-                   target="_blank" rel="noopener noreferrer"
-                   data-ticket="Oct 16"
-                   aria-label="Get free tickets for Friday, October 16 at 7:30 PM, Living Room Theaters, Indianapolis (opens in a new tab)">
+                <div class="ticket-link ticket-link--soldout" role="group"
+                   aria-label="Friday, October 16 at 7:30 PM, Living Room Theaters, Indianapolis: sold out">
                     <span class="ticket">
                         <span class="ticket-main">
                             <span class="ticket-day">Friday</span>
                             <span class="ticket-when"><span class="ticket-date">Oct 16</span><span class="ticket-time">7:30 PM</span></span>
                             <span class="ticket-where ticket-venue"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg><span>Living Room Theaters</span></span>
-                            <span class="ticket-cta">Get Free Tickets</span>
+                            <span class="ticket-cta">Sold Out</span>
                         </span>
                         <span class="ticket-stub" aria-hidden="true"><span>Admit One</span></span>
                     </span>
-                </a>
+                </div>
 
-                <a class="ticket-link"
-                   href="https://tickets.heartlandfilmfestival.org/Festival_Schedule/6a9044cbc9f39a537d113f52"
-                   target="_blank" rel="noopener noreferrer"
-                   data-ticket="Oct 18"
-                   aria-label="Get free tickets for Sunday, October 18 at 5:00 PM, Alamo Drafthouse Cinema at The Square, Indianapolis (opens in a new tab)">
+                <div class="ticket-link ticket-link--soldout" role="group"
+                   aria-label="Sunday, October 18 at 5:00 PM, Alamo Drafthouse Cinema at The Square, Indianapolis: sold out">
                     <span class="ticket">
                         <span class="ticket-main">
                             <span class="ticket-day">Sunday</span>
                             <span class="ticket-when"><span class="ticket-date">Oct 18</span><span class="ticket-time">5:00 PM</span></span>
                             <span class="ticket-where ticket-venue"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg><span>Alamo Drafthouse Cinema at The Square</span></span>
-                            <span class="ticket-cta">Get Free Tickets</span>
+                            <span class="ticket-cta">Sold Out</span>
                         </span>
                         <span class="ticket-stub" aria-hidden="true"><span>Admit One</span></span>
                     </span>
-                </a>
+                </div>
 
-                <!-- Row 3: Virtual -->
-                <a class="ticket-link ticket-link--virtual"
-                   href="https://watch.eventive.org/heartlandfilmfestival/play/6a8caa0d26f98166f0238ccc"
-                   target="_blank" rel="noopener noreferrer"
-                   data-ticket="Virtual Screener"
-                   aria-label="Purchase the virtual screener, streaming October 8 to 18 in the U.S. (opens in a new tab)">
-                    <span class="ticket ticket--virtual">
-                        <span class="ticket-main">
-                            <span class="ticket-day">Stream at home</span>
-                            <span class="ticket-date">Virtual Screener</span>
-                            <span class="ticket-where">Oct 8 to 18, anywhere in the U.S.</span>
-                            <span class="ticket-cta">Purchase Tickets</span>
-                        </span>
-                        <span class="ticket-stub" aria-hidden="true"><span>Admit One</span></span>
-                    </span>
-                </a>
             </div>
 
             <!-- Theater locations -->
@@ -1150,8 +1127,6 @@
         </section>
     </main>
 
-    <!-- Sticky Get Tickets button (hides itself while the tickets or footer are on screen) -->
-    <a class="sticky-cta" href="#tickets" data-link-text="Get Tickets">Get Free Tickets</a>
 
     <!-- Footer -->
     <footer id="footer">
